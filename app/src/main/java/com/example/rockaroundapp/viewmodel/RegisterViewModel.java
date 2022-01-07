@@ -13,10 +13,10 @@ import java.util.Objects;
 
 public class RegisterViewModel extends ViewModel {
 
-    public MutableLiveData<String> email = new MutableLiveData<>();
-    public MutableLiveData<String> password = new MutableLiveData<>();
-    public MutableLiveData<String> firstname = new MutableLiveData<>();
-    public MutableLiveData<String> surname = new MutableLiveData<>();
+    public MutableLiveData<String> email = new MutableLiveData<>("");
+    public MutableLiveData<String> password = new MutableLiveData<>("");
+    public MutableLiveData<String> firstname = new MutableLiveData<>("");
+    public MutableLiveData<String> surname = new MutableLiveData<>("");
     public MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
 
     private MutableLiveData<List<String>> registerDetails;
