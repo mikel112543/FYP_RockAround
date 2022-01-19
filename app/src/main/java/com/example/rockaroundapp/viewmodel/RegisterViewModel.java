@@ -1,11 +1,7 @@
 package com.example.rockaroundapp.viewmodel;
 
-import androidx.databinding.BindingAdapter;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +16,6 @@ public class RegisterViewModel extends ViewModel {
     public MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
 
     private MutableLiveData<List<String>> registerDetails;
-
-    @BindingAdapter("app:errorText")
-    public static void setErrorMessage(TextInputLayout view, String error) {
-        view.setError(error);
-    }
 
     public enum UserType {
         NONE,
