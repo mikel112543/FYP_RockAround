@@ -17,7 +17,7 @@ public class UserRepository {
         this.venueDAO = venueDAO;
     }
 
-    public LiveData<List<String>> checkCredentials(List<String> credentials) {
+    /*public LiveData<List<String>> checkCredentials(List<String> credentials) {
 
-    }
+    }*/
 }

@@ -12,21 +12,25 @@ public class Artist extends User {
     private String county;
     private String country;
     private String profileImgURL;
+    private int price;
     private List<String> instruments;
     private List<String> artistImages;
+    private String city;
     private List<String> genres;
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
 
-    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, String addressLineOne, String addressLineTwo, String county, String country, String profileImgURL, List<String> instruments) {
+    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, int price,  String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
         super(firstname, lastname, email, password, userType, bio, contactNumber);
         this.stageName = stageName;
         this.addressLineOne = addressLineOne;
         this.addressLineTwo = addressLineTwo;
+        this.city = city;
         this.county = county;
         this.country = country;
         this.profileImgURL = profileImgURL;
         this.instruments = instruments;
+        this.price = price;
         sampleTracks = new ArrayList<>();
         artistImages = new ArrayList<>();
         reviews = new ArrayList<>();
@@ -76,6 +80,14 @@ public class Artist extends User {
         return addressLineTwo;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public void setAddressLineTwo(String addressLineTwo) {
         this.addressLineTwo = addressLineTwo;
     }
@@ -110,6 +122,14 @@ public class Artist extends User {
 
     public void setInstruments(List<String> instruments) {
         this.instruments = instruments;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public List<String> getArtistImages() {
