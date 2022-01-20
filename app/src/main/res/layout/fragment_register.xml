@@ -49,7 +49,6 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="35dp"
-            app:cardBackgroundColor="@color/cardview_dark_background"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,8 +78,9 @@
                         android:id="@+id/txtFirstname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/cardview_dark_background"
+                        app:boxBackgroundMode="none"
                         android:hint="Firstname"
+                        android:inputType="textCapWords"
                         android:text="@={registerViewModel.firstname}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,8 +101,8 @@
                         android:id="@+id/txtSurname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/cardview_dark_background"
                         android:hint="Surname"
+                        android:inputType="textCapWords"
                         android:text="@={registerViewModel.surname}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +123,6 @@
                         android:id="@+id/txtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/cardview_dark_background"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:text="@={registerViewModel.email}" />
@@ -147,7 +146,6 @@
                         android:id="@+id/txtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/cardview_dark_background"
                         android:hint="Password"
                         android:inputType="textPassword"
                         android:text="@={registerViewModel.password}" />

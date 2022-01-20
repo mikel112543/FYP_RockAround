@@ -3,8 +3,6 @@ p
 @app/src/test/java/com/example/rockaroundapp/ExampleUnitTest.java,0\4\04a399bd22079f5a48cccb7dfee41a29e9ed2572
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
-m
-=app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
 i
 9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
 s
@@ -13,8 +11,6 @@ r
 Bapp/src/main/java/com/example/rockaroundapp/model/VenueReview.java,0\3\034e0472f69eab81a891e774f56737726b5aa573
 m
 =app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
-x
-Happ/src/main/java/com/example/rockaroundapp/source/remoteConnection.java,5\2\5270ed0508a887c2641cf8766b530a703e9871f0
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
 r

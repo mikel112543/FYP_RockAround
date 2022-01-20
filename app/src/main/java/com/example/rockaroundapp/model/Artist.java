@@ -18,21 +18,6 @@ public class Artist extends User {
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
 
-
-    //Constructor with ArtistID
-    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, int artistId, String stageName, String addressLineOne, String addressLineTwo, String county, String country, String profileImgURL, List<String> instruments) {
-        super(firstname, lastname, email, password, userType, bio, contactNumber);
-        this.artistId = artistId;
-        this.stageName = stageName;
-        this.addressLineOne = addressLineOne;
-        this.addressLineTwo = addressLineTwo;
-        this.county = county;
-        this.country = country;
-        this.profileImgURL = profileImgURL;
-        this.instruments = instruments;
-    }
-
-    //Constructor with no ArtistID
     public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, String addressLineOne, String addressLineTwo, String county, String country, String profileImgURL, List<String> instruments) {
         super(firstname, lastname, email, password, userType, bio, contactNumber);
         this.stageName = stageName;
@@ -45,6 +30,22 @@ public class Artist extends User {
         sampleTracks = new ArrayList<>();
         artistImages = new ArrayList<>();
         reviews = new ArrayList<>();
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public List<ArtistReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ArtistReview> reviews) {
+        this.reviews = reviews;
     }
 
     public int getArtistId() {

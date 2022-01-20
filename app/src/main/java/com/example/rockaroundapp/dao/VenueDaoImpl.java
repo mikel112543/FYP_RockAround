@@ -1,4 +1,4 @@
 package com.example.rockaroundapp.dao;
 
-public class VenueDAO {
+public class VenueDaoImpl {
 }

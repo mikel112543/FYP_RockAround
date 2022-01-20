@@ -28,7 +28,6 @@ public class RegisterViewModel extends ViewModel {
         userType.postValue(type.name());
     }
 
-
     public MutableLiveData<List<String>> getDetails() {
         if (registerDetails == null) {
             registerDetails = new MutableLiveData<>();

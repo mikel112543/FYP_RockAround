@@ -45,14 +45,25 @@ public class RegisterFragment extends Fragment {
                 binding.emailField.setError("Enter an email address");
             }else if (!registerViewModel.badEmailPattern()) {
                 binding.emailField.setError("Incorrect input");
-            }else if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(1)))) {
+            }else{
+                binding.emailField.setError(null);
+            }
+            if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(1)))) {
                 binding.passwordField.setError("Enter a password");
-            }else if (strings.get(2).equals("NONE"))  {
+            }else { binding.passwordField.setError(null);
+            }
+            if(strings.get(2).equals("NONE"))  {
                 Toast.makeText(getActivity(), "Please choose a User type", Toast.LENGTH_SHORT).show();
-            }else if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(3)))) {
+            }
+            if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(3)))) {
                 binding.firstnameField.setError("Enter a firstname");
-            }else if (TextUtils.isEmpty(Objects.requireNonNull(strings.get(4)))) {
+            }else{
+                binding.firstnameField.setError(null);
+            }
+            if (TextUtils.isEmpty(Objects.requireNonNull(strings.get(4)))) {
                 binding.surnameField.setError("Enter a surname");
+            }else{
+                binding.surnameField.setError(null);
             }
         });
         return view;
