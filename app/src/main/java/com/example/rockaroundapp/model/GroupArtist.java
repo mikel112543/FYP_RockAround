@@ -8,17 +8,8 @@ public class GroupArtist extends Artist {
     private int noOfMembers;
     private List<GroupMember> groupMembers;
 
-
-    //Constructor with Id
-    public GroupArtist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, int artistId, String stageName, String addressLineOne, String addressLineTwo, String county, String country, String profileImgURL, List<String> instruments, String formationDate, int noOfMembers, List<GroupMember> groupMembers) {
-        super(firstname, lastname, email, password, userType, bio, contactNumber, artistId, stageName, addressLineOne, addressLineTwo, county, country, profileImgURL, instruments);
-        this.formationDate = formationDate;
-        this.noOfMembers = noOfMembers;
-        this.groupMembers = groupMembers;
-    }
-    //Constructor with no Id
-    public GroupArtist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, String addressLineOne, String addressLineTwo, String county, String country, String profileImgURL, List<String> instruments, String formationDate, int noOfMembers, List<GroupMember> groupMembers) {
-        super(firstname, lastname, email, password, userType, bio, contactNumber, stageName, addressLineOne, addressLineTwo, county, country, profileImgURL, instruments);
+    public GroupArtist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments, String formationDate, int noOfMembers, List<GroupMember> groupMembers) {
+        super(firstname, lastname, email, password, userType, bio, contactNumber, stageName, price, addressLineOne, addressLineTwo, city, county, country, profileImgURL, instruments);
         this.formationDate = formationDate;
         this.noOfMembers = noOfMembers;
         this.groupMembers = groupMembers;

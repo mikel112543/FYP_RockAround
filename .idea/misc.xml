@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1235" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button.xml" value="0.5574358974358974" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button_outline.xml" value="0.1235" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/activity_main.xml" value="0.5359375" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_register.xml" value="0.22" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_register.xml" value="0.14666666666666667" />
       </map>
     </option>
   </component>

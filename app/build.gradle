@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 apply plugin: 'kotlin-android'
 
@@ -35,6 +36,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
     def lifecycle_version = "2.4.0"
     def arch_version = "2.1.0"
 
@@ -48,9 +50,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.2.0'
     implementation group: 'log4j', name: 'log4j', version: '1.2.16'
 }
 repositories {

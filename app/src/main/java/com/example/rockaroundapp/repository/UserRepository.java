@@ -1,23 +1,23 @@
 package com.example.rockaroundapp.repository;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.rockaroundapp.dao.ArtistDaoImpl;
 import com.example.rockaroundapp.dao.VenueDaoImpl;
 
-import java.util.List;
 
 public class UserRepository {
 
     private ArtistDaoImpl artistDAO;
     private VenueDaoImpl venueDAO;
 
-    public UserRepository(ArtistDaoImpl artistDAO, VenueDaoImpl venueDAO) {
-        this.artistDAO = artistDAO;
-        this.venueDAO = venueDAO;
+    public UserRepository() {
+        artistDAO = new ArtistDaoImpl();
+        venueDAO = new VenueDaoImpl();
     }
 
-    /*public LiveData<List<String>> checkCredentials(List<String> credentials) {
 
-    }*/
+    public boolean checkEmail(String email) {
+        //TRUE IF EMAIL EXISTS
+        //FALSE IF NO EMAIL IS FOUND
+        return artistDAO.findByEmail(email) != null;
+    }
 }

@@ -3,16 +3,12 @@ p
 @app/src/test/java/com/example/rockaroundapp/ExampleUnitTest.java,0\4\04a399bd22079f5a48cccb7dfee41a29e9ed2572
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
-i
-9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
 s
 Capp/src/main/java/com/example/rockaroundapp/model/ArtistReview.java,f\d\fd8b59a129963d9bdc8cb076045ffb141e52acda
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/VenueReview.java,0\3\034e0472f69eab81a891e774f56737726b5aa573
 m
 =app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
-r
-Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupMember.java,7\e\7e8a286fe48b0dc87fd7fc4ad83621525872dd9e
 r
@@ -34,8 +30,6 @@ l
 gradlew.bat,2\a\2a45a911a8f1836b0b6c5b758962572012d8f8c3
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 
 Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java,f\2\f2ee3303c876c78fdbb400ef80f1b2b04a977fd6
 l

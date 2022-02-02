@@ -18,8 +18,10 @@ import android.widget.Toast;
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentRegisterBinding;
 import com.example.rockaroundapp.viewmodel.RegisterViewModel;
+import com.google.android.material.textfield.TextInputLayout;
 
 
+import java.util.List;
 import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
@@ -40,15 +42,15 @@ public class RegisterFragment extends Fragment {
         binding.setLifecycleOwner(this);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        registerViewModel.getDetails().observe(this, strings -> {
+        registerViewModel.getDetails().observe(getViewLifecycleOwner(), strings -> {
             if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(0)))) {
                 binding.emailField.setError("Enter an email address");
-            }else if (!registerViewModel.badEmailPattern()) {
+            }else if (!registerViewModel.validateEmail()) {
                 binding.emailField.setError("Incorrect input");
             }else{
                 binding.emailField.setError(null);
             }
-            if(TextUtils.isEmpty(Objects.requireNonNull(strings.get(1)))) {
+            if(strings.get(0).isEmpty()) {
                 binding.passwordField.setError("Enter a password");
             }else { binding.passwordField.setError(null);
             }
@@ -65,7 +67,19 @@ public class RegisterFragment extends Fragment {
             }else{
                 binding.surnameField.setError(null);
             }
+            if(registerViewModel.checkEmail(strings.get(0))) {
+                Toast.makeText(getActivity(), "Email is already in use", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getActivity(), "No email in use", Toast.LENGTH_SHORT).show();
+            }
         });
         return view;
+    }
+    private void confirmDetails(List<String> inputs) {
+        boolean validation = registerViewModel.validateEmail() && registerViewModel.validateFirstname() && registerViewModel.validateLastname() && registerViewModel.validatePassword() && registerViewModel.checkType();
+        if(validation) {
+            //Check users email has not been used before
+            // Register user to firestore
+        }
     }
 }

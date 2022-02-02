@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         // Replace the contents of the container with the new fragment
-        ft.replace(R.id.fragment_container, new RegisterFragment());
+        ft.replace(R.id.fragment_container, new LoginFragment());
         ft.commit();
     }
 }

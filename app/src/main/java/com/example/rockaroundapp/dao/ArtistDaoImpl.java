@@ -3,6 +3,7 @@ package com.example.rockaroundapp.dao;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.source.remoteConnection;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -22,7 +24,7 @@ public class ArtistDaoImpl implements ArtistDao {
     private static final String DELETE = "DELETE FROM artist WHERE Artist_ID=?";
     private static final String INSERT_ARTIST = "INSERT INTO artist(Firstname, Lastname, StageName, ProfileImage, ArtistType, Bio, Price, Email, ContactNumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String INSERT_ADDRESS = "INSERT INTO artistaddress(Artist_ID, AddressLineOne, AddressLineTwo, City, County, Country) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE artist SET Firstname=?, Lastname=?, StageName=?, ProfileImage=?, ArtistType=?, Bio=?, Price=?, Email=?, ContactNumber=? WHERE Artist_ID=?";
+    private static final String UPDATE_ARTIST = "UPDATE artist SET Firstname=?, Lastname=?, StageName=?, ProfileImage=?, ArtistType=?, Bio=?, Price=?, Email=?, ContactNumber=? WHERE Artist_ID=?";
     private static final String FIND_ALL = "SELECT * FROM artist ORDER BY Artist_ID";
     private static final String FIND_BY_ID = "SELECT * FROM artist WHERE Artist_ID=?";
     private static final String FIND_BY_EMAIL = "SELECT * FROM artist WHERE Email=?";
@@ -38,16 +40,15 @@ public class ArtistDaoImpl implements ArtistDao {
             stmt.execute();
         } catch (SQLException e) {
             log.debug(e.getMessage());
+            conn.close();
         }
-        conn.close();
+
     }
 
     @Override
     public void insert(Artist artist) throws SQLException {
         Connection conn = remoteConnection.getConnection();
-        PreparedStatement stmt = null;
-        try {
-            stmt = conn.prepareStatement(INSERT_ARTIST, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement stmt = conn.prepareStatement(INSERT_ARTIST, Statement.RETURN_GENERATED_KEYS))  {
             stmt.setString(1, artist.getFirstname());
             stmt.setString(2, artist.getLastname());
             stmt.setString(3, artist.getStageName());
@@ -57,12 +58,32 @@ public class ArtistDaoImpl implements ArtistDao {
             stmt.setInt(7, artist.getPrice());
             stmt.setString(8, artist.getEmail());
             stmt.setString(9, artist.getContactNumber());
+            stmt.execute();
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+            conn.close();
         }
-
     }
 
     @Override
-    public void update(Artist artist) {
+    public void update(Artist artist) throws SQLException {
+        Connection conn = remoteConnection.getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement(UPDATE_ARTIST)) {
+            stmt.setString(1, artist.getFirstname());
+            stmt.setString(2, artist.getLastname());
+            stmt.setString(3, artist.getStageName());
+            stmt.setString(4, artist.getProfileImgURL());
+            stmt.setString(5, artist.getUserType());
+            stmt.setString(6, artist.getBio());
+            stmt.setInt(7, artist.getPrice());
+            stmt.setString(8, artist.getEmail());
+            stmt.setString(9, artist.getContactNumber());
+            stmt.setInt(10, artist.getArtistId());
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            log.error(e.getMessage());
+            conn.close();
+        }
 
     }
 
@@ -72,22 +93,39 @@ public class ArtistDaoImpl implements ArtistDao {
     }
 
     @Override
-    public LiveData<Artist> findById(int id) {
+    public Artist findById(int id) {
         return null;
     }
 
     @Override
-    public LiveData<Artist> findByEmail(String email) {
+    public Artist findByEmail(String email) {
+        Connection conn = remoteConnection.getConnection();
+        try(PreparedStatement stmt = conn.prepareStatement(FIND_BY_EMAIL)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Artist artist = new Artist();
+                artist.setArtistId(rs.getInt("Artist_ID"));
+                artist.setFirstname(rs.getString("Firstname"));
+                artist.setLastname(rs.getString("Lastname"));
+                artist.setEmail(rs.getString("Email"));
+                return artist;
+            }else{
+                return null;
+            }
+        }catch (SQLException e) {
+            log.error(e.getMessage());
+        }
         return null;
     }
 
     @Override
-    public LiveData<Artist> findByStageName(String stageName) {
+    public List<Artist> findByStageName(String stageName) {
         return null;
     }
 
     @Override
-    public LiveData<Artist> findByFirstname(String firstname) {
+    public List<Artist> findByFirstname(String firstname) {
         return null;
     }
 }

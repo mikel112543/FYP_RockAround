@@ -6,17 +6,16 @@ import java.sql.SQLException;
 
 public class remoteConnection {
 
-    private static Connection conn = null;
+    public static Connection conn = null;
 
     static {
-        String url = "jdbc:mysql://127.0.0.1:3306/music_venue_db";
+        String url = "jdbc:mariadb://192.168.1.17:3306/music_venue_db";
         String user = "root";
         String pass = "";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, pass);
         }
-        catch (ClassNotFoundException | SQLException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }

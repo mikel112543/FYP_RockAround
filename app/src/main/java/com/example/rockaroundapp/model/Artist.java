@@ -20,7 +20,10 @@ public class Artist extends User {
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
 
-    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, int price,  String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
+    public Artist() {
+    }
+
+    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
         super(firstname, lastname, email, password, userType, bio, contactNumber);
         this.stageName = stageName;
         this.addressLineOne = addressLineOne;
