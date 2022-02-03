@@ -67,19 +67,14 @@ public class RegisterFragment extends Fragment {
             }else{
                 binding.surnameField.setError(null);
             }
-            if(registerViewModel.checkEmail(strings.get(0))) {
-                Toast.makeText(getActivity(), "Email is already in use", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getActivity(), "No email in use", Toast.LENGTH_SHORT).show();
-            }
         });
         return view;
     }
-    private void confirmDetails(List<String> inputs) {
+    /*private void confirmDetails(List<String> inputs) {
         boolean validation = registerViewModel.validateEmail() && registerViewModel.validateFirstname() && registerViewModel.validateLastname() && registerViewModel.validatePassword() && registerViewModel.checkType();
         if(validation) {
             //Check users email has not been used before
             // Register user to firestore
         }
-    }
+    }*/
 }

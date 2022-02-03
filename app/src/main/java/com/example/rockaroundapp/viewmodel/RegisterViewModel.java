@@ -15,35 +15,12 @@ import java.util.Objects;
 
 public class RegisterViewModel extends ViewModel {
 
-    private UserRepository userRepo = new UserRepository();
-
-    public void init(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
-
     public MutableLiveData<String> email = new MutableLiveData<>("");
     public MutableLiveData<String> password = new MutableLiveData<>("");
     public MutableLiveData<String> firstname = new MutableLiveData<>("");
     public MutableLiveData<String> surname = new MutableLiveData<>("");
-    public MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
 
     private MutableLiveData<List<String>> registerDetails;
-
-    public enum UserType {
-        NONE,
-        SOLO,
-        GROUP,
-        VENUE;
-    }
-
-    public boolean checkEmail(String checkEmail) {
-        //init(userRepo);
-        return userRepo.checkEmail(checkEmail);
-    }
-
-    public void setButton(UserType type) {
-        userType.postValue(type.name());
-    }
 
     public MutableLiveData<List<String>> getDetails() {
         if (registerDetails == null) {
@@ -56,7 +33,6 @@ public class RegisterViewModel extends ViewModel {
         ArrayList<String> details = new ArrayList<>();
         details.add(email.getValue());
         details.add(password.getValue());
-        details.add(userType.getValue());
         details.add(firstname.getValue());
         details.add(surname.getValue());
 
@@ -75,9 +51,6 @@ public class RegisterViewModel extends ViewModel {
     }
     public boolean validateLastname() {
         return TextUtils.isEmpty(surname.getValue());
-    }
-    public boolean checkType() {
-        return !Objects.equals(userType.getValue(), UserType.NONE.name());
     }
 
 }
