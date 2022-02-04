@@ -2,9 +2,13 @@ package com.example.rockaroundapp.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +20,7 @@ import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentLoginBinding;
 import com.example.rockaroundapp.viewmodel.LoginViewModel;
 import com.example.rockaroundapp.viewmodel.RegisterViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
@@ -24,6 +29,8 @@ public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
     private LoginViewModel loginViewModel;
+    private BottomNavigationView bottomNavigationView;
+    private NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,37 +42,53 @@ public class LoginFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         binding.setLoginViewModel(loginViewModel);
         binding.setLifecycleOwner(this);
+        bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
+        bottomNavigationView.setVisibility(View.INVISIBLE);
+        navController = Navigation.findNavController(view);
         observeViewModel(loginViewModel);
         return view;
     }
 
     private void observeViewModel(LoginViewModel loginViewModel) {
         loginViewModel.getDetails().observe(getViewLifecycleOwner(), details -> {
-            if(TextUtils.isEmpty(details.get(0))) {
+            if (TextUtils.isEmpty(details.get(0))) {
                 binding.loginField.setError("Please provide an email address");
-            }else{
+            } else {
                 binding.loginField.setError(null);
             }
-            if(TextUtils.isEmpty(details.get(1))) {
+            if (TextUtils.isEmpty(details.get(1))) {
                 binding.passwordField.setError("Please provide your password to login");
-            }else{
+            } else {
                 binding.passwordField.setError(null);
             }
-            if(binding.loginField.getError() == null && binding.passwordField.getError() == null) {
+            if (binding.loginField.getError() == null && binding.passwordField.getError() == null) {
                 loginViewModel.loginUser(details.get(0), details.get(1));
             }
         });
         loginViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
-            if(firebaseUser != null) {
+            if (firebaseUser != null) {
                 Toast.makeText(getActivity(), "Error logging in", Toast.LENGTH_SHORT).show();
-            }else{
+
+            } else {
                 Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+                navController.navigate(R.id.action_loginFragment_to_exploreFragment);
             }
         });
         loginViewModel.getLoginFailureMsg().observe(getViewLifecycleOwner(), failureMsg -> {
-            if(!failureMsg.isEmpty()) {
+            if (!failureMsg.isEmpty()) {
+                navController.navigate(R.id.action_loginFragment_to_registerFragment);
                 Toast.makeText(getActivity(), failureMsg, Toast.LENGTH_SHORT).show();
             }
         });
+        loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {
+            if (Boolean.TRUE.equals(isPressed)) {
+                navController.navigate(R.id.action_loginFragment_to_registerFragment);
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

@@ -1,35 +1,35 @@
 package com.example.rockaroundapp.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
+
 public abstract class User {
 
     private String firstname;
     private String lastname;
     private String email;
-    private String password;
     private String userType;
     private String bio;
     private String contactNumber;
-
+    private String password;
+    private ObjectMapper oMapper;
 
     protected User() {
     }
 
-    public User(String firstname, String lastname, String email, String password, String userType) {
+    public User(String firstname, String lastname, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
-        this.userType = userType;
+        setUserType("NONE");
+        oMapper = new ObjectMapper();
+
     }
 
-    protected User(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.userType = userType;
-        this.bio = bio;
-        this.contactNumber = contactNumber;
+
+    public String getPassword() {
+        return password;
     }
 
     public String getFirstname() {
@@ -56,14 +56,6 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUserType() {
         return userType;
     }
@@ -87,5 +79,10 @@ public abstract class User {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+
+    public Map<String, Object> objectMap(User user) {
+        return oMapper.convertValue(user, Map.class);
+    }
+
 
 }

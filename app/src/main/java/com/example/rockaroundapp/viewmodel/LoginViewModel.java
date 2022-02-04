@@ -23,6 +23,7 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> password = new MutableLiveData<>("");
     private MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
     private MutableLiveData<List<String>> loginDetails = new MutableLiveData<>();
+    private MutableLiveData<Boolean> registerButtonPressed = new MutableLiveData<>(false);
 
     public LoginViewModel() {
         userRepository = new UserRepository();
@@ -39,6 +40,10 @@ public class LoginViewModel extends ViewModel {
         SOLO,
         GROUP,
         VENUE
+    }
+
+    public MutableLiveData<Boolean> getRegisterButtonPressed() {
+        return registerButtonPressed;
     }
 
     public MutableLiveData<List<String>> getDetails() {
@@ -60,8 +65,12 @@ public class LoginViewModel extends ViewModel {
         return password;
     }
 
-    public void setButton(LoginViewModel.UserType type) {
+    public void setUserType(LoginViewModel.UserType type) {
         userType.postValue(type.name());
+    }
+
+    public MutableLiveData<String> getUserType() {
+        return userType;
     }
 
     public void onLoginClick() {
@@ -69,6 +78,11 @@ public class LoginViewModel extends ViewModel {
         details.add(email.getValue());
         details.add(password.getValue());
         loginDetails.setValue(details);
+    }
+
+    public void onRegisterClick() {
+        //userType.postValue(userType.getValue());
+        registerButtonPressed.postValue(true);
     }
 
     public void loginUser(String loginEmail, String pass) {

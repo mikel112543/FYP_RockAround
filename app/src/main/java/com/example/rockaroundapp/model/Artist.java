@@ -1,7 +1,10 @@
 package com.example.rockaroundapp.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Artist extends User {
 
@@ -12,6 +15,7 @@ public class Artist extends User {
     private String county;
     private String country;
     private String profileImgURL;
+    private String userType;
     private int price;
     private List<String> instruments;
     private List<String> artistImages;
@@ -19,12 +23,13 @@ public class Artist extends User {
     private List<String> genres;
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
+    private ObjectMapper oMapper;
 
     public Artist() {
     }
-
-    public Artist(String firstname, String lastname, String email, String password, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
-        super(firstname, lastname, email, password, userType, bio, contactNumber);
+/*
+    public Artist(String firstname, String lastname, String email, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
+        super(firstname, lastname, email, userType, bio, contactNumber);
         this.stageName = stageName;
         this.addressLineOne = addressLineOne;
         this.addressLineTwo = addressLineTwo;
@@ -37,6 +42,23 @@ public class Artist extends User {
         sampleTracks = new ArrayList<>();
         artistImages = new ArrayList<>();
         reviews = new ArrayList<>();
+        oMapper = new ObjectMapper();
+
+    }*/
+
+    public Artist(String firstname, String lastname, String email) {
+        super(firstname, lastname, email);
+        setUserType("SOLO");
+    }
+
+    @Override
+    public String getUserType() {
+        return userType;
+    }
+
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public List<String> getGenres() {
@@ -149,5 +171,10 @@ public class Artist extends User {
 
     public void setSampleTracks(List<SampleTrack> sampleTracks) {
         this.sampleTracks = sampleTracks;
+    }
+
+    @Override
+    public Map<String, Object> objectMap(User user) {
+        return super.objectMap(user);
     }
 }

@@ -7,9 +7,12 @@
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button.xml" value="0.5574358974358974" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button_outline.xml" value="0.1235" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_explore.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_login.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_register.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_register.xml" value="0.16452991452991453" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_register.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.16452991452991453" />
       </map>
     </option>

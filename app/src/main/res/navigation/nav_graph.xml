@@ -8,18 +8,24 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.rockaroundapp.view.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
-            app:destination="@id/exploreFragment" />
+            app:destination="@id/exploreFragment"/>
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.rockaroundapp.view.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.example.rockaroundapp.view.ExploreFragment"

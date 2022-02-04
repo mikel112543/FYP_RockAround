@@ -7,7 +7,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Artist;
+import com.example.rockaroundapp.model.GroupArtist;
+import com.example.rockaroundapp.model.User;
+import com.example.rockaroundapp.model.Venue;
 import com.example.rockaroundapp.repository.UserRepository;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +19,87 @@ import java.util.Objects;
 
 public class RegisterViewModel extends ViewModel {
 
-    public MutableLiveData<String> email = new MutableLiveData<>("");
-    public MutableLiveData<String> password = new MutableLiveData<>("");
-    public MutableLiveData<String> firstname = new MutableLiveData<>("");
-    public MutableLiveData<String> surname = new MutableLiveData<>("");
-
+    private UserRepository userRepository;
+    private MutableLiveData<FirebaseUser> firebaseUserRegister;
+    private MutableLiveData<String> email;
+    private MutableLiveData<String> password;
+    private MutableLiveData<String> firstname;
+    private MutableLiveData<String> surname;
+    private MutableLiveData<String> userType;
     private MutableLiveData<List<String>> registerDetails;
+    private String failedRegMessage;
+
+    public enum UserType {
+        NONE,
+        SOLO,
+        GROUP,
+        VENUE
+    }
+
+    public RegisterViewModel() {
+        userRepository = new UserRepository();
+        firebaseUserRegister = userRepository.getFirebaseUserMutableLiveData();
+        failedRegMessage = userRepository.getFailedRegistration();
+        email = new MutableLiveData<>("");
+        password = new MutableLiveData<>("");
+        firstname = new MutableLiveData<>("");
+        surname = new MutableLiveData<>("");
+        userType = new MutableLiveData<>(LoginViewModel.UserType.NONE.name());
+
+    }
+
+    public String getFailedRegMessage() {
+        return failedRegMessage;
+    }
+
+    public MutableLiveData<String> getEmail() {
+        return email;
+    }
+
+    public MutableLiveData<String> getPassword() {
+        return password;
+    }
+
+    public MutableLiveData<String> getFirstname() {
+        return firstname;
+    }
+
+    public MutableLiveData<String> getSurname() {
+        return surname;
+    }
+
+    public void register() {
+        if(userType.getValue().equals("SOLO")) {
+            Artist artist = new Artist(firstname.getValue(), surname.getValue(), email.getValue());
+            userRepository.register(artist);
+        }else if(userType.getValue().equals("GROUP")) {
+            GroupArtist groupArtist = new GroupArtist(firstname.getValue(), surname.getValue(), email.getValue());
+            userRepository.register(groupArtist);
+        }else {
+            Venue venue = new Venue(firstname.getValue(), surname.getValue(), email.getValue());
+            userRepository.register(venue);
+
+        }
+
+    }
+
+    public void setUserType(LoginViewModel.UserType type) {
+        userType.postValue(type.name());
+    }
+
+    public MutableLiveData<String> getUserType() {
+        return userType;
+    }
 
     public MutableLiveData<List<String>> getDetails() {
         if (registerDetails == null) {
             registerDetails = new MutableLiveData<>();
         }
         return registerDetails;
+    }
+
+    public MutableLiveData<FirebaseUser> getFirebaseUserRegister() {
+        return firebaseUserRegister;
     }
 
     public void onRegisterClick() {
@@ -36,21 +109,29 @@ public class RegisterViewModel extends ViewModel {
         details.add(firstname.getValue());
         details.add(surname.getValue());
 
-        registerDetails.setValue(details);
+        registerDetails.postValue(details);
     }
 
     public boolean validateEmail() {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return Objects.requireNonNull(email.getValue()).matches(emailPattern);
     }
+
     public boolean validatePassword() {
         return TextUtils.isEmpty(password.getValue());
     }
+
     public boolean validateFirstname() {
         return TextUtils.isEmpty(firstname.getValue());
     }
+
     public boolean validateLastname() {
         return TextUtils.isEmpty(surname.getValue());
     }
+
+    public boolean validateType() {
+        return !Objects.equals(userType.getValue(), "NONE");
+    }
+
 
 }

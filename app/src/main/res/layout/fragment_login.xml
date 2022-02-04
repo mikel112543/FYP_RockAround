@@ -8,6 +8,9 @@
         <variable
             name="loginViewModel"
             type="com.example.rockaroundapp.viewmodel.LoginViewModel"/>
+        <variable
+            name="loginFragment"
+            type="com.example.rockaroundapp.view.LoginFragment" />
     </data>
         
 
@@ -185,20 +188,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:onClick="@{()-> loginViewModel.setButton(UserType.SOLO)}"
+                        android:onClick="@{()-> loginViewModel.setUserType(UserType.SOLO)}"
                         android:text="Solo Artist" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()-> loginViewModel.setButton(UserType.GROUP)}"
+                        android:onClick="@{()-> loginViewModel.setUserType(UserType.GROUP)}"
                         android:text="Group Artist" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:onClick="@{()-> loginViewModel.setButton(UserType.VENUE)}"
+                        android:onClick="@{()-> loginViewModel.setUserType(UserType.VENUE)}"
                         android:text="Venue Owner" />
                 </RadioGroup>
 
@@ -211,6 +214,7 @@
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/pill_button_outline"
                     android:text="Register"
+                    android:onClick="@{()-> loginViewModel.onRegisterClick()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/user_type_radio_group" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.example.rockaroundapp.viewmodel.LoginViewModel.UserType" />
         <variable
             name="registerViewModel"
             type="com.example.rockaroundapp.viewmodel.RegisterViewModel" />
@@ -166,12 +166,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
+                        android:onClick="@{()-> registerViewModel.setUserType(UserType.SOLO)}"
                         android:text="Solo Artist" />
 
                     <RadioButton
                         android:id="@+id/group_artist_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{()-> registerViewModel.setUserType(UserType.GROUP)}"
                         android:text="Group Artist" />
 
                     <RadioButton
@@ -179,6 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:onClick="@{()-> registerViewModel.setUserType(UserType.VENUE)}"
                         android:text="Venue Owner" />
                 </RadioGroup>
 
@@ -196,6 +199,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:onClick="@{()-> registerViewModel.onRegisterClick()}"
                     app:layout_constraintTop_toBottomOf="@id/user_type_radio_group" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
