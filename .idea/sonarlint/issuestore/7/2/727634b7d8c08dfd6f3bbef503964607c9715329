@@ -1,0 +1,23 @@
+
+A
+java:S1168\"+Return an empty collection instead of null.(¥¹ï
+A
+java:S1168|"+Return an empty collection instead of null.(¥¹ï
+B
+java:S1168"+Return an empty collection instead of null.(¥¹ï
+L
+java:S1128"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ
+S
+java:S1128"8Remove this unused import 'androidx.lifecycle.LiveData'.(ß„İŞşÿÿÿÿ
+Z
+java:S1128"?Remove this unused import 'androidx.lifecycle.MutableLiveData'.(Íèæâıÿÿÿÿ
+M
+java:S1068"2Remove this unused "INSERT_ADDRESS" private field.(ŞÖŒÚşÿÿÿÿ
+B
+java:S1068",Remove this unused "FIND_ALL" private field.(½ä¡¾
+D
+java:S1068".Remove this unused "FIND_BY_ID" private field.(¨«­š
+L
+java:S1068"6Remove this unused "FIND_BY_STAGE_NAME" private field.(ªÏ×ê
+K
+java:S1068 "5Remove this unused "FIND_BY_FIRSTNAME" private field.(µ ³

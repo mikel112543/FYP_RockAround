@@ -46,6 +46,10 @@ public class LoginViewModel extends ViewModel {
         return registerButtonPressed;
     }
 
+    public void signOut() {
+        userRepository.signOut();
+    }
+
     public MutableLiveData<List<String>> getDetails() {
         if (loginDetails == null) {
             loginDetails = new MutableLiveData<>();
@@ -80,10 +84,10 @@ public class LoginViewModel extends ViewModel {
         loginDetails.setValue(details);
     }
 
-    public void onRegisterClick() {
+    /*public void onRegisterClick() {
         //userType.postValue(userType.getValue());
         registerButtonPressed.postValue(true);
-    }
+    }*/
 
     public void loginUser(String loginEmail, String pass) {
         userRepository.loginUser(loginEmail, pass);

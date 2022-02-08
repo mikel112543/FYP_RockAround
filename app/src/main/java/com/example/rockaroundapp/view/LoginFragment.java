@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentLoginBinding;
+import com.example.rockaroundapp.generated.callback.OnClickListener;
 import com.example.rockaroundapp.viewmodel.LoginViewModel;
 import com.example.rockaroundapp.viewmodel.RegisterViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +34,7 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private LoginViewModel loginViewModel;
     private BottomNavigationView bottomNavigationView;
+    private Toolbar toolbar;
     private NavController navController;
 
     @Override
@@ -42,9 +47,11 @@ public class LoginFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         binding.setLoginViewModel(loginViewModel);
         binding.setLifecycleOwner(this);
+        toolbar = getActivity().findViewById(R.id.main_toolbar);
+        toolbar.setVisibility(View.INVISIBLE);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
-        navController = Navigation.findNavController(view);
+        loginViewModel.signOut();
         observeViewModel(loginViewModel);
         return view;
     }
@@ -66,9 +73,8 @@ public class LoginFragment extends Fragment {
             }
         });
         loginViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
-            if (firebaseUser != null) {
+            if (firebaseUser == null) {
                 Toast.makeText(getActivity(), "Error logging in", Toast.LENGTH_SHORT).show();
-
             } else {
                 Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
                 navController.navigate(R.id.action_loginFragment_to_exploreFragment);
@@ -80,15 +86,21 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), failureMsg, Toast.LENGTH_SHORT).show();
             }
         });
-        loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {
+        /*loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {
             if (Boolean.TRUE.equals(isPressed)) {
                 navController.navigate(R.id.action_loginFragment_to_registerFragment);
             }
-        });
+        });*/
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
+        binding.registerButton.setOnClickListener(this::onRegisterClick);
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void onRegisterClick(View view) {
+        navController.navigate(R.id.action_loginFragment_to_registerFragment);
     }
 }

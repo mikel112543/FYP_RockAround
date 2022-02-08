@@ -22,7 +22,6 @@ public abstract class User {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        setUserType("NONE");
         oMapper = new ObjectMapper();
 
     }
@@ -80,7 +79,7 @@ public abstract class User {
         this.contactNumber = contactNumber;
     }
 
-    public Map<String, Object> objectMap(User user) {
+    public Map objectMap(User user) {
         return oMapper.convertValue(user, Map.class);
     }
 

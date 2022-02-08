@@ -2,13 +2,11 @@ package com.example.rockaroundapp.viewmodel;
 
 import android.text.TextUtils;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.model.GroupArtist;
-import com.example.rockaroundapp.model.User;
 import com.example.rockaroundapp.model.Venue;
 import com.example.rockaroundapp.repository.UserRepository;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,28 +66,31 @@ public class RegisterViewModel extends ViewModel {
         return surname;
     }
 
+
+
     public void register() {
-        if(userType.getValue().equals("SOLO")) {
+        if(userType.getValue() == UserType.SOLO.name()) {
             Artist artist = new Artist(firstname.getValue(), surname.getValue(), email.getValue());
-            userRepository.register(artist);
-        }else if(userType.getValue().equals("GROUP")) {
+            userRepository.register(artist, password.getValue());
+        }else if(Objects.equals(userType.getValue(), UserType.GROUP.name())) {
             GroupArtist groupArtist = new GroupArtist(firstname.getValue(), surname.getValue(), email.getValue());
-            userRepository.register(groupArtist);
+            userRepository.register(groupArtist, password.getValue());
         }else {
             Venue venue = new Venue(firstname.getValue(), surname.getValue(), email.getValue());
-            userRepository.register(venue);
+            userRepository.register(venue, password.getValue());
 
         }
 
+    }
+
+    public void signOut() {
+        userRepository.signOut();
     }
 
     public void setUserType(LoginViewModel.UserType type) {
         userType.postValue(type.name());
     }
 
-    public MutableLiveData<String> getUserType() {
-        return userType;
-    }
 
     public MutableLiveData<List<String>> getDetails() {
         if (registerDetails == null) {
@@ -106,6 +107,7 @@ public class RegisterViewModel extends ViewModel {
         ArrayList<String> details = new ArrayList<>();
         details.add(email.getValue());
         details.add(password.getValue());
+        details.add(userType.getValue());
         details.add(firstname.getValue());
         details.add(surname.getValue());
 
@@ -114,19 +116,19 @@ public class RegisterViewModel extends ViewModel {
 
     public boolean validateEmail() {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        return Objects.requireNonNull(email.getValue()).matches(emailPattern);
+        return email.getValue().matches(emailPattern);
     }
 
     public boolean validatePassword() {
-        return TextUtils.isEmpty(password.getValue());
+        return !TextUtils.isEmpty(password.getValue());
     }
 
     public boolean validateFirstname() {
-        return TextUtils.isEmpty(firstname.getValue());
+        return !TextUtils.isEmpty(firstname.getValue());
     }
 
     public boolean validateLastname() {
-        return TextUtils.isEmpty(surname.getValue());
+        return !TextUtils.isEmpty(surname.getValue());
     }
 
     public boolean validateType() {

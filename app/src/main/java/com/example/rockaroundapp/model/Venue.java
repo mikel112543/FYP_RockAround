@@ -1,7 +1,5 @@
 package com.example.rockaroundapp.model;
 
-import android.app.usage.UsageEvents;
-
 import java.util.List;
 import java.util.Map;
 
@@ -126,7 +124,7 @@ public class Venue extends User{
     }
 
     @Override
-    public Map<String, Object> objectMap(User user) {
+    public Map objectMap(User user) {
         return super.objectMap(user);
     }
 }

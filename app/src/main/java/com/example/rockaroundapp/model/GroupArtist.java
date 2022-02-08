@@ -57,7 +57,7 @@ public class GroupArtist extends Artist {
     }
 
     @Override
-    public Map<String, Object> objectMap(User user) {
+    public Map objectMap(User user) {
         return super.objectMap(user);
     }
 }

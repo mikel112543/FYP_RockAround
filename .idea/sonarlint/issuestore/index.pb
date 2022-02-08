@@ -16,8 +16,6 @@ Bapp/src/main/java/com/example/rockaroundapp/model/GroupMember.java,7\e\7e8a286
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
-X
-(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 l
 <app/src/main/java/com/example/rockaroundapp/model/Event.java,5\c\5c23eaa35485ca20b2d4b57b1e45e4f719fae50e
 ;
@@ -36,7 +34,9 @@ r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
 x
 Happ/src/main/java/com/example/rockaroundapp/source/remoteConnection.java,5\2\5270ed0508a887c2641cf8766b530a703e9871f0
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+r
+Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad58b4bdb90d96d55b01cadebe8f908e4e41
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4

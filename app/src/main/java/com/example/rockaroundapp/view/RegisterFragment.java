@@ -3,6 +3,8 @@ package com.example.rockaroundapp.view;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class RegisterFragment extends Fragment {
     private RegisterViewModel registerViewModel;
     private FragmentRegisterBinding binding;
     private NavController navController;
+    private Toolbar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,10 +47,9 @@ public class RegisterFragment extends Fragment {
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         binding.setRegisterViewModel(registerViewModel);
         binding.setLifecycleOwner(this);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar = getActivity().findViewById(R.id.main_toolbar);
+        toolbar.setVisibility(View.VISIBLE);
         observeViewModel();
-        navController = Navigation.findNavController(view);
         return view;
     }
 
@@ -60,7 +62,7 @@ public class RegisterFragment extends Fragment {
             } else {
                 binding.emailField.setError(null);
             }
-            if (strings.get(0).isEmpty()) {
+            if (strings.get(1).isEmpty()) {
                 binding.passwordField.setError("Enter a password");
             } else {
                 binding.passwordField.setError(null);
@@ -78,17 +80,24 @@ public class RegisterFragment extends Fragment {
             } else {
                 binding.surnameField.setError(null);
             }
-            if(registerViewModel.validateEmail() && registerViewModel.validatePassword() &&
+            if (registerViewModel.validateEmail() && registerViewModel.validatePassword() &&
                     registerViewModel.validateFirstname() && registerViewModel.validateLastname() && registerViewModel.validateType()) {
                 registerViewModel.register();
             }
             registerViewModel.getFirebaseUserRegister().observe(getViewLifecycleOwner(), firebaseUser -> {
-                if(firebaseUser != null) {
+                if (firebaseUser != null) {
+                    Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     navController.navigate(R.id.action_registerFragment_to_exploreFragment);
-            }else {
+                } else {
                     Toast.makeText(getActivity(), registerViewModel.getFailedRegMessage(), Toast.LENGTH_SHORT).show();
                 }
+            });
         });
-        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
+        super.onViewCreated(view, savedInstanceState);
     }
 }

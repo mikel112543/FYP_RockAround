@@ -2,7 +2,6 @@ package com.example.rockaroundapp.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -171,10 +170,5 @@ public class Artist extends User {
 
     public void setSampleTracks(List<SampleTrack> sampleTracks) {
         this.sampleTracks = sampleTracks;
-    }
-
-    @Override
-    public Map<String, Object> objectMap(User user) {
-        return super.objectMap(user);
     }
 }
