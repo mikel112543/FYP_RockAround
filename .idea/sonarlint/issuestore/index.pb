@@ -28,8 +28,6 @@ q
 Aapp/src/main/java/com/example/rockaroundapp/dao/VenueDaoImpl.java,f\1\f1d34102de6fab4434aec648d86e6ebc86e781c3
 n
 >app/src/main/java/com/example/rockaroundapp/dao/ArtistDao.java,7\f\7fad84ca9ca184f2614fa595d6d644ae1147d1ac
-i
-9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
 r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
 x
@@ -40,3 +38,15 @@ Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad5
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+l
+<app/src/main/java/com/example/rockaroundapp/model/Venue.java,3\b\3bf0d546b5007f3aefe8b55bfca7538b8def5b8d
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+m
+=app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
+r
+Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
