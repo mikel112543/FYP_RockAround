@@ -2,6 +2,7 @@ package com.example.rockaroundapp.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +19,10 @@ public class Artist extends User {
     private int price;
     private List<String> instruments;
     private List<String> artistImages;
-    private String city;
     private List<String> genres;
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
+    private HashMap<String, Object> address;
     private ObjectMapper oMapper;
 
     public Artist() {
@@ -55,6 +56,21 @@ public class Artist extends User {
         return userType;
     }
 
+    public Artist(String stageName, String profileImgURL, int price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+        this.stageName = stageName;
+        this.profileImgURL = profileImgURL;
+        this.price = price;
+        this.instruments = instruments;
+        this.artistImages = artistImages;
+        this.genres = genres;
+        this.sampleTracks = sampleTracks;
+        this.address = address;
+    }
+
+    public HashMap<String, Object> getAddress() {
+        return address;
+    }
+
     @Override
     public void setUserType(String userType) {
         this.userType = userType;
@@ -80,6 +96,14 @@ public class Artist extends User {
         return artistId;
     }
 
+    public void setAddress() {
+        address = new HashMap<>();
+        address.put("addressLineOne", addressLineOne);
+        address.put("addressLineTwo", addressLineTwo);
+        address.put("county", county);
+        address.put("country", country);
+    }
+
     public void setArtistId(int artistId) {
         this.artistId = artistId;
     }
@@ -102,14 +126,6 @@ public class Artist extends User {
 
     public String getAddressLineTwo() {
         return addressLineTwo;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public void setAddressLineTwo(String addressLineTwo) {
