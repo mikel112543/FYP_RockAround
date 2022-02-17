@@ -55,7 +55,7 @@ public class ArtistDaoImpl implements ArtistDao {
             stmt.setString(4, artist.getProfileImgURL());
             stmt.setString(5, artist.getUserType());
             stmt.setString(6, artist.getBio());
-            stmt.setInt(7, artist.getPrice());
+            stmt.setString(7, artist.getPrice());
             stmt.setString(8, artist.getEmail());
             stmt.setString(9, artist.getContactNumber());
             stmt.execute();
@@ -75,7 +75,7 @@ public class ArtistDaoImpl implements ArtistDao {
             stmt.setString(4, artist.getProfileImgURL());
             stmt.setString(5, artist.getUserType());
             stmt.setString(6, artist.getBio());
-            stmt.setInt(7, artist.getPrice());
+            stmt.setString(7, artist.getPrice());
             stmt.setString(8, artist.getEmail());
             stmt.setString(9, artist.getContactNumber());
             stmt.setInt(10, artist.getArtistId());

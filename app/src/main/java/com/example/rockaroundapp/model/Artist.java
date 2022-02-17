@@ -16,7 +16,7 @@ public class Artist extends User {
     private String country;
     private String profileImgURL;
     private String userType;
-    private int price;
+    private String price;
     private List<String> instruments;
     private List<String> artistImages;
     private List<String> genres;
@@ -56,7 +56,7 @@ public class Artist extends User {
         return userType;
     }
 
-    public Artist(String stageName, String profileImgURL, int price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+    public Artist(String stageName, String profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
         this.stageName = stageName;
         this.profileImgURL = profileImgURL;
         this.price = price;
@@ -164,11 +164,11 @@ public class Artist extends User {
         this.instruments = instruments;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

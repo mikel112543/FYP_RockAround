@@ -64,7 +64,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={soloSetupViewModel.artist.stageName}"
+                    android:text="@={soloSetupViewModel.artist.stageName}}"
                     android:hint="Stage name" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,6 +126,7 @@
                 app:layout_constraintTop_toBottomOf="@id/genres_textInputLayout" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/price_text"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/genres_textInputLayout"
@@ -134,13 +135,28 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginStart="20dp">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:text="@={soloSetupViewModel.artist.price}"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:hint="Price" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                app:layout_constraintTop_toBottomOf="@id/price_text"
+                android:layout_marginStart="20dp"
+                android:onClick="@{()-> soloSetupViewModel.onSaveClicked()}"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/pill_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

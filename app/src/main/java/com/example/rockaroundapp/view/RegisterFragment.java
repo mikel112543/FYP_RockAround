@@ -37,6 +37,7 @@ public class RegisterFragment extends Fragment {
     private FragmentRegisterBinding binding;
     private NavController navController;
     private Toolbar toolbar;
+    private String userType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +56,7 @@ public class RegisterFragment extends Fragment {
 
     private void observeViewModel() {
         registerViewModel.getDetails().observe(getViewLifecycleOwner(), strings -> {
+            userType= strings.get(2);
             if (TextUtils.isEmpty(Objects.requireNonNull(strings.get(0)))) {
                 binding.emailField.setError("Enter an email address");
             } else if (!registerViewModel.validateEmail()) {
@@ -87,7 +89,9 @@ public class RegisterFragment extends Fragment {
             registerViewModel.getFirebaseUserRegister().observe(getViewLifecycleOwner(), firebaseUser -> {
                 if (firebaseUser != null) {
                     Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
-                    navController.navigate(R.id.action_registerFragment_to_exploreFragment);
+                    if(userType == "SOLO") {
+                        navController.navigate(R.id.action_registerFragment_to_soloSetupFragment);
+                    }
                 } else {
                     Toast.makeText(getActivity(), registerViewModel.getFailedRegMessage(), Toast.LENGTH_SHORT).show();
                 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/soloSetupFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -25,12 +25,39 @@
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_exploreFragment"
-            app:destination="@id/exploreFragment" />
+            android:id="@+id/action_registerFragment_to_soloSetupFragment"
+            app:destination="@id/soloSetupFragment" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.example.rockaroundapp.view.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" />
+    <fragment
+        android:id="@+id/soloSetupFragment"
+        android:name="com.example.rockaroundapp.view.SoloSetupFragment"
+        android:label="fragment_soloSetup"
+        tools:layout="@layout/fragment_solo_setup" >
+        <argument
+            android:name="pickedGenres"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_soloSetupFragment_to_genreDialog"
+            app:destination="@id/genreDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/genreDialog"
+        android:name="com.example.rockaroundapp.view.GenreDialogFragment"
+        android:label="dialog_genre"
+        tools:layout="@layout/fragment_genre_dialog">
+        <action
+            android:id="@+id/action_genreDialog_to_soloSetupFragment"
+            app:destination="@id/soloSetupFragment">
+            <argument
+                android:name="pickedGenres"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
+    </dialog>
 </navigation>
