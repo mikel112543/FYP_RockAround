@@ -1,24 +1,23 @@
 package com.example.rockaroundapp.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.rockaroundapp.R;
-
-import java.sql.Struct;
+import com.example.rockaroundapp.databinding.FragmentGenreDialogBinding;
+import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,13 +27,18 @@ public class GenreDialogFragment extends DialogFragment {
     private String[] genreList;
     private List<Integer> selectedGenres = new ArrayList<>();
     private boolean[] checkedGenres;
+    private List<String> selectedNames = new ArrayList<>();
     private String genreText;
-    private NavController navController;
-
-
+    private FragmentGenreDialogBinding fragmentGenreDialogBinding;
+    private SoloSetupViewModel soloSetupViewModel;
     public GenreDialogFragment() {
         // Required empty public constructor
     }
+
+    public interface OnInputListener {
+        void sendInput(List<String> selectedNames);
+    }
+    public OnInputListener mOnInputListener;
 
     public String getGenreText() {
         return genreText;
@@ -61,26 +65,56 @@ public class GenreDialogFragment extends DialogFragment {
                     genreText = "";
                     for (int i = 0; i < selectedGenres.size(); i++) {
                         builder.append(genreList[selectedGenres.get(i)]);
+                        selectedNames.add(genreList[selectedGenres.get(i)]);
                         if (i != selectedGenres.size() - 1) {
                             builder.append(", ");
                         }
                     }
+
                     genreText = builder.toString();
-                    navController.navigate(GenreDialogFragmentDirections.actionGenreDialogToSoloSetupFragment());
+                    try {
+                        soloSetupViewModel.setGenre(selectedNames);
+                        soloSetupViewModel.setGenresString(genreText);
+                    }catch (Exception e) {
+                        Log.e("POST ERROR", e.getMessage());
+                    }
+
+                    dialog.dismiss();
+                    
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .setNeutralButton("Clear all", (dialog, which) -> {
                     Arrays.fill(checkedGenres, false);
+                    selectedNames.clear();
+                    genreText = "";
                     selectedGenres.clear();
+
                 });
         return alertDialogBuilder.create();
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            mOnInputListener
+                    = (OnInputListener) getParentFragmentManager();
+        }
+        catch (ClassCastException e) {
+            Log.e(TAG, "onAttach: ClassCastException: "
+                    + e.getMessage());
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fragmentGenreDialogBinding = FragmentGenreDialogBinding.inflate(inflater, container, false);
+        fragmentGenreDialogBinding.setDialogViewModel(soloSetupViewModel);
+        soloSetupViewModel = new ViewModelProvider(requireParentFragment()).get(SoloSetupViewModel.class);
+        return fragmentGenreDialogBinding.getRoot();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_genre_dialog, container, false);
+        //return inflater.inflate(R.layout.fragment_genre_dialog, container, false);
     }
 
     @Override

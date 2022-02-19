@@ -26,8 +26,6 @@ l
 Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java,f\2\f2ee3303c876c78fdbb400ef80f1b2b04a977fd6
 q
 Aapp/src/main/java/com/example/rockaroundapp/dao/VenueDaoImpl.java,f\1\f1d34102de6fab4434aec648d86e6ebc86e781c3
-n
->app/src/main/java/com/example/rockaroundapp/dao/ArtistDao.java,7\f\7fad84ca9ca184f2614fa595d6d644ae1147d1ac
 x
 Happ/src/main/java/com/example/rockaroundapp/source/remoteConnection.java,5\2\5270ed0508a887c2641cf8766b530a703e9871f0
 r
@@ -48,3 +46,9 @@ n
 >app/src/main/java/com/example/rockaroundapp/model/Address.java,8\4\84f1713a5e8a75602de92b53f34ce9b5eb6be653
 
 Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+r
+Bapp/src/main/java/com/example/rockaroundapp/view/MainActivity.java,8\e\8e27f8d8d0c61ae4b706de91497b72734f48f969
+r
+Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329

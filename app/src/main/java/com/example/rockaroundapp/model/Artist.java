@@ -2,6 +2,7 @@ package com.example.rockaroundapp.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class Artist extends User {
     private ObjectMapper oMapper;
 
     public Artist() {
+        genres = new ArrayList<>();
     }
 /*
     public Artist(String firstname, String lastname, String email, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {

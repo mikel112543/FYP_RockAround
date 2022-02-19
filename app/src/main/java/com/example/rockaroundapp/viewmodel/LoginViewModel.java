@@ -1,14 +1,9 @@
 package com.example.rockaroundapp.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.repository.UserRepository;
-import com.example.rockaroundapp.view.LoginFragment;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;

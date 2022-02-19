@@ -13,22 +13,25 @@ import java.util.Objects;
 public class SoloSetupViewModel extends ViewModel {
 
     public MutableLiveData<String> stageName;
-    public MutableLiveData<List<String>> genre;
+    public MutableLiveData<List<String>> genresMutable;
     public MutableLiveData<String> bio;
     public MutableLiveData<String> price;
     public MutableLiveData<String> contactNumber;
-
+    public MutableLiveData<String> genresStringMutable;
     private MutableLiveData<Artist> artistMutable;
     private SoloSetupRepository soloSetupRepository;
+    private List<String> genreList;
 
     public SoloSetupViewModel() {
         soloSetupRepository = new SoloSetupRepository();
         stageName = new MutableLiveData<>();
-        genre = new MutableLiveData<>();
         bio = new MutableLiveData<>();
         artistMutable = new MutableLiveData<>();
         price = new MutableLiveData<>();
         contactNumber = new MutableLiveData<>();
+        genresMutable = new MutableLiveData<>();
+        genresStringMutable = new MutableLiveData<>();
+        genreList = new ArrayList<>();
     }
 
     public MutableLiveData<Artist> getArtist() {
@@ -38,12 +41,26 @@ public class SoloSetupViewModel extends ViewModel {
         return artistMutable;
     }
 
+    public void setGenre(List<String> genres) {
+        genresMutable.setValue(genres);
+    }
+
+    public void setGenresString(String genresString) {
+        genresStringMutable.setValue(genresString);
+    }
+
+    public MutableLiveData<String> getGenresStringMutable() {
+        return genresStringMutable;
+    }
+
     public void onSaveClicked() {
         Artist artist = new Artist();
         artist.setBio(bio.getValue());
         artist.setStageName(stageName.getValue());
         artist.setPrice(price.getValue());
-        artistMutable.postValue(artist);
+        artist.setGenres(genresMutable.getValue());
+        artist.setContactNumber(contactNumber.getValue());
+        artistMutable.setValue(artist);
     }
 
 }
