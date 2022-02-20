@@ -1,34 +1,26 @@
 package com.example.rockaroundapp.view;
 
 import android.os.Bundle;
-
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentRegisterBinding;
 import com.example.rockaroundapp.viewmodel.RegisterViewModel;
-import com.google.android.material.slider.Slider;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-import java.util.List;
 import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
@@ -36,8 +28,11 @@ public class RegisterFragment extends Fragment {
     private RegisterViewModel registerViewModel;
     private FragmentRegisterBinding binding;
     private NavController navController;
+    private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private String userType;
+    private String firstName;
+    private Bundle bundle = new Bundle();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,13 +45,15 @@ public class RegisterFragment extends Fragment {
         binding.setLifecycleOwner(this);
         toolbar = getActivity().findViewById(R.id.main_toolbar);
         toolbar.setVisibility(View.VISIBLE);
+        bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
+        bottomNavigationView.setVisibility(View.INVISIBLE);
         observeViewModel();
         return view;
     }
 
     private void observeViewModel() {
         registerViewModel.getDetails().observe(getViewLifecycleOwner(), strings -> {
-            userType= strings.get(2);
+            userType = strings.get(2);
             if (TextUtils.isEmpty(Objects.requireNonNull(strings.get(0)))) {
                 binding.emailField.setError("Enter an email address");
             } else if (!registerViewModel.validateEmail()) {
@@ -86,16 +83,29 @@ public class RegisterFragment extends Fragment {
                     registerViewModel.validateFirstname() && registerViewModel.validateLastname() && registerViewModel.validateType()) {
                 registerViewModel.register();
             }
-            registerViewModel.getFirebaseUserRegister().observe(getViewLifecycleOwner(), firebaseUser -> {
+            registerViewModel.getRegisterSuccess().observe(getViewLifecycleOwner(), success -> {
+                if(success) {
+                    firstName = binding.firstnameField.getEditText().getText().toString();
+                    bundle.putString("firstName", firstName);
+                    Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    if (userType == "SOLO") {
+                        navController.navigate(R.id.action_registerFragment_to_soloSetupFragment, bundle);
+                    }
+                }
+            });
+            /*registerViewModel.getFirebaseUserRegister().observe(getViewLifecycleOwner(), firebaseUser -> {
                 if (firebaseUser != null) {
                     Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    firstName = binding.txtFirstname.toString();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("firstName", firstName);
+                    navController.navigate(R.id.action_registerFragment_to_soloSetupFragment, bundle);
                     if(userType == "SOLO") {
-                        navController.navigate(R.id.action_registerFragment_to_soloSetupFragment);
                     }
                 } else {
                     Toast.makeText(getActivity(), registerViewModel.getFailedRegMessage(), Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
         });
     }
 

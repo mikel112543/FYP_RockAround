@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+/*
 public class ArtistDaoImpl implements ArtistDao {
 
     static Logger log = Logger.getLogger(ArtistDaoImpl.class);
@@ -44,7 +45,8 @@ public class ArtistDaoImpl implements ArtistDao {
         }
 
     }
-
+*/
+/*
     @Override
     public void insert(Artist artist) throws SQLException {
         Connection conn = remoteConnection.getConnection();
@@ -63,9 +65,11 @@ public class ArtistDaoImpl implements ArtistDao {
             log.error(e.getMessage());
             conn.close();
         }
-    }
+    }*//*
 
-    @Override
+
+*/
+/*    @Override
     public void update(Artist artist) throws SQLException {
         Connection conn = remoteConnection.getConnection();
         try (PreparedStatement stmt = conn.prepareStatement(UPDATE_ARTIST)) {
@@ -85,7 +89,8 @@ public class ArtistDaoImpl implements ArtistDao {
             conn.close();
         }
 
-    }
+    }*//*
+
 
     @Override
     public List<Artist> findAll() {
@@ -129,3 +134,4 @@ public class ArtistDaoImpl implements ArtistDao {
         return null;
     }
 }
+*/

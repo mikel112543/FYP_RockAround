@@ -31,10 +31,11 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image_view"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="30dp"
-                android:src="@mipmap/ic_launcher_round"
+                android:scaleType="centerInside"
+                app:shapeAppearanceOverlay="@style/circleImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image_textview" />
@@ -86,31 +87,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/stage_name_textInputLayout" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:id="@+id/genres_textInputLayout"
                 android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintBottom_toTopOf="@id/contact_text"
-                android:clickable="false"
-                app:layout_constraintEnd_toStartOf="@+id/add_genre_button"
-                app:layout_constraintStart_toStartOf="parent"
-                android:focusable="false"
-                app:layout_constraintTop_toBottomOf="@id/bio_editText">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:clickable="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Genres" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginEnd="31dp"
+                android:clickable="false"
+                android:focusable="false"
+                app:layout_constraintBottom_toTopOf="@id/contact_text"
+                app:layout_constraintEnd_toStartOf="@+id/add_genre_button"
+                app:layout_constraintStart_toStartOf="@id/bio_editText"
+                app:layout_constraintTop_toBottomOf="@id/bio_editText" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_genre_button"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
+                android:layout_marginStart="31dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/pill_button"
                 android:hint="Add Genre"
@@ -120,33 +116,31 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/contact_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toTopOf="@id/price_text"
-                app:layout_constraintEnd_toEndOf="@id/add_genre_button"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/genres_textInputLayout"
                 app:layout_constraintTop_toBottomOf="@id/genres_textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Contact Number"
                     android:inputType="number"
-                    android:text="@={soloSetupViewModel.contactNumber}"
-                    android:hint="Contact Number" />
+                    android:text="@={soloSetupViewModel.contactNumber}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/price_text"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintEnd_toStartOf="@id/add_genre_button"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/genres_textInputLayout"
+
+                app:layout_constraintStart_toStartOf="@id/contact_text"
                 app:layout_constraintTop_toBottomOf="@id/contact_text">
 
                 <com.google.android.material.textfield.TextInputEditText

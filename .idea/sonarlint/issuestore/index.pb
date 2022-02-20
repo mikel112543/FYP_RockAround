@@ -44,11 +44,5 @@ i
 9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
 n
 >app/src/main/java/com/example/rockaroundapp/model/Address.java,8\4\84f1713a5e8a75602de92b53f34ce9b5eb6be653
-
-Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-r
-Bapp/src/main/java/com/example/rockaroundapp/view/MainActivity.java,8\e\8e27f8d8d0c61ae4b706de91497b72734f48f969
-r
-Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329

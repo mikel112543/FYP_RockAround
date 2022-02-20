@@ -1,23 +1,22 @@
 package com.example.rockaroundapp.view;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentGenreDialogBinding;
 import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,17 +30,9 @@ public class GenreDialogFragment extends DialogFragment {
     private String genreText;
     private FragmentGenreDialogBinding fragmentGenreDialogBinding;
     private SoloSetupViewModel soloSetupViewModel;
+
     public GenreDialogFragment() {
         // Required empty public constructor
-    }
-
-    public interface OnInputListener {
-        void sendInput(List<String> selectedNames);
-    }
-    public OnInputListener mOnInputListener;
-
-    public String getGenreText() {
-        return genreText;
     }
 
     @NonNull
@@ -75,35 +66,23 @@ public class GenreDialogFragment extends DialogFragment {
                     try {
                         soloSetupViewModel.setGenre(selectedNames);
                         soloSetupViewModel.setGenresString(genreText);
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         Log.e("POST ERROR", e.getMessage());
                     }
 
                     dialog.dismiss();
-                    
+
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .setNeutralButton("Clear all", (dialog, which) -> {
                     Arrays.fill(checkedGenres, false);
-                    selectedNames.clear();
                     genreText = "";
+                    selectedNames.clear();
                     selectedGenres.clear();
-
+                    soloSetupViewModel.setGenre(selectedNames);
+                    soloSetupViewModel.setGenresString(genreText);
                 });
         return alertDialogBuilder.create();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            mOnInputListener
-                    = (OnInputListener) getParentFragmentManager();
-        }
-        catch (ClassCastException e) {
-            Log.e(TAG, "onAttach: ClassCastException: "
-                    + e.getMessage());
-        }
     }
 
     @Override

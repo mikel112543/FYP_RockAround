@@ -1,8 +1,16 @@
 package com.example.rockaroundapp.view;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -12,25 +20,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.rockaroundapp.R;
 
 import com.example.rockaroundapp.databinding.FragmentSoloSetupBinding;
-import com.example.rockaroundapp.viewmodel.LoginViewModel;
 import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.chainsaw.Main;
-import org.apache.log4j.spi.LoggerFactory;
 
 import java.util.Objects;
 
@@ -43,7 +48,9 @@ public class SoloSetupFragment extends Fragment {
     private Toolbar toolbar;
     private NavController navController;
     private BottomNavigationView bottomNavigationView;
-    private FragmentManager fragmentManager;
+    private ActivityResultLauncher<Intent> getProfiler;
+    private TextDrawable orgProfiler;
+    private ColorGenerator generator = ColorGenerator.MATERIAL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +65,11 @@ public class SoloSetupFragment extends Fragment {
         toolbar.setVisibility(View.INVISIBLE);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
+        assert getArguments() != null;
+        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), generator.getRandomColor());
+        binding.profileImageView.setImageDrawable(orgProfiler);
         observeViewModel(soloSetupViewModel);
+
         return view;
     }
 
@@ -74,30 +85,62 @@ public class SoloSetupFragment extends Fragment {
             }else{
                 binding.contactText.setError(null);
             }
+            if(!artist.getGenres().isEmpty() && !artist.getContactNumber().isEmpty()) {
+                soloSetupViewModel.saveInfo();
+            }
         });
         soloSetupViewModel.getGenresStringMutable().observe(getViewLifecycleOwner(), string -> {
             if(!string.isEmpty()) {
-                Objects.requireNonNull(binding.genresTextInputLayout.getEditText()).setText(string);
+                binding.genresTextInputLayout.setText(string);
+            }else{
+                binding.genresTextInputLayout.setText("");
             }
         });
-
+        soloSetupViewModel.getSetUpSuccess().observe(getViewLifecycleOwner(), aBoolean -> {
+            if(Boolean.TRUE.equals(aBoolean)) {
+                Toast.makeText(getActivity(), "Setup Successful", Toast.LENGTH_SHORT).show();
+                navController.navigate(R.id.action_soloSetupFragment_to_exploreFragment);
+            }
+        });
 
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.addGenreButton.setOnClickListener(this::onAddGenreClicked);
+        binding.uploadImageButton.setOnClickListener(this::showGallery);
         navController = Navigation.findNavController(getActivity(), R.id.fragmentContainerView);
+        setUpProfileResult();
         super.onViewCreated(view, savedInstanceState);
     }
 
     private void onAddGenreClicked(View view) {
         GenreDialogFragment dialogFragment = new GenreDialogFragment();
         dialogFragment.show(getChildFragmentManager(), "dialog");
-        //navController.navigate(R.id.action_soloSetupFragment_to_genreDialog);
-            //TODO finish onClick for adding Genre
-            //TODO add onClick for Submission
             //TODO add profile image insertion
             //TODO add multi Image insertion
 
+    }
+    private void showGallery(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent.createChooser(intent, "Select your profile image");
+        getProfiler.launch(intent);
+    }
+    public void setUpProfileResult() {
+        getProfiler = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if(result.getResultCode() == Activity.RESULT_OK){
+                try{
+                    if(result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        Picasso.get().load(selectedImageUri).into(binding.profileImageView);
+                        soloSetupViewModel.setProfileImageUri(selectedImageUri);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

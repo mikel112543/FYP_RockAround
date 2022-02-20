@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/soloSetupFragment">
+    app:startDestination="@id/registerFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_soloSetupFragment_to_genreDialog"
             app:destination="@id/genreDialog" />
+        <action
+            android:id="@+id/action_soloSetupFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment" />
     </fragment>
     <dialog
         android:id="@+id/genreDialog"

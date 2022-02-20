@@ -25,6 +25,7 @@ public class RegisterViewModel extends ViewModel {
     private MutableLiveData<String> surname;
     private MutableLiveData<String> userType;
     private MutableLiveData<List<String>> registerDetails;
+    private MutableLiveData<Boolean> registerSuccess;
     private String failedRegMessage;
 
     public enum UserType {
@@ -43,6 +44,7 @@ public class RegisterViewModel extends ViewModel {
         firstname = new MutableLiveData<>("");
         surname = new MutableLiveData<>("");
         userType = new MutableLiveData<>(LoginViewModel.UserType.NONE.name());
+        registerSuccess = userRepository.getRegisterSuccess();
 
     }
 
@@ -66,7 +68,9 @@ public class RegisterViewModel extends ViewModel {
         return surname;
     }
 
-
+    public MutableLiveData<Boolean> getRegisterSuccess() {
+        return registerSuccess;
+    }
 
     public void register() {
         if(userType.getValue() == UserType.SOLO.name()) {

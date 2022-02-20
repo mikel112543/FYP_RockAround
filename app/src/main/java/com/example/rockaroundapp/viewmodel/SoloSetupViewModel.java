@@ -1,5 +1,7 @@
 package com.example.rockaroundapp.viewmodel;
 
+import android.net.Uri;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,8 +21,12 @@ public class SoloSetupViewModel extends ViewModel {
     public MutableLiveData<String> contactNumber;
     public MutableLiveData<String> genresStringMutable;
     private MutableLiveData<Artist> artistMutable;
+    private MutableLiveData<Boolean> setUpSuccess;
+    private MutableLiveData<Uri> imagePath;
     private SoloSetupRepository soloSetupRepository;
     private List<String> genreList;
+    private Uri profileImageUri;
+    private Artist artist;
 
     public SoloSetupViewModel() {
         soloSetupRepository = new SoloSetupRepository();
@@ -32,6 +38,9 @@ public class SoloSetupViewModel extends ViewModel {
         genresMutable = new MutableLiveData<>();
         genresStringMutable = new MutableLiveData<>();
         genreList = new ArrayList<>();
+        artist = new Artist();
+        setUpSuccess = soloSetupRepository.getSuccess();
+
     }
 
     public MutableLiveData<Artist> getArtist() {
@@ -53,14 +62,25 @@ public class SoloSetupViewModel extends ViewModel {
         return genresStringMutable;
     }
 
+    public MutableLiveData<Boolean> getSetUpSuccess() {
+        return setUpSuccess;
+    }
+
+    public void setProfileImageUri(Uri profileImageUri) {
+        this.profileImageUri = profileImageUri;
+    }
+
     public void onSaveClicked() {
-        Artist artist = new Artist();
         artist.setBio(bio.getValue());
         artist.setStageName(stageName.getValue());
         artist.setPrice(price.getValue());
         artist.setGenres(genresMutable.getValue());
         artist.setContactNumber(contactNumber.getValue());
+        artist.setProfileImgURL(profileImageUri);
         artistMutable.setValue(artist);
     }
 
+    public void saveInfo() {
+        soloSetupRepository.saveToDB(artist);
+    }
 }

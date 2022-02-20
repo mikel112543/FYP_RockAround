@@ -1,5 +1,7 @@
 package com.example.rockaroundapp.model;
 
+import android.net.Uri;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Artist extends User {
     private String addressLineTwo;
     private String county;
     private String country;
-    private String profileImgURL;
+    private Uri profileImgURL;
     private String userType;
     private String price;
     private List<String> instruments;
@@ -58,7 +60,7 @@ public class Artist extends User {
         return userType;
     }
 
-    public Artist(String stageName, String profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+    public Artist(String stageName, Uri profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
         this.stageName = stageName;
         this.profileImgURL = profileImgURL;
         this.price = price;
@@ -150,11 +152,11 @@ public class Artist extends User {
         this.country = country;
     }
 
-    public String getProfileImgURL() {
+    public Uri getProfileImgURL() {
         return profileImgURL;
     }
 
-    public void setProfileImgURL(String profileImgURL) {
+    public void setProfileImgURL(Uri profileImgURL) {
         this.profileImgURL = profileImgURL;
     }
 
