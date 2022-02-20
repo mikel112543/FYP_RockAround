@@ -51,6 +51,7 @@ public class SoloSetupFragment extends Fragment {
     private ActivityResultLauncher<Intent> getProfiler;
     private TextDrawable orgProfiler;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
+    //TODO Properly insert image location into Profile Image of Artist
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,8 +117,6 @@ public class SoloSetupFragment extends Fragment {
     private void onAddGenreClicked(View view) {
         GenreDialogFragment dialogFragment = new GenreDialogFragment();
         dialogFragment.show(getChildFragmentManager(), "dialog");
-            //TODO add profile image insertion
-            //TODO add multi Image insertion
 
     }
     private void showGallery(View view) {
