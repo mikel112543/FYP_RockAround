@@ -11,9 +11,6 @@ m
 =app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupMember.java,7\e\7e8a286fe48b0dc87fd7fc4ad83621525872dd9e
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
 l
