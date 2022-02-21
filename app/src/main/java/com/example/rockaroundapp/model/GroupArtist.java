@@ -17,6 +17,9 @@ public class GroupArtist extends Artist {
         this.groupMembers = groupMembers;
     }*/
 
+    public GroupArtist() {
+    }
+
     public GroupArtist(String firstname, String lastname, String email) {
         super(firstname, lastname, email);
         setUserType("GROUP");

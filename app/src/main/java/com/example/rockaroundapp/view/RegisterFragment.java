@@ -87,9 +87,14 @@ public class RegisterFragment extends Fragment {
                 if(success) {
                     firstName = binding.firstnameField.getEditText().getText().toString();
                     bundle.putString("firstName", firstName);
+                    bundle.putString("userType", userType);
                     Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
                     if (userType == "SOLO") {
                         navController.navigate(R.id.action_registerFragment_to_soloSetupFragment, bundle);
+                    }else if(userType == "GROUP") {
+                        navController.navigate(R.id.action_registerFragment_to_groupSetupFragment);
+                    }else{
+                        navController.navigate(R.id.action_registerFragment_to_venueSetupFragment);
                     }
                 }
             });

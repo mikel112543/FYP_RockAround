@@ -17,7 +17,7 @@
             app:popExitAnim="@transition/exit_right_to_left"/>
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
-            app:destination="@id/exploreFragment"/>
+            app:destination="@id/artistExploreFragment"/>
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -27,12 +27,18 @@
         <action
             android:id="@+id/action_registerFragment_to_soloSetupFragment"
             app:destination="@id/soloSetupFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_groupSetupFragment"
+            app:destination="@id/groupSetupFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_venueSetupFragment"
+            app:destination="@id/venueSetupFragment" />
     </fragment>
     <fragment
-        android:id="@+id/exploreFragment"
-        android:name="com.example.rockaroundapp.view.ExploreFragment"
-        android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" />
+        android:id="@+id/artistExploreFragment"
+        android:name="com.example.rockaroundapp.view.ArtistExploreFragment"
+        android:label="fragment_artist_explore"
+        tools:layout="@layout/fragment_artist_explore" />
     <fragment
         android:id="@+id/soloSetupFragment"
         android:name="com.example.rockaroundapp.view.SoloSetupFragment"
@@ -47,7 +53,7 @@
             app:destination="@id/genreDialog" />
         <action
             android:id="@+id/action_soloSetupFragment_to_exploreFragment"
-            app:destination="@id/exploreFragment" />
+            app:destination="@id/artistExploreFragment" />
     </fragment>
     <dialog
         android:id="@+id/genreDialog"
@@ -63,4 +69,18 @@
                 android:defaultValue=""/>
         </action>
     </dialog>
+    <fragment
+        android:id="@+id/groupSetupFragment"
+        android:name="com.example.rockaroundapp.view.GroupSetupFragment"
+        android:label="fragment_groupSetup"
+        tools:layout="@layout/fragment_group_setup" >
+        <action
+            android:id="@+id/action_groupSetupFragment_to_exploreFragment"
+            app:destination="@id/artistExploreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/venueSetupFragment"
+        android:name="com.example.rockaroundapp.view.VenueSetupFragment"
+        android:label="fragment_venueSetup"
+        tools:layout="@layout/fragment_venue_setup" />
 </navigation>

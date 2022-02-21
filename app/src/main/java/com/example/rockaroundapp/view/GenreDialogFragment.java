@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentGenreDialogBinding;
+import com.example.rockaroundapp.viewmodel.GroupSetupViewModel;
 import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class GenreDialogFragment extends DialogFragment {
     private String genreText;
     private FragmentGenreDialogBinding fragmentGenreDialogBinding;
     private SoloSetupViewModel soloSetupViewModel;
+    private GroupSetupViewModel groupSetupViewModel;
 
     public GenreDialogFragment() {
         // Required empty public constructor
@@ -91,6 +93,8 @@ public class GenreDialogFragment extends DialogFragment {
         fragmentGenreDialogBinding = FragmentGenreDialogBinding.inflate(inflater, container, false);
         fragmentGenreDialogBinding.setDialogViewModel(soloSetupViewModel);
         soloSetupViewModel = new ViewModelProvider(requireParentFragment()).get(SoloSetupViewModel.class);
+        groupSetupViewModel = new ViewModelProvider(requireParentFragment()).get(GroupSetupViewModel.class);
+
         return fragmentGenreDialogBinding.getRoot();
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_genre_dialog, container, false);
