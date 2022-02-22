@@ -83,16 +83,21 @@ public class RegisterFragment extends Fragment {
                     registerViewModel.validateFirstname() && registerViewModel.validateLastname() && registerViewModel.validateType()) {
                 registerViewModel.register();
             }
-            registerViewModel.getRegisterSuccess().observe(getViewLifecycleOwner(), success -> {
-                if(success) {
-                    firstName = binding.firstnameField.getEditText().getText().toString();
-                    bundle.putString("firstName", firstName);
-                    Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
-                    if (userType == "SOLO") {
-                        navController.navigate(R.id.action_registerFragment_to_soloSetupFragment, bundle);
-                    }
+        });
+        registerViewModel.getRegisterSuccess().observe(getViewLifecycleOwner(), success -> {
+            if (Boolean.TRUE.equals(success)) {
+                firstName = binding.firstnameField.getEditText().getText().toString();
+                bundle.putString("firstName", firstName);
+                bundle.putString("userType", userType);
+                Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                if (userType == "SOLO") {
+                    navController.navigate(R.id.action_registerFragment_to_soloSetupFragment, bundle);
+                } else if (userType == "GROUP") {
+                    navController.navigate(R.id.action_registerFragment_to_groupSetupFragment, bundle);
+                } else {
+                    navController.navigate(R.id.action_registerFragment_to_venueSetupFragment, bundle);
                 }
-            });
+            }
             /*registerViewModel.getFirebaseUserRegister().observe(getViewLifecycleOwner(), firebaseUser -> {
                 if (firebaseUser != null) {
                     Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();

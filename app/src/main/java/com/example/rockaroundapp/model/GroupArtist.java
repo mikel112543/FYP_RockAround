@@ -6,7 +6,7 @@ import java.util.Map;
 public class GroupArtist extends Artist {
 
     private String formationDate;
-    private int noOfMembers;
+    private String noOfMembers;
     private List<GroupMember> groupMembers;
     private String userType;
 
@@ -16,6 +16,9 @@ public class GroupArtist extends Artist {
         this.noOfMembers = noOfMembers;
         this.groupMembers = groupMembers;
     }*/
+
+    public GroupArtist() {
+    }
 
     public GroupArtist(String firstname, String lastname, String email) {
         super(firstname, lastname, email);
@@ -40,11 +43,11 @@ public class GroupArtist extends Artist {
         this.formationDate = formationDate;
     }
 
-    public int getNoOfMembers() {
+    public String getNoOfMembers() {
         return noOfMembers;
     }
 
-    public void setNoOfMembers(int noOfMembers) {
+    public void setNoOfMembers(String noOfMembers) {
         this.noOfMembers = noOfMembers;
     }
 

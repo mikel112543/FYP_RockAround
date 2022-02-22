@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentGenreDialogBinding;
+import com.example.rockaroundapp.viewmodel.GroupSetupViewModel;
 import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class GenreDialogFragment extends DialogFragment {
     private String genreText;
     private FragmentGenreDialogBinding fragmentGenreDialogBinding;
     private SoloSetupViewModel soloSetupViewModel;
+    private GroupSetupViewModel groupSetupViewModel;
+    private String userType;
 
     public GenreDialogFragment() {
         // Required empty public constructor
@@ -61,15 +64,22 @@ public class GenreDialogFragment extends DialogFragment {
                             builder.append(", ");
                         }
                     }
-
                     genreText = builder.toString();
-                    try {
-                        soloSetupViewModel.setGenre(selectedNames);
-                        soloSetupViewModel.setGenresString(genreText);
-                    } catch (Exception e) {
-                        Log.e("POST ERROR", e.getMessage());
+                    switch (userType) {
+                        case "SOLO":
+                            soloSetupViewModel.setGenre(selectedNames);
+                            soloSetupViewModel.setGenresString(genreText);
+                            break;
+                        case "GROUP":
+                            groupSetupViewModel.setGenre(selectedNames);
+                            groupSetupViewModel.setGenresString(genreText);
+                            break;
+                        case "VENUE":
+                            //venueSetupViewModel.setGenre(selectedNames);
+                            //venueSetupViewModel.setGenreString(genreText);
+                        default:
+                            throw new IllegalArgumentException("Invalid user type " + userType);
                     }
-
                     dialog.dismiss();
 
                 })
@@ -79,8 +89,21 @@ public class GenreDialogFragment extends DialogFragment {
                     genreText = "";
                     selectedNames.clear();
                     selectedGenres.clear();
-                    soloSetupViewModel.setGenre(selectedNames);
-                    soloSetupViewModel.setGenresString(genreText);
+                    switch (userType) {
+                        case "SOLO":
+                            soloSetupViewModel.setGenre(selectedNames);
+                            soloSetupViewModel.setGenresString(genreText);
+                            break;
+                        case "GROUP":
+                            groupSetupViewModel.setGenre(selectedNames);
+                            groupSetupViewModel.setGenresString(genreText);
+                            break;
+                        case "VENUE":
+                            //venueSetupViewModel.setGenre(selectedNames);
+                            //venueSetupViewModel.setGenreString(genreText);
+                        default:
+                            throw new IllegalArgumentException("Invalid user type " + userType);
+                    }
                 });
         return alertDialogBuilder.create();
     }
@@ -91,6 +114,11 @@ public class GenreDialogFragment extends DialogFragment {
         fragmentGenreDialogBinding = FragmentGenreDialogBinding.inflate(inflater, container, false);
         fragmentGenreDialogBinding.setDialogViewModel(soloSetupViewModel);
         soloSetupViewModel = new ViewModelProvider(requireParentFragment()).get(SoloSetupViewModel.class);
+        groupSetupViewModel = new ViewModelProvider(requireParentFragment()).get(GroupSetupViewModel.class);
+        assert getArguments() != null;
+        userType = getArguments().getString("userType");
+
+
         return fragmentGenreDialogBinding.getRoot();
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_genre_dialog, container, false);
