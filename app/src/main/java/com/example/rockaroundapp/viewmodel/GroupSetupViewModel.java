@@ -28,13 +28,13 @@ public class GroupSetupViewModel extends ViewModel {
 
     public GroupSetupViewModel() {
         groupSetupRepository = new GroupSetupRepository();
-        groupName = new MutableLiveData<>();
-        bio = new MutableLiveData<>();
-        noOfMembers = new MutableLiveData<>();
-        contactNumber = new MutableLiveData<>();
-        price = new MutableLiveData<>();
+        groupName = new MutableLiveData<>("");
+        bio = new MutableLiveData<>("");
+        noOfMembers = new MutableLiveData<>("");
+        contactNumber = new MutableLiveData<>("");
+        price = new MutableLiveData<>("");
         groupArtistMutable = new MutableLiveData<>();
-        genresStringMutable = new MutableLiveData<>();
+        genresStringMutable = new MutableLiveData<>("");
         genresMutable = new MutableLiveData<>();
         setUpSuccess = groupSetupRepository.getSuccess();
     }
@@ -47,11 +47,11 @@ public class GroupSetupViewModel extends ViewModel {
     }
 
     public void setGenre(List<String> genres) {
-        genresMutable.setValue(genres);
+        genresMutable.postValue(genres);
     }
 
     public void setGenresString(String genresString) {
-        genresStringMutable.setValue(genresString);
+        genresStringMutable.postValue(genresString);
     }
 
     public MutableLiveData<String> getGenresStringMutable() {
@@ -71,7 +71,7 @@ public class GroupSetupViewModel extends ViewModel {
         groupArtist.setBio(bio.getValue());
         groupArtist.setStageName(groupName.getValue());
         groupArtist.setPrice(price.getValue());
-        groupArtist.setNoOfMembers(Integer.parseInt(Objects.requireNonNull(noOfMembers.getValue())));
+        groupArtist.setNoOfMembers(noOfMembers.getValue());
         groupArtist.setGenres(genresMutable.getValue());
         groupArtist.setContactNumber(contactNumber.getValue());
         groupArtist.setProfileImgURL(profileImageUri);
@@ -79,6 +79,6 @@ public class GroupSetupViewModel extends ViewModel {
     }
 
     public void saveInfo() {
-        //groupSetupRepository.saveToDB(groupArtist);
+        groupSetupRepository.saveToDB(groupArtist);
     }
 }

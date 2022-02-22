@@ -50,6 +50,7 @@ public class SoloSetupFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private ActivityResultLauncher<Intent> getProfiler;
     private TextDrawable orgProfiler;
+    private String userType;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
     //TODO Properly insert image location into Profile Image of Artist
 
@@ -66,9 +67,10 @@ public class SoloSetupFragment extends Fragment {
         toolbar.setVisibility(View.INVISIBLE);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
-        assert getArguments() != null;
         orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), generator.getRandomColor());
         binding.profileImageView.setImageDrawable(orgProfiler);
+        assert getArguments() != null;
+        userType = getArguments().getString("userType");
         observeViewModel(soloSetupViewModel);
 
         return view;
@@ -116,6 +118,9 @@ public class SoloSetupFragment extends Fragment {
 
     private void onAddGenreClicked(View view) {
         GenreDialogFragment dialogFragment = new GenreDialogFragment();
+        Bundle type = new Bundle();
+        type.putString("userType", userType);
+        dialogFragment.setArguments(type);
         dialogFragment.show(getChildFragmentManager(), "dialog");
 
     }

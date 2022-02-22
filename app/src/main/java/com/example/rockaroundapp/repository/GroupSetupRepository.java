@@ -40,7 +40,7 @@ public class GroupSetupRepository {
         group = new HashMap<>();
         group.put("groupName", groupArtist.getStageName());
         group.put("bio", groupArtist.getBio());
-        group.put("profileImg", groupArtist.getProfileImgURL());
+        group.put("profileImg", imagePath);
         group.put("genres", groupArtist.getGenres());
         group.put("price", groupArtist.getPrice());
         group.put("contact", groupArtist.getContactNumber());

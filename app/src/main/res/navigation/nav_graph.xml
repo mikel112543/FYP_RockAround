@@ -44,10 +44,6 @@
         android:name="com.example.rockaroundapp.view.SoloSetupFragment"
         android:label="fragment_soloSetup"
         tools:layout="@layout/fragment_solo_setup" >
-        <argument
-            android:name="pickedGenres"
-            app:argType="string"
-            android:defaultValue=""/>
         <action
             android:id="@+id/action_soloSetupFragment_to_genreDialog"
             app:destination="@id/genreDialog" />

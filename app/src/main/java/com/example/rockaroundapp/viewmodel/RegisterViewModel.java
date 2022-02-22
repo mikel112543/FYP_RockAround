@@ -118,7 +118,7 @@ public class RegisterViewModel extends ViewModel {
 
     public boolean validateEmail() {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        return email.getValue().matches(emailPattern);
+        return Objects.requireNonNull(email.getValue()).matches(emailPattern) && !TextUtils.isEmpty(email.getValue());
     }
 
     public boolean validatePassword() {
