@@ -72,17 +72,16 @@ public class LoginFragment extends Fragment {
                 loginViewModel.loginUser(details.get(0), details.get(1));
             }
         });
-        loginViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
+        /*loginViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
             if (firebaseUser == null) {
                 Toast.makeText(getActivity(), "Error logging in", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
                 navController.navigate(R.id.action_loginFragment_to_exploreFragment);
             }
-        });
+        });*/
         loginViewModel.getLoginFailureMsg().observe(getViewLifecycleOwner(), failureMsg -> {
             if (!failureMsg.isEmpty()) {
-                navController.navigate(R.id.action_loginFragment_to_registerFragment);
                 Toast.makeText(getActivity(), failureMsg, Toast.LENGTH_SHORT).show();
             }
         });

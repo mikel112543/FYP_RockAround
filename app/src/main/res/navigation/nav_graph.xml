@@ -79,4 +79,9 @@
         android:name="com.example.rockaroundapp.view.VenueSetupFragment"
         android:label="fragment_venueSetup"
         tools:layout="@layout/fragment_venue_setup" />
+    <fragment
+        android:id="@+id/reviewOfArtistFragment"
+        android:name="com.example.rockaroundapp.view.ReviewOfArtistFragment"
+        android:label="fragment_reviewOfArtist"
+        tools:layout="@layout/review_of_artist_fragment"/>
 </navigation>

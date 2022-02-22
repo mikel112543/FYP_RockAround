@@ -35,7 +35,7 @@ public class RegisterFragment extends Fragment {
     private Bundle bundle = new Bundle();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_register, container, false);

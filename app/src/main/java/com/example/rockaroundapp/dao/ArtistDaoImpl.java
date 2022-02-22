@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
-import com.example.rockaroundapp.source.remoteConnection;
 
 import org.apache.log4j.Logger;
 
