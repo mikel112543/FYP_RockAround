@@ -23,8 +23,6 @@ l
 Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java,f\2\f2ee3303c876c78fdbb400ef80f1b2b04a977fd6
 q
 Aapp/src/main/java/com/example/rockaroundapp/dao/VenueDaoImpl.java,f\1\f1d34102de6fab4434aec648d86e6ebc86e781c3
-x
-Happ/src/main/java/com/example/rockaroundapp/source/remoteConnection.java,5\2\5270ed0508a887c2641cf8766b530a703e9871f0
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad58b4bdb90d96d55b01cadebe8f908e4e41
 ?
@@ -43,8 +41,6 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 n
 >app/src/main/java/com/example/rockaroundapp/dao/ArtistDao.java,7\f\7fad84ca9ca184f2614fa595d6d644ae1147d1ac
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -60,3 +56,15 @@ r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
 w
 Gapp/src/main/java/com/example/rockaroundapp/view/SoloSetupFragment.java,0\8\0810a6e005b102b97437ac2c469d8d807e5ceccb
+u
+Eapp/src/main/java/com/example/rockaroundapp/util/BindingAdapters.java,d\2\d23cec313d126cc82a031e9765c2118c0b6fa878
+k
+;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
+
+Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
+r
+Bapp/src/main/java/com/example/rockaroundapp/view/MainActivity.java,8\e\8e27f8d8d0c61ae4b706de91497b72734f48f969
+{
+Kapp/src/main/java/com/example/rockaroundapp/view/ArtistExploreFragment.java,5\c\5c2fb826587c2084c140ccd68175f30baa7af4f4
+r
+Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329

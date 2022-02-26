@@ -42,6 +42,7 @@ public class ReviewOfArtistFragment extends Fragment {
         bottomNavigationView.setVisibility(View.INVISIBLE);
         return view;
     }
+    //TODO finish writing Fragment
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
