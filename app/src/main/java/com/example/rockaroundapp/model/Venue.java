@@ -1,5 +1,7 @@
 package com.example.rockaroundapp.model;
 
+import android.net.Uri;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +14,13 @@ public class Venue extends User{
     private String addressLineTwo;
     private String county;
     private String country;
+    private String city;
+    private String contactNumber;
     private List<Event> events;
     private List<Event> pastEvents;
     private List<VenueReview> reviews;
     private String userType;
+    private Uri profileImgURL;
 
  /*   public Venue(String firstname, String lastname, String email, String userType, String bio, String contactNumber, String venueName, int capacity, String venueType, String addressLineOne, String addressLineTwo, String county, String country) {
         super(firstname, lastname, email, userType, bio, contactNumber);
@@ -27,6 +32,9 @@ public class Venue extends User{
         this.county = county;
         this.country = country;
     }*/
+
+    public Venue() {
+    }
 
     public String getVenueName() {
         return venueName;
@@ -84,6 +92,14 @@ public class Venue extends User{
         this.country = country;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public List<Event> getEvents() {
         return events;
     }
@@ -106,6 +122,14 @@ public class Venue extends User{
 
     public void setReviews(List<VenueReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public Uri getProfileImgURL() {
+        return profileImgURL;
+    }
+
+    public void setProfileImgURL(Uri profileImgURL) {
+        this.profileImgURL = profileImgURL;
     }
 
     @Override

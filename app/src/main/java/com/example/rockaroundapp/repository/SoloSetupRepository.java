@@ -1,26 +1,22 @@
 package com.example.rockaroundapp.repository;
 
-import android.content.ContentResolver;
 import android.net.Uri;
-import android.util.MutableBoolean;
-import android.webkit.MimeTypeMap;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class SoloSetupRepository {
 
@@ -39,25 +35,33 @@ public class SoloSetupRepository {
     }
 
     public void saveToDB(Artist artist) {
-        if(artist.getProfileImgURL() != null) {
-            uploadProfileImage(artist.getProfileImgURL());
-            artist.setProfileImgURL(imagePath);
-        }
-        documentReference = db.collection("solo").document(currentUiD);
-        artistSetup = new HashMap<>();
-        artistSetup.put("stagename", artist.getStageName());
-        artistSetup.put("bio", artist.getBio());
-        artistSetup.put("profileImg", artist.getProfileImgURL());
-        artistSetup.put("genres", artist.getGenres());
-        artistSetup.put("price", artist.getPrice());
-        artistSetup.put("contact", artist.getContactNumber());
-        //artistSetup.put("address", artist.getAddress());
-        //artistSetup.put("instruments", artist.getInstruments());
-        //artistSetup.put("sampleTracks", artist.getSampleTracks());
-        //artistSetup.put("images", artist.getArtistImages());
-        documentReference.set(artistSetup, SetOptions.merge()).addOnSuccessListener(unused -> {
-            logger.info("Setup Successful");
-            success.postValue(true);
+        StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
+        UploadTask uploadTask = reference.putFile(artist.getProfileImgURL());
+        uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw Objects.requireNonNull(task.getException());
+            }
+            return reference.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                imagePath = task.getResult();
+                documentReference = db.collection("solo").document(currentUiD);
+                artistSetup = new HashMap<>();
+                artistSetup.put("stagename", artist.getStageName());
+                artistSetup.put("bio", artist.getBio());
+                artistSetup.put("profileImg", imagePath);
+                artistSetup.put("genres", artist.getGenres());
+                artistSetup.put("price", artist.getPrice());
+                artistSetup.put("contact", artist.getContactNumber());
+                //artistSetup.put("address", artist.getAddress());
+                //artistSetup.put("instruments", artist.getInstruments());
+                //artistSetup.put("sampleTracks", artist.getSampleTracks());
+                //artistSetup.put("images", artist.getArtistImages());
+                documentReference.set(artistSetup, SetOptions.merge()).addOnSuccessListener(unused -> {
+                    logger.info("Setup Successful");
+                    success.postValue(true);
+                });
+            }
         });
     }
 
@@ -65,7 +69,7 @@ public class SoloSetupRepository {
         return success;
     }
 
-    public void uploadProfileImage(Uri profileImgURL) {
+/*    public void uploadProfileImage(Uri profileImgURL) {
         StorageReference reference = storageReference.child("users/" + auth.getCurrentUser().getUid() + "profile.jpg");
         reference.putFile(profileImgURL).addOnSuccessListener(taskSnapshot -> {
             logger.info("Image uploaded successfully");
@@ -74,5 +78,5 @@ public class SoloSetupRepository {
 
                     .addOnFailureListener(e -> logger.error("error getting filepath url" + e.getMessage()));
         });
-    }
+    }*/
 }

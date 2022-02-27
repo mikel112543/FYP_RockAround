@@ -4,207 +4,213 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.example.rockaroundapp.viewmodel.LoginViewModel.UserType" />
+
         <variable
             name="registerViewModel"
             type="com.example.rockaroundapp.viewmodel.RegisterViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.RegisterFragment">
+        android:layout_height="match_parent">
 
-        <!--<androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_pink"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24" />-->
+            android:layout_height="match_parent"
+            tools:context=".view.RegisterFragment">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="148dp"
-            android:layout_marginEnd="165dp"
-            android:layout_marginBottom="8dp"
-            android:text="Register"
-            android:textSize="60dp"
-            app:layout_constraintBottom_toTopOf="@+id/register_card"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/register_card"
-            android:layout_width="match_parent"
-            android:layout_height="580dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="35dp"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!--<androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="@color/primary_pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/firstname_field"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="148dp"
+                android:layout_marginEnd="148dp"
+                android:layout_marginBottom="8dp"
+                android:text="Register"
+                android:textSize="60dp"
+                app:layout_constraintBottom_toTopOf="@+id/register_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/register_card"
+                android:layout_width="match_parent"
+                android:layout_height="580dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="35dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="15dp"
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/surname_field"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtFirstname"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/firstname_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Firstname"
-                        android:inputType="textCapWords"
-                        android:text="@={registerViewModel.firstname}"
-                        app:boxBackgroundMode="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="15dp"
+                        app:errorEnabled="true"
+                        app:layout_constraintBottom_toTopOf="@+id/surname_field"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/surname_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="15dp"
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/email_field"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/firstname_field">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtFirstname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Firstname"
+                            android:inputType="textCapWords"
+                            android:text="@={registerViewModel.firstname}"
+                            app:boxBackgroundMode="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtSurname"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/surname_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Surname"
-                        android:inputType="textCapWords"
-                        android:text="@={registerViewModel.surname}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        app:errorEnabled="true"
+                        app:layout_constraintBottom_toTopOf="@+id/email_field"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/firstname_field">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="15dp"
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/password_field"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/surname_field">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtSurname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Surname"
+                            android:inputType="textCapWords"
+                            android:text="@={registerViewModel.surname}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtEmail"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/email_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:text="@={registerViewModel.email}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        app:errorEnabled="true"
+                        app:layout_constraintBottom_toTopOf="@+id/password_field"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/surname_field">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="15dp"
-                    app:errorEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/user_type_radio_group"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/email_field"
-                    app:passwordToggleEnabled="true">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email"
+                            android:inputType="textEmailAddress"
+                            android:text="@={registerViewModel.email}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtPassword"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/password_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:text="@={registerViewModel.password}" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        app:errorEnabled="true"
+                        app:layout_constraintBottom_toTopOf="@+id/user_type_radio_group"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/email_field"
+                        app:passwordToggleEnabled="true">
 
-                <RadioGroup
-                    android:id="@+id/user_type_radio_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toTopOf="@+id/register_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/password_field">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:text="@={registerViewModel.password}" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <RadioButton
-                        android:id="@+id/solo_artist_checkbox"
+                    <RadioGroup
+                        android:id="@+id/user_type_radio_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:onClick="@{()-> registerViewModel.setUserType(UserType.SOLO)}"
-                        android:text="Solo Artist" />
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toTopOf="@+id/register_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/password_field">
 
-                    <RadioButton
-                        android:id="@+id/group_artist_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{()-> registerViewModel.setUserType(UserType.GROUP)}"
-                        android:text="Group Artist" />
+                        <RadioButton
+                            android:id="@+id/solo_artist_checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:onClick="@{()-> registerViewModel.setUserType(UserType.SOLO)}"
+                            android:text="Solo Artist" />
 
-                    <RadioButton
-                        android:id="@+id/venue_owner_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:onClick="@{()-> registerViewModel.setUserType(UserType.VENUE)}"
-                        android:text="Venue Owner" />
-                </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/group_artist_checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()-> registerViewModel.setUserType(UserType.GROUP)}"
+                            android:text="Group Artist" />
 
-                <Button
-                    android:id="@+id/register_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="34dp"
-                    android:background="@drawable/pill_button"
-                    android:backgroundTint="@color/primary_pink"
-                    android:onClick="@{()-> registerViewModel.onRegisterClick()}"
-                    android:text="Register"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/user_type_radio_group" />
+                        <RadioButton
+                            android:id="@+id/venue_owner_checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:onClick="@{()-> registerViewModel.setUserType(UserType.VENUE)}"
+                            android:text="Venue Owner" />
+                    </RadioGroup>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <Button
+                        android:id="@+id/register_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="34dp"
+                        android:background="@drawable/pill_button"
+                        android:backgroundTint="@color/primary_pink"
+                        android:onClick="@{()-> registerViewModel.onRegisterClick()}"
+                        android:text="Register"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_type_radio_group" />
 
-        </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

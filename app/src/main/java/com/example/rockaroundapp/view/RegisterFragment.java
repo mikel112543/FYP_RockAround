@@ -45,6 +45,7 @@ public class RegisterFragment extends Fragment {
         binding.setLifecycleOwner(this);
         toolbar = getActivity().findViewById(R.id.main_toolbar);
         toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle(null);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
         observeViewModel();
