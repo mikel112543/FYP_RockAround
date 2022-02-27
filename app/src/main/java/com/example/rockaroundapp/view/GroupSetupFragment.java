@@ -28,8 +28,6 @@ import com.example.rockaroundapp.viewmodel.GroupSetupViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
 public class GroupSetupFragment extends Fragment {
 
     private NavController navController;
@@ -96,7 +94,7 @@ public class GroupSetupFragment extends Fragment {
                     !groupArtist.getContactNumber().isEmpty()) {
                 groupSetupViewModel.saveInfo();
             }*/
-            if(!binding.stageNameTextInputLayout.isErrorEnabled() && !binding.noOfMembersText.isErrorEnabled()
+            if (!binding.stageNameTextInputLayout.isErrorEnabled() && !binding.noOfMembersText.isErrorEnabled()
                     && (!groupArtist.getGenres().isEmpty() || groupArtist.getGenres() != null)
                     && !binding.contactText.isErrorEnabled() && !binding.priceText.isErrorEnabled()) {
                 groupSetupViewModel.saveInfo();
@@ -115,10 +113,6 @@ public class GroupSetupFragment extends Fragment {
                 navController.navigate(R.id.action_groupSetupFragment_to_exploreFragment);
             }
         });
-        //TODO Store Group Artist in DB
-        //TODO Edit Genre Dialog to accept all user types
-        //TODO Move on to storing Venue user into DB
-
     }
 
     private void onAddGenreClicked(View view) {
@@ -127,10 +121,6 @@ public class GroupSetupFragment extends Fragment {
         type.putString("userType", userType);
         dialogFragment.setArguments(type);
         dialogFragment.show(getChildFragmentManager(), "dialog");
-    }
-
-    private void onSaveClicked(View view) {
-
     }
 
     private void showGallery(View view) {

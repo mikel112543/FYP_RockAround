@@ -11,16 +11,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GroupSetupRepository {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private String currentUiD = auth.getUid();
     private HashMap<String, Object> group;
     private MutableLiveData<Boolean> success;
@@ -33,24 +35,35 @@ public class GroupSetupRepository {
     }
 
     public void saveToDB(GroupArtist groupArtist) {
-        if(groupArtist.getProfileImgURL() != null) {
-            uploadProfileImage(groupArtist.getProfileImgURL());
-        }
-        documentReference = db.collection("group").document(currentUiD);
-        group = new HashMap<>();
-        group.put("groupName", groupArtist.getStageName());
-        group.put("bio", groupArtist.getBio());
-        group.put("profileImg", imagePath);
-        group.put("genres", groupArtist.getGenres());
-        group.put("price", groupArtist.getPrice());
-        group.put("contact", groupArtist.getContactNumber());
-        //group.put("address", groupArtist.getAddress());
-        //group.put("instruments", groupArtist.getInstruments());
-        //group.put("sampleTracks", groupArtist.getSampleTracks());
-        //group.put("images", groupArtist.getArtistImages());
-        documentReference.set(group, SetOptions.merge()).addOnSuccessListener(unused -> {
-            logger.info("Setup Successful");
-            success.postValue(true);
+        StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
+        //Upload file to storage
+        UploadTask uploadTask = reference.putFile(groupArtist.getProfileImgURL());
+        uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw Objects.requireNonNull(task.getException());
+            }
+            return reference.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                //Add User to DB
+                imagePath = task.getResult();
+                documentReference = db.collection("group").document(currentUiD);
+                group = new HashMap<>();
+                group.put("groupName", groupArtist.getStageName());
+                group.put("bio", groupArtist.getBio());
+                group.put("profileImg", imagePath);
+                group.put("genres", groupArtist.getGenres());
+                group.put("price", groupArtist.getPrice());
+                group.put("contact", groupArtist.getContactNumber());
+                //group.put("address", groupArtist.getAddress());
+                //group.put("instruments", groupArtist.getInstruments());
+                //group.put("sampleTracks", groupArtist.getSampleTracks());
+                //group.put("images", groupArtist.getArtistImages());
+                documentReference.set(group, SetOptions.merge()).addOnSuccessListener(unused -> {
+                    logger.info("Setup Successful");
+                    success.postValue(true);
+                });
+            }
         });
     }
 
@@ -58,8 +71,8 @@ public class GroupSetupRepository {
         return success;
     }
 
-    private void uploadProfileImage(Uri profileImgURL) {
-        StorageReference reference = storageReference.child("users/" + auth.getCurrentUser().getUid() + "profile.jpg");
+/*    private void uploadProfileImage(Uri profileImgURL) {
+        StorageReference reference = storageReference.child("users/" + currentUiD +"/" + "profile.jpg");
         reference.putFile(profileImgURL).addOnSuccessListener(taskSnapshot -> {
             logger.info("Image uploaded successfully");
             reference.getDownloadUrl().addOnSuccessListener(uri ->
@@ -67,5 +80,5 @@ public class GroupSetupRepository {
 
                     .addOnFailureListener(e -> logger.error("error getting filepath url" + e.getMessage()));
         });
-    }
+    }*/
 }
