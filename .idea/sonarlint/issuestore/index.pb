@@ -62,8 +62,6 @@ k
 ;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
 
 Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
-r
-Bapp/src/main/java/com/example/rockaroundapp/view/MainActivity.java,8\e\8e27f8d8d0c61ae4b706de91497b72734f48f969
 {
 Kapp/src/main/java/com/example/rockaroundapp/view/ArtistExploreFragment.java,5\c\5c2fb826587c2084c140ccd68175f30baa7af4f4
 r
