@@ -55,6 +55,8 @@ public class GroupArtist extends Artist {
         return groupMembers;
     }
 
+
+
     public void setGroupMembers(List<GroupMember> groupMembers) {
         this.groupMembers = groupMembers;
     }

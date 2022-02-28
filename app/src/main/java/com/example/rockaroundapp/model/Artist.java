@@ -12,7 +12,7 @@ import java.util.Map;
 public class Artist extends User {
 
     private int artistId;
-    private String stageName;
+    private String stagename;
     private String addressLineOne;
     private String addressLineTwo;
     private String county;
@@ -23,6 +23,7 @@ public class Artist extends User {
     private List<String> instruments;
     private List<String> artistImages;
     private List<String> genres;
+    private String genreString;
     private List<SampleTrack> sampleTracks;
     private List<ArtistReview> reviews;
     private HashMap<String, Object> address;
@@ -60,8 +61,8 @@ public class Artist extends User {
         return userType;
     }
 
-    public Artist(String stageName, Uri profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
-        this.stageName = stageName;
+    public Artist(String stagename, Uri profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+        this.stagename = stagename;
         this.profileImgURL = profileImgURL;
         this.price = price;
         this.instruments = instruments;
@@ -108,16 +109,44 @@ public class Artist extends User {
         address.put("country", country);
     }
 
+    public String getGenreString() {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < genres.size(); i++){
+            builder.append(genres.get(i));
+            if (i != genres.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        genreString = builder.toString();
+        return genreString;
+    }
+
     public void setArtistId(int artistId) {
         this.artistId = artistId;
     }
 
     public String getStageName() {
-        return stageName;
+        return stagename;
     }
 
-    public void setStageName(String stageName) {
-        this.stageName = stageName;
+    public void setGenreString(String genreString) {
+        this.genreString = genreString;
+    }
+
+    public void setAddress(HashMap<String, Object> address) {
+        this.address = address;
+    }
+
+    public ObjectMapper getoMapper() {
+        return oMapper;
+    }
+
+    public void setoMapper(ObjectMapper oMapper) {
+        this.oMapper = oMapper;
+    }
+
+    public void setStageName(String stagename) {
+        this.stagename = stagename;
     }
 
     public String getAddressLineOne() {

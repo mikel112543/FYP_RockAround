@@ -6,6 +6,7 @@ import java.util.Map;
 
 public abstract class User {
 
+    private String id;
     private String firstname;
     private String lastname;
     private String email;
@@ -19,6 +20,7 @@ public abstract class User {
     }
 
     public User(String firstname, String lastname, String email) {
+        this.id = "0";
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -26,6 +28,13 @@ public abstract class User {
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPassword() {
         return password;
