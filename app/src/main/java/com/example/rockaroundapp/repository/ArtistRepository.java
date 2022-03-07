@@ -45,6 +45,7 @@ public class ArtistRepository {
                     //TODO Add Reviews for binding
                 }
             }
+            artistListMutable.postValue(artistList);
         });
        /* db.collection("group").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
