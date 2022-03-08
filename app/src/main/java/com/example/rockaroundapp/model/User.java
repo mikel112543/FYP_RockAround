@@ -6,12 +6,13 @@ import java.util.Map;
 
 public abstract class User {
 
+    private String id;
     private String firstname;
     private String lastname;
     private String email;
     private String userType;
     private String bio;
-    private String contactNumber;
+    private String contact;
     private String password;
     private ObjectMapper oMapper;
 
@@ -19,6 +20,7 @@ public abstract class User {
     }
 
     public User(String firstname, String lastname, String email) {
+        this.id = "0";
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -26,6 +28,13 @@ public abstract class User {
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPassword() {
         return password;
@@ -71,12 +80,12 @@ public abstract class User {
         this.bio = bio;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getContact() {
+        return contact;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public Map objectMap(User user) {

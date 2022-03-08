@@ -96,7 +96,7 @@ public class VenueSetupViewModel extends ViewModel {
         venue.setCity(getCity().getValue());
         venue.setCounty(getCounty().getValue());
         venue.setCountry(getCountry().getValue());
-        venue.setContactNumber(getContactNumber().getValue());
+        venue.setContact(getContactNumber().getValue());
         if(!Objects.requireNonNull(maxCapacity.getValue()).isEmpty()) {
             venue.setCapacity(Integer.parseInt(Objects.requireNonNull(getMaxCapacity().getValue())));
         }

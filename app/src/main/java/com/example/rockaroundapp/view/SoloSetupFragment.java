@@ -74,12 +74,12 @@ public class SoloSetupFragment extends Fragment {
             } else {
                 binding.genresTextInputLayout.setError(null);
             }
-            if (artist.getContactNumber().isEmpty()) {
+            if (artist.getContact().isEmpty()) {
                 binding.contactText.setError("Please provide a contact number");
             } else {
                 binding.contactText.setError(null);
             }
-            if (!artist.getGenres().isEmpty() && !artist.getContactNumber().isEmpty()) {
+            if (!artist.getGenres().isEmpty() && !artist.getContact().isEmpty()) {
                 soloSetupViewModel.saveInfo();
             }
         });

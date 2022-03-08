@@ -36,6 +36,11 @@ public class Venue extends User{
     public Venue() {
     }
 
+    public Venue(String firstname, String lastname, String email) {
+        super(firstname, lastname, email);
+        setUserType("VENUE");
+    }
+
     public String getVenueName() {
         return venueName;
     }
@@ -140,11 +145,6 @@ public class Venue extends User{
     @Override
     public void setUserType(String userType) {
         this.userType = userType;
-    }
-
-    public Venue(String firstname, String lastname, String email) {
-        super(firstname, lastname, email);
-        setUserType("VENUE");
     }
 
     @Override

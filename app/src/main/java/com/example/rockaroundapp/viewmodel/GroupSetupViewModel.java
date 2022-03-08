@@ -73,12 +73,12 @@ public class GroupSetupViewModel extends ViewModel {
         groupArtist.setPrice(price.getValue());
         groupArtist.setNoOfMembers(noOfMembers.getValue());
         groupArtist.setGenres(genresMutable.getValue());
-        groupArtist.setContactNumber(contactNumber.getValue());
-        groupArtist.setProfileImgURL(profileImageUri);
+        groupArtist.setContact(contactNumber.getValue());
+        groupArtist.setProfileImg(profileImageUri.toString());
         groupArtistMutable.setValue(groupArtist);
     }
 
     public void saveInfo() {
-        groupSetupRepository.saveToDB(groupArtist);
+        groupSetupRepository.saveToDB(groupArtist, profileImageUri);
     }
 }

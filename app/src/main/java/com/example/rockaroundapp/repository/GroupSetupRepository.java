@@ -26,7 +26,8 @@ public class GroupSetupRepository {
     private String currentUiD = auth.getUid();
     private HashMap<String, Object> group;
     private MutableLiveData<Boolean> success;
-    private Uri imagePath;
+    private String imagePath;
+    private Uri imageUri;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     Logger logger = Logger.getLogger(GroupSetupRepository.class);
 
@@ -34,10 +35,10 @@ public class GroupSetupRepository {
         success = new MutableLiveData<>(false);
     }
 
-    public void saveToDB(GroupArtist groupArtist) {
+    public void saveToDB(GroupArtist groupArtist, Uri imageUri) {
         StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
         //Upload file to storage
-        UploadTask uploadTask = reference.putFile(groupArtist.getProfileImgURL());
+        UploadTask uploadTask = reference.putFile(imageUri);
         uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 throw Objects.requireNonNull(task.getException());
@@ -46,7 +47,7 @@ public class GroupSetupRepository {
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 //Add User to DB
-                imagePath = task.getResult();
+                imagePath = task.getResult().toString();
                 documentReference = db.collection("group").document(currentUiD);
                 group = new HashMap<>();
                 group.put("groupName", groupArtist.getStageName());
@@ -54,7 +55,7 @@ public class GroupSetupRepository {
                 group.put("profileImg", imagePath);
                 group.put("genres", groupArtist.getGenres());
                 group.put("price", groupArtist.getPrice());
-                group.put("contact", groupArtist.getContactNumber());
+                group.put("contact", groupArtist.getContact());
                 //group.put("address", groupArtist.getAddress());
                 //group.put("instruments", groupArtist.getInstruments());
                 //group.put("sampleTracks", groupArtist.getSampleTracks());

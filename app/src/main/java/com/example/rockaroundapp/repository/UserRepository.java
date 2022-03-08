@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 import java.util.HashMap;
 import java.util.Objects;
 
-
 public class UserRepository {
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
     private MutableLiveData<Boolean> registerSuccess;
@@ -65,13 +64,14 @@ public class UserRepository {
         });
     }
 
-    public void register(User user, String pass) {
+    public void register( User user, String pass) {
         auth.createUserWithEmailAndPassword(user.getEmail(), pass).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (user.getUserType() == "SOLO") {
                     documentReference = db.collection("solo")
                             .document(Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     userData = new HashMap<>();
+                    userData.put("id", auth.getCurrentUser().getUid());
                     userData.put("firstname", user.getFirstname());
                     userData.put("lastname", user.getLastname());
                     userData.put("email", user.getEmail());
@@ -80,6 +80,7 @@ public class UserRepository {
                     documentReference = db.collection("group")
                             .document(Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     userData = new HashMap<>();
+                    userData.put("id", auth.getCurrentUser().getUid());
                     userData.put("firstname", user.getFirstname());
                     userData.put("lastname", user.getLastname());
                     userData.put("email", user.getEmail());
@@ -88,6 +89,7 @@ public class UserRepository {
                             .document(Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     //documentReference.set(user.objectMap(user));
                     userData = new HashMap<>();
+                    userData.put("id", auth.getCurrentUser().getUid());
                     userData.put("firstname", user.getFirstname());
                     userData.put("lastname", user.getLastname());
                     userData.put("email", user.getEmail());

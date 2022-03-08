@@ -30,7 +30,7 @@ public class VenueSetupRepository {
     private HashMap<String, Object> venueMp;
     private HashMap<String, Object> addressMp;
     private MutableLiveData<Boolean> success;
-    private Uri imagePath;
+    private String imagePath;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     Logger logger = Logger.getLogger(GroupSetupRepository.class);
 
@@ -53,7 +53,7 @@ public class VenueSetupRepository {
             return reference.getDownloadUrl();
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                imagePath = task.getResult();
+                imagePath = task.getResult().toString();
                 venueMp = new HashMap<>();
                 addressMp = new HashMap<>();
                 documentReference = db.collection("venue").document("test");
@@ -67,28 +67,12 @@ public class VenueSetupRepository {
                 venueMp.put("profileImg", imagePath.toString());
                 venueMp.put("address", addressMp);
                 venueMp.put("capacity", venue.getCapacity());
-                venueMp.put("contact", venue.getContactNumber());
+                venueMp.put("contact", venue.getContact());
                 documentReference.set(venueMp, SetOptions.merge()).addOnSuccessListener(unused -> {
                     Log.d(TAG, "Setup Successful");
                     success.postValue(true);
                 });
             }
         });
-    }
-
-    private void uploadProfileImage(Uri profileImgURL) {
-        StorageReference reference = storageReference.child("users/" + "test" + "/" + "profile.jpg");
-        UploadTask uploadTask = reference.putFile(profileImgURL);
-        uploadTask.continueWithTask(task -> {
-            if (!task.isSuccessful()) {
-                throw Objects.requireNonNull(task.getException());
-            }
-            return reference.getDownloadUrl();
-        }).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                imagePath = task.getResult();
-            }
-        });
-
     }
 }
