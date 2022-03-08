@@ -42,14 +42,10 @@ n
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-z
-Japp/src/main/java/com/example/rockaroundapp/repository/UserRepository.java,3\9\39a66985332ff732d1bbad9716158df229de1b1a
 m
 =app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
 }
 Mapp/src/main/java/com/example/rockaroundapp/viewmodel/SoloSetupViewModel.java,6\0\60f9402e84eecda3fe0ca6069ee9e65e3bdd8b0d
-y
-Iapp/src/main/java/com/example/rockaroundapp/view/GenreDialogFragment.java,8\f\8fbb18f7e3d25a5deb9f8c9eb56fd021b09b880d
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
 w
@@ -60,7 +56,5 @@ k
 ;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
 
 Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
-{
-Kapp/src/main/java/com/example/rockaroundapp/view/ArtistExploreFragment.java,5\c\5c2fb826587c2084c140ccd68175f30baa7af4f4
 r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
