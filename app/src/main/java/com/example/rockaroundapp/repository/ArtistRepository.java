@@ -1,15 +1,25 @@
 package com.example.rockaroundapp.repository;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.model.GroupArtist;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -36,24 +46,31 @@ public class ArtistRepository {
     }
 
     public void findAll() {
-        db.collection("solo").get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                for(DocumentSnapshot document : task.getResult()) {
+        db.collection("solo").addSnapshotListener((snapshot, e) -> {
+            if(e != null) {
+                Log.w(TAG, "Listen Failed", e);
+            }
+            if(snapshot != null) {
+                for(DocumentSnapshot document : snapshot) {
                     Artist artist = document.toObject(Artist.class);
                     artistList.add(artist);
-                    //TODO correct setters and getters for binding
                     //TODO Add Reviews for binding
                 }
             }
-            artistListMutable.postValue(artistList);
         });
-       /* db.collection("group").get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                for(DocumentSnapshot document : task.getResult()) {
+        db.collection("group").addSnapshotListener((snapshot, e) -> {
+            if(e != null) {
+                Log.w(TAG, "Listen Failed", e);
+            }
+            if(snapshot != null) {
+                for(DocumentSnapshot document : snapshot) {
                     GroupArtist groupArtist = document.toObject(GroupArtist.class);
                     artistList.add(groupArtist);
+                    //TODO Add Reviews for binding
                 }
+                artistListMutable.postValue(artistList);
             }
-        });*/
+        });
+
     }
 }

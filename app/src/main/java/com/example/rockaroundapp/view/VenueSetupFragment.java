@@ -74,7 +74,7 @@ public class VenueSetupFragment extends Fragment {
             } else {
                 binding.capacityText.setError(null);
             }
-            if (venue.getContactNumber().isEmpty()) {
+            if (venue.getContact().isEmpty()) {
                 binding.numberText.setError("Please provide a contact number");
             } else {
                 binding.numberText.setError(null);

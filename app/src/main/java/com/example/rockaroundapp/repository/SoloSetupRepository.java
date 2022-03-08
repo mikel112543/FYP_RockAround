@@ -26,7 +26,8 @@ public class SoloSetupRepository {
     private String currentUiD = auth.getUid();
     private HashMap<String, Object> artistSetup;
     private MutableLiveData<Boolean> success;
-    private Uri imagePath;
+    private String imagePath;
+    private Uri imageUri;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     Logger logger = Logger.getLogger(SoloSetupRepository.class);
 
@@ -34,9 +35,9 @@ public class SoloSetupRepository {
         success = new MutableLiveData<>(false);
     }
 
-    public void saveToDB(Artist artist) {
+    public void saveToDB(Artist artist, Uri imageUri) {
         StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
-        UploadTask uploadTask = reference.putFile(artist.getProfileImgURL());
+        UploadTask uploadTask = reference.putFile(imageUri);
         uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) {
                 throw Objects.requireNonNull(task.getException());
@@ -44,7 +45,7 @@ public class SoloSetupRepository {
             return reference.getDownloadUrl();
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                imagePath = task.getResult();
+                imagePath = task.getResult().toString();
                 documentReference = db.collection("solo").document(currentUiD);
                 artistSetup = new HashMap<>();
                 artistSetup.put("stagename", artist.getStageName());
@@ -52,7 +53,7 @@ public class SoloSetupRepository {
                 artistSetup.put("profileImg", imagePath);
                 artistSetup.put("genres", artist.getGenres());
                 artistSetup.put("price", artist.getPrice());
-                artistSetup.put("contact", artist.getContactNumber());
+                artistSetup.put("contact", artist.getContact());
                 //artistSetup.put("address", artist.getAddress());
                 //artistSetup.put("instruments", artist.getInstruments());
                 //artistSetup.put("sampleTracks", artist.getSampleTracks());

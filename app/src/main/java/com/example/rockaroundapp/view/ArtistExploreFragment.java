@@ -39,6 +39,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
+        toolbar = getActivity().findViewById(R.id.main_toolbar);
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_artist_explore, container, false);
         viewModel = new ViewModelProvider(this).get(ArtistExploreViewModel.class);
@@ -47,6 +48,9 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         binding.setLifecycleOwner(this);
         recyclerView = getActivity().findViewById(R.id.rv_main);
         recyclerView.setHasFixedSize(true);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle("Explore Artists");
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

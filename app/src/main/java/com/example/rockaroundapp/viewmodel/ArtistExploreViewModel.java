@@ -16,12 +16,11 @@ public class ArtistExploreViewModel extends ViewModel {
     private ArtistRepository artistRepository;
 
     public ArtistExploreViewModel() {
-        artistList = new MutableLiveData<>();
         artistRepository = new ArtistRepository();
+        artistList = artistRepository.getArtistListMutable();
     }
 
     public MutableLiveData<List<Artist>> getArtistList() {
-        artistList = artistRepository.getArtistListMutable();
         return artistList;
     }
 }

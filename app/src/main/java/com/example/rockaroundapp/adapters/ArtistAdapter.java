@@ -47,7 +47,6 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     }
 
     public void updateArtistList(final List<Artist> artistList) {
-        this.artistList.clear();
         this.artistList = artistList;
         notifyDataSetChanged();
     }

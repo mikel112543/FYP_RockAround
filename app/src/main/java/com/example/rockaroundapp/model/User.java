@@ -12,7 +12,7 @@ public abstract class User {
     private String email;
     private String userType;
     private String bio;
-    private String contactNumber;
+    private String contact;
     private String password;
     private ObjectMapper oMapper;
 
@@ -80,12 +80,12 @@ public abstract class User {
         this.bio = bio;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getContact() {
+        return contact;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public Map objectMap(User user) {

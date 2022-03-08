@@ -75,12 +75,12 @@ public class SoloSetupViewModel extends ViewModel {
         artist.setStageName(stageName.getValue());
         artist.setPrice(price.getValue());
         artist.setGenres(genresMutable.getValue());
-        artist.setContactNumber(contactNumber.getValue());
-        artist.setProfileImgURL(profileImageUri);
+        artist.setContact(contactNumber.getValue());
+        artist.setProfileImg(profileImageUri.toString());
         artistMutable.setValue(artist);
     }
 
     public void saveInfo() {
-        soloSetupRepository.saveToDB(artist);
+        soloSetupRepository.saveToDB(artist, profileImageUri);
     }
 }

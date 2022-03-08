@@ -84,7 +84,7 @@ public class GroupSetupFragment extends Fragment {
             } else {
                 binding.priceText.setError(null);
             }
-            if (groupArtist.getContactNumber().isEmpty()) {
+            if (groupArtist.getContact().isEmpty()) {
                 binding.contactText.setError("Please provide a contact number");
             } else {
                 binding.contactText.setError(null);

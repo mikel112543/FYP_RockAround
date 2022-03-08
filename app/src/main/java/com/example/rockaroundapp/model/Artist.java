@@ -17,7 +17,7 @@ public class Artist extends User {
     private String addressLineTwo;
     private String county;
     private String country;
-    private Uri profileImgURL;
+    private String profileImg;
     private String userType;
     private String price;
     private List<String> instruments;
@@ -32,24 +32,6 @@ public class Artist extends User {
     public Artist() {
         genres = new ArrayList<>();
     }
-/*
-    public Artist(String firstname, String lastname, String email, String userType, String bio, String contactNumber, String stageName, int price, String addressLineOne, String addressLineTwo, String city, String county, String country, String profileImgURL, List<String> instruments) {
-        super(firstname, lastname, email, userType, bio, contactNumber);
-        this.stageName = stageName;
-        this.addressLineOne = addressLineOne;
-        this.addressLineTwo = addressLineTwo;
-        this.city = city;
-        this.county = county;
-        this.country = country;
-        this.profileImgURL = profileImgURL;
-        this.instruments = instruments;
-        this.price = price;
-        sampleTracks = new ArrayList<>();
-        artistImages = new ArrayList<>();
-        reviews = new ArrayList<>();
-        oMapper = new ObjectMapper();
-
-    }*/
 
     public Artist(String firstname, String lastname, String email) {
         super(firstname, lastname, email);
@@ -61,9 +43,9 @@ public class Artist extends User {
         return userType;
     }
 
-    public Artist(String stagename, Uri profileImgURL, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+    public Artist(String stagename, String profileImg, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
         this.stagename = stagename;
-        this.profileImgURL = profileImgURL;
+        this.profileImg = profileImg;
         this.price = price;
         this.instruments = instruments;
         this.artistImages = artistImages;
@@ -181,12 +163,12 @@ public class Artist extends User {
         this.country = country;
     }
 
-    public Uri getProfileImgURL() {
-        return profileImgURL;
+    public String getProfileImg() {
+        return profileImg;
     }
 
-    public void setProfileImgURL(Uri profileImgURL) {
-        this.profileImgURL = profileImgURL;
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public List<String> getInstruments() {
