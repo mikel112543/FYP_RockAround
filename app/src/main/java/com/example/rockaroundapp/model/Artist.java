@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class Artist extends User {
 
-    private int artistId;
     private String stagename;
     private String addressLineOne;
     private String addressLineTwo;
@@ -31,6 +30,7 @@ public class Artist extends User {
 
     public Artist() {
         genres = new ArrayList<>();
+        setUserType("SOLO");
     }
 
     public Artist(String firstname, String lastname, String email) {
@@ -79,9 +79,6 @@ public class Artist extends User {
         this.reviews = reviews;
     }
 
-    public int getArtistId() {
-        return artistId;
-    }
 
     public void setAddress() {
         address = new HashMap<>();
@@ -101,10 +98,6 @@ public class Artist extends User {
         }
         genreString = builder.toString();
         return genreString;
-    }
-
-    public void setArtistId(int artistId) {
-        this.artistId = artistId;
     }
 
     public String getStageName() {

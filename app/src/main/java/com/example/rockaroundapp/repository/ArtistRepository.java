@@ -30,6 +30,8 @@ public class ArtistRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MutableLiveData<List<Artist>>  artistListMutable;
     private List<Artist> artistList;
+    private Artist artist;
+    private GroupArtist groupArtist;
 
     public ArtistRepository() {
         artistList = new ArrayList<>();
@@ -71,6 +73,29 @@ public class ArtistRepository {
                 artistListMutable.postValue(artistList);
             }
         });
+    }
 
+    public Artist findSoloById(String artistId) {
+        db.collection("solo").document(artistId).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                artist = task.getResult().toObject(Artist.class);
+                Log.d(TAG, "Retrieved artist");
+            }else {
+                Log.d(TAG, "Failed to get document", task.getException());
+            }
+        });
+        return artist;
+    }
+
+    public GroupArtist findByGroupId(String artistId) {
+        db.collection("group").document(artistId).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                groupArtist = task.getResult().toObject(GroupArtist.class);
+                Log.d(TAG, "Retrieved artist");
+            }else {
+                Log.d(TAG, "Failed to get document", task.getException());
+            }
+        });
+        return groupArtist;
     }
 }

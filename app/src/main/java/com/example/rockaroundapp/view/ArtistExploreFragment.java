@@ -1,17 +1,25 @@
 package com.example.rockaroundapp.view;
 
-import android.os.Bundle;
+import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.ALLOW;
+import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT;
+import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.adapters.ArtistAdapter;
@@ -19,11 +27,7 @@ import com.example.rockaroundapp.databinding.FragmentArtistExploreBinding;
 import com.example.rockaroundapp.listeners.ArtistListener;
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.viewmodel.ArtistExploreViewModel;
-import com.example.rockaroundapp.viewmodel.SoloSetupViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ArtistExploreFragment extends Fragment implements ArtistListener {
 
@@ -33,6 +37,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     private ArtistExploreViewModel viewModel;
     private ArtistAdapter adapter;
     private RecyclerView recyclerView;
+    private NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +60,8 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ArtistAdapter(this);
+        adapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
+        recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setAdapter(adapter);
         observe();
         return view;
@@ -67,8 +74,34 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void onArtistClicked(Artist artist) {
-        //TODO Create bundle with artistId
-        //TODO navigate to user Profile with bundle
+        Bundle id = new Bundle();
+        id.putString("id", artist.getId());
+        Toast.makeText(getActivity(), "ID of artist" + artist.getId(), Toast.LENGTH_SHORT).show();
+        if (artist.getUserType() == "SOLO") {
+            recyclerView.setVisibility(View.INVISIBLE);
+            navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, id);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

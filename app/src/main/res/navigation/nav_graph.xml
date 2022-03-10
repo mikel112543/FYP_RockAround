@@ -38,7 +38,11 @@
         android:id="@+id/artistExploreFragment"
         android:name="com.example.rockaroundapp.view.ArtistExploreFragment"
         android:label="fragment_artist_explore"
-        tools:layout="@layout/fragment_artist_explore" />
+        tools:layout="@layout/fragment_artist_explore" >
+        <action
+            android:id="@+id/action_artistExploreFragment_to_soloProfileFragment"
+            app:destination="@id/soloProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/soloSetupFragment"
         android:name="com.example.rockaroundapp.view.SoloSetupFragment"
@@ -84,4 +88,9 @@
         android:name="com.example.rockaroundapp.view.ReviewOfArtistFragment"
         android:label="fragment_reviewOfArtist"
         tools:layout="@layout/review_of_artist_fragment"/>
+    <fragment
+        android:id="@+id/soloProfileFragment"
+        android:name="com.example.rockaroundapp.view.SoloProfileFragment"
+        android:label="fragment_soloProfile"
+        tools:layout="@layout/fragment_solo_profile"/>
 </navigation>

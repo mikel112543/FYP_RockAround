@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Artist;
+import com.example.rockaroundapp.repository.ArtistRepository;
 import com.example.rockaroundapp.repository.SoloSetupRepository;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class SoloSetupViewModel extends ViewModel {
     private MutableLiveData<Boolean> setUpSuccess;
     private MutableLiveData<Uri> imagePath;
     private SoloSetupRepository soloSetupRepository;
-    private List<String> genreList;
+    private ArtistRepository artistRepository;
     private Uri profileImageUri;
     private Artist artist;
 
@@ -37,7 +38,6 @@ public class SoloSetupViewModel extends ViewModel {
         contactNumber = new MutableLiveData<>();
         genresMutable = new MutableLiveData<>();
         genresStringMutable = new MutableLiveData<>();
-        genreList = new ArrayList<>();
         artist = new Artist();
         setUpSuccess = soloSetupRepository.getSuccess();
 
