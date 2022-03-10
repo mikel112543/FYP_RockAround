@@ -18,6 +18,7 @@ public class GroupArtist extends Artist {
     }*/
 
     public GroupArtist() {
+        setUserType("GROUP");
     }
 
     public GroupArtist(String firstname, String lastname, String email) {
@@ -54,8 +55,6 @@ public class GroupArtist extends Artist {
     public List<GroupMember> getGroupMembers() {
         return groupMembers;
     }
-
-
 
     public void setGroupMembers(List<GroupMember> groupMembers) {
         this.groupMembers = groupMembers;

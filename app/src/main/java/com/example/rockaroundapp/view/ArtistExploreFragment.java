@@ -5,6 +5,8 @@ import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestoration
 import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,8 @@ import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.viewmodel.ArtistExploreViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.lang.reflect.Parameter;
+
 public class ArtistExploreFragment extends Fragment implements ArtistListener {
 
     private BottomNavigationView bottomNavigationView;
@@ -38,6 +42,8 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     private ArtistAdapter adapter;
     private RecyclerView recyclerView;
     private NavController navController;
+    private LinearLayoutManager layoutManager;
+    private Parcelable state;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,13 +62,14 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         bottomNavigationView.setVisibility(View.VISIBLE);
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Explore Artists");
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ArtistAdapter(this);
         adapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
         recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setAdapter(adapter);
+        layoutManager.onRestoreInstanceState(state);
         observe();
         return view;
     }
@@ -103,5 +110,11 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        state = layoutManager.onSaveInstanceState();
     }
 }

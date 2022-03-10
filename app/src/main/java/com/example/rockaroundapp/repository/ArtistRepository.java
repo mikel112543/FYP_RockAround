@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
@@ -29,13 +30,16 @@ public class ArtistRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MutableLiveData<List<Artist>>  artistListMutable;
+    private MutableLiveData<Artist> _artist;
+    private MutableLiveData<GroupArtist> _groupArtist;
     private List<Artist> artistList;
-    private Artist artist;
-    private GroupArtist groupArtist;
+
 
     public ArtistRepository() {
         artistList = new ArrayList<>();
         artistListMutable = new MutableLiveData<>();
+        _artist = new MutableLiveData<>();
+        _groupArtist = new MutableLiveData<>();
     }
 
     public MutableLiveData<List<Artist>> getArtistListMutable() {
@@ -75,27 +79,27 @@ public class ArtistRepository {
         });
     }
 
-    public Artist findSoloById(String artistId) {
-        db.collection("solo").document(artistId).get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                artist = task.getResult().toObject(Artist.class);
+    public LiveData<Artist> findSoloById(String artistId) {
+        db.collection("solo").document(artistId).get().addOnSuccessListener(documentSnapshot -> {
+            if(documentSnapshot.exists()) {
+                _artist.postValue(documentSnapshot.toObject(Artist.class));
                 Log.d(TAG, "Retrieved artist");
-            }else {
-                Log.d(TAG, "Failed to get document", task.getException());
+            } else {
+                Log.w(TAG, "Listen Failed");
             }
         });
-        return artist;
+        return _artist;
     }
 
-    public GroupArtist findByGroupId(String artistId) {
-        db.collection("group").document(artistId).get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                groupArtist = task.getResult().toObject(GroupArtist.class);
+    public LiveData<GroupArtist> findByGroupId(String artistId) {
+        db.collection("group").document(artistId).get().addOnSuccessListener(snapshot -> {
+            if(snapshot.exists()) {
+                _groupArtist.postValue(snapshot.toObject(GroupArtist.class));
                 Log.d(TAG, "Retrieved artist");
             }else {
-                Log.d(TAG, "Failed to get document", task.getException());
+                Log.d(TAG, "Failed to get document");
             }
         });
-        return groupArtist;
+        return _groupArtist;
     }
 }

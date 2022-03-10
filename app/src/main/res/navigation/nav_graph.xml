@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/artistExploreFragment">
+    app:startDestination="@id/discover">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -17,7 +17,7 @@
             app:popExitAnim="@transition/exit_right_to_left"/>
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
-            app:destination="@id/artistExploreFragment"/>
+            app:destination="@id/discover"/>
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -35,7 +35,7 @@
             app:destination="@id/venueSetupFragment" />
     </fragment>
     <fragment
-        android:id="@+id/artistExploreFragment"
+        android:id="@+id/discover"
         android:name="com.example.rockaroundapp.view.ArtistExploreFragment"
         android:label="fragment_artist_explore"
         tools:layout="@layout/fragment_artist_explore" >
@@ -53,7 +53,7 @@
             app:destination="@id/genreDialog" />
         <action
             android:id="@+id/action_soloSetupFragment_to_exploreFragment"
-            app:destination="@id/artistExploreFragment" />
+            app:destination="@id/discover" />
     </fragment>
     <dialog
         android:id="@+id/genreDialog"
@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_group_setup" >
         <action
             android:id="@+id/action_groupSetupFragment_to_exploreFragment"
-            app:destination="@id/artistExploreFragment" />
+            app:destination="@id/discover" />
     </fragment>
     <fragment
         android:id="@+id/venueSetupFragment"
@@ -92,5 +92,9 @@
         android:id="@+id/soloProfileFragment"
         android:name="com.example.rockaroundapp.view.SoloProfileFragment"
         android:label="fragment_soloProfile"
-        tools:layout="@layout/fragment_solo_profile"/>
+        tools:layout="@layout/fragment_solo_profile">
+        <action
+            android:id="@+id/action_soloProfileFragment_to_reviewOfArtistFragment"
+            app:destination="@id/reviewOfArtistFragment" />
+    </fragment>
 </navigation>
