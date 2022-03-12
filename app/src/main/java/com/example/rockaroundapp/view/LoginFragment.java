@@ -72,17 +72,12 @@ public class LoginFragment extends Fragment {
                 loginViewModel.loginUser(details.get(0), details.get(1));
             }
         });
-        /*loginViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
-            if (firebaseUser == null) {
-                Toast.makeText(getActivity(), "Error logging in", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+        loginViewModel.getLoginSuccess().observe(getViewLifecycleOwner(), bool -> {
+            if(bool) {
+                Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
                 navController.navigate(R.id.action_loginFragment_to_exploreFragment);
-            }
-        });*/
-        loginViewModel.getLoginFailureMsg().observe(getViewLifecycleOwner(), failureMsg -> {
-            if (!failureMsg.isEmpty()) {
-                Toast.makeText(getActivity(), failureMsg, Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
         /*loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {

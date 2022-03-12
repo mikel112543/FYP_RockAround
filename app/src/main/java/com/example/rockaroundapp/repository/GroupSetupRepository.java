@@ -36,35 +36,38 @@ public class GroupSetupRepository {
     }
 
     public void saveToDB(GroupArtist groupArtist, Uri imageUri) {
-        StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
-        //Upload file to storage
-        UploadTask uploadTask = reference.putFile(imageUri);
-        uploadTask.continueWithTask(task -> {
-            if (!task.isSuccessful()) {
-                throw Objects.requireNonNull(task.getException());
-            }
-            return reference.getDownloadUrl();
-        }).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                //Add User to DB
-                imagePath = task.getResult().toString();
-                documentReference = db.collection("group").document(currentUiD);
+        group = new HashMap<>();
+        documentReference = db.collection("group").document(currentUiD);
+        if (imageUri != null) {
+            StorageReference reference = storageReference.child("users/" + currentUiD + "/" + "profile.jpg");
+            //Upload file to storage
+            UploadTask uploadTask = reference.putFile(imageUri);
+            uploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return reference.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
                 group = new HashMap<>();
-                group.put("groupName", groupArtist.getStageName());
-                group.put("bio", groupArtist.getBio());
-                group.put("profileImg", imagePath);
-                group.put("genres", groupArtist.getGenres());
-                group.put("price", groupArtist.getPrice());
-                group.put("contact", groupArtist.getContact());
-                //group.put("address", groupArtist.getAddress());
-                //group.put("instruments", groupArtist.getInstruments());
-                //group.put("sampleTracks", groupArtist.getSampleTracks());
-                //group.put("images", groupArtist.getArtistImages());
-                documentReference.set(group, SetOptions.merge()).addOnSuccessListener(unused -> {
-                    logger.info("Setup Successful");
-                    success.postValue(true);
-                });
-            }
+                groupArtist.setProfileImg(task.getResult().toString());
+                group.put("profileImg", groupArtist.getProfileImg());
+                documentReference.set(group, SetOptions.merge());
+            });
+        } else {
+            group.put("profileImg", groupArtist.getProfileImg());
+        }//Add User to DB
+        group.put("groupName", groupArtist.getStageName());
+        group.put("bio", groupArtist.getBio());
+        group.put("genres", groupArtist.getGenres());
+        group.put("price", groupArtist.getPrice());
+        group.put("contact", groupArtist.getContact());
+        //group.put("address", groupArtist.getAddress());
+        //group.put("instruments", groupArtist.getInstruments());
+        //group.put("sampleTracks", groupArtist.getSampleTracks());
+        //group.put("images", groupArtist.getArtistImages());
+        documentReference.set(group, SetOptions.merge()).addOnSuccessListener(unused -> {
+            logger.info("Setup Successful");
+            success.postValue(true);
         });
     }
 

@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +44,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     private ArtistExploreViewModel viewModel;
     private ArtistAdapter adapter;
     private RecyclerView recyclerView;
+    public AppBarConfiguration configuration;
     private NavController navController;
     private LinearLayoutManager layoutManager;
     private Parcelable state;
@@ -70,6 +74,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setAdapter(adapter);
         layoutManager.onRestoreInstanceState(state);
+        configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
         observe();
         return view;
     }
@@ -83,6 +88,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) getActivity(), navController, configuration);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -109,6 +115,7 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
 
     @Override
     public void onStop() {
+        state = layoutManager.onSaveInstanceState();
         super.onStop();
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/discover">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -97,4 +97,9 @@
             android:id="@+id/action_soloProfileFragment_to_reviewOfArtistFragment"
             app:destination="@id/reviewOfArtistFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/account"
+        android:name="com.example.rockaroundapp.view.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account"/>
 </navigation>

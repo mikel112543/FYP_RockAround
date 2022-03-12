@@ -34,6 +34,7 @@ public class Venue extends User{
     }*/
 
     public Venue() {
+        setUserType("VENUE");
     }
 
     public Venue(String firstname, String lastname, String email) {

@@ -74,7 +74,11 @@ public class GroupSetupViewModel extends ViewModel {
         groupArtist.setNoOfMembers(noOfMembers.getValue());
         groupArtist.setGenres(genresMutable.getValue());
         groupArtist.setContact(contactNumber.getValue());
-        groupArtist.setProfileImg(profileImageUri.toString());
+        if(profileImageUri != null){
+            groupArtist.setProfileImg(profileImageUri.toString());
+        }else{
+            groupArtist.setProfileImg(" ");
+        }
         groupArtistMutable.setValue(groupArtist);
     }
 

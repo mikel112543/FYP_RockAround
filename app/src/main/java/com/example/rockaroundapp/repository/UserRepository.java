@@ -19,7 +19,8 @@ import java.util.Objects;
 
 public class UserRepository {
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
-    private MutableLiveData<Boolean> registerSuccess;
+    private final MutableLiveData<Boolean> registerSuccess;
+    private MutableLiveData<Boolean> loginSuccess;
     private final MutableLiveData<String> loginFailureMsg;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String failedRegistration;
@@ -32,6 +33,7 @@ public class UserRepository {
         firebaseUserMutableLiveData = new MutableLiveData<>();
         loginFailureMsg = new MutableLiveData<>();
         registerSuccess = new MutableLiveData<>(false);
+        loginSuccess = new MutableLiveData<>();
 
         if (auth.getCurrentUser() != null) {
             firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
@@ -40,6 +42,10 @@ public class UserRepository {
 
     public MutableLiveData<FirebaseUser> getFirebaseUserMutableLiveData() {
         return firebaseUserMutableLiveData;
+    }
+
+    public MutableLiveData<Boolean> getLoginSuccess() {
+        return loginSuccess;
     }
 
     public MutableLiveData<Boolean> getRegisterSuccess() {
@@ -57,8 +63,9 @@ public class UserRepository {
     public void loginUser(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
+                loginSuccess.postValue(true);
             } else {
+                loginSuccess.postValue(false);
                 loginFailureMsg.postValue("Error logging in");
             }
         });

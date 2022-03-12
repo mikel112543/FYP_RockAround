@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -25,14 +26,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ArtistRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private MutableLiveData<List<Artist>>  artistListMutable;
     private MutableLiveData<Artist> _artist;
     private MutableLiveData<GroupArtist> _groupArtist;
     private List<Artist> artistList;
+    private final String currentId = auth.getUid();
 
 
     public ArtistRepository() {
@@ -59,7 +63,10 @@ public class ArtistRepository {
             if(snapshot != null) {
                 for(DocumentSnapshot document : snapshot) {
                     Artist artist = document.toObject(Artist.class);
-                    artistList.add(artist);
+                    assert artist != null;
+                    if(!Objects.equals(artist.getId(), currentId)) {
+                        artistList.add(artist);
+                    }
                     //TODO Add Reviews for binding
                 }
             }
@@ -71,7 +78,10 @@ public class ArtistRepository {
             if(snapshot != null) {
                 for(DocumentSnapshot document : snapshot) {
                     GroupArtist groupArtist = document.toObject(GroupArtist.class);
-                    artistList.add(groupArtist);
+                    assert groupArtist != null;
+                    if(!Objects.equals(groupArtist.getId(), currentId)) {
+                        artistList.add(groupArtist);
+                    }
                     //TODO Add Reviews for binding
                 }
                 artistListMutable.postValue(artistList);

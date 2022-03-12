@@ -54,7 +54,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
 
     def lifecycle_version = "2.4.0"
-    def nav_version = "2.4.0"
+    def nav_version = "2.4.1"
     def arch_version = "2.1.0"
 
     implementation 'androidx.core:core:1.7.0'
@@ -83,5 +83,7 @@ repositories {
     maven {
         url 'http://dl.bintray.com/amulyakhare/maven'
     }
+    google()
+    jcenter()
     mavenCentral()
 }

@@ -73,6 +73,7 @@ public class SoloProfileFragment extends Fragment {
         viewModel.getGroupArtist(id).observe(getViewLifecycleOwner(), groupArtist -> {
             binding.artistMembers.setVisibility(View.VISIBLE);
             binding.setGroupModel(groupArtist);
+            binding.setArtistModel(groupArtist);
             if (groupArtist.getProfileImg().isEmpty()) {
                 orgProfiler = TextDrawable.builder().buildRect(String.valueOf(groupArtist.getStageName().charAt(0)), generator.getRandomColor());
                 binding.profileImage.setImageDrawable(orgProfiler);
