@@ -101,10 +101,6 @@ public class RegisterViewModel extends ViewModel {
         return registerDetails;
     }
 
-    public MutableLiveData<FirebaseUser> getFirebaseUserRegister() {
-        return firebaseUserRegister;
-    }
-
     public void onRegisterClick() {
         ArrayList<String> details = new ArrayList<>();
         details.add(email.getValue());

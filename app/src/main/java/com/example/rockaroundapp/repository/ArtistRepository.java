@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -24,16 +26,24 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ArtistRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private MutableLiveData<List<Artist>>  artistListMutable;
+    private MutableLiveData<Artist> _artist;
+    private MutableLiveData<GroupArtist> _groupArtist;
     private List<Artist> artistList;
+    private final String currentId = auth.getUid();
+
 
     public ArtistRepository() {
         artistList = new ArrayList<>();
         artistListMutable = new MutableLiveData<>();
+        _artist = new MutableLiveData<>();
+        _groupArtist = new MutableLiveData<>();
     }
 
     public MutableLiveData<List<Artist>> getArtistListMutable() {
@@ -53,7 +63,10 @@ public class ArtistRepository {
             if(snapshot != null) {
                 for(DocumentSnapshot document : snapshot) {
                     Artist artist = document.toObject(Artist.class);
-                    artistList.add(artist);
+                    assert artist != null;
+                    if(!Objects.equals(currentId, artist.getId())){
+                        artistList.add(artist);
+                    }
                     //TODO Add Reviews for binding
                 }
             }
@@ -65,12 +78,38 @@ public class ArtistRepository {
             if(snapshot != null) {
                 for(DocumentSnapshot document : snapshot) {
                     GroupArtist groupArtist = document.toObject(GroupArtist.class);
-                    artistList.add(groupArtist);
+                    assert groupArtist != null;
+                    if(!Objects.equals(currentId, groupArtist.getId())) {
+                        artistList.add(groupArtist);
+                    }
                     //TODO Add Reviews for binding
                 }
                 artistListMutable.postValue(artistList);
             }
         });
+    }
 
+    public LiveData<Artist> findSoloById(String artistId) {
+        db.collection("solo").document(artistId).get().addOnSuccessListener(documentSnapshot -> {
+            if(documentSnapshot.exists()) {
+                _artist.postValue(documentSnapshot.toObject(Artist.class));
+                Log.d(TAG, "Retrieved artist");
+            } else {
+                Log.w(TAG, "Listen Failed");
+            }
+        });
+        return _artist;
+    }
+
+    public LiveData<GroupArtist> findByGroupId(String artistId) {
+        db.collection("group").document(artistId).get().addOnSuccessListener(snapshot -> {
+            if(snapshot.exists()) {
+                _groupArtist.postValue(snapshot.toObject(GroupArtist.class));
+                Log.d(TAG, "Retrieved artist");
+            }else {
+                Log.d(TAG, "Failed to get document");
+            }
+        });
+        return _groupArtist;
     }
 }

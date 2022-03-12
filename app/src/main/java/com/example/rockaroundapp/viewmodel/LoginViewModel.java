@@ -18,12 +18,13 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> password = new MutableLiveData<>("");
     private MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
     private MutableLiveData<List<String>> loginDetails = new MutableLiveData<>();
-    private MutableLiveData<Boolean> registerButtonPressed = new MutableLiveData<>(false);
+    private MutableLiveData<Boolean> loginSuccess;
 
     public LoginViewModel() {
         userRepository = new UserRepository();
         firebaseUserMutableLiveData = userRepository.getFirebaseUserMutableLiveData();
         loginFailureMsg = userRepository.getLoginFailureMsg();
+        loginSuccess = userRepository.getLoginSuccess();
     }
 
     public MutableLiveData<String> getLoginFailureMsg() {
@@ -35,10 +36,6 @@ public class LoginViewModel extends ViewModel {
         SOLO,
         GROUP,
         VENUE
-    }
-
-    public MutableLiveData<Boolean> getRegisterButtonPressed() {
-        return registerButtonPressed;
     }
 
     public void signOut() {
@@ -54,6 +51,10 @@ public class LoginViewModel extends ViewModel {
 
     public MutableLiveData<FirebaseUser> getFirebaseUserMutableLiveData() {
         return firebaseUserMutableLiveData;
+    }
+
+    public MutableLiveData<Boolean> getLoginSuccess() {
+        return loginSuccess;
     }
 
     public MutableLiveData<String> getEmail() {

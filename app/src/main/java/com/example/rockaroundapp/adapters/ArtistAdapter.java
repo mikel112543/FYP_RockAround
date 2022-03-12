@@ -11,6 +11,7 @@ import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.ArtistCardBinding;
 import com.example.rockaroundapp.listeners.ArtistListener;
 import com.example.rockaroundapp.model.Artist;
+import com.mysql.cj.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
 
         public void bindArtist(Artist artist) {
             binding.setArtistModel(artist);
+            if(StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
+                binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
+            }
             binding.executePendingBindings();
             binding.getRoot().setOnClickListener(v -> artistListener.onArtistClicked(artist));
         }

@@ -1,17 +1,15 @@
 package com.example.rockaroundapp.model;
 
-import android.net.Uri;
-
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Artist extends User {
 
-    private int artistId;
     private String stagename;
     private String addressLineOne;
     private String addressLineTwo;
@@ -31,6 +29,7 @@ public class Artist extends User {
 
     public Artist() {
         genres = new ArrayList<>();
+        setUserType("SOLO");
     }
 
     public Artist(String firstname, String lastname, String email) {
@@ -79,9 +78,6 @@ public class Artist extends User {
         this.reviews = reviews;
     }
 
-    public int getArtistId() {
-        return artistId;
-    }
 
     public void setAddress() {
         address = new HashMap<>();
@@ -93,7 +89,7 @@ public class Artist extends User {
 
     public String getGenreString() {
         StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < genres.size(); i++){
+        for (int i = 0; i < genres.size(); i++) {
             builder.append(genres.get(i));
             if (i != genres.size() - 1) {
                 builder.append(", ");
@@ -101,10 +97,6 @@ public class Artist extends User {
         }
         genreString = builder.toString();
         return genreString;
-    }
-
-    public void setArtistId(int artistId) {
-        this.artistId = artistId;
     }
 
     public String getStageName() {
@@ -201,5 +193,13 @@ public class Artist extends User {
 
     public void setSampleTracks(List<SampleTrack> sampleTracks) {
         this.sampleTracks = sampleTracks;
+    }
+
+    public TextDrawable getDefaultProfiler() {
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        if (stagename.isEmpty()) {
+            return TextDrawable.builder().buildRect(String.valueOf(getFirstname().charAt(0)), generator.getRandomColor());
+        }
+        return TextDrawable.builder().buildRect(String.valueOf(getStageName().charAt(0)), generator.getRandomColor());
     }
 }
