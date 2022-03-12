@@ -40,16 +40,8 @@ r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
 z
 Japp/src/main/java/com/example/rockaroundapp/view/VenueExploreFragment.java,1\5\1552832f209a043d30dde50d832ebcba71766d4d
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-v
-Fapp/src/main/java/com/example/rockaroundapp/view/RegisterFragment.java,5\f\5f27b449dbdd54d1b3bed4041bc353083ff09743
-|
-Lapp/src/main/java/com/example/rockaroundapp/viewmodel/RegisterViewModel.java,9\e\9ec52f224ce54860558ef08b34f769d016423c04
 y
 Iapp/src/main/java/com/example/rockaroundapp/view/GenreDialogFragment.java,8\f\8fbb18f7e3d25a5deb9f8c9eb56fd021b09b880d
-r
-Bapp/src/main/java/com/example/rockaroundapp/view/MainActivity.java,8\e\8e27f8d8d0c61ae4b706de91497b72734f48f969
 l
 <app/src/main/java/com/example/rockaroundapp/model/Venue.java,3\b\3bf0d546b5007f3aefe8b55bfca7538b8def5b8d
 u
