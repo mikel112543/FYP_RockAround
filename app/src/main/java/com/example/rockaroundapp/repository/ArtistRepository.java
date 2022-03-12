@@ -64,7 +64,7 @@ public class ArtistRepository {
                 for(DocumentSnapshot document : snapshot) {
                     Artist artist = document.toObject(Artist.class);
                     assert artist != null;
-                    if(!Objects.equals(artist.getId(), currentId)) {
+                    if(!Objects.equals(currentId, artist.getId())){
                         artistList.add(artist);
                     }
                     //TODO Add Reviews for binding
@@ -79,7 +79,7 @@ public class ArtistRepository {
                 for(DocumentSnapshot document : snapshot) {
                     GroupArtist groupArtist = document.toObject(GroupArtist.class);
                     assert groupArtist != null;
-                    if(!Objects.equals(groupArtist.getId(), currentId)) {
+                    if(!Objects.equals(currentId, groupArtist.getId())) {
                         artistList.add(groupArtist);
                     }
                     //TODO Add Reviews for binding

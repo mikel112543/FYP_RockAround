@@ -97,9 +97,9 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         Bundle id = new Bundle();
         id.putString("id", artist.getId());
         Toast.makeText(getActivity(), "ID of artist" + artist.getId(), Toast.LENGTH_SHORT).show();
-        if (artist.getUserType() == "SOLO") {
-            recyclerView.setVisibility(View.INVISIBLE);
-            navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, id);
+        recyclerView.setVisibility(View.INVISIBLE);
+        navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, id);
+        if (artist.getUserType() == "GROUP") {
         }
     }
 

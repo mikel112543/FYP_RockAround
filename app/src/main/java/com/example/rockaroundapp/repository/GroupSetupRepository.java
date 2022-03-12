@@ -56,11 +56,12 @@ public class GroupSetupRepository {
         } else {
             group.put("profileImg", groupArtist.getProfileImg());
         }//Add User to DB
-        group.put("groupName", groupArtist.getStageName());
+        group.put("stageName", groupArtist.getStageName());
         group.put("bio", groupArtist.getBio());
         group.put("genres", groupArtist.getGenres());
         group.put("price", groupArtist.getPrice());
         group.put("contact", groupArtist.getContact());
+        group.put("noOfMembers", groupArtist.getNoOfMembers());
         //group.put("address", groupArtist.getAddress());
         //group.put("instruments", groupArtist.getInstruments());
         //group.put("sampleTracks", groupArtist.getSampleTracks());

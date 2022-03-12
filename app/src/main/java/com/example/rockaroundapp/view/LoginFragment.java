@@ -73,7 +73,7 @@ public class LoginFragment extends Fragment {
             }
         });
         loginViewModel.getLoginSuccess().observe(getViewLifecycleOwner(), bool -> {
-            if(bool) {
+            if(Boolean.TRUE.equals(bool)) {
                 Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
                 navController.navigate(R.id.action_loginFragment_to_exploreFragment);
             }else{

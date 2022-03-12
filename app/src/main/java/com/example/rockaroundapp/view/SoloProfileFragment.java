@@ -21,6 +21,7 @@ import com.example.rockaroundapp.databinding.FragmentSoloProfileBinding;
 import com.example.rockaroundapp.viewmodel.ArtistProfileViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mysql.cj.util.StringUtils;
 
 import java.util.Objects;
 
@@ -59,11 +60,10 @@ public class SoloProfileFragment extends Fragment {
     private void observeSolo() {
         viewModel.getSoloArtist(id).observe(getViewLifecycleOwner(), artist -> {
             binding.setArtistModel(artist);
-            if (artist.getProfileImg().isEmpty()) {
-                orgProfiler = TextDrawable.builder().buildRect(String.valueOf(artist.getStageName().charAt(0)), generator.getRandomColor());
-                binding.profileImage.setImageDrawable(orgProfiler);
+            if (StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
+                binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
             }
-            if (Objects.equals(artist.getId(), currentUid)) {
+            if (Objects.equals(currentUid,artist.getId())) {
                 binding.writeReviewButton.setVisibility(View.INVISIBLE);
             }
         });
@@ -72,13 +72,12 @@ public class SoloProfileFragment extends Fragment {
     private void observeGroup() {
         viewModel.getGroupArtist(id).observe(getViewLifecycleOwner(), groupArtist -> {
             binding.artistMembers.setVisibility(View.VISIBLE);
-            binding.setGroupModel(groupArtist);
             binding.setArtistModel(groupArtist);
-            if (groupArtist.getProfileImg().isEmpty()) {
-                orgProfiler = TextDrawable.builder().buildRect(String.valueOf(groupArtist.getStageName().charAt(0)), generator.getRandomColor());
-                binding.profileImage.setImageDrawable(orgProfiler);
+            binding.setGroupModel(groupArtist);
+            if (StringUtils.isEmptyOrWhitespaceOnly(groupArtist.getProfileImg())) {
+                binding.profileImage.setImageDrawable(groupArtist.getDefaultProfiler());
             }
-            if (Objects.equals(groupArtist.getId(), currentUid)) {
+            if (Objects.equals(currentUid, groupArtist.getId())) {
                 binding.writeReviewButton.setVisibility(View.INVISIBLE);
             }
         });

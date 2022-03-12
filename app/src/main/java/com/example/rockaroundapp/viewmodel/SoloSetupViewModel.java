@@ -76,7 +76,11 @@ public class SoloSetupViewModel extends ViewModel {
         artist.setPrice(price.getValue());
         artist.setGenres(genresMutable.getValue());
         artist.setContact(contactNumber.getValue());
-        artist.setProfileImg(profileImageUri.toString());
+        if(profileImageUri != null) {
+            artist.setProfileImg(profileImageUri.toString());
+        }else {
+            artist.setProfileImg("");
+        }
         artistMutable.setValue(artist);
     }
 

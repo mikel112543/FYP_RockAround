@@ -77,7 +77,7 @@ public class GroupSetupViewModel extends ViewModel {
         if(profileImageUri != null){
             groupArtist.setProfileImg(profileImageUri.toString());
         }else{
-            groupArtist.setProfileImg(" ");
+            groupArtist.setProfileImg("");
         }
         groupArtistMutable.setValue(groupArtist);
     }
