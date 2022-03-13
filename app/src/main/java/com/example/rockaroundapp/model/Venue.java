@@ -9,6 +9,7 @@ import com.mysql.cj.util.StringUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Venue extends User{
 
@@ -110,7 +111,7 @@ public class Venue extends User{
     }
 
     public String getCity() {
-        return city;
+        return Objects.requireNonNull(address.get("city")).toString();
     }
 
     public void setCity(String city) {

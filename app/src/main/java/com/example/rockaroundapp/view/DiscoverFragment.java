@@ -120,7 +120,13 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
 
     @Override
     public void onVenueClicked(Venue venue) {
-
+        Bundle id = new Bundle();
+        id.putString("id", venue.getId());
+        Toast.makeText(getActivity(), "ID of artist" + venue.getId(), Toast.LENGTH_SHORT).show();
+        //TODO Venue Profile
+        //TODO Venue & Artist Reviews
+        //TODO Account Page
+        // Maps Page
     }
 
     @Override
