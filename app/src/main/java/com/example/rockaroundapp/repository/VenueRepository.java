@@ -1,0 +1,107 @@
+package com.example.rockaroundapp.repository;
+
+import static android.content.ContentValues.TAG;
+
+import android.net.Uri;
+import android.util.Log;
+
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.rockaroundapp.model.Venue;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
+public class VenueRepository {
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference documentReference;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private String currentUiD = auth.getUid();
+    private HashMap<String, Object> venueMp;
+    private HashMap<String, Object> addressMp;
+    private MutableLiveData<Boolean> success;
+    private List<Venue> venueList;
+    private MutableLiveData<List<Venue>> venueListMutable;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+    public VenueRepository() {
+        success = new MutableLiveData<>(false);
+        venueListMutable = new MutableLiveData<>();
+        venueList = new ArrayList<>();
+    }
+
+    public MutableLiveData<Boolean> getSuccess() {
+        return success;
+    }
+
+    public MutableLiveData<List<Venue>> getVenueListMutable() {
+        if (venueList.isEmpty()) {
+            findAll();
+        }
+        venueListMutable.postValue(venueList);
+        return venueListMutable;
+    }
+
+    public void saveToDB(MutableLiveData<Venue> venueMutableLiveData, Uri imageUri) {
+        Venue venue = venueMutableLiveData.getValue();
+        venueMp = new HashMap<>();
+        documentReference = db.collection("venue").document(auth.getUid());
+        if (imageUri != null) {
+            StorageReference reference = storageReference.child("users/" + auth.getUid() + "/" + "profile.jpg");
+            UploadTask uploadTask = reference.putFile(imageUri);
+            uploadTask.continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return reference.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                venueMp = new HashMap<>();
+                assert venue != null;
+                venue.setProfileImg(task.getResult().toString());
+                venueMp.put("profileImg", venue.getProfileImg());
+                documentReference.set(venueMp, SetOptions.merge());
+            });
+        } else {
+            venueMp.put("profileImg", venue.getProfileImg());
+        }
+        assert venue != null;
+        venueMp.put("venueName", venue.getVenueName());
+        venueMp.put("bio", venue.getBio());
+        venueMp.put("address", venue.getAddress());
+        venueMp.put("capacity", venue.getCapacity());
+        venueMp.put("contact", venue.getContact());
+        documentReference.set(venueMp, SetOptions.merge()).addOnSuccessListener(unused -> {
+            Log.d(TAG, "Setup Successful");
+            success.postValue(true);
+        });
+    }
+
+    public void findAll() {
+        db.collection("venue").addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                Log.e(TAG, "No venues found", e);
+            }
+            if (snapshot != null) {
+                for (DocumentSnapshot document : snapshot) {
+                    Venue venue = document.toObject(Venue.class);
+                    assert venue != null;
+                    if (!Objects.equals(currentUiD, venue.getId())) {
+                        venueList.add(venue);
+                    }
+                }
+                venueListMutable.postValue(venueList);
+            }
+        });
+    }
+}

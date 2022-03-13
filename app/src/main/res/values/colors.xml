@@ -12,4 +12,5 @@
     <color name="secondary_pink">#efafc0</color>
     <color name="dark_edit_text_grey">#2f2d2d</color>
     <color name="light_edit_text_grey">#d3d3d3</color>
+    <color name="transparent">#00000000</color>
 </resources>

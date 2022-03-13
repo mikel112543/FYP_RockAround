@@ -1,11 +1,8 @@
 package com.example.rockaroundapp.view;
 
-import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.ALLOW;
-import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT;
 import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,60 +25,80 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.adapters.ArtistAdapter;
+import com.example.rockaroundapp.adapters.VenueAdapter;
 import com.example.rockaroundapp.databinding.FragmentArtistExploreBinding;
 import com.example.rockaroundapp.listeners.ArtistListener;
+import com.example.rockaroundapp.listeners.VenueListener;
 import com.example.rockaroundapp.model.Artist;
-import com.example.rockaroundapp.viewmodel.ArtistExploreViewModel;
+import com.example.rockaroundapp.model.Venue;
+import com.example.rockaroundapp.viewmodel.DiscoverViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Parameter;
+import java.util.Objects;
 
-public class ArtistExploreFragment extends Fragment implements ArtistListener {
+public class DiscoverFragment extends Fragment implements ArtistListener, VenueListener {
 
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private FragmentArtistExploreBinding binding;
-    private ArtistExploreViewModel viewModel;
-    private ArtistAdapter adapter;
+    private DiscoverViewModel viewModel;
+    private ArtistAdapter artistAdapter;
+    private VenueAdapter venueAdapter;
     private RecyclerView recyclerView;
     public AppBarConfiguration configuration;
     private NavController navController;
-    private LinearLayoutManager layoutManager;
     private Parcelable state;
+    private LinearLayoutManager layoutManager;
+    private String userType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
+        assert getArguments() != null;
+        userType = getArguments().getString("userType");
+        viewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navbar);
         toolbar = getActivity().findViewById(R.id.main_toolbar);
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_artist_explore, container, false);
-        viewModel = new ViewModelProvider(this).get(ArtistExploreViewModel.class);
-        View view = binding.getRoot();
-        binding.setArtistExploreViewModel(viewModel);
-        binding.setLifecycleOwner(this);
         recyclerView = getActivity().findViewById(R.id.rv_main);
-        recyclerView.setHasFixedSize(true);
         bottomNavigationView.setVisibility(View.VISIBLE);
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle("Explore Artists");
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ArtistAdapter(this);
-        adapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_explore, container, false);
+        View view = binding.getRoot();
+        initRecycler(userType);
         recyclerView.setVisibility(View.VISIBLE);
-        recyclerView.setAdapter(adapter);
         layoutManager.onRestoreInstanceState(state);
         configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
-        observe();
         return view;
     }
 
-    public void observe() {
+    private void initRecycler(String userType) {
+        if (userType == "SOLO" || userType == "GROUP") {
+            toolbar.setTitle("Explore Venues");
+            venueAdapter = new VenueAdapter(this);
+            venueAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
+            recyclerView.setAdapter(venueAdapter);
+            observeVenues();
+        } else {
+            toolbar.setTitle("Explore Artists");
+            artistAdapter = new ArtistAdapter(this);
+            artistAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
+            recyclerView.setAdapter(artistAdapter);
+            observeArtists();
+        }
+    }
+
+    private void observeArtists() {
         viewModel.getArtistList().observe(getViewLifecycleOwner(), artistList -> {
-            adapter.updateArtistList(artistList);
+            artistAdapter.updateArtistList(artistList);
+        });
+    }
+
+    private void observeVenues() {
+        viewModel.getVenueList().observe(getViewLifecycleOwner(), venues -> {
+            venueAdapter.updateVenueList(venues);
         });
     }
 
@@ -99,8 +116,11 @@ public class ArtistExploreFragment extends Fragment implements ArtistListener {
         Toast.makeText(getActivity(), "ID of artist" + artist.getId(), Toast.LENGTH_SHORT).show();
         recyclerView.setVisibility(View.INVISIBLE);
         navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, id);
-        if (artist.getUserType() == "GROUP") {
-        }
+    }
+
+    @Override
+    public void onVenueClicked(Venue venue) {
+
     }
 
     @Override

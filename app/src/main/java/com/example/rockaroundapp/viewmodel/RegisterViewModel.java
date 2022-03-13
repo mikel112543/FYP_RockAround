@@ -73,13 +73,13 @@ public class RegisterViewModel extends ViewModel {
     }
 
     public void register() {
-        if(userType.getValue() == UserType.SOLO.name()) {
+        if (userType.getValue() == UserType.SOLO.name()) {
             Artist artist = new Artist(firstname.getValue(), surname.getValue(), email.getValue());
             userRepository.register(artist, password.getValue());
-        }else if(userType.getValue() == UserType.GROUP.name()) {
+        } else if (userType.getValue() == UserType.GROUP.name()) {
             GroupArtist groupArtist = new GroupArtist(firstname.getValue(), surname.getValue(), email.getValue());
             userRepository.register(groupArtist, password.getValue());
-        }else{
+        } else {
             Venue venue = new Venue(firstname.getValue(), surname.getValue(), email.getValue());
             userRepository.register(venue, password.getValue());
         }

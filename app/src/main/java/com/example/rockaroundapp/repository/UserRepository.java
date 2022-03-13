@@ -1,12 +1,15 @@
 package com.example.rockaroundapp.repository;
 
+import static android.content.ContentValues.TAG;
+
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rockaroundapp.model.Artist;
+import com.example.rockaroundapp.model.GroupArtist;
 import com.example.rockaroundapp.model.User;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.rockaroundapp.model.Venue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -21,6 +24,7 @@ public class UserRepository {
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
     private final MutableLiveData<Boolean> registerSuccess;
     private MutableLiveData<Boolean> loginSuccess;
+    private MutableLiveData<String> userType;
     private final MutableLiveData<String> loginFailureMsg;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String failedRegistration;
@@ -34,6 +38,7 @@ public class UserRepository {
         loginFailureMsg = new MutableLiveData<>();
         registerSuccess = new MutableLiveData<>(false);
         loginSuccess = new MutableLiveData<>();
+        userType = new MutableLiveData<>();
 
         if (auth.getCurrentUser() != null) {
             firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
@@ -42,6 +47,10 @@ public class UserRepository {
 
     public MutableLiveData<FirebaseUser> getFirebaseUserMutableLiveData() {
         return firebaseUserMutableLiveData;
+    }
+
+    public MutableLiveData<String> getUserType() {
+        return userType;
     }
 
     public MutableLiveData<Boolean> getLoginSuccess() {
@@ -63,15 +72,14 @@ public class UserRepository {
     public void loginUser(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                loginSuccess.postValue(true);
+                findByUserType();
             } else {
                 loginSuccess.postValue(false);
-                loginFailureMsg.postValue("Error logging in");
             }
         });
     }
 
-    public void register( User user, String pass) {
+    public void register(User user, String pass) {
         auth.createUserWithEmailAndPassword(user.getEmail(), pass).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (user.getUserType() == "SOLO") {
@@ -92,7 +100,7 @@ public class UserRepository {
                     userData.put("lastname", user.getLastname());
                     userData.put("email", user.getEmail());
                 } else {
-                    documentReference = db.collection("venues")
+                    documentReference = db.collection("venue")
                             .document(Objects.requireNonNull(auth.getCurrentUser()).getUid());
                     //documentReference.set(user.objectMap(user));
                     userData = new HashMap<>();
@@ -110,9 +118,48 @@ public class UserRepository {
                 failedRegistration = "Registration Failed please!";
             }
         })
-        .addOnFailureListener(e -> {
-            Log.e("Failed to register", e.getMessage());
+                .addOnFailureListener(e -> {
+                    Log.e("Failed to register", e.getMessage());
 
+                });
+    }
+
+    private void findByUserType() {
+        documentReference = db.collection("solo").document(auth.getCurrentUser().getUid());
+        documentReference.addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                Log.e(TAG, "User not solo");
+            }
+            assert snapshot != null;
+            if (snapshot.getData() != null) {
+                Artist artist = snapshot.toObject(Artist.class);
+                assert artist != null;
+                userType.postValue(artist.getUserType());
+            }
+        });
+        documentReference = db.collection("group").document(auth.getCurrentUser().getUid());
+        documentReference.addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                Log.e(TAG, "User not group");
+            }
+            assert snapshot != null;
+            if (snapshot.getData() != null) {
+                GroupArtist groupArtist = snapshot.toObject(GroupArtist.class);
+                assert groupArtist != null;
+                userType.postValue(groupArtist.getUserType());
+            }
+        });
+        documentReference = db.collection("venue").document(auth.getCurrentUser().getUid());
+        documentReference.addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                Log.e(TAG, "User not venue");
+            }
+            assert snapshot != null;
+            if (snapshot.getData() != null) {
+                Venue venue = snapshot.toObject(Venue.class);
+                assert venue != null;
+                userType.postValue(venue.getUserType());
+            }
         });
     }
 

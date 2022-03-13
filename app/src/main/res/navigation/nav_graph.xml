@@ -13,8 +13,10 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:popEnterAnim="@transition/enter_left_to_right"
-            app:popExitAnim="@transition/exit_right_to_left"/>
+            app:enterAnim="@transition/enter_from_right"
+            app:exitAnim="@transition/exit_to_left"
+            app:popEnterAnim="@transition/enter_from_left"
+            app:popExitAnim="@transition/exit_to_right"/>
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
             app:destination="@id/discover"/>
@@ -36,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/discover"
-        android:name="com.example.rockaroundapp.view.ArtistExploreFragment"
+        android:name="com.example.rockaroundapp.view.DiscoverFragment"
         android:label="fragment_artist_explore"
         tools:layout="@layout/fragment_artist_explore" >
         <action
@@ -82,7 +84,11 @@
         android:id="@+id/venueSetupFragment"
         android:name="com.example.rockaroundapp.view.VenueSetupFragment"
         android:label="fragment_venueSetup"
-        tools:layout="@layout/fragment_venue_setup" />
+        tools:layout="@layout/fragment_venue_setup" >
+        <action
+            android:id="@+id/action_venueSetupFragment_to_discover"
+            app:destination="@id/discover" />
+    </fragment>
     <fragment
         android:id="@+id/reviewOfArtistFragment"
         android:name="com.example.rockaroundapp.view.ReviewOfArtistFragment"

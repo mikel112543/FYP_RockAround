@@ -23,7 +23,6 @@ public class SoloSetupViewModel extends ViewModel {
     public MutableLiveData<String> genresStringMutable;
     private MutableLiveData<Artist> artistMutable;
     private MutableLiveData<Boolean> setUpSuccess;
-    private MutableLiveData<Uri> imagePath;
     private SoloSetupRepository soloSetupRepository;
     private ArtistRepository artistRepository;
     private Uri profileImageUri;

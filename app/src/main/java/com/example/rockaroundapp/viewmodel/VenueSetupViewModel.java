@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Venue;
-import com.example.rockaroundapp.repository.VenueSetupRepository;
+import com.example.rockaroundapp.repository.VenueRepository;
 
 import java.util.Objects;
 
@@ -23,12 +23,13 @@ public class VenueSetupViewModel extends ViewModel {
     private MutableLiveData<String> contactNumber;
     private MutableLiveData<Boolean> success;
     private MutableLiveData<Venue> venueMutableLiveData;
-    private VenueSetupRepository venueSetupRepository;
+    private VenueRepository venueRepository;
+    private Uri profileImageUri;
     private Venue venue;
 
     public VenueSetupViewModel() {
-        venueSetupRepository = new VenueSetupRepository();
-        success = venueSetupRepository.getSuccess();
+        venueRepository = new VenueRepository();
+        success = venueRepository.getSuccess();
         venueName = new MutableLiveData<>("");
         venueBio = new MutableLiveData<>("");
         addressLineOne = new MutableLiveData<>("");
@@ -100,14 +101,19 @@ public class VenueSetupViewModel extends ViewModel {
         if(!Objects.requireNonNull(maxCapacity.getValue()).isEmpty()) {
             venue.setCapacity(Integer.parseInt(Objects.requireNonNull(getMaxCapacity().getValue())));
         }
+        if(profileImageUri != null) {
+            venue.setProfileImg(profileImageUri.toString());
+        }else {
+            venue.setProfileImg(" ");
+        }
         venueMutableLiveData.postValue(venue);
     }
 
     public void saveInfo() {
-        venueSetupRepository.saveToDB(venueMutableLiveData);
+        venueRepository.saveToDB(venueMutableLiveData, profileImageUri);
     }
 
     public void setProfileImageUri(Uri selectedImageUri) {
-        venue.setProfileImgURL(selectedImageUri);
+        this.profileImageUri = selectedImageUri;
     }
 }

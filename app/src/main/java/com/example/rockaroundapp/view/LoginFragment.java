@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -73,12 +74,14 @@ public class LoginFragment extends Fragment {
             }
         });
         loginViewModel.getLoginSuccess().observe(getViewLifecycleOwner(), bool -> {
-            if(Boolean.TRUE.equals(bool)) {
-                Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                navController.navigate(R.id.action_loginFragment_to_exploreFragment);
-            }else{
+            if(Boolean.FALSE.equals(bool)) {
                 Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
             }
+        });
+        loginViewModel.getUserType().observe(getViewLifecycleOwner(), userType -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("userType", userType);
+            navController.navigate(R.id.action_loginFragment_to_exploreFragment, bundle);
         });
         /*loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {
             if (Boolean.TRUE.equals(isPressed)) {

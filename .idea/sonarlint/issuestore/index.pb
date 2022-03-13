@@ -21,16 +21,10 @@ Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad5
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
-i
-9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
-n
->app/src/main/java/com/example/rockaroundapp/model/Address.java,8\4\84f1713a5e8a75602de92b53f34ce9b5eb6be653
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-n
->app/src/main/java/com/example/rockaroundapp/dao/ArtistDao.java,7\f\7fad84ca9ca184f2614fa595d6d644ae1147d1ac
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -44,7 +38,5 @@ y
 Iapp/src/main/java/com/example/rockaroundapp/view/GenreDialogFragment.java,8\f\8fbb18f7e3d25a5deb9f8c9eb56fd021b09b880d
 z
 Japp/src/main/java/com/example/rockaroundapp/view/VenueExploreFragment.java,1\5\1552832f209a043d30dde50d832ebcba71766d4d
-v
-Fapp/src/main/java/com/example/rockaroundapp/view/RegisterFragment.java,5\f\5f27b449dbdd54d1b3bed4041bc353083ff09743
 Å
 Qapp/src/main/java/com/example/rockaroundapp/viewmodel/ArtistProfileViewModel.java,8\5\858a6479318d5f11515337d4563836908e558083

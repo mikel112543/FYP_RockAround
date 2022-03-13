@@ -108,9 +108,11 @@ public class GroupSetupFragment extends Fragment {
             }
         });
         groupSetupViewModel.getSetUpSuccess().observe(getViewLifecycleOwner(), success -> {
-            if (success) {
+            if (Boolean.TRUE.equals(success)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userType", userType);
                 Toast.makeText(getActivity(), "Setup Successful", Toast.LENGTH_SHORT).show();
-                navController.navigate(R.id.action_groupSetupFragment_to_exploreFragment);
+                navController.navigate(R.id.action_groupSetupFragment_to_exploreFragment, bundle);
             }
         });
     }
