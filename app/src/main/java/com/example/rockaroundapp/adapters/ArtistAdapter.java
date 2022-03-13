@@ -63,7 +63,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
 
         public void bindArtist(Artist artist) {
             binding.setArtistModel(artist);
-            if(StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
+            if (StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
                 binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
             }
             binding.executePendingBindings();

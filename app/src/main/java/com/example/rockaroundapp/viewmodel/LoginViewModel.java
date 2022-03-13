@@ -16,7 +16,7 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> loginFailureMsg;
     private MutableLiveData<String> email = new MutableLiveData<>("");
     private MutableLiveData<String> password = new MutableLiveData<>("");
-    private MutableLiveData<String> userType = new MutableLiveData<>(UserType.NONE.name());
+    private MutableLiveData<String> userType;
     private MutableLiveData<List<String>> loginDetails = new MutableLiveData<>();
     private MutableLiveData<Boolean> loginSuccess;
 
@@ -25,10 +25,7 @@ public class LoginViewModel extends ViewModel {
         firebaseUserMutableLiveData = userRepository.getFirebaseUserMutableLiveData();
         loginFailureMsg = userRepository.getLoginFailureMsg();
         loginSuccess = userRepository.getLoginSuccess();
-    }
-
-    public MutableLiveData<String> getLoginFailureMsg() {
-        return loginFailureMsg;
+        userType = userRepository.getUserType();
     }
 
     public enum UserType {
@@ -56,6 +53,7 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<Boolean> getLoginSuccess() {
         return loginSuccess;
     }
+
 
     public MutableLiveData<String> getEmail() {
         return email;

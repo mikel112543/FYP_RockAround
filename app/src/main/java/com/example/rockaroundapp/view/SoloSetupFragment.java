@@ -92,8 +92,10 @@ public class SoloSetupFragment extends Fragment {
         });
         soloSetupViewModel.getSetUpSuccess().observe(getViewLifecycleOwner(), aBoolean -> {
             if (Boolean.TRUE.equals(aBoolean)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userType", userType);
                 Toast.makeText(getActivity(), "Setup Successful", Toast.LENGTH_SHORT).show();
-                navController.navigate(R.id.action_soloSetupFragment_to_exploreFragment);
+                navController.navigate(R.id.action_soloSetupFragment_to_exploreFragment, bundle);
             }
         });
 

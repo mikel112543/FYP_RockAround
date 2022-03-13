@@ -2,6 +2,11 @@ package com.example.rockaroundapp.model;
 
 import android.net.Uri;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.mysql.cj.util.StringUtils;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,22 +24,13 @@ public class Venue extends User{
     private List<Event> events;
     private List<Event> pastEvents;
     private List<VenueReview> reviews;
+    private Map<String, Object> address;
     private String userType;
-    private Uri profileImgURL;
-
- /*   public Venue(String firstname, String lastname, String email, String userType, String bio, String contactNumber, String venueName, int capacity, String venueType, String addressLineOne, String addressLineTwo, String county, String country) {
-        super(firstname, lastname, email, userType, bio, contactNumber);
-        this.venueName = venueName;
-        this.capacity = capacity;
-        this.venueType = venueType;
-        this.addressLineOne = addressLineOne;
-        this.addressLineTwo = addressLineTwo;
-        this.county = county;
-        this.country = country;
-    }*/
+    private String profileImg;
 
     public Venue() {
         setUserType("VENUE");
+        address = new HashMap<>();
     }
 
     public Venue(String firstname, String lastname, String email) {
@@ -86,6 +82,20 @@ public class Venue extends User{
         return county;
     }
 
+    public Map<String, Object> getAddress() {
+        address.put("addressLineOne", addressLineOne);
+        address.put("addressLineTwo", addressLineTwo);
+        address.put("city", city);
+        address.put("county", county);
+        address.put("country", country);
+        return address;
+    }
+
+    public void setAddress(Map<String, Object> address) {
+        this.address = address;
+    }
+
+
     public void setCounty(String county) {
         this.county = county;
     }
@@ -130,12 +140,20 @@ public class Venue extends User{
         this.reviews = reviews;
     }
 
-    public Uri getProfileImgURL() {
-        return profileImgURL;
+    public String getProfileImg() {
+        return profileImg;
     }
 
-    public void setProfileImgURL(Uri profileImgURL) {
-        this.profileImgURL = profileImgURL;
+    public void setProfileImg(String profileImgURL) {
+        this.profileImg = profileImg;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     @Override
@@ -151,5 +169,10 @@ public class Venue extends User{
     @Override
     public Map objectMap(User user) {
         return super.objectMap(user);
+    }
+
+    public TextDrawable getDefaultProfiler() {
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        return TextDrawable.builder().buildRect(String.valueOf(venueName.charAt(0)), generator.getRandomColor());
     }
 }

@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/discover"
-        android:name="com.example.rockaroundapp.view.ArtistExploreFragment"
+        android:name="com.example.rockaroundapp.view.DiscoverFragment"
         android:label="fragment_artist_explore"
         tools:layout="@layout/fragment_artist_explore" >
         <action
@@ -82,7 +82,11 @@
         android:id="@+id/venueSetupFragment"
         android:name="com.example.rockaroundapp.view.VenueSetupFragment"
         android:label="fragment_venueSetup"
-        tools:layout="@layout/fragment_venue_setup" />
+        tools:layout="@layout/fragment_venue_setup" >
+        <action
+            android:id="@+id/action_venueSetupFragment_to_discover"
+            app:destination="@id/discover" />
+    </fragment>
     <fragment
         android:id="@+id/reviewOfArtistFragment"
         android:name="com.example.rockaroundapp.view.ReviewOfArtistFragment"

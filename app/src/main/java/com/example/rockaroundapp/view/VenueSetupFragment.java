@@ -54,6 +54,8 @@ public class VenueSetupFragment extends Fragment {
         toolbar.setTitle("Venue Setup");
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
+        assert getArguments() != null;
+        userType = getArguments().getString("userType");
         /*orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), generator.getRandomColor());
         binding.profileImageView.setImageDrawable(orgProfiler);
         assert getArguments() != null;
@@ -112,8 +114,11 @@ public class VenueSetupFragment extends Fragment {
             }
         });
         venueSetupViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
-            if (success) {
+            if (Boolean.TRUE.equals(success)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userType", userType);
                 Toast.makeText(getActivity(), "Profile Setup Successful", Toast.LENGTH_SHORT).show();
+                navController.navigate(R.id.action_venueSetupFragment_to_discover, bundle);
                 //navController
             }
         });

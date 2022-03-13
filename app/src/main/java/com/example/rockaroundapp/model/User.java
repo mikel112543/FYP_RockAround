@@ -13,13 +13,12 @@ public abstract class User {
     private String userType;
     private String bio;
     private String contact;
-    private String password;
     private ObjectMapper oMapper;
 
     protected User() {
     }
 
-    public User(String firstname, String lastname, String email) {
+    protected User(String firstname, String lastname, String email) {
         this.id = "0";
         this.firstname = firstname;
         this.lastname = lastname;
@@ -34,10 +33,6 @@ public abstract class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getFirstname() {
@@ -91,6 +86,4 @@ public abstract class User {
     public Map objectMap(User user) {
         return oMapper.convertValue(user, Map.class);
     }
-
-
 }
