@@ -38,12 +38,6 @@ r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
 u
 Eapp/src/main/java/com/example/rockaroundapp/util/BindingAdapters.java,d\2\d23cec313d126cc82a031e9765c2118c0b6fa878
-x
-Happ/src/main/java/com/example/rockaroundapp/view/VenueSetupFragment.java,c\a\ca5b6bb873699cd389b3bc8752afa326459d6df3
-~
-Napp/src/main/java/com/example/rockaroundapp/viewmodel/VenueSetupViewModel.java,8\b\8b4795ed8c138810c0ef1ede65f42c8271445459
-€
-Papp/src/main/java/com/example/rockaroundapp/repository/VenueSetupRepository.java,6\d\6d9e89897409ba78604863eadadb3fd9f144cd4e
 |
 Lapp/src/main/java/com/example/rockaroundapp/view/ReviewOfArtistFragment.java,4\0\406605497653146d791d661c5ad15328e375a998
 y
