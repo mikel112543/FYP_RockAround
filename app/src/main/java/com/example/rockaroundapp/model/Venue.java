@@ -27,6 +27,7 @@ public class Venue extends User{
     private Map<String, Object> address;
     private String userType;
     private String profileImg;
+    private final ColorGenerator generator = ColorGenerator.MATERIAL;
 
     public Venue() {
         setUserType("VENUE");
@@ -172,7 +173,6 @@ public class Venue extends User{
     }
 
     public TextDrawable getDefaultProfiler() {
-        ColorGenerator generator = ColorGenerator.MATERIAL;
         return TextDrawable.builder().buildRect(String.valueOf(venueName.charAt(0)), generator.getRandomColor());
     }
 }

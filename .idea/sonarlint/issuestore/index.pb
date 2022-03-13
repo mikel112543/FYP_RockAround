@@ -21,8 +21,6 @@ Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad5
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
-i
-9app/src/main/java/com/example/rockaroundapp/conntest.java,b\c\bcc02a001583d294dd5c54837471d84c529b75d0
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 P
