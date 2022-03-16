@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -81,13 +82,9 @@ public class LoginFragment extends Fragment {
         loginViewModel.getUserType().observe(getViewLifecycleOwner(), userType -> {
             Bundle bundle = new Bundle();
             bundle.putString("userType", userType);
-            navController.navigate(R.id.action_loginFragment_to_exploreFragment, bundle);
+            NavOptions options = new NavOptions.Builder().setPopUpTo(R.id.discover, true).build();
+            navController.navigate(R.id.action_loginFragment_to_exploreFragment, bundle, options);
         });
-        /*loginViewModel.getRegisterButtonPressed().observe(getViewLifecycleOwner(), isPressed -> {
-            if (Boolean.TRUE.equals(isPressed)) {
-                navController.navigate(R.id.action_loginFragment_to_registerFragment);
-            }
-        });*/
     }
 
     @Override

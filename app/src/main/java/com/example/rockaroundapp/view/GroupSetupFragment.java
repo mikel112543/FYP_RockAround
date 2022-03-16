@@ -18,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -112,7 +113,8 @@ public class GroupSetupFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("userType", userType);
                 Toast.makeText(getActivity(), "Setup Successful", Toast.LENGTH_SHORT).show();
-                navController.navigate(R.id.action_groupSetupFragment_to_exploreFragment, bundle);
+                NavOptions options = new NavOptions.Builder().setPopUpTo(R.id.discover, true).build();
+                navController.navigate(R.id.action_groupSetupFragment_to_exploreFragment, bundle, options);
             }
         });
     }

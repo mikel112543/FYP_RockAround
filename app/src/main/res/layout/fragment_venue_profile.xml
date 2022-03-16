@@ -2,17 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.SoloProfileFragment">
+    tools:context=".view.VenueProfileFragment">
 
     <data>
 
         <variable
-            name="artistModel"
-            type="com.example.rockaroundapp.model.Artist" />
-
-        <variable
-            name="groupModel"
-            type="com.example.rockaroundapp.model.GroupArtist" />
+            name="venueModel"
+            type="com.example.rockaroundapp.model.Venue" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -23,20 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/primary_pink"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_image"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="100dp"
-                android:imageURL="@{artistModel.profileImg}"
+                android:imageURL="@{venueModel.profileImg}"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@{artistModel.stageName}"
+                android:text="@{venueModel.venueName}"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="@id/profile_image"
@@ -56,38 +44,34 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
             <TextView
-                android:id="@+id/artist_type"
+                android:id="@+id/venue_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{`Capacity: ` + venueModel.capacity}"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@id/profile_image"
                 app:layout_constraintStart_toStartOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/artist_name"
-                android:text="@{artistModel.userType + ` Artist`}">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/artist_name" />
 
             <TextView
-                android:id="@+id/artist_members"
+                android:id="@+id/venue_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:text="@{groupModel.noOfMembers + ` Members`}"
+                android:text="@{venueModel.city}"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@id/profile_image"
                 app:layout_constraintStart_toStartOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/artist_type">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/venue_capacity"/>
 
-            <TextView
-                android:id="@+id/artist_genres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{artistModel.genreString}"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@id/profile_image"
-                app:layout_constraintStart_toStartOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/artist_members">
-            </TextView>
+            <ImageView
+                android:id="@+id/location_pin"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_baseline_location_on_24"
+                app:layout_constraintBottom_toBottomOf="@id/venue_location"
+                app:layout_constraintEnd_toStartOf="@id/venue_location"
+                app:layout_constraintTop_toTopOf="@id/venue_location" />
 
             <View
                 android:id="@+id/divider"
@@ -99,7 +83,7 @@
                 android:background="@color/primary_pink"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/artist_genres" />
+                app:layout_constraintTop_toBottomOf="@id/venue_location" />
 
             <TextView
                 android:id="@+id/bio_title"
@@ -109,8 +93,7 @@
                 android:text="Bio"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/divider">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/divider" />
 
             <TextView
                 android:id="@+id/bio_text"
@@ -118,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@{artistModel.bio}"
+                android:text="@{venueModel.bio}"
                 app:layout_constraintEnd_toEndOf="@id/divider"
                 app:layout_constraintStart_toStartOf="@id/divider"
                 app:layout_constraintTop_toBottomOf="@id/bio_title" />
@@ -148,7 +131,7 @@
                 android:id="@+id/email_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{artistModel.email}"
+                android:text="@{venueModel.email}"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/contact_title" />
 
@@ -156,7 +139,7 @@
                 android:id="@+id/number_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{artistModel.contact}"
+                android:text="@{venueModel.contact}"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/email_field" />
 
@@ -180,8 +163,7 @@
                 android:text="Ratings"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider3"
-                app:layout_constraintTop_toBottomOf="@id/divider3">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/divider3"/>
 
             <TextView
                 android:id="@+id/overall_rating_title"
@@ -602,5 +584,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 
 </layout>

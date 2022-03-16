@@ -17,7 +17,7 @@ import androidx.navigation.Navigation;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.rockaroundapp.R;
-import com.example.rockaroundapp.databinding.FragmentSoloProfileBinding;
+import com.example.rockaroundapp.databinding.FragmentArtistProfileBinding;
 import com.example.rockaroundapp.viewmodel.ArtistProfileViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,12 +25,12 @@ import com.mysql.cj.util.StringUtils;
 
 import java.util.Objects;
 
-public class SoloProfileFragment extends Fragment {
+public class ArtistProfileFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private ArtistProfileViewModel viewModel;
-    private FragmentSoloProfileBinding binding;
+    private FragmentArtistProfileBinding binding;
     private TextDrawable orgProfiler;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
     private String id;
@@ -46,7 +46,7 @@ public class SoloProfileFragment extends Fragment {
         bottomNavigationView.setVisibility(View.INVISIBLE);
         toolbar.setVisibility(View.VISIBLE);
         binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_solo_profile, container, false);
+                inflater, R.layout.fragment_artist_profile, container, false);
         View view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(ArtistProfileViewModel.class);
         assert getArguments() != null;
@@ -85,7 +85,7 @@ public class SoloProfileFragment extends Fragment {
 
     //TODO Add review onClicks
     private void onWriteReviewClicked(View view) {
-        navController.navigate(R.id.action_soloProfileFragment_to_reviewOfArtistFragment);
+        navController.navigate(R.id.action_artistProfile_to_reviewOfArtistFragment);
     }
 
     @Override

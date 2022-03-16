@@ -85,16 +85,15 @@ public class Venue extends User{
     }
 
     public Map<String, Object> getAddress() {
+        return address;
+    }
+
+    public void setAddress() {
         address.put("addressLineOne", addressLineOne);
         address.put("addressLineTwo", addressLineTwo);
         address.put("city", city);
         address.put("county", county);
         address.put("country", country);
-        return address;
-    }
-
-    public void setAddress(Map<String, Object> address) {
-        this.address = address;
     }
 
 
@@ -111,6 +110,9 @@ public class Venue extends User{
     }
 
     public String getCity() {
+        if(!(city == null || city.isEmpty())){
+            return city;
+        }
         return Objects.requireNonNull(address.get("city")).toString();
     }
 

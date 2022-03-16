@@ -20,6 +20,13 @@
         <item>Soul</item>
     </string-array>
 
+    <string-array name="filters">
+        <item>Ascending</item>
+        <item>Descending</item>
+        <item>Rating (High-low)</item>
+        <item>Rating (Low-high)</item>
+    </string-array>
+
     <string-array name="venue_size">
         <item></item>
     </string-array>

@@ -70,13 +70,11 @@
                     android:id="@+id/venue_name_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="40dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
+                    android:layout_marginEnd="40dp"
+                    android:background="@color/transparent"
                     android:hint="Venue Name"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/upload_image_button">
@@ -84,9 +82,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.venueName}" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -134,10 +130,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider">
@@ -145,9 +139,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="Address Line one"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.addressLineOne}" />
@@ -159,10 +151,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/address_line_one">
@@ -170,9 +160,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="Address Line Two"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.addressLineTwo}" />
@@ -185,18 +173,14 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:background="@color/transparent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/address_line_two">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="City/Town"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.city}" />
@@ -206,12 +190,8 @@
                     android:id="@+id/county"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:background="@color/transparent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/city">
 
@@ -220,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="County"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.county}" />
@@ -233,18 +213,14 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:background="@color/transparent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/county">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="Country"
                         android:inputType="textCapSentences"
                         android:text="@={venueSetupViewModel.country}" />
@@ -255,7 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/light_edit_text_grey"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -267,18 +243,14 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:background="@color/transparent"
                     app:layout_constraintStart_toStartOf="@id/divider2"
                     app:layout_constraintTop_toBottomOf="@+id/divider2">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
+                        android:background="@color/transparent"
                         android:hint="*Max Capacity"
                         android:inputType="number"
                         android:text="@={venueSetupViewModel.maxCapacity}" />
@@ -290,20 +262,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/edit_text_background"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@color/transparent"
                     app:layout_constraintStart_toStartOf="@id/divider2"
                     app:layout_constraintTop_toBottomOf="@+id/capacity_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/edit_text_background"
-                        android:hint="*Contact Number"
+                        android:background="@color/transparent"
+                        android:hint="Contact Number"
                         android:inputType="number"
                         android:text="@={venueSetupViewModel.contactNumber}" />
                 </com.google.android.material.textfield.TextInputLayout>

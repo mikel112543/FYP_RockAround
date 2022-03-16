@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="reviewOfArtistViewModel"
+            name="viewModel"
             type="com.example.rockaroundapp.viewmodel.ReviewOfArtistViewModel" />
     </data>
 
@@ -37,6 +37,7 @@
             android:layout_marginBottom="20dp"
             android:hint="Title"
             android:textSize="20dp"
+            android:text="@={viewModel.reviewTitle}"
             app:layout_constraintBottom_toTopOf="@+id/review_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +52,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/bio_box_outline"
             android:gravity="start|top"
+            android:text="@={viewModel.reviewDescription}"
             android:hint="How was your experience with this artist?"
             android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,21 +95,25 @@
             android:layout_marginEnd="20dp">
 
             <ImageView
+                android:id="@+id/stage_presence_s1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/stage_presence_s2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/stage_presence_s3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/stage_presence_s4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
         <TextView
@@ -133,21 +139,25 @@
             android:layout_marginEnd="20dp">
 
             <ImageView
+                android:id="@+id/vocals_s1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/vocals_s2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/vocals_s3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/vocals_s4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
         </LinearLayout>
 
         <TextView
@@ -173,21 +183,25 @@
             android:layout_marginEnd="20dp">
 
             <ImageView
+                android:id="@+id/reliability_s1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/reliability_s2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/reliability_s3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/reliability_s4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
         </LinearLayout>
 
         <TextView
@@ -213,21 +227,25 @@
             android:layout_marginEnd="20dp">
 
             <ImageView
+                android:id="@+id/communication_s1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/communication_s2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24"/>
             <ImageView
+                android:id="@+id/communication_s3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_rate_50"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
+                android:id="@+id/communication_s4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"/>
+                android:background="@drawable/ic_baseline_star_outline_24" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -239,7 +257,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/pill_button"
-            android:text="Save"
+            android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

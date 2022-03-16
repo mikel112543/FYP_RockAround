@@ -5,8 +5,14 @@ import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestoration
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,8 +39,7 @@ import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.model.Venue;
 import com.example.rockaroundapp.viewmodel.DiscoverViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Objects;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DiscoverFragment extends Fragment implements ArtistListener, VenueListener {
 
@@ -48,6 +53,7 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
 
@@ -58,10 +64,12 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         userType = getArguments().getString("userType");
         viewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navbar);
-        toolbar = getActivity().findViewById(R.id.main_toolbar);
-        recyclerView = getActivity().findViewById(R.id.rv_main);
+        toolbar = requireActivity().findViewById(R.id.main_toolbar);
+        recyclerView = requireActivity().findViewById(R.id.rv_main);
         bottomNavigationView.setVisibility(View.VISIBLE);
         toolbar.setVisibility(View.VISIBLE);
+        setHasOptionsMenu(true);
+        toolbar.inflateMenu(R.menu.toolbar_menu);
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -72,6 +80,31 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         layoutManager.onRestoreInstanceState(state);
         configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.filter);
+        Spinner spinner = (Spinner) item.getActionView();
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.filters, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(spinnerListener);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.logout) {
+            auth.signOut();
+            navController.navigate(R.id.loginFragment);
+            recyclerView.setVisibility(View.INVISIBLE);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initRecycler(String userType) {
@@ -122,12 +155,30 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public void onVenueClicked(Venue venue) {
         Bundle id = new Bundle();
         id.putString("id", venue.getId());
-        Toast.makeText(getActivity(), "ID of artist" + venue.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "ID of venue" + venue.getId(), Toast.LENGTH_SHORT).show();
+        recyclerView.setVisibility(View.INVISIBLE);
+        bottomNavigationView.setVisibility(View.INVISIBLE);
+        navController.navigate(R.id.action_discover_to_venueProfileFragment, id);
         //TODO Venue Profile
         //TODO Venue & Artist Reviews
         //TODO Account Page
         // Maps Page
     }
+
+    private final AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            String selected = parent.getItemAtPosition(position).toString();
+            Toast.makeText(getActivity(), selected + " selected", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     @Override
     public void onResume() {

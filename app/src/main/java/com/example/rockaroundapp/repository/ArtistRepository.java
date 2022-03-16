@@ -3,6 +3,7 @@ package com.example.rockaroundapp.repository;
 import static android.content.ContentValues.TAG;
 
 import android.util.Log;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,10 +41,10 @@ public class ArtistRepository {
 
 
     public ArtistRepository() {
-        artistList = new ArrayList<>();
         artistListMutable = new MutableLiveData<>();
         _artist = new MutableLiveData<>();
         _groupArtist = new MutableLiveData<>();
+        artistList = new ArrayList<>();
     }
 
     public MutableLiveData<List<Artist>> getArtistListMutable() {
@@ -56,6 +57,7 @@ public class ArtistRepository {
     }
 
     public void findAll() {
+        artistList.clear();
         db.collection("solo").addSnapshotListener((snapshot, e) -> {
             if(e != null) {
                 Log.w(TAG, "Listen Failed", e);

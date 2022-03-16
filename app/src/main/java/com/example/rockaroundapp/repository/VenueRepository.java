@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.net.Uri;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Venue;
@@ -31,6 +32,7 @@ public class VenueRepository {
     private HashMap<String, Object> venueMp;
     private HashMap<String, Object> addressMp;
     private MutableLiveData<Boolean> success;
+    private MutableLiveData<Venue> _venue;
     private List<Venue> venueList;
     private MutableLiveData<List<Venue>> venueListMutable;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -38,6 +40,7 @@ public class VenueRepository {
     public VenueRepository() {
         success = new MutableLiveData<>(false);
         venueListMutable = new MutableLiveData<>();
+        _venue = new MutableLiveData<>();
         venueList = new ArrayList<>();
     }
 
@@ -88,6 +91,7 @@ public class VenueRepository {
     }
 
     public void findAll() {
+        venueList.clear();
         db.collection("venue").addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.e(TAG, "No venues found", e);
@@ -103,5 +107,18 @@ public class VenueRepository {
                 venueListMutable.postValue(venueList);
             }
         });
+    }
+
+    public LiveData<Venue> findById(String venueId) {
+        db.collection("venue").document(venueId).get().addOnSuccessListener(snapshot -> {
+            if (snapshot.exists()) {
+                _venue.postValue(snapshot.toObject(Venue.class));
+                Log.d(TAG, "Retrieved artist");
+            } else {
+                Log.d(TAG, "Failed to get document");
+            }
+        });
+        return _venue;
+
     }
 }

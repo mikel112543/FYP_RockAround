@@ -43,7 +43,10 @@
         tools:layout="@layout/fragment_artist_explore" >
         <action
             android:id="@+id/action_artistExploreFragment_to_soloProfileFragment"
-            app:destination="@id/soloProfileFragment" />
+            app:destination="@id/artistProfile" />
+        <action
+            android:id="@+id/action_discover_to_venueProfileFragment"
+            app:destination="@id/venueProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/soloSetupFragment"
@@ -95,12 +98,12 @@
         android:label="fragment_reviewOfArtist"
         tools:layout="@layout/review_of_artist_fragment"/>
     <fragment
-        android:id="@+id/soloProfileFragment"
-        android:name="com.example.rockaroundapp.view.SoloProfileFragment"
+        android:id="@+id/artistProfile"
+        android:name="com.example.rockaroundapp.view.ArtistProfileFragment"
         android:label="fragment_soloProfile"
-        tools:layout="@layout/fragment_solo_profile">
+        tools:layout="@layout/fragment_artist_profile">
         <action
-            android:id="@+id/action_soloProfileFragment_to_reviewOfArtistFragment"
+            android:id="@+id/action_artistProfile_to_reviewOfArtistFragment"
             app:destination="@id/reviewOfArtistFragment" />
     </fragment>
     <fragment
@@ -108,4 +111,9 @@
         android:name="com.example.rockaroundapp.view.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account"/>
+    <fragment
+        android:id="@+id/venueProfileFragment"
+        android:name="com.example.rockaroundapp.view.VenueProfileFragment"
+        android:label="fragment_venue_profile"
+        tools:layout="@layout/fragment_venue_profile"/>
 </navigation>

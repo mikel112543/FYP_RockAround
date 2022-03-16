@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private NavOptions options;
 
 
     protected void onCreate(Bundle savedInstanceState) {

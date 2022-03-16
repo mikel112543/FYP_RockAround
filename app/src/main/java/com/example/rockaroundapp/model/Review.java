@@ -2,49 +2,55 @@ package com.example.rockaroundapp.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 abstract class Review {
 
-    private int reviewId;
-    private String reviewTitle;
-    private String reviewDescription;
+    private String id;
+    private String title;
+    private String description;
     private int reviewerId;
     private int reviewedId;
-    private LocalDate reviewDate;
-    private LocalTime reviewTime;
+    private LocalDate date;
+    private LocalTime time;
 
-    protected Review(int reviewId, String reviewTitle, String reviewDescription, int reviewerId, int reviewedId, LocalDate reviewDate, LocalTime reviewTime) {
-        this.reviewId = reviewId;
-        this.reviewTitle = reviewTitle;
-        this.reviewDescription = reviewDescription;
+    public Review() {
+        id = UUID.randomUUID().toString();
+        date = LocalDate.now();
+        time = LocalTime.now();
+    }
+
+    protected Review(String id, String title, String description, int reviewerId, int reviewedId) {
+        this.id = description;
+        this.title = title;
+        this.description = description;
         this.reviewerId = reviewerId;
         this.reviewedId = reviewedId;
-        this.reviewDate = reviewDate;
-        this.reviewTime = reviewTime;
+        this.time = LocalTime.now();
     }
 
-    public int getReviewId() {
-        return reviewId;
+    public String getId() {
+        return id;
     }
 
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getReviewTitle() {
-        return reviewTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setReviewTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getReviewDescription() {
-        return reviewDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setReviewDescription(String reviewDescription) {
-        this.reviewDescription = reviewDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getReviewerId() {
@@ -63,20 +69,20 @@ abstract class Review {
         this.reviewedId = reviewedId;
     }
 
-    public LocalDate getReviewDate() {
-        return reviewDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setReviewDate(LocalDate reviewDate) {
-        this.reviewDate = reviewDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public LocalTime getReviewTime() {
-        return reviewTime;
+    public LocalTime getTime() {
+        return time;
     }
 
-    public void setReviewTime(LocalTime reviewTime) {
-        this.reviewTime = reviewTime;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }
 

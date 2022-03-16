@@ -10,8 +10,11 @@ public class ArtistReview extends Review {
     private int reliabilityRating;
     private int communicationRating;
 
-    public ArtistReview(int reviewId, String reviewTitle, String reviewDescription, int reviewerId, int reviewedId, LocalDate reviewDate, LocalTime reviewTime, int stagePresenceRating, int vocalsRating, int reliabilityRating, int communicationRating) {
-        super(reviewId, reviewTitle, reviewDescription, reviewerId, reviewedId, reviewDate, reviewTime);
+    public ArtistReview() {
+    }
+
+    public ArtistReview(String id, String title, String description, int reviewerId, int reviewedId, int stagePresenceRating, int vocalsRating, int reliabilityRating, int communicationRating) {
+        super(id, title, description, reviewerId, reviewedId);
         this.stagePresenceRating = stagePresenceRating;
         this.vocalsRating = vocalsRating;
         this.reliabilityRating = reliabilityRating;
