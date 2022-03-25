@@ -56,9 +56,6 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
-    private Drawable starOutline;
-    private Drawable starFilled;
-    private Drawable halfStar;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
@@ -81,7 +78,6 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         recyclerView.setLayoutManager(layoutManager);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_explore, container, false);
         View view = binding.getRoot();
-        initRecycler(userType);
         recyclerView.setVisibility(View.VISIBLE);
         layoutManager.onRestoreInstanceState(state);
         configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
@@ -113,28 +109,28 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         return super.onOptionsItemSelected(item);
     }
 
-    private void initRecycler(String userType) {
+    private void initRecycler(String userType, int orderPosition) {
         if (userType == "SOLO" || userType == "GROUP") {
             toolbar.setTitle("Explore Venues");
             venueAdapter = new VenueAdapter(this);
             venueAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
             recyclerView.setAdapter(venueAdapter);
-            observeVenues();
+            observeVenues(orderPosition);
         } else {
             toolbar.setTitle("Explore Artists");
             artistAdapter = new ArtistAdapter(this);
             artistAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
             recyclerView.setAdapter(artistAdapter);
-            observeArtists();
+            observeArtists(orderPosition);
         }
     }
 
-    private void observeArtists() {
-        viewModel.getArtistList().observe(getViewLifecycleOwner(), artistList -> artistAdapter.updateArtistList(artistList));
+    private void observeArtists(int orderPosition) {
+        viewModel.getArtistList(orderPosition).observe(getViewLifecycleOwner(), artistList -> artistAdapter.updateArtistList(artistList));
     }
 
-    private void observeVenues() {
-        viewModel.getVenueList().observe(getViewLifecycleOwner(), venues -> venueAdapter.updateVenueList(venues));
+    private void observeVenues(int orderPosition) {
+        viewModel.getVenueList(orderPosition).observe(getViewLifecycleOwner(), venues -> venueAdapter.updateVenueList(venues));
     }
 
     @Override
@@ -170,9 +166,13 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     private final AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            String selected = parent.getItemAtPosition(position).toString();
-            Toast.makeText(getActivity(), selected + " selected", Toast.LENGTH_SHORT).show();
+            // position 0 - Ascending
+            // position 1 - Descending
+            // position 2 - Rating (High - low)
+            // position 3 - Rating (Low - high)
+            String order = parent.getItemAtPosition(position).toString();
+            Toast.makeText(getActivity(), order + " " + position + " selected", Toast.LENGTH_SHORT).show();
+            initRecycler(userType, position);
 
         }
 

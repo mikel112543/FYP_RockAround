@@ -33,17 +33,13 @@ public class ArtistProfileFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private ArtistProfileViewModel viewModel;
-    private ReviewOfArtistViewModel reviewViewModel;
     private FragmentArtistProfileBinding binding;
-    private TextDrawable orgProfiler;
-    private ColorGenerator generator = ColorGenerator.MATERIAL;
     private String id;
     private NavController navController;
     private Drawable starOutline;
     private Drawable starFilled;
     private Drawable halfStar;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private String currentUid = auth.getUid();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +55,6 @@ public class ArtistProfileFragment extends Fragment {
                 inflater, R.layout.fragment_artist_profile, container, false);
         View view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(ArtistProfileViewModel.class);
-        //reviewViewModel = new ViewModelProvider(this).get(ReviewOfArtistViewModel.class);
         assert getArguments() != null;
         id = getArguments().getString("id");
         binding.setLifecycleOwner(this);
