@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DiscoverViewModel extends ViewModel {
 
-    private MutableLiveData<List<Artist>> artistList;
     private MutableLiveData<List<Venue>> venueList;
     private ArtistRepository artistRepository;
     private VenueRepository venueRepository;
@@ -20,15 +19,13 @@ public class DiscoverViewModel extends ViewModel {
     public DiscoverViewModel() {
         artistRepository = new ArtistRepository();
         venueRepository = new VenueRepository();
-        artistList = artistRepository.getArtistListMutable();
-        venueList = venueRepository.getVenueListMutable();
     }
 
     public MutableLiveData<List<Artist>> getArtistList() {
-        return artistList;
+        return artistRepository.getArtistListMutable();
     }
 
     public MutableLiveData<List<Venue>> getVenueList() {
-        return venueList;
+        return venueRepository.getVenueListMutable();
     }
 }

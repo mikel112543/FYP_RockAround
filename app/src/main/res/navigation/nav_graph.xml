@@ -19,7 +19,11 @@
             app:popExitAnim="@transition/exit_to_right"/>
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
-            app:destination="@id/discover"/>
+            app:destination="@id/discover"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -28,13 +32,25 @@
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_soloSetupFragment"
-            app:destination="@id/soloSetupFragment" />
+            app:destination="@id/soloSetupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_registerFragment_to_groupSetupFragment"
-            app:destination="@id/groupSetupFragment" />
+            app:destination="@id/groupSetupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_registerFragment_to_venueSetupFragment"
-            app:destination="@id/venueSetupFragment" />
+            app:destination="@id/venueSetupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/discover"
@@ -43,10 +59,18 @@
         tools:layout="@layout/fragment_artist_explore" >
         <action
             android:id="@+id/action_artistExploreFragment_to_soloProfileFragment"
-            app:destination="@id/artistProfile" />
+            app:destination="@id/artistProfile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_discover_to_venueProfileFragment"
-            app:destination="@id/venueProfileFragment" />
+            app:destination="@id/venueProfileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/soloSetupFragment"
@@ -58,7 +82,11 @@
             app:destination="@id/genreDialog" />
         <action
             android:id="@+id/action_soloSetupFragment_to_exploreFragment"
-            app:destination="@id/discover" />
+            app:destination="@id/discover"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <dialog
         android:id="@+id/genreDialog"
@@ -81,7 +109,11 @@
         tools:layout="@layout/fragment_group_setup" >
         <action
             android:id="@+id/action_groupSetupFragment_to_exploreFragment"
-            app:destination="@id/discover" />
+            app:destination="@id/discover"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/venueSetupFragment"
@@ -90,7 +122,11 @@
         tools:layout="@layout/fragment_venue_setup" >
         <action
             android:id="@+id/action_venueSetupFragment_to_discover"
-            app:destination="@id/discover" />
+            app:destination="@id/discover"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/reviewOfArtistFragment"
@@ -104,7 +140,11 @@
         tools:layout="@layout/fragment_artist_profile">
         <action
             android:id="@+id/action_artistProfile_to_reviewOfArtistFragment"
-            app:destination="@id/reviewOfArtistFragment" />
+            app:destination="@id/reviewOfArtistFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/account"

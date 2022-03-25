@@ -2,6 +2,7 @@ package com.example.rockaroundapp.view;
 
 import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +56,9 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
+    private Drawable starOutline;
+    private Drawable starFilled;
+    private Drawable halfStar;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
@@ -124,15 +130,11 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     }
 
     private void observeArtists() {
-        viewModel.getArtistList().observe(getViewLifecycleOwner(), artistList -> {
-            artistAdapter.updateArtistList(artistList);
-        });
+        viewModel.getArtistList().observe(getViewLifecycleOwner(), artistList -> artistAdapter.updateArtistList(artistList));
     }
 
     private void observeVenues() {
-        viewModel.getVenueList().observe(getViewLifecycleOwner(), venues -> {
-            venueAdapter.updateVenueList(venues);
-        });
+        viewModel.getVenueList().observe(getViewLifecycleOwner(), venues -> venueAdapter.updateVenueList(venues));
     }
 
     @Override

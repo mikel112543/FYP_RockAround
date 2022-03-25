@@ -1,9 +1,11 @@
 package com.example.rockaroundapp.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,12 +20,15 @@ import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
 
-    private List<Artist> artistList;
+    private List<Artist> artistListHolder;
     private LayoutInflater layoutInflater;
     private ArtistListener artistListener;
+    private Drawable starOutline;
+    private Drawable starFilled;
+    private Drawable halfStar;
 
     public ArtistAdapter(ArtistListener artistListener) {
-        this.artistList = new ArrayList<>();
+        this.artistListHolder = new ArrayList<>();
         this.artistListener = artistListener;
     }
 
@@ -34,21 +39,24 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
         ArtistCardBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.artist_card, parent, false);
+        starFilled = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_rate_50);
+        starOutline = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_outline_24);
+        halfStar = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_half_24);
         return new ArtistViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
-        holder.bindArtist(artistList.get(position));
+        holder.bindArtist(artistListHolder.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return artistList.size();
+        return artistListHolder.size();
     }
 
-    public void updateArtistList(final List<Artist> artistList) {
-        this.artistList = artistList;
+    public void updateArtistList(List<Artist> artistList) {
+        artistListHolder = artistList;
         notifyDataSetChanged();
     }
 
@@ -63,11 +71,62 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
 
         public void bindArtist(Artist artist) {
             binding.setArtistModel(artist);
+            mapRating(artist.getAvgOverallRating());
             if (StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
                 binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
             }
             binding.executePendingBindings();
             binding.getRoot().setOnClickListener(v -> artistListener.onArtistClicked(artist));
+        }
+
+        private void mapRating(double rating) {
+            if (rating == 0.0) {
+                binding.star1.setBackground(starOutline);
+                binding.star2.setBackground(starOutline);
+                binding.star3.setBackground(starOutline);
+                binding.star4.setBackground(starOutline);
+                binding.star5.setBackground(starOutline);
+            } else if (rating <= 0.50) {
+                binding.star1.setBackground(halfStar);
+            } else if (rating <= 1.00) {
+                binding.star1.setBackground(starFilled);
+            } else if (rating <= 1.50) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(halfStar);
+            } else if (rating <= 2.00) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+            } else if (rating <= 2.50) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(halfStar);
+            } else if (rating <= 3.00) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(starFilled);
+            } else if (rating <= 3.50) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(starFilled);
+                binding.star4.setBackground(halfStar);
+            } else if (rating <= 4.00) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(starFilled);
+                binding.star4.setBackground(starFilled);
+            } else if (rating <= 4.50) {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(starFilled);
+                binding.star4.setBackground(starFilled);
+                binding.star5.setBackground(halfStar);
+            } else {
+                binding.star1.setBackground(starFilled);
+                binding.star2.setBackground(starFilled);
+                binding.star3.setBackground(starFilled);
+                binding.star4.setBackground(starFilled);
+                binding.star5.setBackground(starFilled);
+            }
         }
     }
 }

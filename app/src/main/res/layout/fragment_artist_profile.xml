@@ -205,27 +205,46 @@
                 <ImageView
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"/>
+                    android:scaleType="center"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/overall_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                android:text="@{artistModel.avgOverallRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/overall_rating_title"/>
 
             <TextView
                 android:id="@+id/avg_stage_presence_title"
@@ -236,7 +255,7 @@
                 android:text="Stage Presence Rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/stage_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
+                app:layout_constraintTop_toBottomOf="@id/overall_rating"
                 tools:ignore="SmallSp" />
 
             <LinearLayout
@@ -250,27 +269,41 @@
                 <ImageView
                     android:id="@+id/stage_presence_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/stage_presence_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/stage_presence_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/stage_presence_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/stage_presence_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/stage_presence_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                app:layout_constraintTop_toBottomOf="@id/stage_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/avg_stage_presence_title"
+                android:text="@{artistModel.avgStagePresenceRating + ` / 5`}"/>
 
             <TextView
                 android:id="@+id/avg_vocals_title"
@@ -281,7 +314,7 @@
                 android:text="Vocals Rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/vocals_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/overall_rating" />
 
             <LinearLayout
                 android:id="@+id/vocals_rating_stars"
@@ -294,27 +327,41 @@
                 <ImageView
                     android:id="@+id/vocals_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/vocals_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/vocals_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/vocals_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24" />
                 <ImageView
                     android:id="@+id/vocals_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/vocals_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                app:layout_constraintTop_toBottomOf="@id/vocals_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/avg_vocals_title"
+                android:text="@{artistModel.avgVocalsRating + ` / 5`}"/>
 
             <TextView
                 android:id="@+id/reliability_rating_title"
@@ -325,7 +372,7 @@
                 android:text="Reliability Rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/reliability_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/stage_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/vocals_rating" />
 
             <LinearLayout
                 android:id="@+id/reliability_rating_stars"
@@ -338,27 +385,41 @@
                 <ImageView
                     android:id="@+id/reliability_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/reliability_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/reliability_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                android:text="@{artistModel.avgReliabilityRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/reliability_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/reliability_rating_title"/>
 
             <TextView
                 android:id="@+id/communication_rating_title"
@@ -369,7 +430,7 @@
                 android:text="Communication Rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/communication_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/vocals_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/vocals_rating" />
 
             <LinearLayout
                 android:id="@+id/communication_rating_stars"
@@ -382,28 +443,42 @@
                 <ImageView
                     android:id="@+id/communication_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/communication_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/communication_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/communication_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/communication_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/communication_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                android:text="@{artistModel.avgCommunicationRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/communication_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/communication_rating_title"/>
 
             <View
                 android:id="@+id/divider4"
@@ -415,7 +490,7 @@
                 android:background="@color/primary_pink"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/communication_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/communication_rating" />
 
             <TextView
                 android:id="@+id/reviews_title"

@@ -18,16 +18,15 @@ public class Artist extends User {
     private String profileImg;
     private String userType;
     private String price;
-    private int avgCommunicationRating;
-    private int avgReliabilityRating;
-    private int avgVocalsRating;
-    private int avgStagePresenceRating;
+    private double avgCommunicationRating;
+    private double avgReliabilityRating;
+    private double avgVocalsRating;
+    private double avgStagePresenceRating;
     private int totalCommunicationRating;
     private int totalReliabilityRating;
     private int totalVocalsRating;
     private int totalStagePresenceRating;
-    private int totalOverallRating;
-    private int avgOverallRating;
+    private double avgOverallRating;
     private List<String> instruments;
     private List<String> artistImages;
     private List<String> genres;
@@ -63,35 +62,35 @@ public class Artist extends User {
         this.address = address;
     }
 
-    public int getAvgCommunicationRating() {
+    public double getAvgCommunicationRating() {
         return avgCommunicationRating;
     }
 
-    public void setAvgCommunicationRating(int avgCommunicationRating) {
+    public void setAvgCommunicationRating(double avgCommunicationRating) {
         this.avgCommunicationRating = avgCommunicationRating;
     }
 
-    public int getAvgReliabilityRating() {
+    public double getAvgReliabilityRating() {
         return avgReliabilityRating;
     }
 
-    public void setAvgReliabilityRating(int avgReliabilityRating) {
+    public void setAvgReliabilityRating(double avgReliabilityRating) {
         this.avgReliabilityRating = avgReliabilityRating;
     }
 
-    public int getAvgVocalsRating() {
+    public double getAvgVocalsRating() {
         return avgVocalsRating;
     }
 
-    public void setAvgVocalsRating(int avgVocalsRating) {
+    public void setAvgVocalsRating(double avgVocalsRating) {
         this.avgVocalsRating = avgVocalsRating;
     }
 
-    public int getAvgStagePresenceRating() {
+    public double getAvgStagePresenceRating() {
         return avgStagePresenceRating;
     }
 
-    public void setAvgStagePresenceRating(int avgStagePresenceRating) {
+    public void setAvgStagePresenceRating(double avgStagePresenceRating) {
         this.avgStagePresenceRating = avgStagePresenceRating;
     }
 
@@ -125,6 +124,10 @@ public class Artist extends User {
 
     public void setTotalStagePresenceRating(int totalStagePresenceRating) {
         this.totalStagePresenceRating = totalStagePresenceRating;
+    }
+
+    public void setAvgOverallRating(double avgOverallRating) {
+        this.avgOverallRating = avgOverallRating;
     }
 
     public HashMap<String, Object> getAddress() {
@@ -173,20 +176,8 @@ public class Artist extends User {
         return genreString;
     }
 
-    public int getTotalOverallRating() {
-        return totalOverallRating;
-    }
-
-    public void setTotalOverallRating(int totalOverallRating) {
-        this.totalOverallRating = totalOverallRating;
-    }
-
-    public int getAvgOverallRating() {
+    public double getAvgOverallRating() {
         return avgOverallRating;
-    }
-
-    public void setAvgOverallRating(int avgOverallRating) {
-        this.avgOverallRating = avgOverallRating;
     }
 
     public String getStageName() {

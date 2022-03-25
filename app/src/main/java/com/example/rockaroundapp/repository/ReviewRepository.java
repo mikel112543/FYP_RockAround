@@ -53,15 +53,14 @@ public class ReviewRepository {
                         artist.get().setTotalVocalsRating(artist.get().getTotalVocalsRating() + review.getVocalsRating());
                         artist.get().setTotalStagePresenceRating(artist.get().getTotalStagePresenceRating() + review.getStagePresenceRating());
 
-                        artist.get().setAvgCommunicationRating(artist.get().getTotalCommunicationRating() / reviewCount.get());
-                        artist.get().setAvgReliabilityRating(artist.get().getTotalReliabilityRating() / reviewCount.get());
-                        artist.get().setAvgVocalsRating(artist.get().getTotalVocalsRating() / reviewCount.get());
-                        artist.get().setAvgStagePresenceRating(artist.get().getTotalStagePresenceRating() / reviewCount.get());
+                        artist.get().setAvgCommunicationRating((double) artist.get().getTotalCommunicationRating() / reviewCount.get());
+                        artist.get().setAvgReliabilityRating((double) artist.get().getTotalReliabilityRating() / reviewCount.get());
+                        artist.get().setAvgVocalsRating((double) artist.get().getTotalVocalsRating() / reviewCount.get());
+                        artist.get().setAvgStagePresenceRating((double) artist.get().getTotalStagePresenceRating() / reviewCount.get());
                         //TODO properly calculate overall average
-                        //TODO change ints to double
 
-                        artist.get().setAvgOverallRating((artist.get().getAvgCommunicationRating() * (1/4)) +  artist.get().getAvgVocalsRating() +
-                                artist.get().getAvgReliabilityRating() + artist.get().getAvgStagePresenceRating() / 4);
+                        artist.get().setAvgOverallRating((artist.get().getAvgCommunicationRating() / 4) +  (artist.get().getAvgVocalsRating() / 4) +
+                                (artist.get().getAvgReliabilityRating() / 4) + (artist.get().getAvgStagePresenceRating() / 4));
 
                         map.put("avgCommunicationRating", artist.get().getAvgCommunicationRating());
                         map.put("avgReliabilityRating", artist.get().getAvgReliabilityRating());

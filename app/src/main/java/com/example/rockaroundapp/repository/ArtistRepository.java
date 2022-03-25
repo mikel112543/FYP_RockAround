@@ -50,10 +50,7 @@ public class ArtistRepository {
     }
 
     public MutableLiveData<List<Artist>> getArtistListMutable() {
-        if(artistList.isEmpty()) {
-            findAll();
-        }
-
+        findAll();
         artistListMutable.postValue(artistList);
         return artistListMutable;
     }
@@ -123,8 +120,9 @@ public class ArtistRepository {
             }
             if (snapshot != null) {
                 for (DocumentSnapshot document : snapshot) {
-                    if (userId.equals(document.getId())) {
+                    if (document.getId().equalsIgnoreCase(userId)) {
                         alreadyReviewed.postValue(true);
+                        break;
                     } else {
                         alreadyReviewed.postValue(false);
                     }
