@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Artist extends User {
 
-    private String stagename;
+    private String stageName;
     private String addressLineOne;
     private String addressLineTwo;
     private String county;
@@ -18,6 +18,16 @@ public class Artist extends User {
     private String profileImg;
     private String userType;
     private String price;
+    private int avgCommunicationRating;
+    private int avgReliabilityRating;
+    private int avgVocalsRating;
+    private int avgStagePresenceRating;
+    private int totalCommunicationRating;
+    private int totalReliabilityRating;
+    private int totalVocalsRating;
+    private int totalStagePresenceRating;
+    private int totalOverallRating;
+    private int avgOverallRating;
     private List<String> instruments;
     private List<String> artistImages;
     private List<String> genres;
@@ -42,8 +52,8 @@ public class Artist extends User {
         return userType;
     }
 
-    public Artist(String stagename, String profileImg, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
-        this.stagename = stagename;
+    public Artist(String stageName, String profileImg, String price, List<String> instruments, List<String> artistImages, List<String> genres, List<SampleTrack> sampleTracks, HashMap<String, Object> address) {
+        this.stageName = stageName;
         this.profileImg = profileImg;
         this.price = price;
         this.instruments = instruments;
@@ -51,6 +61,70 @@ public class Artist extends User {
         this.genres = genres;
         this.sampleTracks = sampleTracks;
         this.address = address;
+    }
+
+    public int getAvgCommunicationRating() {
+        return avgCommunicationRating;
+    }
+
+    public void setAvgCommunicationRating(int avgCommunicationRating) {
+        this.avgCommunicationRating = avgCommunicationRating;
+    }
+
+    public int getAvgReliabilityRating() {
+        return avgReliabilityRating;
+    }
+
+    public void setAvgReliabilityRating(int avgReliabilityRating) {
+        this.avgReliabilityRating = avgReliabilityRating;
+    }
+
+    public int getAvgVocalsRating() {
+        return avgVocalsRating;
+    }
+
+    public void setAvgVocalsRating(int avgVocalsRating) {
+        this.avgVocalsRating = avgVocalsRating;
+    }
+
+    public int getAvgStagePresenceRating() {
+        return avgStagePresenceRating;
+    }
+
+    public void setAvgStagePresenceRating(int avgStagePresenceRating) {
+        this.avgStagePresenceRating = avgStagePresenceRating;
+    }
+
+    public int getTotalCommunicationRating() {
+        return totalCommunicationRating;
+    }
+
+    public void setTotalCommunicationRating(int totalCommunicationRating) {
+        this.totalCommunicationRating = totalCommunicationRating;
+    }
+
+    public int getTotalReliabilityRating() {
+        return totalReliabilityRating;
+    }
+
+    public void setTotalReliabilityRating(int totalReliabilityRating) {
+        this.totalReliabilityRating = totalReliabilityRating;
+    }
+
+    public int getTotalVocalsRating() {
+        return totalVocalsRating;
+    }
+
+    public void setTotalVocalsRating(int totalVocalsRating) {
+        this.totalVocalsRating = totalVocalsRating;
+    }
+
+    public int getTotalStagePresenceRating() {
+        return totalStagePresenceRating;
+    }
+
+    public void setTotalStagePresenceRating(int totalStagePresenceRating) {
+        this.totalStagePresenceRating = totalStagePresenceRating;
     }
 
     public HashMap<String, Object> getAddress() {
@@ -99,8 +173,24 @@ public class Artist extends User {
         return genreString;
     }
 
+    public int getTotalOverallRating() {
+        return totalOverallRating;
+    }
+
+    public void setTotalOverallRating(int totalOverallRating) {
+        this.totalOverallRating = totalOverallRating;
+    }
+
+    public int getAvgOverallRating() {
+        return avgOverallRating;
+    }
+
+    public void setAvgOverallRating(int avgOverallRating) {
+        this.avgOverallRating = avgOverallRating;
+    }
+
     public String getStageName() {
-        return stagename;
+        return stageName;
     }
 
     public void setGenreString(String genreString) {
@@ -119,8 +209,8 @@ public class Artist extends User {
         this.oMapper = oMapper;
     }
 
-    public void setStageName(String stagename) {
-        this.stagename = stagename;
+    public void setStageName(String stageName) {
+        this.stageName = stageName;
     }
 
     public String getAddressLineOne() {
@@ -197,7 +287,7 @@ public class Artist extends User {
 
     public TextDrawable getDefaultProfiler() {
         ColorGenerator generator = ColorGenerator.MATERIAL;
-        if (stagename.isEmpty()) {
+        if (stageName.isEmpty()) {
             return TextDrawable.builder().buildRect(String.valueOf(getFirstname().charAt(0)), generator.getRandomColor());
         }
         return TextDrawable.builder().buildRect(String.valueOf(getStageName().charAt(0)), generator.getRandomColor());

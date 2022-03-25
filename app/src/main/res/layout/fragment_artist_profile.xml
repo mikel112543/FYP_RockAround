@@ -205,31 +205,26 @@
                 <ImageView
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
                     android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <TextView
@@ -255,31 +250,26 @@
                 <ImageView
                     android:id="@+id/stage_presence_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/stage_presence_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/stage_presence_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/stage_presence_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
                 <ImageView
                     android:id="@+id/stage_presence_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <TextView
@@ -304,31 +294,26 @@
                 <ImageView
                     android:id="@+id/vocals_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/vocals_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/vocals_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/vocals_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
                 <ImageView
                     android:id="@+id/vocals_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <TextView
@@ -353,31 +338,26 @@
                 <ImageView
                     android:id="@+id/reliability_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/reliability_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/reliability_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
 
                 <ImageView
                     android:id="@+id/reliability_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
                 <ImageView
                     android:id="@+id/reliability_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <TextView
@@ -402,32 +382,27 @@
                 <ImageView
                     android:id="@+id/communication_s1"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/communication_s2"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/communication_s3"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/communication_s4"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
 
                 <ImageView
                     android:id="@+id/communication_s5"
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <View

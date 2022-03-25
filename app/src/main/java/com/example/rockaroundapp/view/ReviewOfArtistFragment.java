@@ -2,7 +2,6 @@ package com.example.rockaroundapp.view;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,20 +56,20 @@ public class ReviewOfArtistFragment extends Fragment {
 
     private void observe() {
         mViewModel.get_review().observe(getViewLifecycleOwner(), artistReview -> {
-            if(binding.reviewTitle.getText().toString().isEmpty()) {
+            if (binding.reviewTitle.getText().toString().isEmpty()) {
                 binding.reviewTitle.setError("Please provide a title");
             }
-            if(binding.reviewDescription.getText().toString().isEmpty()) {
+            if (binding.reviewDescription.getText().toString().isEmpty()) {
                 binding.reviewDescription.setError("Please write a review");
             }
-            if(!(binding.reviewTitle.getText().toString().isEmpty() && binding.reviewDescription.getText().toString().isEmpty())) {
+            if (!(binding.reviewTitle.getText().toString().isEmpty() && binding.reviewDescription.getText().toString().isEmpty())) {
                 artistReview.setReviewerId(currentUid);
                 artistReview.setReviewedId(artistId);
                 mViewModel.submitReview(artistReview);
             }
         });
         mViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
-            if(Boolean.TRUE.equals(success)) {
+            if (Boolean.TRUE.equals(success)) {
                 Toast.makeText(getActivity(), "Review successful", Toast.LENGTH_SHORT).show();
                 navController.navigateUp();
             }
@@ -316,7 +315,7 @@ public class ReviewOfArtistFragment extends Fragment {
                     binding.communicationS1.setBackground(starOutline);
                     binding.communicationS2.setBackground(starOutline);
                     binding.communicationS3.setBackground(starOutline);
-                }else{
+                } else {
                     mViewModel.setCommunicationRating(3);
                     binding.communicationS1.setBackground(filledStar);
                     binding.communicationS2.setBackground(filledStar);
@@ -332,7 +331,7 @@ public class ReviewOfArtistFragment extends Fragment {
                     binding.communicationS2.setBackground(starOutline);
                     binding.communicationS3.setBackground(starOutline);
                     binding.communicationS4.setBackground(starOutline);
-                }else {
+                } else {
                     mViewModel.setCommunicationRating(4);
                     binding.communicationS1.setBackground(filledStar);
                     binding.communicationS2.setBackground(filledStar);
@@ -422,7 +421,7 @@ public class ReviewOfArtistFragment extends Fragment {
                     binding.reliabilityS2.setBackground(starOutline);
                     binding.reliabilityS3.setBackground(starOutline);
                     binding.reliabilityS4.setBackground(starOutline);
-                }else{
+                } else {
                     mViewModel.setReliabilityRating(4);
                     binding.reliabilityS1.setBackground(filledStar);
                     binding.reliabilityS2.setBackground(filledStar);
@@ -439,7 +438,7 @@ public class ReviewOfArtistFragment extends Fragment {
                     binding.reliabilityS3.setBackground(starOutline);
                     binding.reliabilityS4.setBackground(starOutline);
                     binding.reliabilityS5.setBackground(starOutline);
-                }else{
+                } else {
                     mViewModel.setReliabilityRating(5);
                     binding.reliabilityS1.setBackground(filledStar);
                     binding.reliabilityS2.setBackground(filledStar);

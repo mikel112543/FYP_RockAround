@@ -55,6 +55,7 @@ public class ArtistProfileFragment extends Fragment {
         binding.setLifecycleOwner(this);
         observeSolo();
         observeGroup();
+        checkIsReviewed();
         return view;
     }
 
@@ -95,7 +96,6 @@ public class ArtistProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        checkIsReviewed();
         binding.writeReviewButton.setOnClickListener(this::onWriteReviewClicked);
         super.onViewCreated(view, savedInstanceState);
     }
