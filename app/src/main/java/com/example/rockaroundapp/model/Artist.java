@@ -5,6 +5,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,6 +62,10 @@ public class Artist extends User {
         this.sampleTracks = sampleTracks;
         this.address = address;
     }
+
+    Comparator<Artist> compareByStageName = (o1, o2) -> o1.getStageName().compareTo(o2.getStageName());
+
+    Comparator<Artist> comparatorByOverallRating =  Comparator.comparing(Artist::getAvgOverallRating);
 
     public double getAvgCommunicationRating() {
         return avgCommunicationRating;
