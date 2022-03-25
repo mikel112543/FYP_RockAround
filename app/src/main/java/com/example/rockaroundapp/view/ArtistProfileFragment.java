@@ -19,17 +19,17 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentArtistProfileBinding;
 import com.example.rockaroundapp.viewmodel.ArtistProfileViewModel;
+import com.example.rockaroundapp.viewmodel.ReviewOfArtistViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mysql.cj.util.StringUtils;
-
-import java.util.Objects;
 
 public class ArtistProfileFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private ArtistProfileViewModel viewModel;
+    private ReviewOfArtistViewModel reviewViewModel;
     private FragmentArtistProfileBinding binding;
     private TextDrawable orgProfiler;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
@@ -49,6 +49,7 @@ public class ArtistProfileFragment extends Fragment {
                 inflater, R.layout.fragment_artist_profile, container, false);
         View view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(ArtistProfileViewModel.class);
+        //reviewViewModel = new ViewModelProvider(this).get(ReviewOfArtistViewModel.class);
         assert getArguments() != null;
         id = getArguments().getString("id");
         binding.setLifecycleOwner(this);
@@ -63,7 +64,12 @@ public class ArtistProfileFragment extends Fragment {
             if (StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
                 binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
             }
-            if (Objects.equals(currentUid,artist.getId())) {
+        });
+    }
+
+    private void checkIsReviewed() {
+        viewModel.alreadyReviewed(id).observe(getViewLifecycleOwner(), alreadyReviewed -> {
+            if (Boolean.TRUE.equals(alreadyReviewed)) {
                 binding.writeReviewButton.setVisibility(View.INVISIBLE);
             }
         });
@@ -77,26 +83,23 @@ public class ArtistProfileFragment extends Fragment {
             if (StringUtils.isEmptyOrWhitespaceOnly(groupArtist.getProfileImg())) {
                 binding.profileImage.setImageDrawable(groupArtist.getDefaultProfiler());
             }
-            if (Objects.equals(currentUid, groupArtist.getId())) {
-                binding.writeReviewButton.setVisibility(View.INVISIBLE);
-            }
         });
     }
 
-    //TODO Add review onClicks
     private void onWriteReviewClicked(View view) {
-        navController.navigate(R.id.action_artistProfile_to_reviewOfArtistFragment);
+        Bundle bundle = new Bundle();
+        bundle.putString("artistId", id);
+        navController.navigate(R.id.action_artistProfile_to_reviewOfArtistFragment, bundle);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
+        checkIsReviewed();
         binding.writeReviewButton.setOnClickListener(this::onWriteReviewClicked);
         super.onViewCreated(view, savedInstanceState);
     }
 
-    //TODO link up group to explore
-    //TODO Do venue explore
     //TODO Implement account page
     //TODO Implement Maps Page
     //TODO Fully implement Reviews

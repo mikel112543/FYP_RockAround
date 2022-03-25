@@ -12,13 +12,13 @@ import java.util.List;
 public class LoginViewModel extends ViewModel {
 
     private final UserRepository userRepository;
-    private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
-    private MutableLiveData<String> loginFailureMsg;
-    private MutableLiveData<String> email = new MutableLiveData<>("");
-    private MutableLiveData<String> password = new MutableLiveData<>("");
-    private MutableLiveData<String> userType;
+    private final MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
+    private final MutableLiveData<String> loginFailureMsg;
+    private final MutableLiveData<String> email = new MutableLiveData<>("");
+    private final MutableLiveData<String> password = new MutableLiveData<>("");
+    private final MutableLiveData<String> userType;
     private MutableLiveData<List<String>> loginDetails = new MutableLiveData<>();
-    private MutableLiveData<Boolean> loginSuccess;
+    private final MutableLiveData<Boolean> loginSuccess;
 
     public LoginViewModel() {
         userRepository = new UserRepository();

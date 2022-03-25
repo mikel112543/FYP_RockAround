@@ -72,7 +72,7 @@ public class UserRepository {
     public void loginUser(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                findByUserType();
+                findByUserType(Objects.requireNonNull(auth.getCurrentUser()).getUid());
             } else {
                 loginSuccess.postValue(false);
             }
@@ -124,8 +124,8 @@ public class UserRepository {
                 });
     }
 
-    private void findByUserType() {
-        documentReference = db.collection("solo").document(auth.getCurrentUser().getUid());
+    public MutableLiveData<String> findByUserType(String userId) {
+        documentReference = db.collection("solo").document(userId);
         documentReference.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.e(TAG, "User not solo");
@@ -137,7 +137,7 @@ public class UserRepository {
                 userType.postValue(artist.getUserType());
             }
         });
-        documentReference = db.collection("group").document(auth.getCurrentUser().getUid());
+        documentReference = db.collection("group").document(userId);
         documentReference.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.e(TAG, "User not group");
@@ -149,7 +149,7 @@ public class UserRepository {
                 userType.postValue(groupArtist.getUserType());
             }
         });
-        documentReference = db.collection("venue").document(auth.getCurrentUser().getUid());
+        documentReference = db.collection("venue").document(userId);
         documentReference.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.e(TAG, "User not venue");
@@ -161,6 +161,7 @@ public class UserRepository {
                 userType.postValue(venue.getUserType());
             }
         });
+        return userType;
     }
 
     public void signOut() {

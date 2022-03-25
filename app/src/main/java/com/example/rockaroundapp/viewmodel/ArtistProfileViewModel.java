@@ -23,5 +23,7 @@ public class ArtistProfileViewModel extends ViewModel {
     public LiveData<GroupArtist> getGroupArtist(String id){
         return repository.findByGroupId(id);
     }
+
+    public LiveData<Boolean> alreadyReviewed(String userId) { return repository.alreadyReviewed(userId, "venue");}
 }
 

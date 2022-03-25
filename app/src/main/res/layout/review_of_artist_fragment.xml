@@ -114,6 +114,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_baseline_star_outline_24" />
+            <ImageView
+                android:id="@+id/stage_presence_s5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
         <TextView
@@ -155,6 +160,11 @@
                 android:background="@drawable/ic_baseline_star_outline_24" />
             <ImageView
                 android:id="@+id/vocals_s4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_star_outline_24" />
+            <ImageView
+                android:id="@+id/vocals_s5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_baseline_star_outline_24" />
@@ -202,6 +212,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_baseline_star_outline_24" />
+            <ImageView
+                android:id="@+id/reliability_s5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_star_outline_24" />
         </LinearLayout>
 
         <TextView
@@ -246,6 +261,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_baseline_star_outline_24" />
+            <ImageView
+                android:id="@+id/communication_s5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_star_outline_24" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -258,6 +278,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/pill_button"
             android:text="Submit"
+            android:onClick="@{() -> viewModel.onSubmitClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

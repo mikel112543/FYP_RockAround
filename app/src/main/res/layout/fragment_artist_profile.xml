@@ -225,6 +225,11 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_star_rate_50" />
+                <ImageView
+                    android:id="@+id/overall_rating_s5"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_rate_50" />
             </LinearLayout>
 
             <TextView
@@ -267,6 +272,11 @@
 
                 <ImageView
                     android:id="@+id/stage_presence_s4"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_rate_50" />
+                <ImageView
+                    android:id="@+id/stage_presence_s5"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_star_rate_50" />
@@ -314,6 +324,11 @@
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_star_rate_50" />
+                <ImageView
+                    android:id="@+id/vocals_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_rate_50" />
             </LinearLayout>
 
             <TextView
@@ -358,6 +373,11 @@
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_star_rate_50" />
+                <ImageView
+                    android:id="@+id/reliability_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_rate_50" />
             </LinearLayout>
 
             <TextView
@@ -399,6 +419,12 @@
 
                 <ImageView
                     android:id="@+id/communication_s4"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_baseline_star_rate_50" />
+
+                <ImageView
+                    android:id="@+id/communication_s5"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_star_rate_50" />
@@ -577,11 +603,12 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/more_review_button"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textColor="@color/primary_pink"
                     android:background="@drawable/pill_button_outline"
                     android:text="More reviews"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/review_card_2" />
@@ -589,7 +616,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/write_review_button"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/pill_button"

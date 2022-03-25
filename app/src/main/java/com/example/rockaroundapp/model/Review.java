@@ -1,7 +1,13 @@
 package com.example.rockaroundapp.model;
 
+import static java.time.format.FormatStyle.MEDIUM;
+import static java.time.format.FormatStyle.SHORT;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
 import java.util.UUID;
 
 abstract class Review {
@@ -9,24 +15,25 @@ abstract class Review {
     private String id;
     private String title;
     private String description;
-    private int reviewerId;
-    private int reviewedId;
-    private LocalDate date;
-    private LocalTime time;
+    private String reviewerId;
+    private String reviewedId;
+    private String date;
+    private String time;
 
     public Review() {
         id = UUID.randomUUID().toString();
-        date = LocalDate.now();
-        time = LocalTime.now();
+        date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        time = LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(SHORT));
     }
 
-    protected Review(String id, String title, String description, int reviewerId, int reviewedId) {
-        this.id = description;
+    protected Review(String id, String title, String description, String reviewerId, String reviewedId) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.reviewerId = reviewerId;
         this.reviewedId = reviewedId;
-        this.time = LocalTime.now();
+        date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        time = LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(SHORT));
     }
 
     public String getId() {
@@ -53,35 +60,35 @@ abstract class Review {
         this.description = description;
     }
 
-    public int getReviewerId() {
+    public String getReviewerId() {
         return reviewerId;
     }
 
-    public void setReviewerId(int reviewerId) {
+    public void setReviewerId(String reviewerId) {
         this.reviewerId = reviewerId;
     }
 
-    public int getReviewedId() {
+    public String getReviewedId() {
         return reviewedId;
     }
 
-    public void setReviewedId(int reviewedId) {
+    public void setReviewedId(String reviewedId) {
         this.reviewedId = reviewedId;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -36,6 +36,7 @@ public class ArtistRepository {
     private MutableLiveData<List<Artist>>  artistListMutable;
     private MutableLiveData<Artist> _artist;
     private MutableLiveData<GroupArtist> _groupArtist;
+    private MutableLiveData<Boolean> alreadyReviewed;
     private List<Artist> artistList;
     private final String currentId = auth.getUid();
 
@@ -45,6 +46,7 @@ public class ArtistRepository {
         _artist = new MutableLiveData<>();
         _groupArtist = new MutableLiveData<>();
         artistList = new ArrayList<>();
+        alreadyReviewed = new MutableLiveData<>(false);
     }
 
     public MutableLiveData<List<Artist>> getArtistListMutable() {
@@ -69,7 +71,6 @@ public class ArtistRepository {
                     if(!Objects.equals(currentId, artist.getId())){
                         artistList.add(artist);
                     }
-                    //TODO Add Reviews for binding
                 }
             }
         });
@@ -84,7 +85,6 @@ public class ArtistRepository {
                     if(!Objects.equals(currentId, groupArtist.getId())) {
                         artistList.add(groupArtist);
                     }
-                    //TODO Add Reviews for binding
                 }
                 artistListMutable.postValue(artistList);
             }
@@ -113,5 +113,24 @@ public class ArtistRepository {
             }
         });
         return _groupArtist;
+    }
+
+    public MutableLiveData<Boolean> alreadyReviewed(String userId, String userType) {
+        assert currentId != null;
+        db.collection(userType).document(currentId).collection("writtenReviews").addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                Log.w(TAG, "error retrieving written reviews" + e);
+            }
+            if (snapshot != null) {
+                for (DocumentSnapshot document : snapshot) {
+                    if (userId.equals(document.getId())) {
+                        alreadyReviewed.postValue(true);
+                    } else {
+                        alreadyReviewed.postValue(false);
+                    }
+                }
+            }
+        });
+        return alreadyReviewed;
     }
 }

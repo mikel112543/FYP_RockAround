@@ -13,7 +13,7 @@ public class ArtistReview extends Review {
     public ArtistReview() {
     }
 
-    public ArtistReview(String id, String title, String description, int reviewerId, int reviewedId, int stagePresenceRating, int vocalsRating, int reliabilityRating, int communicationRating) {
+    public ArtistReview(String id, String title, String description, String reviewerId, String reviewedId, int stagePresenceRating, int vocalsRating, int reliabilityRating, int communicationRating) {
         super(id, title, description, reviewerId, reviewedId);
         this.stagePresenceRating = stagePresenceRating;
         this.vocalsRating = vocalsRating;

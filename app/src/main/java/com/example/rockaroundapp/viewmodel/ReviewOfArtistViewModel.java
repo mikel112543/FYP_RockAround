@@ -5,24 +5,30 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.ArtistReview;
 import com.example.rockaroundapp.repository.ArtistRepository;
+import com.example.rockaroundapp.repository.ReviewRepository;
+import com.example.rockaroundapp.repository.UserRepository;
 
 public class ReviewOfArtistViewModel extends ViewModel {
 
-    private ArtistRepository repository;
+    private ReviewRepository repository;
+    private UserRepository userRepository;
     private MutableLiveData<String> reviewTitle;
     private MutableLiveData<String> reviewDescription;
     private ArtistReview review;
     private MutableLiveData<ArtistReview> _review;
+    private MutableLiveData<Boolean> success;
     private int stagePresenceRating;
     private int vocalsRating;
     private int communicationRating;
     private int reliabilityRating;
 
     public ReviewOfArtistViewModel() {
-        repository = new ArtistRepository();
-        reviewTitle = new MutableLiveData<>();
-        reviewDescription = new MutableLiveData<>();
+        repository = new ReviewRepository();
+        userRepository = new UserRepository();
+        reviewTitle = new MutableLiveData<>("");
+        reviewDescription = new MutableLiveData<>("");
         _review = new MutableLiveData<>();
+        success = repository.getSuccess();
     }
 
     public MutableLiveData<ArtistReview> get_review() {
@@ -30,6 +36,14 @@ public class ReviewOfArtistViewModel extends ViewModel {
             _review = new MutableLiveData<>();
         }
         return _review;
+    }
+
+    public MutableLiveData<Boolean> getSuccess() {
+        return success;
+    }
+
+    public MutableLiveData<String> getUserType(String userId) {
+        return userRepository.findByUserType(userId);
     }
 
     public MutableLiveData<String> getReviewTitle() {
@@ -65,5 +79,9 @@ public class ReviewOfArtistViewModel extends ViewModel {
         review.setVocalsRating(vocalsRating);
         review.setStagePresenceRating(stagePresenceRating);
         _review.postValue(review);
+    }
+
+    public void submitReview(ArtistReview artistReview) {
+        repository.submitArtistReview(artistReview);
     }
 }
