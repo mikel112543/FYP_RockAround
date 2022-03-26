@@ -109,10 +109,17 @@ public class ArtistProfileFragment extends Fragment {
         navController.navigate(R.id.action_artistProfile_to_reviewOfArtistFragment, bundle);
     }
 
+    private void onMoreReviewsClicked(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("artistId", id);
+
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         binding.writeReviewButton.setOnClickListener(this::onWriteReviewClicked);
+        binding.moreReviewButton.setOnClickListener();
         super.onViewCreated(view, savedInstanceState);
     }
 
