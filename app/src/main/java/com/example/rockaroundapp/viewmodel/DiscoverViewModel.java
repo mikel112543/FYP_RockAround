@@ -21,11 +21,19 @@ public class DiscoverViewModel extends ViewModel {
         venueRepository = new VenueRepository();
     }
 
-    public MutableLiveData<List<Artist>> getArtistList(int order) {
-        return artistRepository.getArtistListMutable(order);
+    public MutableLiveData<List<Artist>> getArtistList() {
+        return artistRepository.getArtistListMutable();
     }
 
-    public MutableLiveData<List<Venue>> getVenueList(int order) {
+    public MutableLiveData<List<Venue>> getVenueList() {
         return venueRepository.getVenueListMutable();
+    }
+
+    public void sortList(int order, String userType) {
+        if (userType.equalsIgnoreCase("venue")) {
+            artistRepository.sortList(order);
+        }else{
+            //TODO sort venue list
+        }
     }
 }

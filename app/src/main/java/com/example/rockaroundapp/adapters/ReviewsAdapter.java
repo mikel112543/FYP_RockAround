@@ -10,73 +10,105 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rockaroundapp.R;
-import com.example.rockaroundapp.databinding.ArtistCardBinding;
-import com.example.rockaroundapp.listeners.ArtistListener;
-import com.example.rockaroundapp.model.Artist;
-import com.mysql.cj.util.StringUtils;
+import com.example.rockaroundapp.databinding.ReviewCardBinding;
+import com.example.rockaroundapp.model.ArtistReview;
+import com.example.rockaroundapp.model.Venue;
+import com.example.rockaroundapp.model.VenueReview;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
+public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder> {
 
-    private List<Artist> artistListHolder;
+    private List<ArtistReview> artistReviews;
+    private List<VenueReview> venueReviews;
+    private List<Venue> artistReviewers;
     private LayoutInflater layoutInflater;
-    private ArtistListener artistListener;
-    private Drawable starOutline;
+    private final String currentUserType;
     private Drawable starFilled;
+    private Drawable starOutline;
     private Drawable halfStar;
 
-    public ArtistAdapter(ArtistListener artistListener) {
-        this.artistListHolder = new ArrayList<>();
-        this.artistListener = artistListener;
+    public ReviewsAdapter(String currentUserType) {
+        this.currentUserType = currentUserType;
+        artistReviews = new ArrayList<>();
+        venueReviews = new ArrayList<>();
+        artistReviewers = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public ArtistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        ArtistCardBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.artist_card, parent, false);
+        ReviewCardBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.review_card, parent, false);
         starFilled = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_rate_50);
         starOutline = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_outline_24);
         halfStar = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_half_24);
-        return new ArtistViewHolder(binding);
+        return new ReviewViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ArtistViewHolder holder, int position) {
-        holder.bindArtist(artistListHolder.get(position));
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
+        holder.bindArtistReview(artistReviews.get(position));
+        if (!artistReviewers.isEmpty()) {
+            holder.bindArtistReviewer(artistReviewers.get(position));
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return artistListHolder.size();
+        if (currentUserType.equalsIgnoreCase("venue")) {
+            return artistReviews.size();
+        }
+        return venueReviews.size();
     }
 
-    public void updateArtistList(List<Artist> artistList) {
-        this.artistListHolder = artistList;
+    public void updateArtistReviewList(List<ArtistReview> reviews, List<Venue> artistReviewers) {
+        this.artistReviews = reviews;
+        this.artistReviewers = artistReviewers;
         notifyDataSetChanged();
     }
 
-    class ArtistViewHolder extends RecyclerView.ViewHolder {
+/*    public void updateArtistReviewers(List<Venue> reviewers) {
+        this.artistReviewers = reviewers;
+        notifyDataSetChanged();
+    }*/
 
-        private ArtistCardBinding binding;
+    public void updateVenueReviews(List<VenueReview> reviews) {
+        this.venueReviews = reviews;
+    }
 
-        public ArtistViewHolder(ArtistCardBinding binding) {
+    class ReviewViewHolder extends RecyclerView.ViewHolder {
+
+        private final ReviewCardBinding binding;
+
+        public ReviewViewHolder(ReviewCardBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bindArtist(Artist artist) {
-            binding.setArtistModel(artist);
-            mapRating(artist.getAvgOverallRating());
-            if (StringUtils.isEmptyOrWhitespaceOnly(artist.getProfileImg())) {
-                binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
-            }
+        public void bindArtistReview(ArtistReview review) {
+            binding.setReviewModel(review);
             binding.executePendingBindings();
-            binding.getRoot().setOnClickListener(v -> artistListener.onArtistClicked(artist));
+            mapRating(review.getOverallRating());
+        }
+
+        public void bindVenueReview(VenueReview venueReview) {
+
+        }
+
+        public void bindArtistReviewer(Venue venue) {
+            binding.reviewerName2.setText(venue.getVenueName());
+            Picasso.get().load(venue.getProfileImg())
+                    .placeholder(R.drawable.ic_baseline_account_circle_24)
+                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .fit()
+                    .centerCrop()
+                    .into(binding.reviewerProfileImg2);
         }
 
         private void mapRating(double rating) {

@@ -10,7 +10,7 @@ import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.UUID;
 
-abstract class Review {
+public abstract class Review {
 
     private String id;
     private String title;

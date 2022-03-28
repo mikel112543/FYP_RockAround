@@ -49,15 +49,12 @@ public class VenueRepository {
     }
 
     public MutableLiveData<List<Venue>> getVenueListMutable() {
-        if (venueList.isEmpty()) {
-            findAll();
-        }
+        findAll();
         venueListMutable.postValue(venueList);
         return venueListMutable;
     }
 
-    public void saveToDB(MutableLiveData<Venue> venueMutableLiveData, Uri imageUri) {
-        Venue venue = venueMutableLiveData.getValue();
+    public void saveToDB(Venue venue, Uri imageUri) {
         venueMp = new HashMap<>();
         documentReference = db.collection("venue").document(auth.getUid());
         if (imageUri != null) {
@@ -113,7 +110,7 @@ public class VenueRepository {
         db.collection("venue").document(venueId).get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
                 _venue.postValue(snapshot.toObject(Venue.class));
-                Log.d(TAG, "Retrieved artist");
+                Log.d(TAG, "Retrieved venue");
             } else {
                 Log.d(TAG, "Failed to get document");
             }

@@ -42,7 +42,7 @@ public class VenueSetupViewModel extends ViewModel {
         venue = new Venue();
     }
 
-    public MutableLiveData<Venue> getVenueMutableLiveData() {
+    public MutableLiveData<Venue> getVenue() {
         if (venueMutableLiveData == null) {
             venueMutableLiveData = new MutableLiveData<>();
         }
@@ -106,11 +106,11 @@ public class VenueSetupViewModel extends ViewModel {
         }else {
             venue.setProfileImg(" ");
         }
-        venueMutableLiveData.postValue(venue);
+        venueMutableLiveData.setValue(venue);
     }
 
     public void saveInfo() {
-        venueRepository.saveToDB(venueMutableLiveData, profileImageUri);
+        venueRepository.saveToDB(venue, profileImageUri);
     }
 
     public void setProfileImageUri(Uri selectedImageUri) {

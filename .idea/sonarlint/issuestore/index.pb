@@ -15,8 +15,6 @@ l
 Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java,f\2\f2ee3303c876c78fdbb400ef80f1b2b04a977fd6
 q
 Aapp/src/main/java/com/example/rockaroundapp/dao/VenueDaoImpl.java,f\1\f1d34102de6fab4434aec648d86e6ebc86e781c3
-r
-Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad58b4bdb90d96d55b01cadebe8f908e4e41
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 X
@@ -30,7 +28,3 @@ P
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 r
 Bapp/src/main/java/com/example/rockaroundapp/dao/ArtistDaoImpl.java,7\2\727634b7d8c08dfd6f3bbef503964607c9715329
-u
-Eapp/src/main/java/com/example/rockaroundapp/util/BindingAdapters.java,d\2\d23cec313d126cc82a031e9765c2118c0b6fa878
-z
-Japp/src/main/java/com/example/rockaroundapp/view/VenueExploreFragment.java,1\5\1552832f209a043d30dde50d832ebcba71766d4d

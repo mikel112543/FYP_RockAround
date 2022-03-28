@@ -1,8 +1,5 @@
 package com.example.rockaroundapp.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class ArtistReview extends Review {
 
     private int stagePresenceRating;
@@ -13,12 +10,8 @@ public class ArtistReview extends Review {
     public ArtistReview() {
     }
 
-    public ArtistReview(String id, String title, String description, String reviewerId, String reviewedId, int stagePresenceRating, int vocalsRating, int reliabilityRating, int communicationRating) {
-        super(id, title, description, reviewerId, reviewedId);
-        this.stagePresenceRating = stagePresenceRating;
-        this.vocalsRating = vocalsRating;
-        this.reliabilityRating = reliabilityRating;
-        this.communicationRating = communicationRating;
+    public double getOverallRating() {
+        return (double) (communicationRating+vocalsRating+reliabilityRating+stagePresenceRating) / 4;
     }
 
     public int getStagePresenceRating() {

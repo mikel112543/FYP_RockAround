@@ -148,7 +148,7 @@ public class Venue extends User{
         return profileImg;
     }
 
-    public void setProfileImg(String profileImgURL) {
+    public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
     }
 

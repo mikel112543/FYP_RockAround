@@ -2,7 +2,6 @@ package com.example.rockaroundapp.view;
 
 import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,7 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.adapters.ArtistAdapter;
 import com.example.rockaroundapp.adapters.VenueAdapter;
-import com.example.rockaroundapp.databinding.FragmentArtistExploreBinding;
+import com.example.rockaroundapp.databinding.FragmentDiscoverBinding;
 import com.example.rockaroundapp.listeners.ArtistListener;
 import com.example.rockaroundapp.listeners.VenueListener;
 import com.example.rockaroundapp.model.Artist;
@@ -44,11 +41,13 @@ import com.example.rockaroundapp.viewmodel.DiscoverViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class DiscoverFragment extends Fragment implements ArtistListener, VenueListener {
 
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private FragmentArtistExploreBinding binding;
+    private FragmentDiscoverBinding binding;
     private DiscoverViewModel viewModel;
     private ArtistAdapter artistAdapter;
     private VenueAdapter venueAdapter;
@@ -56,6 +55,7 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
+    private int storedFilter = 0;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
@@ -76,11 +76,12 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_explore, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_discover, container, false);
         View view = binding.getRoot();
         recyclerView.setVisibility(View.VISIBLE);
         layoutManager.onRestoreInstanceState(state);
         configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
+        initRecycler(userType);
         return view;
     }
 
@@ -109,54 +110,54 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         return super.onOptionsItemSelected(item);
     }
 
-    private void initRecycler(String userType, int orderPosition) {
-        if (userType == "SOLO" || userType == "GROUP") {
+    private void initRecycler(String userType) {
+        if (userType.equalsIgnoreCase("solo")|| userType.equalsIgnoreCase("group")) {
             toolbar.setTitle("Explore Venues");
             venueAdapter = new VenueAdapter(this);
             venueAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
             recyclerView.setAdapter(venueAdapter);
-            observeVenues(orderPosition);
+            observeVenues();
         } else {
             toolbar.setTitle("Explore Artists");
             artistAdapter = new ArtistAdapter(this);
             artistAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
             recyclerView.setAdapter(artistAdapter);
-            observeArtists(orderPosition);
+            observeArtists();
         }
     }
 
-    private void observeArtists(int orderPosition) {
-        viewModel.getArtistList(orderPosition).observe(getViewLifecycleOwner(), artistList -> artistAdapter.updateArtistList(artistList));
+    private void observeArtists() {
+        viewModel.getArtistList().observe(getViewLifecycleOwner(), artistList -> artistAdapter.updateArtistList(artistList));
     }
 
-    private void observeVenues(int orderPosition) {
-        viewModel.getVenueList(orderPosition).observe(getViewLifecycleOwner(), venues -> venueAdapter.updateVenueList(venues));
+    private void observeVenues() {
+        viewModel.getVenueList().observe(getViewLifecycleOwner(), venues -> venueAdapter.updateVenueList(venues));
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        NavigationUI.setupActionBarWithNavController((AppCompatActivity) getActivity(), navController, configuration);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) requireActivity(), navController, configuration);
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onArtistClicked(Artist artist) {
-        Bundle id = new Bundle();
-        id.putString("id", artist.getId());
-        Toast.makeText(getActivity(), "ID of artist" + artist.getId(), Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", artist.getId());
+        bundle.putString("currentUserType", userType);
         recyclerView.setVisibility(View.INVISIBLE);
-        navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, id);
+        navController.navigate(R.id.action_artistExploreFragment_to_soloProfileFragment, bundle);
     }
 
     @Override
     public void onVenueClicked(Venue venue) {
-        Bundle id = new Bundle();
-        id.putString("id", venue.getId());
-        Toast.makeText(getActivity(), "ID of venue" + venue.getId(), Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("id", venue.getId());
+        bundle.putString("currentUserType", userType);
         recyclerView.setVisibility(View.INVISIBLE);
         bottomNavigationView.setVisibility(View.INVISIBLE);
-        navController.navigate(R.id.action_discover_to_venueProfileFragment, id);
+        navController.navigate(R.id.action_discover_to_venueProfileFragment, bundle);
         //TODO Venue Profile
         //TODO Venue & Artist Reviews
         //TODO Account Page
@@ -170,15 +171,11 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
             // position 1 - Descending
             // position 2 - Rating (High - low)
             // position 3 - Rating (Low - high)
-            String order = parent.getItemAtPosition(position).toString();
-            Toast.makeText(getActivity(), order + " " + position + " selected", Toast.LENGTH_SHORT).show();
-            initRecycler(userType, position);
-
+            viewModel.sortList(position, userType);
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
         }
     };
 

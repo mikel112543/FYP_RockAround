@@ -35,6 +35,7 @@ public class ArtistProfileFragment extends Fragment {
     private ArtistProfileViewModel viewModel;
     private FragmentArtistProfileBinding binding;
     private String id;
+    private String currentUserType;
     private NavController navController;
     private Drawable starOutline;
     private Drawable starFilled;
@@ -57,6 +58,7 @@ public class ArtistProfileFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ArtistProfileViewModel.class);
         assert getArguments() != null;
         id = getArguments().getString("id");
+        currentUserType = getArguments().getString("currentUserType");
         binding.setLifecycleOwner(this);
         observeSolo();
         observeGroup();
@@ -112,14 +114,15 @@ public class ArtistProfileFragment extends Fragment {
     private void onMoreReviewsClicked(View view) {
         Bundle bundle = new Bundle();
         bundle.putString("artistId", id);
-
+        bundle.putString("currentUserType", currentUserType);
+        navController.navigate(R.id.action_artistProfile_to_userReviewsFragment, bundle);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         binding.writeReviewButton.setOnClickListener(this::onWriteReviewClicked);
-        binding.moreReviewButton.setOnClickListener();
+        binding.moreReviewButton.setOnClickListener(this::onMoreReviewsClicked);
         super.onViewCreated(view, savedInstanceState);
     }
 

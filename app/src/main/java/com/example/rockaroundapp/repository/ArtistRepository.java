@@ -39,13 +39,18 @@ public class ArtistRepository {
         alreadyReviewed = new MutableLiveData<>(false);
     }
 
-    public MutableLiveData<List<Artist>> getArtistListMutable(int orderPosition) {
-        findAll(orderPosition);
-        artistListMutable.postValue(artistList);
+    public MutableLiveData<List<Artist>> getArtistListMutable() {
+        findAll();
+        /*if(artistList.isEmpty()) {
+            findAll(orderPosition);
+        }else{
+            sortList(orderPosition);
+        }*/
+        //artistListMutable.postValue(artistList);
         return artistListMutable;
     }
 
-    public void findAll(int order) {
+    public void findAll() {
         artistList.clear();
         db.collection("solo").addSnapshotListener((snapshot, e) -> {
             if (e != null) {
@@ -73,18 +78,22 @@ public class ArtistRepository {
                         artistList.add(groupArtist);
                     }
                 }
-                if (order == 0) { //Ascending
-                    Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
-                } else if (order == 1) { //Descending
-                    Collections.sort(artistList, Comparator.comparing(Artist::getStageName).reversed());
-                } else if (order == 2) { //Rating (High - low)
-                    Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
-                } else { //Rating (Low - high)
-                    Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating));
-                }
-                artistListMutable.postValue(artistList);
             }
+            artistListMutable.postValue(artistList);
         });
+    }
+
+    public void sortList(int orderPosition) {
+        if (orderPosition == 0) { //Ascending
+            Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
+        } else if (orderPosition == 1) { //Descending
+            Collections.sort(artistList, Comparator.comparing(Artist::getStageName).reversed());
+        } else if (orderPosition == 2) { //Rating (High - low)
+            Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
+        } else { //Rating (Low - high)
+            Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating));
+        }
+        artistListMutable.postValue(artistList);
     }
 
     public LiveData<Artist> findSoloById(String artistId) {

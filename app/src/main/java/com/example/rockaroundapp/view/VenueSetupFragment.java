@@ -62,7 +62,7 @@ public class VenueSetupFragment extends Fragment {
     }
 
     private void observeViewModel() {
-        venueSetupViewModel.getVenueMutableLiveData().observe(getViewLifecycleOwner(), venue -> {
+        venueSetupViewModel.getVenue().observe(getViewLifecycleOwner(), venue -> {
             if (venue.getVenueName().isEmpty()) {
                 binding.venueNameText.setError("Please provide a name");
             } else {
