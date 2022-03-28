@@ -2,8 +2,17 @@ plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs'
+    id "org.sonarqube" version "3.3"
 }
 apply plugin: 'kotlin-android'
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "mikel112543_FYP_RockAround"
+        property "sonar.organization", "mikel112543"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
 
 
 android {
@@ -26,7 +35,7 @@ android {
         }
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
 
@@ -37,7 +46,7 @@ android {
     }
 
     configurations {
-        implementation.exclude module:'protobuf-java'
+        implementation.exclude module: 'protobuf-java'
     }
 }
 
