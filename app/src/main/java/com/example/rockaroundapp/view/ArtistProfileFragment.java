@@ -100,7 +100,8 @@ public class ArtistProfileFragment extends Fragment {
     private void checkIsReviewed() {
         viewModel.alreadyReviewed(id).observe(getViewLifecycleOwner(), alreadyReviewed -> {
             if (Boolean.TRUE.equals(alreadyReviewed)) {
-                binding.writeReviewButton.setVisibility(View.INVISIBLE);
+                binding.writeReviewButton.setEnabled(false);
+                binding.writeReviewButton.setText(getString(R.string.artist_already_reviewed));
             }
         });
     }

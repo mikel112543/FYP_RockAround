@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,8 +40,6 @@ import com.example.rockaroundapp.viewmodel.DiscoverViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
-
 public class DiscoverFragment extends Fragment implements ArtistListener, VenueListener {
 
     private BottomNavigationView bottomNavigationView;
@@ -55,13 +52,12 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
-    private int storedFilter = 0;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         assert getArguments() != null;
         userType = getArguments().getString("userType");
@@ -72,7 +68,7 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         bottomNavigationView.setVisibility(View.VISIBLE);
         toolbar.setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
-        toolbar.inflateMenu(R.menu.toolbar_menu);
+        toolbar.inflateMenu(R.menu.discover_toolbar_menu);
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -87,7 +83,7 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu);
+        inflater.inflate(R.menu.discover_toolbar_menu, menu);
 
         MenuItem item = menu.findItem(R.id.filter);
         Spinner spinner = (Spinner) item.getActionView();
@@ -99,19 +95,8 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         spinner.setOnItemSelectedListener(spinnerListener);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.logout) {
-            auth.signOut();
-            navController.navigate(R.id.loginFragment);
-            recyclerView.setVisibility(View.INVISIBLE);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void initRecycler(String userType) {
-        if (userType.equalsIgnoreCase("solo")|| userType.equalsIgnoreCase("group")) {
+        if (userType.equalsIgnoreCase("solo") || userType.equalsIgnoreCase("group")) {
             toolbar.setTitle("Explore Venues");
             venueAdapter = new VenueAdapter(this);
             venueAdapter.setStateRestorationPolicy(PREVENT_WHEN_EMPTY);
@@ -167,8 +152,8 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     private final AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            // position 0 - Ascending
-            // position 1 - Descending
+            // position 0 - Descending
+            // position 1 - Ascending
             // position 2 - Rating (High - low)
             // position 3 - Rating (Low - high)
             viewModel.sortList(position, userType);

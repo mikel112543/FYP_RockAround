@@ -156,7 +156,6 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@id/genres_textInputLayout"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 android:background="@drawable/edit_text_background"
@@ -173,13 +172,13 @@
                     android:inputType="number"
                     android:text="@={soloSetupViewModel.price}" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
-                android:id="@+id/gridView_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:text="@string/per_hour"
+                app:layout_constraintStart_toEndOf="@id/price_text"
+                app:layout_constraintBottom_toBottomOf="@id/price_text"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_button"

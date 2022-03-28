@@ -84,10 +84,10 @@ public class ArtistRepository {
     }
 
     public void sortList(int orderPosition) {
-        if (orderPosition == 0) { //Ascending
-            Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
-        } else if (orderPosition == 1) { //Descending
+        if (orderPosition == 0) { //Descending
             Collections.sort(artistList, Comparator.comparing(Artist::getStageName).reversed());
+        } else if (orderPosition == 1) { //Ascending
+            Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
         } else if (orderPosition == 2) { //Rating (High - low)
             Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
         } else { //Rating (Low - high)

@@ -18,7 +18,7 @@
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button.xml" value="0.5574358974358974" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/drawable/pill_button_outline.xml" value="0.1235" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/artist_card.xml" value="0.22" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/artist_card.xml" value="0.5" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_account.xml" value="0.1641025641025641" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_artist_explore.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_artist_profile.xml" value="0.33" />
@@ -30,7 +30,7 @@
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_profile.xml" value="0.28061224489795916" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_register.xml" value="0.16452991452991453" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_setup.xml" value="0.16" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_setup.xml" value="0.25" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_user_reviews.xml" value="0.18" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_explore.xml" value="0.2565217391304348" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_profile.xml" value="0.22" />

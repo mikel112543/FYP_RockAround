@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_reviews_too_see_here">No Reviews</string>
+    <string name="per_hour">per hour</string>
+    <string name="logout">Logout</string>
+    <string name="artist_already_reviewed">Artist already reviewed</string>
 
     <string-array name="genres">
         <item>Jazz</item>
@@ -22,8 +25,8 @@
     </string-array>
 
     <string-array name="filters">
-        <item>Ascending</item>
         <item>Descending</item>
+        <item>Ascending</item>
         <item>Rating (High-low)</item>
         <item>Rating (Low-high)</item>
     </string-array>
