@@ -28,6 +28,7 @@ public class UserRepository {
     private final MutableLiveData<String> loginFailureMsg;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String failedRegistration;
+    private final String currentId = FirebaseAuth.getInstance().getUid();;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
     private HashMap<String, Object> userData;
@@ -72,7 +73,7 @@ public class UserRepository {
     public void loginUser(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                findByUserType(Objects.requireNonNull(auth.getCurrentUser()).getUid());
+                findUserType(Objects.requireNonNull(auth.getCurrentUser()).getUid());
             } else {
                 loginSuccess.postValue(false);
             }
@@ -124,7 +125,7 @@ public class UserRepository {
                 });
     }
 
-    public MutableLiveData<String> findByUserType(String userId) {
+    public MutableLiveData<String> findUserType(String userId) {
         documentReference = db.collection("solo").document(userId);
         documentReference.addSnapshotListener((snapshot, e) -> {
             if (e != null) {

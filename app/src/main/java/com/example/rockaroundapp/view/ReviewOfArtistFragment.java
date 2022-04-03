@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class ReviewOfArtistFragment extends Fragment {
     private Drawable starOutline;
     private String artistId;
     private String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -192,6 +194,130 @@ public class ReviewOfArtistFragment extends Fragment {
                 binding.stagePresenceS5.setBackground(starOutline);
         }
     }
+
+    /*private void setRatings(View view) {
+        if(view.getId() == R.id.communication_s1) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "communication");
+        }else if(view.getId() == R.id.communication_s2) {
+            setStar2(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "communication");
+        }else if(view.getId() == R.id.communication_s3) {
+            setStar3(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "communication");
+        }else if(view.getId() == R.id.communication_s4) {
+            setStar4(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "communication");
+        }else if(view.getId() == R.id.communication_s5) {
+            setStar5(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "communication");
+        }else if(view.getId() == R.id.vocals_s1) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "vocals");
+        }else if(view.getId() == R.id.vocals_s2) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "vocals");
+        }else if(view.getId() == R.id.vocals_s3) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "vocals");
+        }else if(view.getId() == R.id.vocals_s4) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "vocals");
+        }else if(view.getId() == R.id.vocals_s5) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "vocals");
+        }else if(view.getId() == R.id.reliability_s1) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "reliability");
+        }else if(view.getId() == R.id.reliability_s2) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "reliability");
+        }else if(view.getId() == R.id.reliability_s3) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "reliability");
+        }else if(view.getId() == R.id.reliability_s4) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "reliability");
+        }else if(view.getId() == R.id.reliability_s5) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "reliability");
+        }else if(view.getId() == R.id.stage_presence_s1) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "stagePresence");
+        }else if(view.getId() == R.id.stage_presence_s2) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "stagePresence");
+        }else if(view.getId() == R.id.stage_presence_s3) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "stagePresence");
+        }else if(view.getId() == R.id.stage_presence_s4) {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "stagePresence");
+        }else {
+            setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, "stagePresence");
+        }
+}
+
+    private void setStar1(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, String ratingType) {
+        if (star1.getBackground() == filledStar && star2.getBackground() == starOutline) {
+            //mViewModel.setVocalsRating(0);
+            star1.setBackground(starOutline);
+        } else {
+            mViewModel.setVocalsRating(1);
+            star1.setBackground(filledStar);
+            star2.setBackground(starOutline);
+            star3.setBackground(starOutline);
+            star4.setBackground(starOutline);
+            star5.setBackground(starOutline);
+        }
+    }
+
+    private void setStar2(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, String ratingType) {
+        if (star2.getBackground() == filledStar && star3.getBackground() == starOutline) {
+            //mViewModel.setVocalsRating(0);
+            star1.setBackground(starOutline);
+            star2.setBackground(starOutline);
+        } else {
+            mViewModel.setVocalsRating(2);
+            star1.setBackground(filledStar);
+            star2.setBackground(filledStar);
+            star3.setBackground(starOutline);
+            star4.setBackground(starOutline);
+            star5.setBackground(starOutline);
+        }
+    }
+
+    private void setStar3(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, String ratingType) {
+        if (star3.getBackground() == filledStar && star4.getBackground() == starOutline) {
+            mViewModel.setVocalsRating(0);
+            star1.setBackground(starOutline);
+            star2.setBackground(starOutline);
+            star3.setBackground(starOutline);
+        } else {
+            mViewModel.setVocalsRating(3);
+            star1.setBackground(filledStar);
+            star2.setBackground(filledStar);
+            star3.setBackground(filledStar);
+            star4.setBackground(starOutline);
+            star5.setBackground(starOutline);
+        }
+    }
+
+    private void setStar4(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, String ratingType) {
+        if (star4.getBackground() == filledStar && star5.getBackground() == starOutline) {
+            mViewModel.setVocalsRating(0);
+            star1.setBackground(starOutline);
+            star2.setBackground(starOutline);
+            star3.setBackground(starOutline);
+            star4.setBackground(starOutline);
+        } else {
+            mViewModel.setVocalsRating(4);
+            star1.setBackground(filledStar);
+            star2.setBackground(filledStar);
+            star3.setBackground(filledStar);
+            star4.setBackground(filledStar);
+            star5.setBackground(starOutline);
+        }
+    }
+
+    private void setStar5(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, String ratingType) {
+        if (star4.getBackground() == filledStar) {
+            mViewModel.setVocalsRating(0);
+            star1.setBackground(starOutline);
+            star2.setBackground(starOutline);
+            star3.setBackground(starOutline);
+            star4.setBackground(starOutline);
+            star5.setBackground(starOutline);
+        } else {
+            mViewModel.setVocalsRating(5);
+            star1.setBackground(filledStar);
+            star2.setBackground(filledStar);
+            star3.setBackground(filledStar);
+            star4.setBackground(filledStar);
+            star5.setBackground(filledStar);
+        }
+    }*/
 
     private void vocalsRatingOnClick(View view) {
         switch (view.getId()) {

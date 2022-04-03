@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.model.Venue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -19,6 +20,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -97,6 +100,7 @@ public class VenueRepository {
                 for (DocumentSnapshot document : snapshot) {
                     Venue venue = document.toObject(Venue.class);
                     assert venue != null;
+                    venue.setAddressMap((HashMap<String, Object>) document.get("address"));
                     if (!Objects.equals(currentUiD, venue.getId())) {
                         venueList.add(venue);
                     }
@@ -104,6 +108,19 @@ public class VenueRepository {
                 venueListMutable.postValue(venueList);
             }
         });
+    }
+
+    public void sortList(int orderPosition) {
+        if (orderPosition == 0) { //Descending
+            Collections.sort(venueList, Comparator.comparing(Venue::getVenueName).reversed());
+        } else if (orderPosition == 1) { //Ascending
+            Collections.sort(venueList, Comparator.comparing(Venue::getVenueName));
+        } else if (orderPosition == 2) { //Rating (High - low)
+            //Collections.sort(venueList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
+        } else { //Rating (Low - high)
+            //Collections.sort(venueList, Comparator.comparing(Artist::getAvgOverallRating));
+        }
+        venueListMutable.postValue(venueList);
     }
 
     public LiveData<Venue> findById(String venueId) {

@@ -53,7 +53,7 @@ public class ReviewOfArtistViewModel extends ViewModel {
     }
 
     public MutableLiveData<String> getUserType(String userId) {
-        return userRepository.findByUserType(userId);
+        return userRepository.findUserType(userId);
     }
 
     public MutableLiveData<String> getReviewTitle() {

@@ -52,16 +52,20 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
     public AppBarConfiguration configuration;
     private NavController navController;
     private Parcelable state;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private LinearLayoutManager layoutManager;
     private String userType;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        assert getArguments() != null;
         userType = getArguments().getString("userType");
+        //assert getArguments() != null;
         viewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
+        viewModel.getCurrentUserType().observe(getViewLifecycleOwner(), currentType -> {
+            userType = currentType;
+            initRecycler(userType);
+        });
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navbar);
         toolbar = requireActivity().findViewById(R.id.main_toolbar);
         recyclerView = requireActivity().findViewById(R.id.rv_main);
@@ -77,7 +81,6 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         recyclerView.setVisibility(View.VISIBLE);
         layoutManager.onRestoreInstanceState(state);
         configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
-        initRecycler(userType);
         return view;
     }
 

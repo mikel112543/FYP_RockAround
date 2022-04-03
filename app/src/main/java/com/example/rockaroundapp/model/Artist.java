@@ -283,7 +283,7 @@ public class Artist extends User {
 
     public TextDrawable getDefaultProfiler() {
         ColorGenerator generator = ColorGenerator.MATERIAL;
-        if (stageName.isEmpty()) {
+        if (stageName == null || stageName.isEmpty()) {
             return TextDrawable.builder().buildRect(String.valueOf(getFirstname().charAt(0)), generator.getRandomColor());
         }
         return TextDrawable.builder().buildRect(String.valueOf(getStageName().charAt(0)), generator.getRandomColor());

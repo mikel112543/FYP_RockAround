@@ -157,7 +157,18 @@
         android:id="@+id/account"
         android:name="com.example.rockaroundapp.view.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account"/>
+        tools:layout="@layout/fragment_account">
+        <action
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_graph"
+            android:id="@+id/action_account_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <argument
+        android:name="currentUserType"
+        app:argType="string"
+        android:defaultValue="userType" />
     <fragment
         android:id="@+id/venueProfileFragment"
         android:name="com.example.rockaroundapp.view.VenueProfileFragment"

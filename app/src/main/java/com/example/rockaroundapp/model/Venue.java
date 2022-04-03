@@ -1,5 +1,6 @@
 package com.example.rockaroundapp.model;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -96,6 +97,9 @@ public class Venue extends User{
         address.put("country", country);
     }
 
+    public void setAddressMap(Map<String, Object> map) {
+        this.address = map;
+    }
 
     public void setCounty(String county) {
         this.county = county;
