@@ -56,6 +56,9 @@ public class AccountFragment extends Fragment {
         starFilled = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_rate_50);
         starOutline = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_outline_24);
         halfStar = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_half_24);
+        viewModel.getUserType().observe(getViewLifecycleOwner(), userType -> {
+            currentUserType = userType;
+        });
         if (currentUserType.equalsIgnoreCase("solo")) {
             FragmentArtistProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_profile, container, false);
             binding.setLifecycleOwner(this);
@@ -98,6 +101,7 @@ public class AccountFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
             auth.signOut();
             navController.navigate(R.id.action_account_to_loginFragment);
         }

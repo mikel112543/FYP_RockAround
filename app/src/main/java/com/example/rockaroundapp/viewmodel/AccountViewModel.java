@@ -21,14 +21,16 @@ public class AccountViewModel extends ViewModel {
 
     private MutableLiveData<String> userType;
     private UserRepository repository;
-    private String currentUid = FirebaseAuth.getInstance().getUid();
+    private String currentUid = FirebaseAuth.getInstance().getUid();;
 
     public AccountViewModel() {
         repository = new UserRepository();
         userType = new MutableLiveData<>();
+
     }
 
     public MutableLiveData<String> getUserType() {
+         currentUid = FirebaseAuth.getInstance().getUid();
         return repository.findUserType(currentUid);
     }
 

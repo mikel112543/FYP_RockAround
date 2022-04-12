@@ -68,8 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setVisibility(View.INVISIBLE);
                 toolbar.setTitle("Account");
             } else if (destination.getId() == R.id.discover) {
-                getCurrentUserType();
+                if(currentUserType == null) {
+                    getCurrentUserType();
+                }
             } else if(destination.getId() == R.id.loginFragment) {
+                currentUserType = null;
                 recyclerView.setVisibility(View.INVISIBLE);
             }
         });
