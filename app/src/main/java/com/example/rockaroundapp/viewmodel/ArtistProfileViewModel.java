@@ -5,25 +5,41 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Artist;
+import com.example.rockaroundapp.model.ArtistReview;
 import com.example.rockaroundapp.model.GroupArtist;
+import com.example.rockaroundapp.model.Venue;
 import com.example.rockaroundapp.repository.ArtistRepository;
+import com.example.rockaroundapp.repository.ArtistReviewsRepository;
+import com.example.rockaroundapp.repository.VenueRepository;
+
+import java.util.List;
 
 public class ArtistProfileViewModel extends ViewModel {
 
     private ArtistRepository repository;
+    private ArtistReviewsRepository reviewsRepository;
 
     public ArtistProfileViewModel() {
         repository = new ArtistRepository();
+        reviewsRepository = new ArtistReviewsRepository();
     }
 
-    public LiveData<Artist> getSoloArtist(String id) {
-        return repository.findSoloById(id);
+    public LiveData<Artist> getSoloArtist(String artistId) {
+        return repository.findSoloById(artistId);
     }
 
-    public LiveData<GroupArtist> getGroupArtist(String id){
-        return repository.findByGroupId(id);
+    public LiveData<GroupArtist> getGroupArtist(String artistId){
+        return repository.findByGroupId(artistId);
     }
 
-    public LiveData<Boolean> alreadyReviewed(String userId) { return repository.alreadyReviewed(userId, "venue");}
+    public LiveData<Boolean> alreadyReviewed(String artistId) { return repository.alreadyReviewed(artistId, "venue");}
+
+    public LiveData<List<ArtistReview>> getReviews(String artistId, int position) {
+        return reviewsRepository.getSortedReviews(artistId, position);
+    }
+
+    public LiveData<Venue> getReviewer(String venueId) {
+        return new VenueRepository().findById(venueId);
+    }
 }
 
