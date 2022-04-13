@@ -50,8 +50,6 @@ Papp/src/main/java/com/example/rockaroundapp/repository/GroupSetupRepository.jav
 Papp/src/main/java/com/example/rockaroundapp/viewmodel/VenueReviewsViewModel.java,b\f\bfa90d91cf87f4d05de0dfbafa4e96e59040b42a
 }
 Mapp/src/main/java/com/example/rockaroundapp/viewmodel/SoloSetupViewModel.java,6\0\60f9402e84eecda3fe0ca6069ee9e65e3bdd8b0d
-w
-Gapp/src/main/java/com/example/rockaroundapp/view/SoloSetupFragment.java,0\8\0810a6e005b102b97437ac2c469d8d807e5ceccb
 l
 <app/src/main/java/com/example/rockaroundapp/model/Event.java,5\c\5c23eaa35485ca20b2d4b57b1e45e4f719fae50e
 s

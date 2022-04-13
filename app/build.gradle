@@ -90,6 +90,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
     implementation group: 'log4j', name: 'log4j', version: '1.2.16'
+    implementation 'pub.devrel:easypermissions:3.0.0'
 
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
