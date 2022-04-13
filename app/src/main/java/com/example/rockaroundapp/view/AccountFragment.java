@@ -87,7 +87,7 @@ public class AccountFragment extends Fragment {
         toolbar = requireActivity().findViewById(R.id.main_toolbar);
         setHasOptionsMenu(true);
         toolbar.inflateMenu(R.menu.account_toolbar_menu);
-        configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.map1, R.id.account).build();
+        configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.mapsFragment, R.id.account).build();
         return view;
     }
 

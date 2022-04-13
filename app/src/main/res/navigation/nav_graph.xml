@@ -187,4 +187,9 @@
         android:name="com.example.rockaroundapp.view.UserReviewsFragment"
         android:label="fragment_user_reviews"
         tools:layout="@layout/fragment_user_reviews" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.rockaroundapp.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps"/>
 </navigation>

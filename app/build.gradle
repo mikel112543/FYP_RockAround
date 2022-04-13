@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs'
     id "org.sonarqube" version "3.3"
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 apply plugin: 'kotlin-android'
 
@@ -62,6 +63,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
 
     def lifecycle_version = "2.4.0"
     def nav_version = "2.4.1"

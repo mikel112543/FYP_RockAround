@@ -17,8 +17,6 @@ Aapp/src/main/java/com/example/rockaroundapp/dao/VenueDaoImpl.java,f\1\f1d34102
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
@@ -42,8 +40,6 @@ v
 Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22dc1234d1878e5ef068cbaf6fdfa5d13bb2dfbc
 m
 =app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 K
 .github/workflows/build.yml,f\e\fe77d5d1439f26e353a42bbd38dece2467ff6558
 X
@@ -74,8 +70,6 @@ Kapp/src/main/java/com/example/rockaroundapp/repository/VenueRepository.java,4\
 Napp/src/main/java/com/example/rockaroundapp/viewmodel/VenueSetupViewModel.java,8\b\8b4795ed8c138810c0ef1ede65f42c8271445459
 m
 =app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 {
 Kapp/src/main/java/com/example/rockaroundapp/view/ReviewOfVenueFragment.java,8\f\8f80ac1a1f8583cdc16a5d9aac478d27df36b129
 v

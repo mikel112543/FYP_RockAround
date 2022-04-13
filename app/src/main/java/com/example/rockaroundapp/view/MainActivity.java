@@ -46,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.discover1) {
+            if (item.getItemId() == R.id.discover_btn) {
                 Bundle bundle = new Bundle();
                 bundle.putString("userType", getCurrentUserType());
                 navController.navigate(R.id.discover, bundle);
-            } else if (item.getItemId() == R.id.account1) {
+            } else if (item.getItemId() == R.id.account_btn) {
                 Bundle bundle = new Bundle();
                 bundle.putString("currentUserType", currentUserType);
                 navController.navigate(R.id.account, bundle);
+            }else{
+                navController.navigate(R.id.mapsFragment);
             }
             return true;
         });
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
             } else if(destination.getId() == R.id.loginFragment) {
                 currentUserType = null;
                 recyclerView.setVisibility(View.INVISIBLE);
+            }else if(destination.getId() == R.id.mapsFragment) {
+                recyclerView.setVisibility(View.INVISIBLE);
+                toolbar.setTitle("Map");
             }
         });
 

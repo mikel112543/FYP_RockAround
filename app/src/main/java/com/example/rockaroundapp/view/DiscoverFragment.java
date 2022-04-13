@@ -76,7 +76,7 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         View view = binding.getRoot();
         recyclerView.setVisibility(View.VISIBLE);
         layoutManager.onRestoreInstanceState(state);
-        configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.account).build();
+        configuration = new AppBarConfiguration.Builder(R.id.discover, R.id.mapsFragment, R.id.account).build();
         initRecycler(userType);
         return view;
     }

@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/discover1"
+        android:id="@+id/discover_btn"
         android:title="Discover"
         android:orderInCategory="1"
         android:icon="@drawable/ic_baseline_search_24" />
 
     <item
-        android:id="@+id/map1"
+        android:id="@+id/map_btn"
         android:title="Map"
         android:orderInCategory="2"
         android:icon="@drawable/ic_baseline_location_on_24"/>
 
     <item
-        android:id="@+id/account1"
+        android:id="@+id/account_btn"
         android:title="Account"
         android:orderInCategory="2"
         android:icon="@drawable/ic_baseline_account_circle_24"/>
