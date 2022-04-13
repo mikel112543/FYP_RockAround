@@ -66,8 +66,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'androidx.appcompat:appcompat:1.4.1'
 
-    def lifecycle_version = "2.4.0"
-    def nav_version = "2.4.1"
+    def lifecycle_version = "2.4.1"
+    def nav_version = "2.4.2"
     def arch_version = "2.1.0"
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
