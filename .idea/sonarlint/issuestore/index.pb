@@ -40,8 +40,6 @@ v
 Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22dc1234d1878e5ef068cbaf6fdfa5d13bb2dfbc
 m
 =app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
-K
-.github/workflows/build.yml,f\e\fe77d5d1439f26e353a42bbd38dece2467ff6558
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 €
@@ -58,8 +56,6 @@ w
 Gapp/src/main/java/com/example/rockaroundapp/adapters/ArtistAdapter.java,7\d\7d48225c4929f56e50ce823b3dbddeebdea8ed53
 k
 ;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
-z
-Japp/src/main/java/com/example/rockaroundapp/view/VenueProfileFragment.java,6\1\61890eb1d5e372ee44692f364351ffea1d8c6f69
 l
 <app/src/main/java/com/example/rockaroundapp/model/Venue.java,3\b\3bf0d546b5007f3aefe8b55bfca7538b8def5b8d
 {
