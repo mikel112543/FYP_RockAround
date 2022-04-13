@@ -4,11 +4,11 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.model.ArtistReview;
-import com.example.rockaroundapp.model.Review;
 import com.example.rockaroundapp.model.Venue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -16,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -126,19 +128,36 @@ public class ArtistReviewsRepository {
         });
     }
 
+    public void sortList(int orderPosition) {
+        if (orderPosition == 0) { //Descending
+            Collections.sort(artistReviews, Comparator.comparing(ArtistReview::getDate).reversed());
+        } else if (orderPosition == 1) { //Ascending
+            Collections.sort(artistReviews, Comparator.comparing(ArtistReview::getDate));
+        } else if (orderPosition == 2) { //Rating (High - low)
+            Collections.sort(artistReviews, Comparator.comparing(ArtistReview::getOverallRating).reversed());
+        } else { //Rating (Low - high)
+            Collections.sort(artistReviews, Comparator.comparing(ArtistReview::getOverallRating));
+        }
+        _artistReviews.postValue(artistReviews);
+    }
+
     //Return all reviews for either solo or group artist
-    public MutableLiveData<List<ArtistReview>> getAllReviews(String artistId) {
-        artistReviews.clear();
+    public MutableLiveData<List<ArtistReview>> getSortedReviews(String artistId, int position) {
         db.collection("solo").document(artistId).collection("reviews").addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.w(TAG, "Failed to get reviews for solo artist");
             }
             if (snapshot != null) {
                 if (!snapshot.isEmpty()) {
+                    artistReviews.clear();
                     for (DocumentSnapshot documentSnapshot : snapshot) {
                         artistReviews.add(documentSnapshot.toObject(ArtistReview.class));
                     }
+                    if(position <= 3) {
+                        sortList(position);
+                    }
                     _artistReviews.postValue(artistReviews);
+                    //_artistReviews.postValue(artistReviews);
                 } else {
                     db.collection("group").document(artistId).collection("reviews").addSnapshotListener((snapshot1, e1) -> {
                         if (e1 != null) {
@@ -146,8 +165,12 @@ public class ArtistReviewsRepository {
                         }
                         if (snapshot1 != null) {
                             if (!snapshot1.isEmpty()) {
+                                artistReviews.clear();
                                 for (DocumentSnapshot documentSnapshot : snapshot1) {
                                     artistReviews.add(documentSnapshot.toObject(ArtistReview.class));
+                                }
+                                if(position <= 3) {
+                                    sortList(position);
                                 }
                                 _artistReviews.postValue(artistReviews);
                             }
