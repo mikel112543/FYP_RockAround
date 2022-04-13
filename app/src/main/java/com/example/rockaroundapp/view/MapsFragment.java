@@ -59,6 +59,8 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             if(checkPermissions()) {
+                //TODO Get all artists/venues and place markers for the location
+                //TODO Place markers for each location
                 LatLng currentLocation = new LatLng(deviceLat, deviceLong);
                 locationMarker = googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
