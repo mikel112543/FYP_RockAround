@@ -17,8 +17,6 @@ Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 r
-Bapp/src/main/java/com/example/rockaroundapp/model/VenueReview.java,0\3\034e0472f69eab81a891e774f56737726b5aa573
-r
 Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
 r
 Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad58b4bdb90d96d55b01cadebe8f908e4e41
@@ -26,10 +24,6 @@ u
 Eapp/src/main/java/com/example/rockaroundapp/util/BindingAdapters.java,d\2\d23cec313d126cc82a031e9765c2118c0b6fa878
 y
 Iapp/src/main/java/com/example/rockaroundapp/listeners/ArtistListener.java,8\1\8132a8a8c5838e3413af69684b274de332f42a9f
-v
-Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22dc1234d1878e5ef068cbaf6fdfa5d13bb2dfbc
-m
-=app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 €
@@ -38,8 +32,6 @@ Papp/src/main/java/com/example/rockaroundapp/repository/GroupSetupRepository.jav
 Mapp/src/main/java/com/example/rockaroundapp/viewmodel/SoloSetupViewModel.java,6\0\60f9402e84eecda3fe0ca6069ee9e65e3bdd8b0d
 l
 <app/src/main/java/com/example/rockaroundapp/model/Event.java,5\c\5c23eaa35485ca20b2d4b57b1e45e4f719fae50e
-s
-Capp/src/main/java/com/example/rockaroundapp/model/ArtistReview.java,f\d\fd8b59a129963d9bdc8cb076045ffb141e52acda
 k
 ;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
 {
@@ -62,8 +54,6 @@ z
 Japp/src/main/java/com/example/rockaroundapp/repository/UserRepository.java,3\9\39a66985332ff732d1bbad9716158df229de1b1a
 
 Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
-|
-Lapp/src/main/java/com/example/rockaroundapp/repository/ArtistRepository.java,7\7\778859166ecefd4468024f2c9a7ebf0ba5f76a58
 v
 Fapp/src/main/java/com/example/rockaroundapp/view/DiscoverFragment.java,f\5\f59935573a8e40c58f30d70a44e32f4fd3940228
 @
@@ -74,3 +64,25 @@ K
 .github/workflows/build.yml,f\e\fe77d5d1439f26e353a42bbd38dece2467ff6558
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+{
+Kapp/src/main/java/com/example/rockaroundapp/viewmodel/AccountViewModel.java,0\c\0c42e03061d767b8119395079d7412eb3581490e
+~
+Napp/src/main/java/com/example/rockaroundapp/viewmodel/GroupSetupViewModel.java,2\c\2c36feb1fe5d2cdd3a5db345b8d7f362013f9b6c
+y
+Iapp/src/main/java/com/example/rockaroundapp/viewmodel/LoginViewModel.java,c\f\cfd372fae6ab20229a5103d0c215d4bab8f54a2d
+s
+Capp/src/main/java/com/example/rockaroundapp/view/LoginFragment.java,a\5\a5b0f56a5d40e9732d37124a90e8e7da41313364
+|
+Lapp/src/main/java/com/example/rockaroundapp/viewmodel/RegisterViewModel.java,9\e\9ec52f224ce54860558ef08b34f769d016423c04
+v
+Fapp/src/main/java/com/example/rockaroundapp/constants/RatingsEnum.java,8\c\8c432cb6d3755532dd7d8b76bb47c21b5483bf68
+m
+=app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
+r
+Bapp/src/main/java/com/example/rockaroundapp/view/MapsFragment.java,1\b\1bd72e37abb3cb323aa7481b9aa35637b601da5a
+y
+Iapp/src/main/java/com/example/rockaroundapp/view/UserReviewsFragment.java,6\d\6defc111dd969e55f963c073a8d34804b6f44978
+s
+Capp/src/main/java/com/example/rockaroundapp/model/ArtistReview.java,f\d\fd8b59a129963d9bdc8cb076045ffb141e52acda
+m
+=app/src/main/java/com/example/rockaroundapp/model/Review.java,d\7\d7c3d2d2050dcbf233b78cf2dd839aabd5d9909d

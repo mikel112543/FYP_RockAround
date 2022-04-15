@@ -135,7 +135,7 @@
                         android:background="@drawable/ic_baseline_star_outline_24" />
 
                     <ImageView
-                        android:id="@+id/start5"
+                        android:id="@+id/star5"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/ic_baseline_star_outline_24" />

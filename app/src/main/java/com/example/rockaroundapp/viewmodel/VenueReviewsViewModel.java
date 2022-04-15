@@ -11,9 +11,8 @@ public class VenueReviewsViewModel extends ViewModel {
 
     private final VenueReviewsRepository reviewsRepository;
     private final UserRepository userRepository;
-    private MutableLiveData<String> reviewTitle;
-    private MutableLiveData<String> reviewDescription;
-    private VenueReview review;
+    private final MutableLiveData<String> reviewTitle;
+    private final MutableLiveData<String> reviewDescription;
     private MutableLiveData<VenueReview> _venueReview;
     private MutableLiveData<Boolean> success;
     private int atmosphereRating;
@@ -21,14 +20,13 @@ public class VenueReviewsViewModel extends ViewModel {
     private int communicationRating;
     private int reliabilityRating;
 
-    //TODO Linkup Reviews with LiveData and Repo
-
     public VenueReviewsViewModel() {
         reviewsRepository = new VenueReviewsRepository();
         userRepository = new UserRepository();
-        reviewTitle = new MutableLiveData<>();
-        reviewDescription = new MutableLiveData<>();
+        reviewTitle = new MutableLiveData<>("");
+        reviewDescription = new MutableLiveData<>("");
         _venueReview = new MutableLiveData<>();
+        success = reviewsRepository.getSuccess();
     }
 
     public MutableLiveData<String> getReviewTitle() {
@@ -39,11 +37,10 @@ public class VenueReviewsViewModel extends ViewModel {
         return reviewDescription;
     }
 
-    public VenueReview getReview() {
-        return review;
-    }
-
     public MutableLiveData<VenueReview> get_venueReview() {
+        if(_venueReview == null) {
+            _venueReview = new MutableLiveData<>();
+        }
         return _venueReview;
     }
 
@@ -68,5 +65,17 @@ public class VenueReviewsViewModel extends ViewModel {
     }
 
     public void onSubmitClick() {
+        VenueReview review = new VenueReview();
+        review.setTitle(reviewTitle.getValue());
+        review.setDescription(reviewDescription.getValue());
+        review.setCommunicationRating(communicationRating);
+        review.setReliabilityRating(reliabilityRating);
+        review.setSettingRating(settingRating);
+        review.setAtmosphereRating(atmosphereRating);
+        _venueReview.postValue(review);
+    }
+
+    public void saveReview(VenueReview venueReview) {
+        reviewsRepository.saveVenueReview(venueReview);
     }
 }

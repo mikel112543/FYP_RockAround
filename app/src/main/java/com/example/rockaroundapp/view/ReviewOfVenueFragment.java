@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentReviewOfVenueBinding;
@@ -25,19 +28,24 @@ public class ReviewOfVenueFragment extends Fragment {
 
     private VenueReviewsViewModel mViewModel;
     private FragmentReviewOfVenueBinding binding;
+    private NavController navController;
     private Drawable starOutline;
     private Drawable filledStar;
+    private String venueId;
     private final String currentUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         assert getArguments() != null;
-        getArguments().getString("venueId");
+        venueId = getArguments().getString("venueId");
         filledStar = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_rate_50);
         starOutline = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_outline_24);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_review_of_venue, container, false);
         mViewModel = new ViewModelProvider(this).get(VenueReviewsViewModel.class);
+        binding.setViewModel(mViewModel);
+        binding.setLifecycleOwner(this);
+        observe();
         return binding.getRoot();
     }
 
@@ -48,6 +56,17 @@ public class ReviewOfVenueFragment extends Fragment {
             }
             if (binding.reviewDescription.getText().toString().isEmpty()) {
                 binding.reviewDescription.setError("Please write a review");
+            }
+            if (!(binding.reviewTitle.getText().toString().isEmpty() && binding.reviewDescription.getText().toString().isEmpty())) {
+                venueReview.setReviewerId(currentUid);
+                venueReview.setReviewedId(venueId);
+                mViewModel.saveReview(venueReview);
+            }
+        });
+        mViewModel.getSuccess().observe(getViewLifecycleOwner(), success -> {
+            if(Boolean.TRUE.equals(success)) {
+                Toast.makeText(getActivity(), "Review successful", Toast.LENGTH_SHORT).show();
+                navController.navigateUp();
             }
         });
     }
@@ -78,8 +97,16 @@ public class ReviewOfVenueFragment extends Fragment {
         binding.reliabilityS4.setOnClickListener(this::setRatings);
         binding.reliabilityS5.setOnClickListener(this::setRatings);
 
+        //binding.saveButton.setOnClickListener(this::saveReview);
+
+        navController = Navigation.findNavController(view);
+
         super.onViewCreated(view, savedInstanceState);
     }
+
+  /*  public void saveReview(View view) {
+        mViewModel.onSubmitClick();
+    }*/
 
     enum type {
         COMMUNICATION,

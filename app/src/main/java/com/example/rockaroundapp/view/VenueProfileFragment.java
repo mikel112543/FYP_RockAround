@@ -27,8 +27,6 @@ import com.mysql.cj.util.StringUtils;
 
 import java.util.Objects;
 
-import io.reactivex.rxjava3.observers.ResourceCompletableObserver;
-
 public class VenueProfileFragment extends Fragment {
 
     private FragmentVenueProfileBinding binding;
@@ -55,12 +53,23 @@ public class VenueProfileFragment extends Fragment {
         assert getArguments() != null;
         id = getArguments().getString("id");
         binding.setLifecycleOwner(this);
+        checkIsReviewed();
         observeVenue();
         return view;
     }
 
+    private void checkIsReviewed() {
+        viewModel.getAlreadyReviewed(id).observe(getViewLifecycleOwner(), alreadyReviewed -> {
+            if (alreadyReviewed) {
+                binding.writeReviewButton.setEnabled(false);
+                binding.writeReviewButton.setText(getString(R.string.venue_already_reviewed));
+            }
+        });
+    }
+
     private void observeVenue() {
         viewModel.getVenue(id).observe(getViewLifecycleOwner(), venue -> {
+            mapAllStars(venue);
             binding.setVenueModel(venue);
             if (StringUtils.isEmptyOrWhitespaceOnly(venue.getProfileImg())) {
                 Drawable orgProfile = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_account_circle_24, null);
@@ -85,7 +94,7 @@ public class VenueProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void mapAllStart(Venue venue) {
+    private void mapAllStars(Venue venue) {
         mapRating(binding.atmosphereS1, binding.atmosphereS2, binding.atmosphereS3, binding.atmosphereS4, binding.atmosphereS5, venue.getAvgAtmosphereRating());
         mapRating(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, venue.getAvgCommunicationRating());
         mapRating(binding.reliabilityS1, binding.reliabilityS2, binding.reliabilityS3, binding.reliabilityS4, binding.reliabilityS5, venue.getAvgReliabilityRating());
@@ -100,35 +109,36 @@ public class VenueProfileFragment extends Fragment {
             star3.setBackground(starOutline);
             star4.setBackground(starOutline);
             star5.setBackground(starOutline);
-        }else {
-            if(rating <= 0.50) {
+        } else {
+            if (rating <= 0.50) {
                 star1.setBackground(halfStar);
             }
-            if(rating > 0.50) {
+            if (rating > 0.50) {
                 star1.setBackground(starFilled);
             }
-            if(rating > 1.00 && rating <= 1.50) {
+            if (rating > 1.00 && rating <= 1.50) {
                 star2.setBackground(halfStar);
             }
-            if(rating > 1.50) {
+            if (rating > 1.50) {
                 star2.setBackground(starFilled);
             }
-            if(rating > 2.00 && rating <= 2.50) {
+            if (rating > 2.00 && rating <= 2.50) {
                 star3.setBackground(halfStar);
             }
-            if(rating > 2.50) {
+            if (rating > 2.50) {
                 star3.setBackground(starFilled);
             }
-            if(rating > 3.00 && rating <= 3.50) {
+            if (rating > 3.00 && rating <= 3.50) {
                 star4.setBackground(halfStar);
             }
-            if(rating > 3.50) {
+            if (rating > 3.50) {
                 star4.setBackground(starFilled);
             }
-            if(rating > 4.00 && rating <= 4.50) {
-                star5.setBackground(halfStar);
+            if (rating > 4.00 && rating <= 4.50) {
+                star5.setImageDrawable(halfStar);
+                //star5.setBackground(halfStar);
             }
-            if(rating > 4.50) {
+            if (rating > 4.50) {
                 star5.setBackground(starFilled);
             }
         }

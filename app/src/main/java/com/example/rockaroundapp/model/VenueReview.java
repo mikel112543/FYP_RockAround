@@ -10,12 +10,15 @@ public class VenueReview extends Review {
     private int atmosphereRating;
     private int communicationRating;
 
-    protected VenueReview(String id, String reviewTitle, String reviewDescription, String reviewerId, String reviewedId, int settingRating, int reliabilityRating, int atmosphereRating, int communicationRating) {
+    public VenueReview(String id, String reviewTitle, String reviewDescription, String reviewerId, String reviewedId, int settingRating, int reliabilityRating, int atmosphereRating, int communicationRating) {
         super(id, reviewTitle, reviewDescription, reviewerId, reviewedId);
         this.settingRating = settingRating;
         this.reliabilityRating = reliabilityRating;
         this.atmosphereRating = atmosphereRating;
         this.communicationRating = communicationRating;
+    }
+
+    public VenueReview() {
     }
 
     public int getSettingRating() {

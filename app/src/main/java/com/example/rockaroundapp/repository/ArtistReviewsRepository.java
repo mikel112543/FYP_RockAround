@@ -26,7 +26,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class ArtistReviewsRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private VenueRepository venueRepository;
     private MutableLiveData<Boolean> _success;
     private MutableLiveData<List<ArtistReview>> _artistReviews;
     private MutableLiveData<List<Venue>> _artistReviewers;
@@ -35,7 +34,6 @@ public class ArtistReviewsRepository {
     private List<Venue> artistReviewers;
 
     public ArtistReviewsRepository() {
-        venueRepository = new VenueRepository();
         _success = new MutableLiveData<>();
         _artistReviews = new MutableLiveData<>();
         _artistReviewers = new MutableLiveData<>();
@@ -63,17 +61,19 @@ public class ArtistReviewsRepository {
                     if (task.isSuccessful()) {
                         artist.set(task.getResult().toObject(Artist.class));
                         HashMap<String, Object> map = new HashMap<>();
+                        //Total Ratings
                         artist.get().setTotalCommunicationRating(artist.get().getTotalCommunicationRating() + review.getCommunicationRating());
                         artist.get().setTotalReliabilityRating(artist.get().getTotalReliabilityRating() + review.getReliabilityRating());
                         artist.get().setTotalVocalsRating(artist.get().getTotalVocalsRating() + review.getVocalsRating());
                         artist.get().setTotalStagePresenceRating(artist.get().getTotalStagePresenceRating() + review.getStagePresenceRating());
 
+                        //Avg Ratings
                         artist.get().setAvgCommunicationRating((double) artist.get().getTotalCommunicationRating() / reviewCount.get());
                         artist.get().setAvgReliabilityRating((double) artist.get().getTotalReliabilityRating() / reviewCount.get());
                         artist.get().setAvgVocalsRating((double) artist.get().getTotalVocalsRating() / reviewCount.get());
                         artist.get().setAvgStagePresenceRating((double) artist.get().getTotalStagePresenceRating() / reviewCount.get());
-                        //TODO properly calculate overall average
 
+                        //Overall Avg Rating
                         artist.get().setAvgOverallRating((artist.get().getAvgCommunicationRating() / 4) + (artist.get().getAvgVocalsRating() / 4) +
                                 (artist.get().getAvgReliabilityRating() / 4) + (artist.get().getAvgStagePresenceRating() / 4));
 

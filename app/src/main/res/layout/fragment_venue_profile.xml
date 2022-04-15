@@ -180,6 +180,7 @@
                 android:id="@+id/overall_rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating_title">
@@ -188,29 +189,39 @@
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 

@@ -14,6 +14,8 @@
     <string name="setting_rating">Setting Rating</string>
     <string name="atmosphere_rating">Atmosphere Rating</string>
     <string name="submit">Submit</string>
+    <string name="reliability_rating">Reliability Rating</string>
+    <string name="venue_already_reviewed">Venue already reviewed</string>
 
     <string-array name="genres">
         <item>Jazz</item>
@@ -39,7 +41,4 @@
         <item>Rating (Low-high)</item>
     </string-array>
 
-    <string-array name="venue_size">
-        <item></item>
-    </string-array>
 </resources>
