@@ -16,7 +16,7 @@
             app:enterAnim="@transition/enter_from_right"
             app:exitAnim="@transition/exit_to_left"
             app:popEnterAnim="@transition/enter_from_left"
-            app:popExitAnim="@transition/exit_to_right"/>
+            app:popExitAnim="@transition/exit_to_right" />
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
             app:destination="@id/discover"
@@ -56,7 +56,7 @@
         android:id="@+id/discover"
         android:name="com.example.rockaroundapp.view.DiscoverFragment"
         android:label="fragment_artist_explore"
-        tools:layout="@layout/fragment_discover" >
+        tools:layout="@layout/fragment_discover">
         <action
             android:id="@+id/action_artistExploreFragment_to_soloProfileFragment"
             app:destination="@id/artistProfile"
@@ -76,7 +76,7 @@
         android:id="@+id/soloSetupFragment"
         android:name="com.example.rockaroundapp.view.SoloSetupFragment"
         android:label="fragment_soloSetup"
-        tools:layout="@layout/fragment_solo_setup" >
+        tools:layout="@layout/fragment_solo_setup">
         <action
             android:id="@+id/action_soloSetupFragment_to_genreDialog"
             app:destination="@id/genreDialog" />
@@ -98,15 +98,15 @@
             app:destination="@id/soloSetupFragment">
             <argument
                 android:name="pickedGenres"
-                app:argType="string"
-                android:defaultValue=""/>
+                android:defaultValue=""
+                app:argType="string" />
         </action>
     </dialog>
     <fragment
         android:id="@+id/groupSetupFragment"
         android:name="com.example.rockaroundapp.view.GroupSetupFragment"
         android:label="fragment_groupSetup"
-        tools:layout="@layout/fragment_group_setup" >
+        tools:layout="@layout/fragment_group_setup">
         <action
             android:id="@+id/action_groupSetupFragment_to_exploreFragment"
             app:destination="@id/discover"
@@ -119,7 +119,7 @@
         android:id="@+id/venueSetupFragment"
         android:name="com.example.rockaroundapp.view.VenueSetupFragment"
         android:label="fragment_venueSetup"
-        tools:layout="@layout/fragment_venue_setup" >
+        tools:layout="@layout/fragment_venue_setup">
         <action
             android:id="@+id/action_venueSetupFragment_to_discover"
             app:destination="@id/discover"
@@ -132,7 +132,7 @@
         android:id="@+id/reviewOfArtistFragment"
         android:name="com.example.rockaroundapp.view.ReviewOfArtistFragment"
         android:label="fragment_reviewOfArtist"
-        tools:layout="@layout/review_of_artist_fragment"/>
+        tools:layout="@layout/review_of_artist_fragment" />
     <fragment
         android:id="@+id/artistProfile"
         android:name="com.example.rockaroundapp.view.ArtistProfileFragment"
@@ -159,16 +159,16 @@
         android:label="fragment_account"
         tools:layout="@layout/fragment_account">
         <action
-            app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/nav_graph"
             android:id="@+id/action_account_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <argument
         android:name="currentUserType"
-        app:argType="string"
-        android:defaultValue="userType" />
+        android:defaultValue="userType"
+        app:argType="string" />
     <fragment
         android:id="@+id/venueProfileFragment"
         android:name="com.example.rockaroundapp.view.VenueProfileFragment"
@@ -181,6 +181,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_venueProfileFragment_to_reviewOfVenueFragment"
+            app:destination="@id/reviewOfVenueFragment" />
     </fragment>
     <fragment
         android:id="@+id/userReviewsFragment"
@@ -191,5 +194,10 @@
         android:id="@+id/mapsFragment"
         android:name="com.example.rockaroundapp.view.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps"/>
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/reviewOfVenueFragment"
+        android:name="com.example.rockaroundapp.view.ReviewOfVenueFragment"
+        android:label="fragment_review_of_venue"
+        tools:layout="@layout/fragment_review_of_venue" />
 </navigation>

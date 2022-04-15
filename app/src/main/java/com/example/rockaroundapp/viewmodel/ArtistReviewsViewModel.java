@@ -1,6 +1,5 @@
 package com.example.rockaroundapp.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -11,9 +10,8 @@ import com.example.rockaroundapp.repository.UserRepository;
 
 import java.util.List;
 
-public class ReviewOfArtistViewModel extends ViewModel {
+public class ArtistReviewsViewModel extends ViewModel {
 
-    private ArtistReviewsRepository repository;
     private UserRepository userRepository;
     private ArtistReviewsRepository reviewsRepository;
     private MutableLiveData<String> reviewTitle;
@@ -21,21 +19,18 @@ public class ReviewOfArtistViewModel extends ViewModel {
     private ArtistReview review;
     private MutableLiveData<ArtistReview> _review;
     private MutableLiveData<Boolean> success;
-    private MutableLiveData<List<Venue>> _artistReviewers;
     private int stagePresenceRating;
     private int vocalsRating;
     private int communicationRating;
     private int reliabilityRating;
 
-    public ReviewOfArtistViewModel() {
-        repository = new ArtistReviewsRepository();
+    public ArtistReviewsViewModel() {
         userRepository = new UserRepository();
         reviewsRepository = new ArtistReviewsRepository();
         reviewTitle = new MutableLiveData<>("");
         reviewDescription = new MutableLiveData<>("");
         _review = new MutableLiveData<>();
-        _artistReviewers = new MutableLiveData<>();
-        success = repository.getSuccess();
+        success = reviewsRepository.getSuccess();
     }
 
     public MutableLiveData<ArtistReview> get_review() {
@@ -46,7 +41,7 @@ public class ReviewOfArtistViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<Venue>> get_artistReviewers(List<ArtistReview> artistReviews) {
-        return repository.getReviewersForArtist(artistReviews);
+        return reviewsRepository.getReviewersForArtist(artistReviews);
     }
 
     public void sortReviews(int order) {
@@ -97,10 +92,10 @@ public class ReviewOfArtistViewModel extends ViewModel {
     }
 
     public void submitReview(ArtistReview artistReview) {
-        repository.submitArtistReview(artistReview);
+        reviewsRepository.submitArtistReview(artistReview);
     }
 
     public MutableLiveData<List<ArtistReview>> getAllReviews(String artistId, int position) {
-        return repository.getSortedReviews(artistId, position);
+        return reviewsRepository.getSortedReviews(artistId, position);
     }
 }

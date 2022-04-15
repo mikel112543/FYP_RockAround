@@ -1,18 +1,14 @@
 package com.example.rockaroundapp.model;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.mysql.cj.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Venue extends User{
+public class Venue extends User {
 
     private String venueName;
     private int capacity;
@@ -23,13 +19,22 @@ public class Venue extends User{
     private String country;
     private String city;
     private String contactNumber;
+    private double avgCommunicationRating;
+    private double avgReliabilityRating;
+    private double avgSettingRating;
+    private double avgAtmosphereRating;
+    private int totalCommunicationRating;
+    private int totalReliabilityRating;
+    private int totalSettingRating;
+    private int totalAtmosphereRating;
+    private double avgOverallRating;
     private List<Event> events;
     private List<Event> pastEvents;
     private List<VenueReview> reviews;
     private Map<String, Object> address;
     private String userType;
     private String profileImg;
-    private final ColorGenerator generator = ColorGenerator.MATERIAL;
+    private static final ColorGenerator generator = ColorGenerator.MATERIAL;
 
     public Venue() {
         setUserType("VENUE");
@@ -114,7 +119,7 @@ public class Venue extends User{
     }
 
     public String getCity() {
-        if(!(city == null || city.isEmpty())){
+        if (!(city == null || city.isEmpty())) {
             return city;
         }
         return Objects.requireNonNull(address.get("city")).toString();
@@ -162,6 +167,78 @@ public class Venue extends User{
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public double getAvgCommunicationRating() {
+        return avgCommunicationRating;
+    }
+
+    public void setAvgCommunicationRating(double avgCommunicationRating) {
+        this.avgCommunicationRating = avgCommunicationRating;
+    }
+
+    public double getAvgReliabilityRating() {
+        return avgReliabilityRating;
+    }
+
+    public void setAvgReliabilityRating(double avgReliabilityRating) {
+        this.avgReliabilityRating = avgReliabilityRating;
+    }
+
+    public double getAvgSettingRating() {
+        return avgSettingRating;
+    }
+
+    public void setAvgSettingRating(double avgSettingRating) {
+        this.avgSettingRating = avgSettingRating;
+    }
+
+    public double getAvgAtmosphereRating() {
+        return avgAtmosphereRating;
+    }
+
+    public void setAvgAtmosphereRating(double avgAtmosphereRating) {
+        this.avgAtmosphereRating = avgAtmosphereRating;
+    }
+
+    public int getTotalCommunicationRating() {
+        return totalCommunicationRating;
+    }
+
+    public void setTotalCommunicationRating(int totalCommunicationRating) {
+        this.totalCommunicationRating = totalCommunicationRating;
+    }
+
+    public int getTotalReliabilityRating() {
+        return totalReliabilityRating;
+    }
+
+    public void setTotalReliabilityRating(int totalReliabilityRating) {
+        this.totalReliabilityRating = totalReliabilityRating;
+    }
+
+    public int getTotalSettingRating() {
+        return totalSettingRating;
+    }
+
+    public void setTotalSettingRating(int totalSettingRating) {
+        this.totalSettingRating = totalSettingRating;
+    }
+
+    public int getTotalAtmosphereRating() {
+        return totalAtmosphereRating;
+    }
+
+    public void setTotalAtmosphereRating(int totalAtmosphereRating) {
+        this.totalAtmosphereRating = totalAtmosphereRating;
+    }
+
+    public double getAvgOverallRating() {
+        return avgOverallRating;
+    }
+
+    public void setAvgOverallRating(double avgOverallRating) {
+        this.avgOverallRating = avgOverallRating;
     }
 
     @Override

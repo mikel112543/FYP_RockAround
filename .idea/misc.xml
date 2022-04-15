@@ -21,7 +21,7 @@
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/artist_card.xml" value="0.5" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_account.xml" value="0.1641025641025641" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_artist_explore.xml" value="0.13333333333333333" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_artist_profile.xml" value="0.22" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_artist_profile.xml" value="0.33" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_discover.xml" value="0.4745605920444033" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_explore.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_genre_dialog.xml" value="0.17777777777777778" />
@@ -29,19 +29,20 @@
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_maps.xml" value="0.3790983606557377" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_review_of_venue.xml" value="0.2744479495268139" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_profile.xml" value="0.28061224489795916" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_register.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_solo_setup.xml" value="0.25" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_user_reviews.xml" value="0.18" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_explore.xml" value="0.2565217391304348" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_profile.xml" value="0.22" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_profile.xml" value="0.4213075060532688" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_register.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/fragment_venue_setup.xml" value="0.23076923076923078" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/genre_items.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/review_card.xml" value="0.25" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/review_of_artist_fragment.xml" value="0.33" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.1641025641025641" />
-        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/venue_card.xml" value="0.33" />
+        <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/layout/venue_card.xml" value="0.2" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.16452991452991453" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/menu/discover_toolbar_menu.xml" value="0.1" />
         <entry key="..\:/Users/mikel/AndroidStudioProjects/RockAroundApp/app/src/main/res/menu/filter_menu.xml" value="0.1641025641025641" />

@@ -7,8 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +25,7 @@ import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.adapters.ReviewsAdapter;
 import com.example.rockaroundapp.databinding.FragmentUserReviewsBinding;
 import com.example.rockaroundapp.model.ArtistReview;
-import com.example.rockaroundapp.viewmodel.ReviewOfArtistViewModel;
+import com.example.rockaroundapp.viewmodel.ArtistReviewsViewModel;
 import com.example.rockaroundapp.viewmodel.VenueReviewsViewModel;
 
 import java.util.List;
@@ -35,7 +33,7 @@ import java.util.List;
 public class UserReviewsFragment extends Fragment {
 
     private String currentUserType;
-    private ReviewOfArtistViewModel reviewOfArtistViewModel;
+    private ArtistReviewsViewModel artistReviewsViewModel;
     private VenueReviewsViewModel venueReviewsViewModel;
     private LinearLayoutManager layoutManager;
     private NavController navController;
@@ -100,11 +98,11 @@ public class UserReviewsFragment extends Fragment {
        if(currentUserType.equalsIgnoreCase("venue")) {
             assert getArguments() != null;
             artistId = getArguments().getString("artistId");
-            reviewOfArtistViewModel = new ViewModelProvider(this).get(ReviewOfArtistViewModel.class);
-            reviewOfArtistViewModel.getAllReviews(artistId, position).observe(getViewLifecycleOwner(), reviews -> {
+            artistReviewsViewModel = new ViewModelProvider(this).get(ArtistReviewsViewModel.class);
+            artistReviewsViewModel.getAllReviews(artistId, position).observe(getViewLifecycleOwner(), reviews -> {
                 artistReviews = reviews;
-                reviewOfArtistViewModel.sortReviews(position);
-                reviewOfArtistViewModel.get_artistReviewers(artistReviews).observe(getViewLifecycleOwner(), reviewers -> adapter.updateArtistReviewList(artistReviews, reviewers));
+                artistReviewsViewModel.sortReviews(position);
+                artistReviewsViewModel.get_artistReviewers(artistReviews).observe(getViewLifecycleOwner(), reviewers -> adapter.updateArtistReviewList(artistReviews, reviewers));
                 binding.noReviews.setVisibility(View.INVISIBLE);
                 if(artistReviews.isEmpty()) {
                     binding.noReviews.setVisibility(View.VISIBLE);

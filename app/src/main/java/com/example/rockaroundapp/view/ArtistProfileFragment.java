@@ -245,8 +245,4 @@ public class ArtistProfileFragment extends Fragment {
             star5.setBackground(starFilled);
         }
     }
-
-    //TODO Implement account page
-    //TODO Implement Maps Page
-    //TODO Fully implement Reviews
 }

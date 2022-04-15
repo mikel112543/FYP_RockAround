@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,21 +19,21 @@ import androidx.navigation.Navigation;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.ReviewOfArtistFragmentBinding;
-import com.example.rockaroundapp.viewmodel.ReviewOfArtistViewModel;
+import com.example.rockaroundapp.viewmodel.ArtistReviewsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class ReviewOfArtistFragment extends Fragment {
 
-    private ReviewOfArtistViewModel mViewModel;
+    private ArtistReviewsViewModel mViewModel;
     private ReviewOfArtistFragmentBinding binding;
-    private Toolbar toolbar;
-    private BottomNavigationView bottomNavigationView;
     private NavController navController;
     private Drawable filledStar;
     private Drawable starOutline;
     private String artistId;
-    private String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private final String currentUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
 
     @Override
@@ -45,13 +44,11 @@ public class ReviewOfArtistFragment extends Fragment {
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.review_of_artist_fragment, container, false);
         View view = binding.getRoot();
-        mViewModel = new ViewModelProvider(this).get(ReviewOfArtistViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ArtistReviewsViewModel.class);
         binding.setViewModel(mViewModel);
         binding.setLifecycleOwner(this);
         assert getArguments() != null;
         artistId = getArguments().getString("artistId");
-        toolbar = requireActivity().findViewById(R.id.main_toolbar);
-        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navbar);
         observe();
         return view;
     }

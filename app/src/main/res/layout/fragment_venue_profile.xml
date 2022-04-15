@@ -32,7 +32,7 @@
                 app:shapeAppearanceOverlay="@style/circleImageView" />
 
             <TextView
-                android:id="@+id/artist_name"
+                android:id="@+id/venue_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -51,7 +51,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@id/profile_image"
                 app:layout_constraintStart_toStartOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/artist_name" />
+                app:layout_constraintTop_toBottomOf="@id/venue_name" />
 
             <TextView
                 android:id="@+id/venue_location"
@@ -188,114 +188,130 @@
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
+                <ImageView
+                    android:id="@+id/overall_rating_s5"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/avg_stage_presence_title"
+                android:id="@+id/avg_setting_rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Stage Presence Rating"
+                android:text="@string/setting_rating"
                 android:textSize="9sp"
-                app:layout_constraintStart_toStartOf="@id/stage_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/setting_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
                 tools:ignore="SmallSp" />
 
             <LinearLayout
-                android:id="@+id/stage_rating_stars"
+                android:id="@+id/setting_rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avg_stage_presence_title">
+                app:layout_constraintTop_toBottomOf="@id/avg_setting_rating_title">
 
                 <ImageView
-                    android:id="@+id/stage_presence_s1"
+                    android:id="@+id/setting_s1"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/stage_presence_s2"
+                    android:id="@+id/setting_s2"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/stage_presence_s3"
+                    android:id="@+id/setting_s3"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/stage_presence_s4"
+                    android:id="@+id/setting_s4"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
+                <ImageView
+                    android:id="@+id/setting_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/avg_vocals_title"
+                android:id="@+id/avg_atmosphere_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Vocals Rating"
+                android:text="@string/atmosphere_rating"
                 android:textSize="9sp"
-                app:layout_constraintStart_toStartOf="@id/vocals_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars" />
+                app:layout_constraintStart_toStartOf="@id/atmosphere_rating_stars"
+                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
-                android:id="@+id/vocals_rating_stars"
+                android:id="@+id/atmosphere_rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginEnd="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avg_vocals_title">
+                app:layout_constraintTop_toBottomOf="@id/avg_atmosphere_title">
 
                 <ImageView
-                    android:id="@+id/vocals_s1"
+                    android:id="@+id/atmosphere_s1"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/vocals_s2"
+                    android:id="@+id/atmosphere_s2"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/vocals_s3"
+                    android:id="@+id/atmosphere_s3"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
-                    android:id="@+id/vocals_s4"
+                    android:id="@+id/atmosphere_s4"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
+                <ImageView
+                    android:id="@+id/atmosphere_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
             <TextView
@@ -307,7 +323,7 @@
                 android:text="Reliability Rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/reliability_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/stage_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars" />
 
             <LinearLayout
                 android:id="@+id/reliability_rating_stars"
@@ -321,25 +337,30 @@
                     android:id="@+id/reliability_s1"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/reliability_s2"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/reliability_s3"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/reliability_s4"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
+                <ImageView
+                    android:id="@+id/reliability_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
             <TextView
@@ -348,10 +369,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Communication Rating"
+                android:text="@string/communication_rating"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="@id/communication_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/vocals_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/communication_rating_stars"
@@ -365,25 +387,30 @@
                     android:id="@+id/communication_s1"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/communication_s2"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/communication_s3"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
                     android:id="@+id/communication_s4"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_baseline_star_rate_50" />
+                    android:background="@drawable/ic_baseline_star_outline_24" />
+                <ImageView
+                    android:id="@+id/communication_s5"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
             <View
@@ -403,7 +430,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Reviews"
+                android:text="@string/reviews"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/bio_title"
                 app:layout_constraintTop_toBottomOf="@id/divider4" />
@@ -559,24 +586,26 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/more_review_button"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textColor="@color/primary_pink"
                     android:background="@drawable/pill_button_outline"
-                    android:text="More reviews"
-                    android:textSize="10dp"
+                    android:text="@string/more_reviews"
+                    android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/review_card_2" />
+                    app:layout_constraintTop_toBottomOf="@id/review_card_2"
+                    tools:ignore="SmallSp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/write_review_button"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/pill_button"
-                    android:text="Write Review"
-                    android:textSize="10dp"
+                    android:text="@string/write_review"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
