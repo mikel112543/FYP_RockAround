@@ -42,7 +42,7 @@ public class VenueProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        toolbar = getActivity().findViewById(R.id.main_toolbar);
+        toolbar = requireActivity().findViewById(R.id.main_toolbar);
         toolbar.setVisibility(View.VISIBLE);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_venue_profile, container, false);
         View view = binding.getRoot();
@@ -60,7 +60,7 @@ public class VenueProfileFragment extends Fragment {
 
     private void checkIsReviewed() {
         viewModel.getAlreadyReviewed(id).observe(getViewLifecycleOwner(), alreadyReviewed -> {
-            if (alreadyReviewed) {
+            if (Boolean.TRUE.equals(alreadyReviewed)) {
                 binding.writeReviewButton.setEnabled(false);
                 binding.writeReviewButton.setText(getString(R.string.venue_already_reviewed));
             }
@@ -77,6 +77,21 @@ public class VenueProfileFragment extends Fragment {
             }
             if (Objects.equals(currentUid, venue.getId())) {
                 binding.writeReviewButton.setVisibility(View.INVISIBLE);
+            }
+        });
+        viewModel.getReviews(id).observe(getViewLifecycleOwner(), reviews -> {
+            if (reviews.isEmpty()) {
+                binding.divider5.setVisibility(View.INVISIBLE);
+                binding.noReviews.setVisibility(View.VISIBLE);
+            } else if (reviews.size() == 1) {
+                binding.setReviewOne(reviews.get(0));
+                binding.divider5.setVisibility(View.VISIBLE);
+                binding.noReviews.setVisibility(View.INVISIBLE);
+            } else {
+                binding.setReviewOne(reviews.get(0));
+                binding.setReviewTwo(reviews.get(1));
+                binding.divider5.setVisibility(View.VISIBLE);
+                binding.noReviews.setVisibility(View.INVISIBLE);
             }
         });
     }

@@ -35,15 +35,11 @@ public class DiscoverViewModel extends ViewModel {
         return venueRepository.getVenueListMutable();
     }
 
-    public MutableLiveData<String> getCurrentUserType() {
-        return userRepository.findUserType(currentId);
-    }
-
     public void sortList(int order, String userType) {
         if (userType.equalsIgnoreCase("venue")) {
             artistRepository.sortList(order);
         }else{
-            //TODO sort venue list
+            venueRepository.sortList(order);
         }
     }
 }

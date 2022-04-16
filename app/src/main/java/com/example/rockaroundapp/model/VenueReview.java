@@ -1,7 +1,8 @@
 package com.example.rockaroundapp.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class VenueReview extends Review {
 
@@ -9,14 +10,6 @@ public class VenueReview extends Review {
     private int reliabilityRating;
     private int atmosphereRating;
     private int communicationRating;
-
-    public VenueReview(String id, String reviewTitle, String reviewDescription, String reviewerId, String reviewedId, int settingRating, int reliabilityRating, int atmosphereRating, int communicationRating) {
-        super(id, reviewTitle, reviewDescription, reviewerId, reviewedId);
-        this.settingRating = settingRating;
-        this.reliabilityRating = reliabilityRating;
-        this.atmosphereRating = atmosphereRating;
-        this.communicationRating = communicationRating;
-    }
 
     public VenueReview() {
     }

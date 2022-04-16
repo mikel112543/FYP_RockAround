@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
@@ -12,9 +13,11 @@ import com.example.rockaroundapp.model.User;
 import com.example.rockaroundapp.model.Venue;
 import com.example.rockaroundapp.model.VenueReview;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +28,7 @@ public class VenueReviewsRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MutableLiveData<Boolean> _success;
-    private MutableLiveData<List<VenueReview>> _venueReviews;
+    private final MutableLiveData<List<VenueReview>> _venueReviews;
     private final String currentUid = FirebaseAuth.getInstance().getUid();
     private UserRepository userRepository;
 
@@ -48,46 +51,32 @@ public class VenueReviewsRepository {
         db.collection("solo").document(venueReview.getReviewerId()).get().addOnCompleteListener(snapshot -> {
             if (snapshot.getResult().getData() != null) {
                 Artist artistReviewer = snapshot.getResult().toObject(Artist.class);
-                Map<String, Object> artistMp = new HashMap<>();
+                HashMap<String, Object> artistMp = new HashMap<>();
                 artistMp.put("iD", artistReviewer.getId());
                 artistMp.put("userType", artistReviewer.getUserType());
                 artistMp.put("profileImg", artistReviewer.getProfileImg());
                 artistMp.put("stageName", artistReviewer.getStageName());
+                venueReview.setReviewer(artistMp);
                 db.collection("solo").document(artistReviewer.getId())
                         .collection("writtenReviews").document(venueReview.getReviewedId()).set(venueReview).addOnCompleteListener(upload -> {
                     if (upload.isSuccessful()) {
-                        Log.w(TAG, "Successfully uploaded review of venue");
-                        db.collection("solo").document(artistReviewer.getId())
-                                .collection("writtenReviews").document(venueReview.getReviewedId())
-                                .update("reviewer", artistMp).addOnCompleteListener(doc -> {
-                            if (doc.isSuccessful()) {
-                                Log.w(TAG, "Review fully uploaded");
-                                uploadVenueData(venueReview, artistMp);
-                            }
-                        });
+                        uploadVenueData(venueReview, artistMp);
                     }
                 });
             } else {
                 db.collection("group").document(venueReview.getReviewerId()).get().addOnCompleteListener(groupSnapshot -> {
                     GroupArtist artistReviewer = snapshot.getResult().toObject(GroupArtist.class);
-                    Map<String, Object> artistMp = new HashMap<>();
+                    HashMap<String, Object> artistMp = new HashMap<>();
                     artistMp.put("iD", artistReviewer.getId());
                     artistMp.put("userType", artistReviewer.getUserType());
                     artistMp.put("profileImg", artistReviewer.getProfileImg());
                     artistMp.put("stageName", artistReviewer.getStageName());
+                    venueReview.setReviewer(artistMp);
                     db.collection("group").document(artistReviewer.getId())
                             .collection("writtenReviews").document(venueReview.getReviewedId())
                             .set(venueReview).addOnCompleteListener(upload -> {
                         if (upload.isSuccessful()) {
-                            Log.w(TAG, "Upload successful");
-                            db.collection("group").document(artistReviewer.getId())
-                                    .collection("writtenReviews").document(venueReview.getReviewedId())
-                                    .update("reviewer", artistMp).addOnCompleteListener(doc -> {
-                                if (doc.isSuccessful()) {
-                                    Log.w(TAG, "Review fully uploaded");
-                                    uploadVenueData(venueReview, artistMp);
-                                }
-                            });
+                            uploadVenueData(venueReview, artistMp);
                         }
                     });
                 });
@@ -99,15 +88,7 @@ public class VenueReviewsRepository {
         db.collection("venue").document(venueReview.getReviewedId()).collection("reviews")
                 .document(currentUid).set(venueReview).addOnCompleteListener(upload -> {
             if (upload.isSuccessful()) {
-                Log.w(TAG, "Review upload by venue successful");
-                db.collection("venue").document(venueReview.getReviewedId())
-                        .collection("reviews").document(currentUid)
-                        .update("reviewer", artistMp).addOnCompleteListener(doc -> {
-                    if (doc.isSuccessful()) {
-                        Log.w(TAG, "Full review upload by venue successful");
-                        setVenueAvgRatings(venueReview);
-                    }
-                });
+                setVenueAvgRatings(venueReview);
             }
         });
     }
@@ -180,5 +161,22 @@ public class VenueReviewsRepository {
                 });
             }
         });
+    }
+
+    public LiveData<List<VenueReview>> getReviews(String id) {
+        List<VenueReview> venueReviews = new ArrayList<>();
+        db.collection("venue").document(id).collection("reviews").addSnapshotListener((snapshot, e) -> {
+            if(e != null) {
+                Log.w(TAG, "No documents found");
+            }
+            if(snapshot != null) {
+                for(DocumentSnapshot document : snapshot) {
+                    VenueReview venueReview = document.toObject(VenueReview.class);
+                    venueReviews.add(venueReview);
+                }
+            }
+            _venueReviews.postValue(venueReviews);
+        });
+        return _venueReviews;
     }
 }

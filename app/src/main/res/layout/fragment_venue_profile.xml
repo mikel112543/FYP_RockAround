@@ -9,6 +9,14 @@
         <variable
             name="venueModel"
             type="com.example.rockaroundapp.model.Venue" />
+
+        <variable
+            name="reviewOne"
+            type="com.example.rockaroundapp.model.VenueReview" />
+
+        <variable
+            name="reviewTwo"
+            type="com.example.rockaroundapp.model.VenueReview" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -190,7 +198,6 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
@@ -198,7 +205,6 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
@@ -206,7 +212,6 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
 
                 <ImageView
@@ -214,7 +219,6 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
@@ -473,7 +477,7 @@
                             android:id="@+id/reviewer_profile_img"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_baseline_account_circle_24"
+                            android:imageURL="@{reviewOne.reviewerImg}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -483,7 +487,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:text="John Doe"
+                            android:text="@{reviewOne.reviewerStageName}"
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@id/reviewer_profile_img"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -492,17 +496,18 @@
                             android:id="@+id/review_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10/12/22"
+                            android:text="@{reviewOne.date}"
                             android:textSize="9sp"
                             app:layout_constraintStart_toStartOf="@id/reviewer_name"
-                            app:layout_constraintTop_toBottomOf="@id/reviewer_name" />
+                            app:layout_constraintTop_toBottomOf="@id/reviewer_name"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:id="@+id/review_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="This is the title"
+                            android:text="@{reviewOne.title}"
                             android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="@id/review_date"
                             app:layout_constraintTop_toBottomOf="@id/review_date" />
@@ -513,22 +518,36 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:layout_marginEnd="108dp"
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar at mauris a vestibulum. Integer molestie erat et libero sodales elementum."
+                            android:text="@{reviewOne.description}"
                             android:textSize="10sp"
                             app:layout_constraintStart_toStartOf="@id/review_title"
-                            app:layout_constraintTop_toBottomOf="@id/review_title" />
+                            app:layout_constraintTop_toBottomOf="@id/review_title"
+                            tools:ignore="SmallSp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <View
+                <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider5"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="15dp"
-                    android:background="@color/primary_pink"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/review_card" />
+
+                <TextView
+                    android:id="@+id/no_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_reviews_too_see_here"
+                    android:textSize="25sp"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="@id/reviews_section"
+                    app:layout_constraintEnd_toEndOf="@id/reviews_section"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/reviews_section"
+                    app:layout_constraintVertical_bias="0.281"
+                    tools:layout_editor_absoluteX="0dp" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/review_card_2"
@@ -547,7 +566,7 @@
                             android:id="@+id/reviewer_profile_img_2"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_baseline_account_circle_24"
+                            android:imageURL="@{reviewTwo.reviewerImg}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -557,7 +576,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:text="John Doe"
+                            android:text="@{reviewTwo.reviewerStageName}"
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@id/reviewer_profile_img_2"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -566,7 +585,7 @@
                             android:id="@+id/review_date_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10/12/22"
+                            android:text="@{reviewTwo.date}"
                             android:textSize="9sp"
                             app:layout_constraintStart_toStartOf="@id/reviewer_name_2"
                             app:layout_constraintTop_toBottomOf="@id/reviewer_name_2" />
@@ -576,7 +595,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="This is the title"
+                            android:text="@{reviewTwo.title}"
                             android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="@id/review_date_2"
                             app:layout_constraintTop_toBottomOf="@id/review_date_2" />
@@ -587,10 +606,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:layout_marginEnd="108dp"
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar at mauris a vestibulum. Integer molestie erat et libero sodales elementum."
+                            android:text="@{reviewTwo.description}"
                             android:textSize="10sp"
                             app:layout_constraintStart_toStartOf="@id/review_title_2"
-                            app:layout_constraintTop_toBottomOf="@id/review_title_2" />
+                            app:layout_constraintTop_toBottomOf="@id/review_title_2"
+                            tools:ignore="SmallSp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 

@@ -116,9 +116,9 @@ public class VenueRepository {
         } else if (orderPosition == 1) { //Ascending
             Collections.sort(venueList, Comparator.comparing(Venue::getVenueName));
         } else if (orderPosition == 2) { //Rating (High - low)
-            //Collections.sort(venueList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
+            Collections.sort(venueList, Comparator.comparing(Venue::getAvgOverallRating).reversed());
         } else { //Rating (Low - high)
-            //Collections.sort(venueList, Comparator.comparing(Artist::getAvgOverallRating));
+            Collections.sort(venueList, Comparator.comparing(Venue::getAvgOverallRating));
         }
         venueListMutable.postValue(venueList);
     }

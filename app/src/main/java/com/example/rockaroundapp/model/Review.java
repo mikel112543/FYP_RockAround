@@ -8,6 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Review {
@@ -19,11 +22,13 @@ public abstract class Review {
     private String reviewedId;
     private String date;
     private String time;
+    private HashMap<String, Object> reviewer;
 
-    public Review() {
+    protected Review() {
         id = UUID.randomUUID().toString();
         date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         time = LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(SHORT));
+        reviewer = new HashMap<>();
     }
 
     protected Review(String id, String title, String description, String reviewerId, String reviewedId) {
@@ -34,6 +39,22 @@ public abstract class Review {
         this.reviewedId = reviewedId;
         date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         time = LocalTime.now().format(DateTimeFormatter.ofLocalizedTime(SHORT));
+    }
+
+    public void setReviewer(HashMap<String, Object> reviewer) {
+        this.reviewer = reviewer;
+    }
+
+    public Map<String, Object> getReviewer() {
+        return reviewer;
+    }
+
+    public String getReviewerImg() {
+        return Objects.requireNonNull(reviewer.get("profileImg")).toString();
+    }
+
+    public String getReviewerStageName() {
+        return Objects.requireNonNull(reviewer.get("stageName")).toString();
     }
 
     public String getId() {

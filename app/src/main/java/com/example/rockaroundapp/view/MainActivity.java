@@ -81,12 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle("Map");
             }
         });
-
-        //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // Replace the contents of the container with the new fragment
-        //ft.replace(R.id.fragmentContainerView, new LoginFragment());
-        // ft.commit();
-
     }
 
     private String getCurrentUserType() {
