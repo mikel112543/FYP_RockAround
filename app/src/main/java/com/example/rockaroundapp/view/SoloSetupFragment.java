@@ -45,6 +45,7 @@ public class SoloSetupFragment extends Fragment {
     private TextDrawable orgProfiler;
     private String userType;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
+    private int randomAccountColour = generator.getRandomColor();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +60,7 @@ public class SoloSetupFragment extends Fragment {
         toolbar.setVisibility(View.INVISIBLE);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
-        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), generator.getRandomColor());
+        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), randomAccountColour);
         binding.profileImageView.setImageDrawable(orgProfiler);
         assert getArguments() != null;
         userType = getArguments().getString("userType");

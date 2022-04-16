@@ -37,7 +37,7 @@ public class GroupSetupFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private TextDrawable orgProfiler;
     private Toolbar toolbar;
-    private ColorGenerator generator = ColorGenerator.MATERIAL;
+    private int randomAccountColour = ColorGenerator.MATERIAL.getRandomColor();
     private ActivityResultLauncher<Intent> getProfiler;
     private String userType;
 
@@ -55,7 +55,7 @@ public class GroupSetupFragment extends Fragment {
         toolbar.setVisibility(View.INVISIBLE);
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
-        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), generator.getRandomColor());
+        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), randomAccountColour);
         binding.profileImageView.setImageDrawable(orgProfiler);
         assert getArguments() != null;
         userType = getArguments().getString("userType");
@@ -90,11 +90,6 @@ public class GroupSetupFragment extends Fragment {
             } else {
                 binding.contactText.setError(null);
             }
-            /*if (!groupArtist.getStageName().isEmpty() && (!groupArtist.getNoOfMembers().equals("") || Integer.parseInt(groupArtist.getNoOfMembers()) > 1) &&
-                    !groupArtist.getGenres().isEmpty() && !groupArtist.getPrice().isEmpty() &&
-                    !groupArtist.getContactNumber().isEmpty()) {
-                groupSetupViewModel.saveInfo();
-            }*/
             if (!binding.stageNameTextInputLayout.isErrorEnabled() && !binding.noOfMembersText.isErrorEnabled()
                     && (!groupArtist.getGenres().isEmpty() || groupArtist.getGenres() != null)
                     && !binding.contactText.isErrorEnabled() && !binding.priceText.isErrorEnabled()) {

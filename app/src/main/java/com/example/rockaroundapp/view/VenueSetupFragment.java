@@ -2,6 +2,7 @@ package com.example.rockaroundapp.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,9 +38,9 @@ public class VenueSetupFragment extends Fragment {
     private NavController navController;
     private BottomNavigationView bottomNavigationView;
     private ActivityResultLauncher<Intent> getProfiler;
-    private TextDrawable orgProfiler;
-    private ColorGenerator generator = ColorGenerator.MATERIAL;
+    private int randomAccountColour = ColorGenerator.MATERIAL.getRandomColor();
     private String userType;
+    private TextDrawable orgProfiler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +56,8 @@ public class VenueSetupFragment extends Fragment {
         toolbar.setTitle("Venue Setup");
         bottomNavigationView = getActivity().findViewById(R.id.bottom_navbar);
         bottomNavigationView.setVisibility(View.INVISIBLE);
+        orgProfiler = TextDrawable.builder().buildRect(String.valueOf(getArguments().getString("firstName").charAt(0)), randomAccountColour);
+        binding.profileImageView.setImageDrawable(orgProfiler);
         assert getArguments() != null;
         userType = getArguments().getString("userType");
         observeViewModel();

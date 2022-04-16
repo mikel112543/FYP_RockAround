@@ -13,11 +13,12 @@ import java.util.Objects;
 
 public class GroupSetupViewModel extends ViewModel {
 
-    public MutableLiveData<String> groupName;
-    public MutableLiveData<String> bio;
-    public MutableLiveData<String> noOfMembers;
-    public MutableLiveData<String> contactNumber;
-    public MutableLiveData<String> price;
+    private MutableLiveData<String> groupName;
+    private MutableLiveData<String> bio;
+    private MutableLiveData<String> noOfMembers;
+    private MutableLiveData<String> contactNumber;
+    private MutableLiveData<String> price;
+    private MutableLiveData<String> city;
     private MutableLiveData<GroupArtist> groupArtistMutable;
     private final MutableLiveData<String> genresStringMutable;
     private Uri profileImageUri;
@@ -30,6 +31,7 @@ public class GroupSetupViewModel extends ViewModel {
         groupSetupRepository = new GroupSetupRepository();
         groupName = new MutableLiveData<>("");
         bio = new MutableLiveData<>("");
+        city = new MutableLiveData<>("");
         noOfMembers = new MutableLiveData<>("");
         contactNumber = new MutableLiveData<>("");
         price = new MutableLiveData<>("");
@@ -46,12 +48,60 @@ public class GroupSetupViewModel extends ViewModel {
         return groupArtistMutable;
     }
 
+    public MutableLiveData<String> getCity() {
+        return city;
+    }
+
+    public void setCity(MutableLiveData<String> city) {
+        this.city = city;
+    }
+
     public void setGenre(List<String> genres) {
         genresMutable.postValue(genres);
     }
 
     public void setGenresString(String genresString) {
         genresStringMutable.postValue(genresString);
+    }
+
+    public MutableLiveData<String> getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(MutableLiveData<String> groupName) {
+        this.groupName = groupName;
+    }
+
+    public MutableLiveData<String> getBio() {
+        return bio;
+    }
+
+    public void setBio(MutableLiveData<String> bio) {
+        this.bio = bio;
+    }
+
+    public MutableLiveData<String> getNoOfMembers() {
+        return noOfMembers;
+    }
+
+    public void setNoOfMembers(MutableLiveData<String> noOfMembers) {
+        this.noOfMembers = noOfMembers;
+    }
+
+    public MutableLiveData<String> getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(MutableLiveData<String> contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public MutableLiveData<String> getPrice() {
+        return price;
+    }
+
+    public void setPrice(MutableLiveData<String> price) {
+        this.price = price;
     }
 
     public MutableLiveData<String> getGenresStringMutable() {
@@ -74,6 +124,7 @@ public class GroupSetupViewModel extends ViewModel {
         groupArtist.setNoOfMembers(noOfMembers.getValue());
         groupArtist.setGenres(genresMutable.getValue());
         groupArtist.setContact(contactNumber.getValue());
+        groupArtist.setCity(city.getValue());
         if(profileImageUri != null){
             groupArtist.setProfileImg(profileImageUri.toString());
         }else{

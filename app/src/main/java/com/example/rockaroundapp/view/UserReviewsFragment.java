@@ -90,13 +90,12 @@ public class UserReviewsFragment extends Fragment {
     private void initRecycler(int position) {
         adapter = new ReviewsAdapter(currentUserType);
         recyclerView = requireActivity().findViewById(R.id.rv_main);
-        //recyclerView.setVisibility(View.VISIBLE);
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-       if(currentUserType.equalsIgnoreCase("venue")) {
-            assert getArguments() != null;
+        assert getArguments() != null;
+        if(currentUserType.equalsIgnoreCase("venue")) {
             artistId = getArguments().getString("artistId");
             artistReviewsViewModel = new ViewModelProvider(this).get(ArtistReviewsViewModel.class);
             artistReviewsViewModel.getAllReviews(artistId, position).observe(getViewLifecycleOwner(), reviews -> {
@@ -108,15 +107,15 @@ public class UserReviewsFragment extends Fragment {
                     binding.noReviews.setVisibility(View.VISIBLE);
                 }
             });
-            //adapter.updateArtistReviewList(artistReviews);
-            //1. Get List of Reviews
-            //2. Traverse List of Reviews and find documents of reviewers from list of reviews
-            //3. Create list of reviewers and pass into adapter
-            //check if viewing their own profile (pass currentUid in bundle and compare)
-            //observeArtistReviews(filter)
         }else{
+            String venueId = getArguments().getString("venueId");
             venueReviewsViewModel = new ViewModelProvider(this).get(VenueReviewsViewModel.class);
-            //observeVenueReviews(filter)
+            venueReviewsViewModel.getAllReviews(venueId).observe(getViewLifecycleOwner(), reviews -> {
+                if(!reviews.isEmpty()) {
+                    binding.noReviews.setVisibility(View.INVISIBLE);
+                }
+                adapter.updateVenueReviews(reviews);
+            });
         }
     }
 }
