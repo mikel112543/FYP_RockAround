@@ -40,8 +40,6 @@ K
 .github/workflows/build.yml,f\e\fe77d5d1439f26e353a42bbd38dece2467ff6558
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-{
-Kapp/src/main/java/com/example/rockaroundapp/viewmodel/AccountViewModel.java,0\c\0c42e03061d767b8119395079d7412eb3581490e
 y
 Iapp/src/main/java/com/example/rockaroundapp/viewmodel/LoginViewModel.java,c\f\cfd372fae6ab20229a5103d0c215d4bab8f54a2d
 |

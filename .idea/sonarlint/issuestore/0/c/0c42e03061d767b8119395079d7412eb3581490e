@@ -1,7 +1,0 @@
-
-t
-java:S1450"YRemove the "currentUid" field and declare it as a local variable in the relevant methods.(Ëá‹Éüÿÿÿÿ
-7
-java:S1116"Remove this empty statement.(Ëá‹Éüÿÿÿÿ
-G
-java:S1068",Remove this unused "userType" private field.(Ù–È”ıÿÿÿÿ

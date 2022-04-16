@@ -55,9 +55,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         if(!artistReviews.isEmpty()) {
             holder.bindArtistReview(artistReviews.get(position));
-            if (!artistReviewers.isEmpty()) {
-                holder.bindArtistReviewer(artistReviewers.get(position));
-            }
         }else{
             holder.bindVenueReview(venueReviews.get(position));
         }
@@ -71,9 +68,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
         return venueReviews.size();
     }
 
-    public void updateArtistReviewList(List<ArtistReview> reviews, List<Venue> artistReviewers) {
+    public void updateArtistReviewList(List<ArtistReview> reviews) {
         this.artistReviews = reviews;
-        this.artistReviewers = artistReviewers;
         notifyDataSetChanged();
     }
 
@@ -103,16 +99,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
             mapRating(venueReview.getOverallRating());
 
 
-        }
-
-        public void bindArtistReviewer(Venue venue) {
-            binding.reviewerName2.setText(venue.getVenueName());
-            Picasso.get().load(venue.getProfileImg())
-                    .placeholder(R.drawable.ic_baseline_account_circle_24)
-                    .error(R.drawable.ic_baseline_account_circle_24)
-                    .fit()
-                    .centerCrop()
-                    .into(binding.reviewerProfileImg2);
         }
 
         private void mapRating(double rating) {

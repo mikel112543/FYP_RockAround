@@ -95,7 +95,7 @@ public class ArtistReviewsViewModel extends ViewModel {
         reviewsRepository.submitArtistReview(artistReview);
     }
 
-    public MutableLiveData<List<ArtistReview>> getAllReviews(String artistId, int position) {
-        return reviewsRepository.getSortedReviews(artistId, position);
+    public MutableLiveData<List<ArtistReview>> getAllReviews(String artistId) {
+        return reviewsRepository.getReviews(artistId);
     }
 }

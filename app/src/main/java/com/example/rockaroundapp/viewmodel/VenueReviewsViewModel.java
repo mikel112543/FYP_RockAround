@@ -85,4 +85,8 @@ public class VenueReviewsViewModel extends ViewModel {
     public void saveReview(VenueReview venueReview) {
         reviewsRepository.saveVenueReview(venueReview);
     }
+
+    public void sortReviews(int position) {
+        reviewsRepository.sortList(position);
+    }
 }
