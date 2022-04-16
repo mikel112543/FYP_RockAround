@@ -28,12 +28,8 @@ Papp/src/main/java/com/example/rockaroundapp/repository/GroupSetupRepository.jav
 Mapp/src/main/java/com/example/rockaroundapp/viewmodel/SoloSetupViewModel.java,6\0\60f9402e84eecda3fe0ca6069ee9e65e3bdd8b0d
 l
 <app/src/main/java/com/example/rockaroundapp/model/Event.java,5\c\5c23eaa35485ca20b2d4b57b1e45e4f719fae50e
-k
-;app/src/main/java/com/example/rockaroundapp/model/User.java,e\6\e6b6b18471794307212f6d39cd81b5315479d209
 ~
 Napp/src/main/java/com/example/rockaroundapp/viewmodel/VenueSetupViewModel.java,8\b\8b4795ed8c138810c0ef1ede65f42c8271445459
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 x
 Happ/src/main/java/com/example/rockaroundapp/adapters/ReviewsAdapter.java,a\f\afa8e825e25a4b5403f35d4f7c165b514173ac01
 
@@ -54,8 +50,6 @@ y
 Iapp/src/main/java/com/example/rockaroundapp/viewmodel/LoginViewModel.java,c\f\cfd372fae6ab20229a5103d0c215d4bab8f54a2d
 |
 Lapp/src/main/java/com/example/rockaroundapp/viewmodel/RegisterViewModel.java,9\e\9ec52f224ce54860558ef08b34f769d016423c04
-v
-Fapp/src/main/java/com/example/rockaroundapp/constants/RatingsEnum.java,8\c\8c432cb6d3755532dd7d8b76bb47c21b5483bf68
 y
 Iapp/src/main/java/com/example/rockaroundapp/view/UserReviewsFragment.java,6\d\6defc111dd969e55f963c073a8d34804b6f44978
 |
@@ -68,5 +62,3 @@ v
 Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22dc1234d1878e5ef068cbaf6fdfa5d13bb2dfbc
 ƒ
 Sapp/src/main/java/com/example/rockaroundapp/repository/ArtistReviewsRepository.java,a\8\a80c5b8825015aa76a8375829c5aea74f22c7b10
-z
-Japp/src/main/java/com/example/rockaroundapp/repository/UserRepository.java,3\9\39a66985332ff732d1bbad9716158df229de1b1a

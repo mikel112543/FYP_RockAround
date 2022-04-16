@@ -28,7 +28,8 @@ public class UserRepository {
     private final MutableLiveData<String> loginFailureMsg;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String failedRegistration;
-    private final String currentId = FirebaseAuth.getInstance().getUid();;
+    private final String currentId = FirebaseAuth.getInstance().getUid();
+    ;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
     private HashMap<String, Object> userData;
@@ -167,5 +168,31 @@ public class UserRepository {
 
     public void signOut() {
         auth.signOut();
+    }
+
+    public void saveLocation(double devLat, double devLong, String userType) {
+        String LATITUDE = "latitude";
+        String LONGITUDE = "longitude";
+        if (userType.equalsIgnoreCase("solo")) {
+            assert currentId != null;
+            db.collection("solo").document(currentId).update(LATITUDE, devLat);
+            db.collection("solo").document(currentId).update(LONGITUDE, devLong);
+        } else if (userType.equalsIgnoreCase("group")) {
+            assert currentId != null;
+            db.collection("group").document(currentId).update(LATITUDE, devLat);
+            db.collection("group").document(currentId).update(LONGITUDE, devLong);
+        } else {
+            assert currentId != null;
+            db.collection("venue").document(currentId).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Venue venue = task.getResult().toObject(Venue.class);
+                    assert venue != null;
+                    if (venue.getLatitude() == 0 && venue.getLongitude() == 0) {
+                        db.collection("venue").document(currentId).update(LATITUDE, devLat);
+                        db.collection("venue").document(currentId).update(LONGITUDE, devLong);
+                    }
+                }
+            });
+        }
     }
 }

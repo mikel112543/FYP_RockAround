@@ -6,6 +6,8 @@ import java.util.Map;
 
 public abstract class User {
 
+    private double latitude;
+    private double longitude;
     private String id;
     private String firstname;
     private String lastname;
@@ -81,6 +83,22 @@ public abstract class User {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public Map objectMap(User user) {
