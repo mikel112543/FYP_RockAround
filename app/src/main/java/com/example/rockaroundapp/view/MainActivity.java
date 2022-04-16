@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             }else if(destination.getId() == R.id.mapsFragment) {
                 recyclerView.setVisibility(View.INVISIBLE);
                 toolbar.setTitle("Map");
+            }else if(destination.getId() == R.id.venueProfileFragment) {
+                recyclerView.setVisibility(View.INVISIBLE);
             }
         });
     }

@@ -66,7 +66,6 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         toolbar = requireActivity().findViewById(R.id.main_toolbar);
         recyclerView = requireActivity().findViewById(R.id.rv_main);
         bottomNavigationView.setVisibility(View.VISIBLE);
-        //bottomNavigationView.setSelectedItemId(R.id.discover_btn);
         toolbar.setVisibility(View.VISIBLE);
         setHasOptionsMenu(true);
         toolbar.inflateMenu(R.menu.discover_toolbar_menu);

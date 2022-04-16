@@ -13,7 +13,9 @@
         android:id="@+id/venue_card"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20sp"
         app:cardCornerRadius="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

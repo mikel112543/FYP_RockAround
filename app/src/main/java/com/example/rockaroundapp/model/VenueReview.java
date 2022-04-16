@@ -14,6 +14,10 @@ public class VenueReview extends Review {
     public VenueReview() {
     }
 
+    public double getOverallRating() {
+        return (double) (communicationRating+settingRating+reliabilityRating+atmosphereRating) / 4;
+    }
+
     public int getSettingRating() {
         return settingRating;
     }

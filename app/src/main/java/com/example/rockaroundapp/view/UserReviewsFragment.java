@@ -40,7 +40,6 @@ public class UserReviewsFragment extends Fragment {
     private RecyclerView recyclerView;
     private String artistId;
     private Toolbar toolbar;
-    private String venueId;
     private ReviewsAdapter adapter;
     private List<ArtistReview> artistReviews;
     private FragmentUserReviewsBinding binding;
@@ -55,6 +54,7 @@ public class UserReviewsFragment extends Fragment {
         toolbar = requireActivity().findViewById(R.id.main_toolbar);
         toolbar.inflateMenu(R.menu.discover_toolbar_menu);
         // Inflate the layout for this fragment
+        initRecycler();
         return binding.getRoot();
     }
 
@@ -79,7 +79,11 @@ public class UserReviewsFragment extends Fragment {
             // position 1 - Ascending
             // position 2 - Rating (High - low)
             // position 3 - Rating (Low - high)
-            initRecycler(position);
+            if(currentUserType.equalsIgnoreCase("venue")) {
+                artistReviewsViewModel.sortReviews(position);
+            }else{
+                venueReviewsViewModel.sortReviews(position);
+            }
         }
 
         @Override
@@ -87,36 +91,32 @@ public class UserReviewsFragment extends Fragment {
         }
     };
 
-    private void initRecycler(int position) {
+    private void initRecycler() {
         adapter = new ReviewsAdapter(currentUserType);
         recyclerView = requireActivity().findViewById(R.id.rv_main);
-        //recyclerView.setVisibility(View.VISIBLE);
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-       if(currentUserType.equalsIgnoreCase("venue")) {
-            assert getArguments() != null;
+        assert getArguments() != null;
+        if(currentUserType.equalsIgnoreCase("venue")) {
             artistId = getArguments().getString("artistId");
             artistReviewsViewModel = new ViewModelProvider(this).get(ArtistReviewsViewModel.class);
-            artistReviewsViewModel.getAllReviews(artistId, position).observe(getViewLifecycleOwner(), reviews -> {
-                artistReviews = reviews;
-                artistReviewsViewModel.sortReviews(position);
-                artistReviewsViewModel.get_artistReviewers(artistReviews).observe(getViewLifecycleOwner(), reviewers -> adapter.updateArtistReviewList(artistReviews, reviewers));
-                binding.noReviews.setVisibility(View.INVISIBLE);
-                if(artistReviews.isEmpty()) {
-                    binding.noReviews.setVisibility(View.VISIBLE);
+            artistReviewsViewModel.getAllReviews(artistId).observe(getViewLifecycleOwner(), reviews -> {
+                if(!reviews.isEmpty()) {
+                    binding.noReviews.setVisibility(View.INVISIBLE);
                 }
+                adapter.updateArtistReviewList(reviews);
             });
-            //adapter.updateArtistReviewList(artistReviews);
-            //1. Get List of Reviews
-            //2. Traverse List of Reviews and find documents of reviewers from list of reviews
-            //3. Create list of reviewers and pass into adapter
-            //check if viewing their own profile (pass currentUid in bundle and compare)
-            //observeArtistReviews(filter)
         }else{
+            String venueId = getArguments().getString("venueId");
             venueReviewsViewModel = new ViewModelProvider(this).get(VenueReviewsViewModel.class);
-            //observeVenueReviews(filter)
+            venueReviewsViewModel.getAllReviews(venueId).observe(getViewLifecycleOwner(), reviews -> {
+                if(!reviews.isEmpty()) {
+                    binding.noReviews.setVisibility(View.INVISIBLE);
+                }
+                adapter.updateVenueReviews(reviews);
+            });
         }
     }
 }

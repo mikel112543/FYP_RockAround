@@ -18,6 +18,7 @@ public class Artist extends User {
     private String profileImg;
     private String userType;
     private String price;
+    private String city;
     private double avgCommunicationRating;
     private double avgReliabilityRating;
     private double avgVocalsRating;
@@ -38,12 +39,12 @@ public class Artist extends User {
 
     public Artist() {
         genres = new ArrayList<>();
-        setUserType("SOLO");
+        setUserType("Solo");
     }
 
     public Artist(String firstname, String lastname, String email) {
         super(firstname, lastname, email);
-        setUserType("SOLO");
+        setUserType("Solo");
     }
 
     @Override
@@ -68,6 +69,14 @@ public class Artist extends User {
 
     public void setAvgCommunicationRating(double avgCommunicationRating) {
         this.avgCommunicationRating = avgCommunicationRating;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public double getAvgReliabilityRating() {
@@ -277,10 +286,9 @@ public class Artist extends User {
     }
 
     public TextDrawable getDefaultProfiler() {
-        ColorGenerator generator = ColorGenerator.MATERIAL;
         if (stageName == null || stageName.isEmpty()) {
-            return TextDrawable.builder().buildRect(String.valueOf(getFirstname().charAt(0)), generator.getRandomColor());
+            return TextDrawable.builder().buildRect(String.valueOf(getFirstname().charAt(0)), ColorGenerator.MATERIAL.getRandomColor());
         }
-        return TextDrawable.builder().buildRect(String.valueOf(getStageName().charAt(0)), generator.getRandomColor());
+        return TextDrawable.builder().buildRect(String.valueOf(getStageName().charAt(0)), ColorGenerator.MATERIAL.getRandomColor());
     }
 }

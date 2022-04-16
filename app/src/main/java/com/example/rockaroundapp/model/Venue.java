@@ -34,16 +34,16 @@ public class Venue extends User {
     private Map<String, Object> address;
     private String userType;
     private String profileImg;
-    private static final ColorGenerator generator = ColorGenerator.MATERIAL;
+    private String randomAccountColour;
 
     public Venue() {
-        setUserType("VENUE");
+        setUserType("Venue");
         address = new HashMap<>();
     }
 
     public Venue(String firstname, String lastname, String email) {
         super(firstname, lastname, email);
-        setUserType("VENUE");
+        setUserType("Venue");
     }
 
     public String getVenueName() {
@@ -257,6 +257,6 @@ public class Venue extends User {
     }
 
     public TextDrawable getDefaultProfiler() {
-        return TextDrawable.builder().buildRect(String.valueOf(venueName.charAt(0)), generator.getRandomColor());
+        return TextDrawable.builder().buildRect(String.valueOf(venueName.charAt(0)), ColorGenerator.MATERIAL.getRandomColor());
     }
 }

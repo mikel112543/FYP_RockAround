@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder> {
 
@@ -52,11 +53,11 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-        holder.bindArtistReview(artistReviews.get(position));
-        if (!artistReviewers.isEmpty()) {
-            holder.bindArtistReviewer(artistReviewers.get(position));
+        if(!artistReviews.isEmpty()) {
+            holder.bindArtistReview(artistReviews.get(position));
+        }else{
+            holder.bindVenueReview(venueReviews.get(position));
         }
-
     }
 
     @Override
@@ -67,19 +68,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
         return venueReviews.size();
     }
 
-    public void updateArtistReviewList(List<ArtistReview> reviews, List<Venue> artistReviewers) {
+    public void updateArtistReviewList(List<ArtistReview> reviews) {
         this.artistReviews = reviews;
-        this.artistReviewers = artistReviewers;
         notifyDataSetChanged();
     }
 
-/*    public void updateArtistReviewers(List<Venue> reviewers) {
-        this.artistReviewers = reviewers;
-        notifyDataSetChanged();
-    }*/
-
     public void updateVenueReviews(List<VenueReview> reviews) {
         this.venueReviews = reviews;
+        notifyDataSetChanged();
     }
 
     class ReviewViewHolder extends RecyclerView.ViewHolder {
@@ -98,17 +94,11 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
         }
 
         public void bindVenueReview(VenueReview venueReview) {
+            binding.setReviewModel(venueReview);
+            binding.executePendingBindings();
+            mapRating(venueReview.getOverallRating());
 
-        }
 
-        public void bindArtistReviewer(Venue venue) {
-            binding.reviewerName2.setText(venue.getVenueName());
-            Picasso.get().load(venue.getProfileImg())
-                    .placeholder(R.drawable.ic_baseline_account_circle_24)
-                    .error(R.drawable.ic_baseline_account_circle_24)
-                    .fit()
-                    .centerCrop()
-                    .into(binding.reviewerProfileImg2);
         }
 
         private void mapRating(double rating) {
@@ -118,46 +108,37 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
                 binding.star3.setBackground(starOutline);
                 binding.star4.setBackground(starOutline);
                 binding.star5.setBackground(starOutline);
-            } else if (rating <= 0.50) {
-                binding.star1.setBackground(halfStar);
-            } else if (rating <= 1.00) {
-                binding.star1.setBackground(starFilled);
-            } else if (rating <= 1.50) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(halfStar);
-            } else if (rating <= 2.00) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-            } else if (rating <= 2.50) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(halfStar);
-            } else if (rating <= 3.00) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(starFilled);
-            } else if (rating <= 3.50) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(starFilled);
-                binding.star4.setBackground(halfStar);
-            } else if (rating <= 4.00) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(starFilled);
-                binding.star4.setBackground(starFilled);
-            } else if (rating <= 4.50) {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(starFilled);
-                binding.star4.setBackground(starFilled);
-                binding.star5.setBackground(halfStar);
             } else {
-                binding.star1.setBackground(starFilled);
-                binding.star2.setBackground(starFilled);
-                binding.star3.setBackground(starFilled);
-                binding.star4.setBackground(starFilled);
-                binding.star5.setBackground(starFilled);
+                if (rating <= 0.50) {
+                    binding.star1.setBackground(halfStar);
+                }
+                if (rating > 0.50) {
+                    binding.star1.setBackground(starFilled);
+                }
+                if (rating > 1.00 && rating <= 1.50) {
+                    binding.star2.setBackground(halfStar);
+                }
+                if (rating > 1.50) {
+                    binding.star2.setBackground(starFilled);
+                }
+                if (rating > 2.00 && rating <= 2.50) {
+                    binding.star3.setBackground(halfStar);
+                }
+                if (rating > 2.50) {
+                    binding.star3.setBackground(starFilled);
+                }
+                if (rating > 3.00 && rating <= 3.50) {
+                    binding.star4.setBackground(halfStar);
+                }
+                if (rating > 3.50) {
+                    binding.star4.setBackground(starFilled);
+                }
+                if (rating > 4.00 && rating <= 4.50) {
+                    binding.star5.setBackground(halfStar);
+                }
+                if (rating > 4.50) {
+                    binding.star5.setBackground(starFilled);
+                }
             }
         }
     }

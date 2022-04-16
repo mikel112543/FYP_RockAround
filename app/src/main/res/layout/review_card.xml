@@ -28,7 +28,9 @@
                     android:id="@+id/reviewer_profile_img_2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:layout_marginTop="5dp"
+                    android:imageURL="@{reviewModel.reviewerImg}"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +41,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:textSize="12sp"
+                    android:text="@{reviewModel.reviewerStageName}"
                     app:layout_constraintStart_toEndOf="@id/reviewer_profile_img_2"
                     app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,7 +1,6 @@
 package com.example.rockaroundapp.viewmodel;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.Artist;
@@ -34,8 +33,8 @@ public class ArtistProfileViewModel extends ViewModel {
 
     public LiveData<Boolean> alreadyReviewed(String artistId) { return repository.alreadyReviewed(artistId, "venue");}
 
-    public LiveData<List<ArtistReview>> getReviews(String artistId, int position) {
-        return reviewsRepository.getSortedReviews(artistId, position);
+    public LiveData<List<ArtistReview>> getReviews(String artistId) {
+        return reviewsRepository.getReviews(artistId);
     }
 
     public LiveData<Venue> getReviewer(String venueId) {

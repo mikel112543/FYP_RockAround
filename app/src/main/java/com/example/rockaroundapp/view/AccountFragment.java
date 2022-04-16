@@ -56,32 +56,54 @@ public class AccountFragment extends Fragment {
         starFilled = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_rate_50);
         starOutline = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_outline_24);
         halfStar = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_half_24);
-        viewModel.getUserType().observe(getViewLifecycleOwner(), userType -> {
-            currentUserType = userType;
-        });
-        if (currentUserType.equalsIgnoreCase("solo")) {
+        viewModel.getUserType().observe(getViewLifecycleOwner(), userType -> currentUserType = userType);
+        if (currentUserType.equalsIgnoreCase("solo") || currentUserType.equalsIgnoreCase("group")) {
             FragmentArtistProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_profile, container, false);
             binding.setLifecycleOwner(this);
             view = binding.getRoot();
-            viewModel.getSoloUser(currentUid).observe(getViewLifecycleOwner(), solo -> {
-                binding.setArtistModel(solo);
-                mapArtistRatings(solo, binding);
+            if (currentUserType.equalsIgnoreCase("solo")) {
+                viewModel.getSoloUser(currentUid).observe(getViewLifecycleOwner(), solo -> {
+                    binding.setArtistModel(solo);
+                    mapArtistRatings(solo, binding);
+                });
+            } else {
+                viewModel.getGroupUser(currentUid).observe(getViewLifecycleOwner(), groupArtist -> {
+                    binding.setArtistModel(groupArtist);
+                    binding.setGroupModel(groupArtist);
+                    mapArtistRatings(groupArtist, binding);
+                });
+            }
+            binding.writeReviewButton.setVisibility(View.INVISIBLE);
+            viewModel.getArtistReviews().observe(getViewLifecycleOwner(), venueReviews -> {
+                if(!venueReviews.isEmpty()) {
+                    binding.setArtistReview1(venueReviews.get(0));
+                }else{
+                    binding.noReviews.setVisibility(View.VISIBLE);
+                    binding.divider5.setVisibility(View.INVISIBLE);
+                }
+                if(venueReviews.size() >= 2) {
+                    binding.setArtistReview2(venueReviews.get(1));
+                }
             });
-        } else if(currentUserType.equalsIgnoreCase("group")){
-            FragmentArtistProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_artist_profile, container, false);
-            binding.setLifecycleOwner(this);
-            view = binding.getRoot();
-            viewModel.getGroupUser(currentUid).observe(getViewLifecycleOwner(), groupArtist -> {
-                binding.setArtistModel(groupArtist);
-                binding.setGroupModel(groupArtist);
-                mapArtistRatings(groupArtist, binding);
-            });
-        }else{
+        } else {
             FragmentVenueProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_venue_profile, container, false);
             binding.setLifecycleOwner(this);
             view = binding.getRoot();
             viewModel.getVenueUser(currentUid).observe(getViewLifecycleOwner(), venue -> {
                 binding.setVenueModel(venue);
+                binding.writeReviewButton.setVisibility(View.INVISIBLE);
+                mapVenueRatings(venue, binding);
+            });
+            viewModel.getVenueReviews().observe(getViewLifecycleOwner(), venueReviews -> {
+                if(!venueReviews.isEmpty()) {
+                    binding.setReviewOne(venueReviews.get(0));
+                }else{
+                    binding.noReviews.setVisibility(View.VISIBLE);
+                    binding.divider5.setVisibility(View.INVISIBLE);
+                }
+                if(venueReviews.size() >= 2) {
+                    binding.setReviewTwo(venueReviews.get(1));
+                }
             });
         }
         toolbar = requireActivity().findViewById(R.id.main_toolbar);
@@ -117,8 +139,11 @@ public class AccountFragment extends Fragment {
     }
 
     private void mapVenueRatings(Venue venue, FragmentVenueProfileBinding binding) {
-
-
+        mapRating(binding.reliabilityS1, binding.reliabilityS2, binding.reliabilityS3, binding.reliabilityS4, binding.reliabilityS5, venue.getAvgReliabilityRating());
+        mapRating(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, venue.getAvgCommunicationRating());
+        mapRating(binding.settingS1, binding.settingS2, binding.settingS3, binding.settingS4, binding.settingS5, venue.getAvgSettingRating());
+        mapRating(binding.atmosphereS1, binding.atmosphereS2, binding.atmosphereS3, binding.atmosphereS4, binding.atmosphereS5, venue.getAvgAtmosphereRating());
+        mapRating(binding.overallRatingS1, binding.overallRatingS2, binding.overallRatingS3, binding.overallRatingS4, binding.overallRatingS5, venue.getAvgOverallRating());
     }
 
     private void mapRating(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, double rating) {
@@ -128,46 +153,37 @@ public class AccountFragment extends Fragment {
             star3.setBackground(starOutline);
             star4.setBackground(starOutline);
             star5.setBackground(starOutline);
-        } else if (rating <= 0.50) {
-            star1.setBackground(halfStar);
-        } else if (rating <= 1.00) {
-            star1.setBackground(starFilled);
-        } else if (rating <= 1.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(halfStar);
-        } else if (rating <= 2.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-        } else if (rating <= 2.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(halfStar);
-        } else if (rating <= 3.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-        } else if (rating <= 3.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(halfStar);
-        } else if (rating <= 4.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
-        } else if (rating <= 4.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
-            star5.setBackground(halfStar);
         } else {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
-            star5.setBackground(starFilled);
+            if (rating <= 0.50) {
+                star1.setBackground(halfStar);
+            }
+            if (rating > 0.50) {
+                star1.setBackground(starFilled);
+            }
+            if (rating > 1.00 && rating <= 1.50) {
+                star2.setBackground(halfStar);
+            }
+            if (rating > 1.50) {
+                star2.setBackground(starFilled);
+            }
+            if (rating > 2.00 && rating <= 2.50) {
+                star3.setBackground(halfStar);
+            }
+            if (rating > 2.50) {
+                star3.setBackground(starFilled);
+            }
+            if (rating > 3.00 && rating <= 3.50) {
+                star4.setBackground(halfStar);
+            }
+            if (rating > 3.50) {
+                star4.setBackground(starFilled);
+            }
+            if (rating > 4.00 && rating <= 4.50) {
+                star5.setBackground(halfStar);
+            }
+            if (rating > 4.50) {
+                star5.setBackground(starFilled);
+            }
         }
     }
 

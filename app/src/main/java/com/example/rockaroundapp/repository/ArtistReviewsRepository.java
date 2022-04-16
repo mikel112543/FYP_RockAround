@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
@@ -99,27 +98,41 @@ public class ArtistReviewsRepository {
         });
     }
 
+    private void uploadVenueData(ArtistReview artistReview, String userType) {
+        db.collection("venue").document(currentUid).collection("writtenReviews")
+                .document(artistReview.getReviewedId()).set(artistReview).addOnCompleteListener(upload -> {
+            if (upload.isSuccessful()) {
+                setArtistAverageRatings(artistReview, userType);
+            }
+        });
+    }
+
     //For venues to submit reviews of artists
     public void submitArtistReview(ArtistReview artistReview) {
-        db.collection("solo").document(artistReview.getReviewedId()).get().addOnCompleteListener(snapshot -> {
+        db.collection("venue").document(artistReview.getReviewerId()).get().addOnCompleteListener(snapshot -> {
             if (snapshot.getResult().getData() != null) {
-                db.collection("solo").document(artistReview.getReviewedId()).collection("reviews").document(currentUid).set(artistReview).addOnCompleteListener(upload -> {
-                    Log.w(TAG, "Solo review upload successful");
-                    db.collection("venue").document(currentUid).collection("writtenReviews").document(artistReview.getReviewedId()).set(artistReview).addOnCompleteListener(venueUpload -> {
-                        if (venueUpload.isSuccessful()) {
-                            Log.w(TAG, "Review of venue upload successful");
-                            setArtistAverageRatings(artistReview, "solo");
-                        }
-                    });
-                });
-            } else {
-                db.collection("group").document(artistReview.getReviewedId()).collection("reviews").document(currentUid).set(artistReview).addOnCompleteListener(groupUpload -> {
-                    if (groupUpload.isSuccessful()) {
-                        Log.w(TAG, "Group review upload successful");
-                        db.collection("venue").document(currentUid).collection("writtenReviews").document(artistReview.getReviewedId()).set(artistReview).addOnCompleteListener(venueUpload -> {
-                            if (venueUpload.isSuccessful()) {
-                                Log.w(TAG, "Review of venue upload successful");
-                                setArtistAverageRatings(artistReview, "group");
+                Venue venueReviewer = snapshot.getResult().toObject(Venue.class); //Get reviewer object
+                HashMap<String, Object> venueMp = new HashMap<>();
+                venueMp.put("iD", venueReviewer.getId());
+                venueMp.put("userType", venueReviewer.getUserType());
+                venueMp.put("profileImg", venueReviewer.getProfileImg());
+                venueMp.put("stageName", venueReviewer.getVenueName());
+                artistReview.setReviewer(venueMp);
+                db.collection("solo").document(artistReview.getReviewedId()).get().addOnCompleteListener(user -> {
+                    if (user.getResult().getData() != null) {   //Check if reviewed user is solo
+                        db.collection("solo").document(artistReview.getReviewedId())
+                                .collection("reviews").document(currentUid).set(artistReview)
+                                .addOnCompleteListener(upload -> {
+                                    if (upload.isSuccessful()) {
+                                        uploadVenueData(artistReview, "solo");  //Upload review to Venue section
+                                    }
+                                });
+                    } else {
+                        db.collection("group").document(artistReview.getReviewedId())
+                                .collection("reviews").document(currentUid) //Check if user is group
+                                .set(artistReview).addOnCompleteListener(groupUpload -> {
+                            if (groupUpload.isSuccessful()) {
+                                uploadVenueData(artistReview, "group");
                             }
                         });
                     }
@@ -142,7 +155,7 @@ public class ArtistReviewsRepository {
     }
 
     //Return all reviews for either solo or group artist
-    public MutableLiveData<List<ArtistReview>> getSortedReviews(String artistId, int position) {
+    public MutableLiveData<List<ArtistReview>> getReviews(String artistId) {
         db.collection("solo").document(artistId).collection("reviews").addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 Log.w(TAG, "Failed to get reviews for solo artist");
@@ -153,27 +166,18 @@ public class ArtistReviewsRepository {
                     for (DocumentSnapshot documentSnapshot : snapshot) {
                         artistReviews.add(documentSnapshot.toObject(ArtistReview.class));
                     }
-                    if(position <= 3) {
-                        sortList(position);
-                    }
                     _artistReviews.postValue(artistReviews);
-                    //_artistReviews.postValue(artistReviews);
                 } else {
                     db.collection("group").document(artistId).collection("reviews").addSnapshotListener((snapshot1, e1) -> {
                         if (e1 != null) {
                             Log.w(TAG, "Failed to get reviews for group artist");
                         }
                         if (snapshot1 != null) {
-                            if (!snapshot1.isEmpty()) {
-                                artistReviews.clear();
-                                for (DocumentSnapshot documentSnapshot : snapshot1) {
-                                    artistReviews.add(documentSnapshot.toObject(ArtistReview.class));
-                                }
-                                if(position <= 3) {
-                                    sortList(position);
-                                }
-                                _artistReviews.postValue(artistReviews);
+                            artistReviews.clear();
+                            for (DocumentSnapshot documentSnapshot : snapshot1) {
+                                artistReviews.add(documentSnapshot.toObject(ArtistReview.class));
                             }
+                            _artistReviews.postValue(artistReviews);
                         }
                     });
                 }
@@ -184,17 +188,17 @@ public class ArtistReviewsRepository {
 
     public MutableLiveData<List<Venue>> getReviewersForArtist(List<ArtistReview> artistReviews) {
         artistReviewers.clear();
-            for (ArtistReview artistReview : artistReviews) {
-                db.collection("venue").document(artistReview.getReviewerId()).addSnapshotListener((snapshot, e) -> {
-                    assert snapshot != null;
-                    if (snapshot.getData()!= null) {
-                        artistReviewers.add(snapshot.toObject(Venue.class));
-                        _artistReviewers.postValue(artistReviewers);
-                    } else {
-                        Log.w(TAG, "Could not find reviewer for artist");
-                    }
-                });
-            }
+        for (ArtistReview artistReview : artistReviews) {
+            db.collection("venue").document(artistReview.getReviewerId()).addSnapshotListener((snapshot, e) -> {
+                assert snapshot != null;
+                if (snapshot.getData() != null) {
+                    artistReviewers.add(snapshot.toObject(Venue.class));
+                    _artistReviewers.postValue(artistReviewers);
+                } else {
+                    Log.w(TAG, "Could not find reviewer for artist");
+                }
+            });
+        }
         _artistReviewers.postValue(artistReviewers);
         return _artistReviewers;
     }

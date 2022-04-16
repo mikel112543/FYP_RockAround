@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,6 @@ import com.example.rockaroundapp.viewmodel.ArtistProfileViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mysql.cj.util.StringUtils;
-import com.squareup.picasso.Picasso;
 
 public class ArtistProfileFragment extends Fragment {
 
@@ -74,39 +72,16 @@ public class ArtistProfileFragment extends Fragment {
                 binding.profileImage.setImageDrawable(artist.getDefaultProfiler());
             }
         });
-        viewModel.getReviews(id, 10).observe(getViewLifecycleOwner(), reviews -> {
+        viewModel.getReviews(id).observe(getViewLifecycleOwner(), reviews -> {
             if (!reviews.isEmpty()) {
                 binding.setArtistReview1(reviews.get(0));
                 binding.noReviews.setVisibility(View.INVISIBLE);
-                viewModel.getReviewer(reviews.get(0).getReviewerId()).observe(getViewLifecycleOwner(), reviewerVenue -> {
-                    binding.reviewerName.setText(reviewerVenue.getVenueName());
-                    Picasso.get().load(reviewerVenue.getProfileImg())
-                            .placeholder(R.drawable.ic_baseline_account_circle_24)
-                            .error(R.drawable.ic_baseline_account_circle_24)
-                            .fit()
-                            .centerCrop()
-                            .into(binding.reviewerProfileImg);
-                });
-                if (reviews.size() >= 2) {
-                    binding.setArtistReview2(reviews.get(1));
-                    viewModel.getReviewer(reviews.get(1).getReviewerId()).observe(getViewLifecycleOwner(), reviewerVenue2 -> {
-                        binding.reviewerName2.setText(reviewerVenue2.getVenueName());
-                        Picasso.get().load(reviewerVenue2.getProfileImg())
-                                .placeholder(R.drawable.ic_baseline_account_circle_24)
-                                .error(R.drawable.ic_baseline_account_circle_24)
-                                .fit()
-                                .centerCrop()
-                                .into(binding.reviewerProfileImg2);
-                    });
-                }
             } else {
-                binding.reviewsSection.setVisibility(View.INVISIBLE);
-                binding.reviewCard2.setVisibility(View.INVISIBLE);
-                binding.reviewCard.setVisibility(View.INVISIBLE);
                 binding.divider5.setVisibility(View.INVISIBLE);
-                binding.reviewerProfileImg.setVisibility(View.INVISIBLE);
-                binding.reviewerProfileImg2.setVisibility(View.INVISIBLE);
                 binding.noReviews.setVisibility(View.VISIBLE);
+            }
+            if (reviews.size() >= 2) {
+                binding.setArtistReview2(reviews.get(1));
             }
         });
     }
@@ -121,38 +96,16 @@ public class ArtistProfileFragment extends Fragment {
                 binding.profileImage.setImageDrawable(groupArtist.getDefaultProfiler());
             }
         });
-        viewModel.getReviews(id, 10).observe(getViewLifecycleOwner(), reviews -> {
+        viewModel.getReviews(id).observe(getViewLifecycleOwner(), reviews -> {
             if (!reviews.isEmpty()) {
                 binding.setArtistReview1(reviews.get(0));
-                viewModel.getReviewer(reviews.get(0).getReviewerId()).observe(getViewLifecycleOwner(), reviewerVenue -> {
-                    binding.reviewerName.setText(reviewerVenue.getVenueName());
-                    Picasso.get().load(reviewerVenue.getProfileImg())
-                            .placeholder(R.drawable.ic_baseline_account_circle_24)
-                            .error(R.drawable.ic_baseline_account_circle_24)
-                            .fit()
-                            .centerCrop()
-                            .into(binding.reviewerProfileImg);
-                });
-                if (reviews.size() >= 2) {
-                    binding.setArtistReview2(reviews.get(1));
-                    viewModel.getReviewer(reviews.get(0).getReviewerId()).observe(getViewLifecycleOwner(), reviewerVenue -> {
-                        binding.reviewerName.setText(reviewerVenue.getVenueName());
-                        Picasso.get().load(reviewerVenue.getProfileImg())
-                                .placeholder(R.drawable.ic_baseline_account_circle_24)
-                                .error(R.drawable.ic_baseline_account_circle_24)
-                                .fit()
-                                .centerCrop()
-                                .into(binding.reviewerProfileImg);
-                    });
-                }
+                binding.noReviews.setVisibility(View.INVISIBLE);
             } else {
-                binding.reviewsSection.setVisibility(View.INVISIBLE);
-                binding.reviewCard2.setVisibility(View.INVISIBLE);
-                binding.reviewCard.setVisibility(View.INVISIBLE);
                 binding.divider5.setVisibility(View.INVISIBLE);
-                binding.reviewerProfileImg.setVisibility(View.INVISIBLE);
-                binding.reviewerProfileImg2.setVisibility(View.INVISIBLE);
                 binding.noReviews.setVisibility(View.VISIBLE);
+            }
+            if (reviews.size() >= 2) {
+                binding.setArtistReview2(reviews.get(1));
             }
         });
     }

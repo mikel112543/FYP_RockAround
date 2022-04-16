@@ -1,0 +1,11 @@
+
+p
+java:S1450"ZRemove the "artistSetup" field and declare it as a local variable in the relevant methods.(øÍ¾Ü
+v
+java:S1450"`Remove the "documentReference" field and declare it as a local variable in the relevant methods.( Êİ
+P	java:S125?"<This block of commented-out lines of code should be removed.(¡²ƒ<
+Q	java:S125M"<This block of commented-out lines of code should be removed.(ê©¼›
+C
+java:S1068"-Remove this unused "imagePath" private field.(Ìš•
+G
+java:S1068",Remove this unused "imageUri" private field.(Ø°´şÿÿÿÿ

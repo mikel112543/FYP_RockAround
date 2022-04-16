@@ -102,10 +102,19 @@ public class VenueProfileFragment extends Fragment {
         navController.navigate(R.id.action_venueProfileFragment_to_reviewOfVenueFragment, bundle);
     }
 
+    private void onMoreReviewsClicked(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("venueId", id);
+        bundle.putString("currentUserType", "solo");
+        navController.navigate(R.id.action_venueProfileFragment_to_userReviewsFragment, bundle);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         binding.writeReviewButton.setOnClickListener(this::onWriteReviewClicked);
+        binding.moreReviewButton.setOnClickListener(this::onMoreReviewsClicked);
+
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -150,8 +159,7 @@ public class VenueProfileFragment extends Fragment {
                 star4.setBackground(starFilled);
             }
             if (rating > 4.00 && rating <= 4.50) {
-                star5.setImageDrawable(halfStar);
-                //star5.setBackground(halfStar);
+                star5.setBackground(halfStar);
             }
             if (rating > 4.50) {
                 star5.setBackground(starFilled);

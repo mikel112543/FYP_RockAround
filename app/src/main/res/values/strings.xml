@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RockAroundApp</string>
+    <string name="app_name">RockAround</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_reviews_too_see_here">No Reviews</string>
     <string name="per_hour">per hour</string>
@@ -25,6 +25,22 @@
     <string name="stage_presence_rating">Stage Presence Rating</string>
     <string name="vocals_rating">Vocals Rating</string>
     <string name="bio">Bio</string>
+    <string name="town_city">Town/City</string>
+    <string name="price">Price</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="save">Save</string>
+    <string name="no_of_members">No. of members</string>
+    <string name="add_genre">Add Genre</string>
+    <string name="tell_us_about_the_group">Tell us about the group</string>
+    <string name="group_name">Group name</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="venue_name">Venue Name</string>
+    <string name="address_line_one">Address Line one</string>
+    <string name="county">County</string>
+    <string name="country">Country</string>
+    <string name="max_capacity">Max Capacity</string>
+    <string name="login">Login</string>
 
     <string-array name="genres">
         <item>Jazz</item>

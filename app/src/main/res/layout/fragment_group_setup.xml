@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="80dp"
-                android:text="Profile Image"
+                android:text="@string/profile_image"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/pill_button"
                 android:gravity="center"
-                android:text="Choose Image"
+                android:text="@string/choose_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_image_view" />
@@ -58,6 +58,8 @@
                 android:layout_marginTop="20dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/upload_image_button">
@@ -65,9 +67,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Group name"
-                    android:layout_marginStart="20sp"
-                    android:layout_marginEnd="20sp"
+                    android:hint="@string/group_name"
                     android:background="@drawable/edit_text_background"
                     android:inputType="textCapSentences"
                     android:text="@={groupSetupViewModel.groupName}" />
@@ -82,7 +82,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bio_box_outline"
                 android:gravity="start|top"
-                android:hint="Tell us about the group"
+                android:hint="@string/tell_us_about_the_group"
                 android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
                 android:text="@={groupSetupViewModel.bio}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,7 @@
                 android:layout_marginEnd="20dp"
                 app:layout_constraintTop_toBottomOf="@id/bio_editText"
                 android:background="@drawable/pill_button"
-                android:hint="Add Genre"
+                android:hint="@string/add_genre"
                 app:layout_constraintBottom_toTopOf="@id/no_of_members_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/genres_textInputLayout" />
@@ -131,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_background"
-                    android:hint="No. of members"
+                    android:hint="@string/no_of_members"
                     android:inputType="number"
                     android:text="@={groupSetupViewModel.noOfMembers}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -143,8 +143,7 @@
                 android:layout_marginTop="20dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/price_text"
+                app:layout_constraintBottom_toTopOf="@+id/city_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/no_of_members_text">
@@ -155,9 +154,32 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/edit_text_background"
-                    android:hint="Contact Number"
+                    android:hint="@string/contact_number"
                     android:inputType="number"
                     android:text="@={groupSetupViewModel.contactNumber}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/city_text"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/price_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/town_city"
+                    android:inputType="number"
+                    android:text="@={groupSetupViewModel.city}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -169,7 +191,7 @@
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contact_text">
+                app:layout_constraintTop_toBottomOf="@id/city_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

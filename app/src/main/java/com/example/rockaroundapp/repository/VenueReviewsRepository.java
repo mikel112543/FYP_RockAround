@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.rockaroundapp.model.Artist;
+import com.example.rockaroundapp.model.ArtistReview;
 import com.example.rockaroundapp.model.GroupArtist;
 import com.example.rockaroundapp.model.User;
 import com.example.rockaroundapp.model.Venue;
@@ -18,6 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,12 +33,14 @@ public class VenueReviewsRepository {
     private MutableLiveData<Boolean> _success;
     private final MutableLiveData<List<VenueReview>> _venueReviews;
     private final String currentUid = FirebaseAuth.getInstance().getUid();
+    private List<VenueReview> venueReviews;
     private UserRepository userRepository;
 
     public VenueReviewsRepository() {
         userRepository = new UserRepository();
         _success = new MutableLiveData<>();
         _venueReviews = new MutableLiveData<>();
+        venueReviews = new ArrayList<>();
     }
 
     public MutableLiveData<Boolean> getSuccess() {
@@ -44,6 +49,19 @@ public class VenueReviewsRepository {
         }
         return _success;
 
+    }
+
+    public void sortList(int orderPosition) {
+        if (orderPosition == 0) { //Descending
+            Collections.sort(venueReviews, Comparator.comparing(VenueReview::getDate).reversed());
+        } else if (orderPosition == 1) { //Ascending
+            Collections.sort(venueReviews, Comparator.comparing(VenueReview::getDate));
+        } else if (orderPosition == 2) { //Rating (High - low)
+            Collections.sort(venueReviews, Comparator.comparing(VenueReview::getOverallRating).reversed());
+        } else { //Rating (Low - high)re
+            Collections.sort(venueReviews, Comparator.comparing(VenueReview::getOverallRating));
+        }
+        _venueReviews.postValue(venueReviews);
     }
 
     //For Artists to submit reviews on venues
@@ -60,7 +78,7 @@ public class VenueReviewsRepository {
                 db.collection("solo").document(artistReviewer.getId())
                         .collection("writtenReviews").document(venueReview.getReviewedId()).set(venueReview).addOnCompleteListener(upload -> {
                     if (upload.isSuccessful()) {
-                        uploadVenueData(venueReview, artistMp);
+                        uploadVenueData(venueReview);
                     }
                 });
             } else {
@@ -76,7 +94,7 @@ public class VenueReviewsRepository {
                             .collection("writtenReviews").document(venueReview.getReviewedId())
                             .set(venueReview).addOnCompleteListener(upload -> {
                         if (upload.isSuccessful()) {
-                            uploadVenueData(venueReview, artistMp);
+                            uploadVenueData(venueReview);
                         }
                     });
                 });
@@ -84,7 +102,7 @@ public class VenueReviewsRepository {
         });
     }
 
-    private void uploadVenueData(VenueReview venueReview, Map<String, Object> artistMp) {
+    private void uploadVenueData(VenueReview venueReview) {
         db.collection("venue").document(venueReview.getReviewedId()).collection("reviews")
                 .document(currentUid).set(venueReview).addOnCompleteListener(upload -> {
             if (upload.isSuccessful()) {
@@ -164,7 +182,7 @@ public class VenueReviewsRepository {
     }
 
     public LiveData<List<VenueReview>> getReviews(String id) {
-        List<VenueReview> venueReviews = new ArrayList<>();
+        venueReviews.clear();
         db.collection("venue").document(id).collection("reviews").addSnapshotListener((snapshot, e) -> {
             if(e != null) {
                 Log.w(TAG, "No documents found");

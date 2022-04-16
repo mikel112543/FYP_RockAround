@@ -1,11 +1,14 @@
 package com.example.rockaroundapp.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rockaroundapp.model.VenueReview;
 import com.example.rockaroundapp.repository.UserRepository;
 import com.example.rockaroundapp.repository.VenueReviewsRepository;
+
+import java.util.List;
 
 public class VenueReviewsViewModel extends ViewModel {
 
@@ -64,6 +67,10 @@ public class VenueReviewsViewModel extends ViewModel {
         this.reliabilityRating = reliabilityRating;
     }
 
+    public LiveData<List<VenueReview>> getAllReviews(String venueId) {
+        return reviewsRepository.getReviews(venueId);
+    }
+
     public void onSubmitClick() {
         VenueReview review = new VenueReview();
         review.setTitle(reviewTitle.getValue());
@@ -77,5 +84,9 @@ public class VenueReviewsViewModel extends ViewModel {
 
     public void saveReview(VenueReview venueReview) {
         reviewsRepository.saveVenueReview(venueReview);
+    }
+
+    public void sortReviews(int position) {
+        reviewsRepository.sortList(position);
     }
 }
