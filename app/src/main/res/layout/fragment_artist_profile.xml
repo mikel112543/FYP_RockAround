@@ -127,6 +127,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@{artistModel.bio}"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@id/divider"
                 app:layout_constraintStart_toStartOf="@id/divider"
                 app:layout_constraintTop_toBottomOf="@id/bio_title" />
@@ -147,7 +148,7 @@
                 android:id="@+id/contact_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact"
+                android:text="@string/contact"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/divider2" />
@@ -156,7 +157,10 @@
                 android:id="@+id/email_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoLink="email"
+                android:linksClickable="true"
                 android:text="@{artistModel.email}"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/contact_title" />
 
@@ -164,7 +168,11 @@
                 android:id="@+id/number_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@{artistModel.contact}"
+                android:autoLink="phone"
+                android:linksClickable="true"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/email_field" />
 
@@ -185,7 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Ratings"
+                android:text="@string/ratings"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider3"
                 app:layout_constraintTop_toBottomOf="@id/divider3">
@@ -197,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Overall Rating"
+                android:text="@string/overall_rating"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/overall_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/ratings_title" />
@@ -214,34 +222,29 @@
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
-                    android:scaleType="center"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:scaleType="center"
                     android:background="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
 
@@ -249,10 +252,11 @@
                 android:id="@+id/overall_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 android:text="@{artistModel.avgOverallRating + ` / 5`}"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
-                app:layout_constraintStart_toStartOf="@id/overall_rating_title"/>
+                app:layout_constraintStart_toStartOf="@id/overall_rating_title"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/avg_stage_presence_title"
@@ -260,8 +264,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Stage Presence Rating"
-                android:textSize="9sp"
+                android:text="@string/stage_presence_rating"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/stage_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating"
                 tools:ignore="SmallSp" />
@@ -308,10 +312,11 @@
                 android:id="@+id/stage_presence_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 app:layout_constraintTop_toBottomOf="@id/stage_rating_stars"
                 app:layout_constraintStart_toStartOf="@id/avg_stage_presence_title"
-                android:text="@{artistModel.avgStagePresenceRating + ` / 5`}"/>
+                android:text="@{artistModel.avgStagePresenceRating + ` / 5`}"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/avg_vocals_title"
@@ -319,10 +324,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Vocals Rating"
-                android:textSize="9sp"
+                android:text="@string/vocals_rating"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/vocals_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/overall_rating" />
+                app:layout_constraintTop_toBottomOf="@id/overall_rating"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/vocals_rating_stars"
@@ -366,10 +372,11 @@
                 android:id="@+id/vocals_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 app:layout_constraintTop_toBottomOf="@id/vocals_rating_stars"
                 app:layout_constraintStart_toStartOf="@id/avg_vocals_title"
-                android:text="@{artistModel.avgVocalsRating + ` / 5`}"/>
+                android:text="@{artistModel.avgVocalsRating + ` / 5`}"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/reliability_rating_title"
@@ -377,8 +384,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Reliability Rating"
-                android:textSize="9sp"
+                android:text="@string/reliability_rating"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/reliability_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/vocals_rating" />
 
@@ -424,10 +431,11 @@
                 android:id="@+id/reliability_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 android:text="@{artistModel.avgReliabilityRating + ` / 5`}"
                 app:layout_constraintTop_toBottomOf="@id/reliability_rating_stars"
-                app:layout_constraintStart_toStartOf="@id/reliability_rating_title"/>
+                app:layout_constraintStart_toStartOf="@id/reliability_rating_title"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/communication_rating_title"
@@ -435,10 +443,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Communication Rating"
-                android:textSize="9sp"
+                android:text="@string/communication_rating"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/communication_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/vocals_rating" />
+                app:layout_constraintTop_toBottomOf="@id/vocals_rating"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/communication_rating_stars"
@@ -483,10 +492,11 @@
                 android:id="@+id/communication_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 android:text="@{artistModel.avgCommunicationRating + ` / 5`}"
                 app:layout_constraintTop_toBottomOf="@id/communication_rating_stars"
-                app:layout_constraintStart_toStartOf="@id/communication_rating_title"/>
+                app:layout_constraintStart_toStartOf="@id/communication_rating_title"
+                tools:ignore="SmallSp" />
 
             <View
                 android:id="@+id/divider4"
@@ -505,7 +515,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Reviews"
+                android:text="@string/reviews"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/bio_title"
                 app:layout_constraintTop_toBottomOf="@id/divider4" />
@@ -549,7 +559,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="12sp"
+                            android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@id/reviewer_profile_img"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -560,7 +570,8 @@
                             android:text="@{artistReview1.date}"
                             android:textSize="9sp"
                             app:layout_constraintStart_toStartOf="@id/reviewer_name"
-                            app:layout_constraintTop_toBottomOf="@id/reviewer_name" />
+                            app:layout_constraintTop_toBottomOf="@id/reviewer_name"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:id="@+id/review_title"
@@ -581,7 +592,8 @@
                             android:text="@{artistReview1.description}"
                             android:textSize="10sp"
                             app:layout_constraintStart_toStartOf="@id/review_title"
-                            app:layout_constraintTop_toBottomOf="@id/review_title" />
+                            app:layout_constraintTop_toBottomOf="@id/review_title"
+                            tools:ignore="SmallSp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -635,7 +647,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="12sp"
+                            android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@id/reviewer_profile_img_2"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -646,7 +658,8 @@
                             android:text="@{artistReview2.date}"
                             android:textSize="9sp"
                             app:layout_constraintStart_toStartOf="@id/reviewer_name_2"
-                            app:layout_constraintTop_toBottomOf="@id/reviewer_name_2" />
+                            app:layout_constraintTop_toBottomOf="@id/reviewer_name_2"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:id="@+id/review_title_2"
@@ -667,7 +680,8 @@
                             android:text="@{artistReview2.description}"
                             android:textSize="10sp"
                             app:layout_constraintStart_toStartOf="@id/review_title_2"
-                            app:layout_constraintTop_toBottomOf="@id/review_title_2" />
+                            app:layout_constraintTop_toBottomOf="@id/review_title_2"
+                            tools:ignore="SmallSp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -678,11 +692,12 @@
                     android:layout_marginTop="20dp"
                     android:textColor="@color/primary_pink"
                     android:background="@drawable/pill_button_outline"
-                    android:text="More reviews"
+                    android:text="@string/more_reviews"
                     android:textSize="10sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/review_card_2" />
+                    app:layout_constraintTop_toBottomOf="@id/review_card_2"
+                    tools:ignore="SmallSp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/write_review_button"
@@ -691,8 +706,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/pill_button"
-                    android:text="Write Review"
-                    android:textSize="10dp"
+                    android:text="@string/write_review"
+                    android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

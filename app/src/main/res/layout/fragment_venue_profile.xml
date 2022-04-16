@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Bio"
+                android:text="@string/bio"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -110,6 +110,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@{venueModel.bio}"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@id/divider"
                 app:layout_constraintStart_toStartOf="@id/divider"
                 app:layout_constraintTop_toBottomOf="@id/bio_title" />
@@ -130,7 +131,7 @@
                 android:id="@+id/contact_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact"
+                android:text="@string/contact"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/divider2" />
@@ -139,7 +140,10 @@
                 android:id="@+id/email_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoLink="email"
+                android:linksClickable="true"
                 android:text="@{venueModel.email}"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/contact_title" />
 
@@ -148,6 +152,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{venueModel.contact}"
+                android:autoLink="phone"
+                android:linksClickable="true"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/divider2"
                 app:layout_constraintTop_toBottomOf="@id/email_field" />
 
@@ -168,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Ratings"
+                android:text="@string/ratings"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/divider3"
                 app:layout_constraintTop_toBottomOf="@id/divider3"/>
@@ -179,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Overall Rating"
+                android:text="@string/overall_rating"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/overall_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/ratings_title" />
@@ -225,9 +232,19 @@
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
                     android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/overall_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="@{venueModel.avgOverallRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/overall_rating_title"
+                tools:ignore="SmallSp" />
+
 
             <TextView
                 android:id="@+id/avg_setting_rating_title"
@@ -236,7 +253,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/setting_rating"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/setting_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
                 tools:ignore="SmallSp" />
@@ -280,13 +297,23 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/setting_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@id/setting_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/avg_setting_rating_title"
+                android:text="@{venueModel.avgSettingRating + ` / 5`}"
+                tools:ignore="SmallSp" />
+
+            <TextView
                 android:id="@+id/avg_atmosphere_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/atmosphere_rating"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/atmosphere_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/overall_rating_stars"
                 tools:ignore="SmallSp" />
@@ -330,15 +357,26 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/atmosphere_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/avg_atmosphere_title"
+                android:text="@{venueModel.avgAtmosphereRating + ` / 5`}"
+                tools:ignore="SmallSp" />
+
+            <TextView
                 android:id="@+id/reliability_rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Reliability Rating"
-                android:textSize="9sp"
+                android:layout_marginTop="30dp"
+                android:text="@string/reliability_rating"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/reliability_rating_stars"
-                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/reliability_rating_stars"
@@ -379,13 +417,23 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/reliability_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="@{venueModel.avgReliabilityRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/reliability_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/reliability_rating_title"
+                tools:ignore="SmallSp" />
+
+            <TextView
                 android:id="@+id/communication_rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/communication_rating"
-                android:textSize="9sp"
+                android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/communication_rating_stars"
                 app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_stars"
                 tools:ignore="SmallSp" />
@@ -428,6 +476,16 @@
                     android:background="@drawable/ic_baseline_star_outline_24" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/communication_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="@{venueModel.avgCommunicationRating + ` / 5`}"
+                app:layout_constraintTop_toBottomOf="@id/communication_rating_stars"
+                app:layout_constraintStart_toStartOf="@id/communication_rating_title"
+                tools:ignore="SmallSp" />
+
             <View
                 android:id="@+id/divider4"
                 android:layout_width="match_parent"
@@ -438,7 +496,7 @@
                 android:background="@color/primary_pink"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/communication_rating_stars" />
+                app:layout_constraintTop_toBottomOf="@id/communication_rating" />
 
             <TextView
                 android:id="@+id/reviews_title"
@@ -577,7 +635,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:text="@{reviewTwo.reviewerStageName}"
-                            android:textSize="12sp"
+                            android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@id/reviewer_profile_img_2"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -588,7 +646,8 @@
                             android:text="@{reviewTwo.date}"
                             android:textSize="9sp"
                             app:layout_constraintStart_toStartOf="@id/reviewer_name_2"
-                            app:layout_constraintTop_toBottomOf="@id/reviewer_name_2" />
+                            app:layout_constraintTop_toBottomOf="@id/reviewer_name_2"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:id="@+id/review_title_2"
