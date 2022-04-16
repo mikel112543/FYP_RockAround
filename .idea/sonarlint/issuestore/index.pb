@@ -17,8 +17,6 @@ Oapp/src/androidTest/java/com/example/rockaroundapp/ExampleInstrumentedTest.java
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 r
-Bapp/src/main/java/com/example/rockaroundapp/model/GroupArtist.java,1\3\13260fe0a8b9c39fc665822cb555af1199b917d6
-r
 Bapp/src/main/java/com/example/rockaroundapp/model/SampleTrack.java,d\1\d122ad58b4bdb90d96d55b01cadebe8f908e4e41
 y
 Iapp/src/main/java/com/example/rockaroundapp/listeners/ArtistListener.java,8\1\8132a8a8c5838e3413af69684b274de332f42a9f
@@ -36,8 +34,6 @@ k
 Napp/src/main/java/com/example/rockaroundapp/viewmodel/VenueSetupViewModel.java,8\b\8b4795ed8c138810c0ef1ede65f42c8271445459
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-w
-Gapp/src/main/java/com/example/rockaroundapp/view/SoloSetupFragment.java,0\8\0810a6e005b102b97437ac2c469d8d807e5ceccb
 x
 Happ/src/main/java/com/example/rockaroundapp/adapters/ReviewsAdapter.java,a\f\afa8e825e25a4b5403f35d4f7c165b514173ac01
 
@@ -60,8 +56,6 @@ Iapp/src/main/java/com/example/rockaroundapp/viewmodel/LoginViewModel.java,c\f\
 Lapp/src/main/java/com/example/rockaroundapp/viewmodel/RegisterViewModel.java,9\e\9ec52f224ce54860558ef08b34f769d016423c04
 v
 Fapp/src/main/java/com/example/rockaroundapp/constants/RatingsEnum.java,8\c\8c432cb6d3755532dd7d8b76bb47c21b5483bf68
-m
-=app/src/main/java/com/example/rockaroundapp/model/Artist.java,e\a\ea10d50b0433e838f9d522a797d2c82668e8b0b9
 y
 Iapp/src/main/java/com/example/rockaroundapp/view/UserReviewsFragment.java,6\d\6defc111dd969e55f963c073a8d34804b6f44978
 |
@@ -76,5 +70,3 @@ Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22d
 Sapp/src/main/java/com/example/rockaroundapp/repository/ArtistReviewsRepository.java,a\8\a80c5b8825015aa76a8375829c5aea74f22c7b10
 z
 Japp/src/main/java/com/example/rockaroundapp/repository/UserRepository.java,3\9\39a66985332ff732d1bbad9716158df229de1b1a
-l
-<app/src/main/java/com/example/rockaroundapp/model/Venue.java,3\b\3bf0d546b5007f3aefe8b55bfca7538b8def5b8d
