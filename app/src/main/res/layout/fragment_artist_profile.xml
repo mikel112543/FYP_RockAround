@@ -222,30 +222,30 @@
                     android:id="@+id/overall_rating_s1"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s2"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s3"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/overall_rating_s4"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
                 <ImageView
                     android:id="@+id/overall_rating_s5"
                     android:layout_width="35dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
             </LinearLayout>
 
             <TextView
@@ -401,19 +401,19 @@
                     android:id="@+id/reliability_s1"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s2"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s3"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
+                    android:src="@drawable/ic_baseline_star_outline_24"/>
 
                 <ImageView
                     android:id="@+id/reliability_s4"

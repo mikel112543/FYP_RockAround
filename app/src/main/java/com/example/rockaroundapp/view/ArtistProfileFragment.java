@@ -34,10 +34,6 @@ public class ArtistProfileFragment extends Fragment {
     private String id;
     private String currentUserType;
     private NavController navController;
-    private Drawable starOutline;
-    private Drawable starFilled;
-    private Drawable halfStar;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +43,6 @@ public class ArtistProfileFragment extends Fragment {
         setHasOptionsMenu(false);
         bottomNavigationView.setVisibility(View.INVISIBLE);
         toolbar.setVisibility(View.VISIBLE);
-        starFilled = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_rate_50);
-        starOutline = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_outline_24);
-        halfStar = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_star_half_24);
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_artist_profile, container, false);
         View view = binding.getRoot();
@@ -150,52 +143,55 @@ public class ArtistProfileFragment extends Fragment {
     }
 
     private void mapRating(ImageView star1, ImageView star2, ImageView star3, ImageView star4, ImageView star5, double rating) {
+        int starFilled = R.drawable.ic_baseline_star_rate_50;
+        int halfStar = R.drawable.ic_baseline_star_half_24;
+        int starOutline = R.drawable.ic_baseline_star_outline_24;
         if (rating == 0.0) {
-            star1.setBackground(starOutline);
-            star2.setBackground(starOutline);
-            star3.setBackground(starOutline);
-            star4.setBackground(starOutline);
-            star5.setBackground(starOutline);
+            star1.setImageResource(starOutline);
+            star2.setImageResource(starOutline);
+            star3.setImageResource(starOutline);
+            star4.setImageResource(starOutline);
+            star5.setImageResource(starOutline);
         } else if (rating <= 0.50) {
-            star1.setBackground(halfStar);
+            star1.setImageResource(halfStar);
         } else if (rating <= 1.00) {
-            star1.setBackground(starFilled);
+            star1.setImageResource(starFilled);
         } else if (rating <= 1.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(halfStar);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(halfStar);
         } else if (rating <= 2.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
         } else if (rating <= 2.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(halfStar);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(halfStar);
         } else if (rating <= 3.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(starFilled);
         } else if (rating <= 3.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(halfStar);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(starFilled);
+            star4.setImageResource(halfStar);
         } else if (rating <= 4.00) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(starFilled);
+            star4.setImageResource(starFilled);
         } else if (rating <= 4.50) {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
-            star5.setBackground(halfStar);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(starFilled);
+            star4.setImageResource(starFilled);
+            star5.setImageResource(halfStar);
         } else {
-            star1.setBackground(starFilled);
-            star2.setBackground(starFilled);
-            star3.setBackground(starFilled);
-            star4.setBackground(starFilled);
-            star5.setBackground(starFilled);
+            star1.setImageResource(starFilled);
+            star2.setImageResource(starFilled);
+            star3.setImageResource(starFilled);
+            star4.setImageResource(starFilled);
+            star5.setImageResource(starFilled);
         }
     }
 }

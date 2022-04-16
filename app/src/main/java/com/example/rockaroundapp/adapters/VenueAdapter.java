@@ -1,11 +1,9 @@
 package com.example.rockaroundapp.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,10 +21,6 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.VenueViewHol
     private List<Venue> venueList;
     private LayoutInflater layoutInflater;
     private final VenueListener venueListener;
-    private Drawable starFilled;
-    private Drawable starOutline;
-    private Drawable halfStar;
-
 
     public VenueAdapter(VenueListener venueListener) {
         this.venueList = new ArrayList<>();
@@ -40,9 +34,6 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.VenueViewHol
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
         VenueCardBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.venue_card, parent, false);
-        starFilled = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_rate_50);
-        starOutline = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_outline_24);
-        halfStar = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_half_24);
         return new VenueViewHolder(binding);
     }
 
@@ -81,42 +72,45 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.VenueViewHol
         }
 
         private void mapRating(double rating) {
+            int starFilled = R.drawable.ic_baseline_star_rate_50;
+            int halfStar = R.drawable.ic_baseline_star_half_24;
+            int starOutline = R.drawable.ic_baseline_star_outline_24;
             if (rating == 0.0) {
-                binding.star1.setBackground(starOutline);
-                binding.star2.setBackground(starOutline);
-                binding.star3.setBackground(starOutline);
-                binding.star4.setBackground(starOutline);
-                binding.star5.setBackground(starOutline);
+                binding.star1.setImageResource(starOutline);
+                binding.star2.setImageResource(starOutline);
+                binding.star3.setImageResource(starOutline);
+                binding.star4.setImageResource(starOutline);
+                binding.star5.setImageResource(starOutline);
             } else {
                 if (rating <= 0.50) {
-                    binding.star1.setBackground(halfStar);
+                    binding.star1.setImageResource(halfStar);
                 }
                 if (rating > 0.50) {
-                    binding.star1.setBackground(starFilled);
+                    binding.star1.setImageResource(starFilled);
                 }
                 if (rating > 1.00 && rating <= 1.50) {
-                    binding.star2.setBackground(halfStar);
+                    binding.star2.setImageResource(halfStar);
                 }
                 if (rating > 1.50) {
-                    binding.star2.setBackground(starFilled);
+                    binding.star2.setImageResource(starFilled);
                 }
                 if (rating > 2.00 && rating <= 2.50) {
-                    binding.star3.setBackground(halfStar);
+                    binding.star3.setImageResource(halfStar);
                 }
                 if (rating > 2.50) {
-                    binding.star3.setBackground(starFilled);
+                    binding.star3.setImageResource(starFilled);
                 }
                 if (rating > 3.00 && rating <= 3.50) {
-                    binding.star4.setBackground(halfStar);
+                    binding.star4.setImageResource(halfStar);
                 }
                 if (rating > 3.50) {
-                    binding.star4.setBackground(starFilled);
+                    binding.star4.setImageResource(starFilled);
                 }
                 if (rating > 4.00 && rating <= 4.50) {
-                    binding.star5.setBackground(halfStar);
+                    binding.star5.setImageResource(halfStar);
                 }
                 if (rating > 4.50) {
-                    binding.star5.setBackground(starFilled);
+                    binding.star5.setImageResource(starFilled);
                 }
             }
         }

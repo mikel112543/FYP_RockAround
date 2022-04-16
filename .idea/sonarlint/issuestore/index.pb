@@ -56,9 +56,3 @@ Iapp/src/main/java/com/example/rockaroundapp/view/UserReviewsFragment.java,6\d\
 Lapp/src/main/java/com/example/rockaroundapp/view/ReviewOfArtistFragment.java,4\0\406605497653146d791d661c5ad15328e375a998
 Å
 Qapp/src/main/java/com/example/rockaroundapp/viewmodel/ArtistReviewsViewModel.java,d\9\d96d70dd66e3fc4606688c93d3f63dc7a1ddd682
-w
-Gapp/src/main/java/com/example/rockaroundapp/adapters/ArtistAdapter.java,7\d\7d48225c4929f56e50ce823b3dbddeebdea8ed53
-v
-Fapp/src/main/java/com/example/rockaroundapp/adapters/VenueAdapter.java,2\2\22dc1234d1878e5ef068cbaf6fdfa5d13bb2dfbc
-É
-Sapp/src/main/java/com/example/rockaroundapp/repository/ArtistReviewsRepository.java,a\8\a80c5b8825015aa76a8375829c5aea74f22c7b10
