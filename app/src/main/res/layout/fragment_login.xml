@@ -60,7 +60,7 @@
                     android:layout_marginStart="25sp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textSize="35dp"
                     app:layout_constraintBottom_toTopOf="@+id/login_field"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +82,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edit_text_background"
                         android:layout_marginStart="20sp"
                         android:layout_marginEnd="20sp"
-                        android:text="@={loginViewModel.email}"
-                        android:hint="Email" />
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:text="@={loginViewModel.email}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

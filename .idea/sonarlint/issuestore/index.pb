@@ -28,8 +28,6 @@ l
 <app/src/main/java/com/example/rockaroundapp/model/Event.java,5\c\5c23eaa35485ca20b2d4b57b1e45e4f719fae50e
 ~
 Napp/src/main/java/com/example/rockaroundapp/viewmodel/VenueSetupViewModel.java,8\b\8b4795ed8c138810c0ef1ede65f42c8271445459
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 
 Oapp/src/main/java/com/example/rockaroundapp/repository/SoloSetupRepository.java,1\0\103380d57fcf03c80eeff65282007a6e49d7a54a
 @

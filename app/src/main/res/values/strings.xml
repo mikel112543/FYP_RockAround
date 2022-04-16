@@ -40,6 +40,7 @@
     <string name="county">County</string>
     <string name="country">Country</string>
     <string name="max_capacity">Max Capacity</string>
+    <string name="login">Login</string>
 
     <string-array name="genres">
         <item>Jazz</item>
