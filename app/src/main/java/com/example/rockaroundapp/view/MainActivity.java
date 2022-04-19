@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setVisibility(View.INVISIBLE);
             }else if(destination.getId() == R.id.mapsFragment) {
                 recyclerView.setVisibility(View.INVISIBLE);
+                bottomNavigationView.setVisibility(View.VISIBLE);
                 toolbar.setTitle("Map");
             }else if(destination.getId() == R.id.venueProfileFragment) {
                 recyclerView.setVisibility(View.INVISIBLE);

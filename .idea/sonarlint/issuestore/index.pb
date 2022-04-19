@@ -49,5 +49,3 @@ Qapp/src/main/java/com/example/rockaroundapp/viewmodel/ArtistReviewsViewModel.ja
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 u
 Eapp/src/main/java/com/example/rockaroundapp/view/AccountFragment.java,1\9\199cbdc4331a08e9e19455159bfc863174b260b1
-{
-Kapp/src/main/java/com/example/rockaroundapp/view/ArtistProfileFragment.java,e\f\effdb1cece195373d3c2ddddaf108306c10d20cd

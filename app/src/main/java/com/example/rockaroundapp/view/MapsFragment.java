@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.rockaroundapp.R;
 import com.example.rockaroundapp.databinding.FragmentMapsBinding;
@@ -37,7 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickListener {
 
     private final String[] permissions = {
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -53,6 +55,7 @@ public class MapsFragment extends Fragment {
     private List<Venue> venueList;
     private MapViewModel viewModel;
     private GoogleMap gMap;
+    private NavController navController;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -103,6 +106,21 @@ public class MapsFragment extends Fragment {
         return false;
     }
 
+
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        if (userType.equalsIgnoreCase("venue") && !artistList.isEmpty()) {
+            for (Artist artist : artistList) {
+                if (artist.getStageName().equalsIgnoreCase(marker.getTitle())) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", artist.getId());
+                    bundle.putString("currentUserType", "venue ");
+                    navController.navigate(R.id.artistProfile, bundle);
+                }
+            }
+        }
+        return false;
+    }
+
     private void onLocationClick(View view) {
         locationMarker.remove();
         if (checkPermissions()) {
@@ -120,15 +138,36 @@ public class MapsFragment extends Fragment {
                 viewModel.getVenues().observe(getViewLifecycleOwner(), venueList -> {
                     this.venueList = venueList;
                     updateMap();
+                    gMap.setOnMarkerClickListener(marker -> {
+                        for (Venue venue : venueList) {
+                            if (venue.getVenueName().equalsIgnoreCase(marker.getTitle())) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("id", venue.getId());
+                                navController.navigate(R.id.venueProfileFragment, bundle);
+                            }
+                        }
+                        return false;
+                    });
                 });
             } else {
                 viewModel.getArtists().observe(getViewLifecycleOwner(), artistList -> {
                     this.artistList = artistList;
                     updateMap();
+                    gMap.setOnMarkerClickListener(marker -> {
+                        for (Artist artist : artistList) {
+                            if (artist.getStageName().equalsIgnoreCase(marker.getTitle())) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("id", artist.getId());
+                                navController.navigate(R.id.artistProfile, bundle);
+                            }
+                        }
+                        return false;
+                    });
                 });
             }
         }
     }
+
 
     private void updateMap() {
         if (mapReady && userType != null && (artistList != null || venueList != null)) {
@@ -171,6 +210,7 @@ public class MapsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.locationButton.setOnClickListener(this::onLocationClick);
+        navController = Navigation.findNavController(view);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
