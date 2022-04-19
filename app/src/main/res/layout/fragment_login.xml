@@ -4,35 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.example.rockaroundapp.viewmodel.LoginViewModel.UserType" />
+
         <variable
             name="loginViewModel"
-            type="com.example.rockaroundapp.viewmodel.LoginViewModel"/>
+            type="com.example.rockaroundapp.viewmodel.LoginViewModel" />
+
         <variable
             name="loginFragment"
             type="com.example.rockaroundapp.view.LoginFragment" />
     </data>
-        
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.LoginFragment">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <TextView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="141dp"
-            android:layout_marginEnd="141dp"
-            app:layout_constraintBottom_toTopOf="@+id/login_card"
+            android:text="@string/rockaround"
+            android:textSize="50sp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintBottom_toTopOf="@id/login_card"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="80dp"
-            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/login_card"
@@ -180,37 +180,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/or_txt" />
 
-               <!-- <RadioGroup
-                    android:id="@+id/user_type_radio_group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintBottom_toTopOf="@+id/register_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/register_txt">
+                <!-- <RadioGroup
+                     android:id="@+id/user_type_radio_group"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:layout_marginTop="20dp"
+                     app:layout_constraintBottom_toTopOf="@+id/register_button"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toBottomOf="@id/register_txt">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:onClick="@{()-> loginViewModel.setUserType(UserType.SOLO)}"
-                        android:text="Solo Artist" />
+                     <RadioButton
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="8dp"
+                         android:onClick="@{()-> loginViewModel.setUserType(UserType.SOLO)}"
+                         android:text="Solo Artist" />
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{()-> loginViewModel.setUserType(UserType.GROUP)}"
-                        android:text="Group Artist" />
+                     <RadioButton
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:onClick="@{()-> loginViewModel.setUserType(UserType.GROUP)}"
+                         android:text="Group Artist" />
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:onClick="@{()-> loginViewModel.setUserType(UserType.VENUE)}"
-                        android:text="Venue Owner" />
-                </RadioGroup>-->
+                     <RadioButton
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginStart="8dp"
+                         android:onClick="@{()-> loginViewModel.setUserType(UserType.VENUE)}"
+                         android:text="Venue Owner" />
+                 </RadioGroup>-->
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/register_button"
