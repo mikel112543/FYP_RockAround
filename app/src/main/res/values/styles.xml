@@ -4,4 +4,25 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlHighlight">@color/primary_pink</item>
+        <item name="colorControlActivated">@color/primary_pink</item>
+        <item name="android:isIndicator">true</item>
+        <item name="color">@color/primary_pink</item>
+
+    </style>
+
+    <style name="overAllRating" parent="Widget.AppCompat.RatingBar">
+        <item name="colorControlHighlight">@color/primary_pink</item>
+        <item name="colorControlActivated">@color/primary_pink</item>
+        <item name="android:isIndicator">true</item>
+        <item name="color">@color/primary_pink</item>
+    </style>
+
+    <style name="reviewRatings" parent="Widget.AppCompat.RatingBar">
+    <item name="colorControlHighlight">@color/primary_pink</item>
+    <item name="colorControlActivated">@color/primary_pink</item>
+    <item name="color">@color/primary_pink</item>
+    </style>
 </resources>

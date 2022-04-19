@@ -73,6 +73,8 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_discover, container, false);
+        binding.setLifecycleOwner(this);
+        binding.setArtistExploreViewModel(viewModel);
         View view = binding.getRoot();
         recyclerView.setVisibility(View.VISIBLE);
         layoutManager.onRestoreInstanceState(state);
@@ -87,9 +89,14 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
 
         MenuItem item = menu.findItem(R.id.filter);
         Spinner spinner = (Spinner) item.getActionView();
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.filters, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter;
+        if (userType.equalsIgnoreCase("venue")) {
+            adapter = ArrayAdapter.createFromResource(getActivity(),
+                    R.array.venue_filters, android.R.layout.simple_spinner_dropdown_item);
+        } else {
+            adapter = ArrayAdapter.createFromResource(getActivity(),
+                    R.array.artist_filters, android.R.layout.simple_spinner_dropdown_item);
+        }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(spinnerListener);
@@ -152,6 +159,8 @@ public class DiscoverFragment extends Fragment implements ArtistListener, VenueL
             // position 1 - Ascending
             // position 2 - Rating (High - low)
             // position 3 - Rating (Low - high)
+            // position 4 - Price (High - Low)
+            // position 5 - Price (Low-High)
             viewModel.sortList(position, userType);
         }
 

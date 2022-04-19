@@ -66,7 +66,7 @@ public class UserReviewsFragment extends Fragment {
         Spinner spinner = (Spinner) item.getActionView();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.filters, android.R.layout.simple_spinner_dropdown_item);
+                R.array.artist_filters, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(spinnerListener);

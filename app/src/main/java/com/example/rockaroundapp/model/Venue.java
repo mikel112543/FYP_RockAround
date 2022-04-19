@@ -23,10 +23,10 @@ public class Venue extends User {
     private double avgReliabilityRating;
     private double avgSettingRating;
     private double avgAtmosphereRating;
-    private int totalCommunicationRating;
-    private int totalReliabilityRating;
-    private int totalSettingRating;
-    private int totalAtmosphereRating;
+    private double totalCommunicationRating;
+    private double totalReliabilityRating;
+    private double totalSettingRating;
+    private double totalAtmosphereRating;
     private double avgOverallRating;
     private List<Event> events;
     private List<Event> pastEvents;
@@ -201,35 +201,35 @@ public class Venue extends User {
         this.avgAtmosphereRating = avgAtmosphereRating;
     }
 
-    public int getTotalCommunicationRating() {
+    public double getTotalCommunicationRating() {
         return totalCommunicationRating;
     }
 
-    public void setTotalCommunicationRating(int totalCommunicationRating) {
+    public void setTotalCommunicationRating(double totalCommunicationRating) {
         this.totalCommunicationRating = totalCommunicationRating;
     }
 
-    public int getTotalReliabilityRating() {
+    public double getTotalReliabilityRating() {
         return totalReliabilityRating;
     }
 
-    public void setTotalReliabilityRating(int totalReliabilityRating) {
+    public void setTotalReliabilityRating(double totalReliabilityRating) {
         this.totalReliabilityRating = totalReliabilityRating;
     }
 
-    public int getTotalSettingRating() {
+    public double getTotalSettingRating() {
         return totalSettingRating;
     }
 
-    public void setTotalSettingRating(int totalSettingRating) {
+    public void setTotalSettingRating(double totalSettingRating) {
         this.totalSettingRating = totalSettingRating;
     }
 
-    public int getTotalAtmosphereRating() {
+    public double getTotalAtmosphereRating() {
         return totalAtmosphereRating;
     }
 
-    public void setTotalAtmosphereRating(int totalAtmosphereRating) {
+    public void setTotalAtmosphereRating(double totalAtmosphereRating) {
         this.totalAtmosphereRating = totalAtmosphereRating;
     }
 

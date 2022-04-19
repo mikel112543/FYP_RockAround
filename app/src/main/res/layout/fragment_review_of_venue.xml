@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.rockaroundapp.viewmodel.VenueReviewsViewModel" />
@@ -14,9 +15,9 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            tools:context=".view.ReviewOfVenueFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:context=".view.ReviewOfVenueFragment">
 
             <EditText
                 android:id="@+id/review_title"
@@ -27,8 +28,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:hint="@string/title"
-                android:textSize="20sp"
                 android:text="@={viewModel.reviewTitle}"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/review_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,221 +44,113 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bio_box_outline"
                 android:gravity="start|top"
-                android:text="@={viewModel.reviewDescription}"
                 android:hint="@string/how_was_your_experience_with_this_venue"
                 android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
+                android:text="@={viewModel.reviewDescription}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/review_title"/>
+                app:layout_constraintTop_toBottomOf="@id/review_title" />
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="25dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/cardview_dark_background"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_description" />
 
             <TextView
                 android:id="@+id/stage_presence_rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/setting_rating"
-                app:layout_constraintTop_toBottomOf="@id/divider"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/setting_review_stars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/stage_presence_rating_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="20dp">
+                android:text="@string/setting_rating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
 
-                <ImageView
-                    android:id="@+id/setting_s1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/setting_s2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/setting_s3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/setting_s4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/setting_s5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-            </LinearLayout>
+            <RatingBar
+                android:id="@+id/setting_review_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:numStars="5"
+                android:stepSize=".5"
+                android:theme="@style/reviewRatings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stage_presence_rating_text" />
 
             <TextView
                 android:id="@+id/atmosphere_rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/atmosphere_rating"
-                app:layout_constraintTop_toBottomOf="@id/setting_review_stars"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"/>
-
-            <LinearLayout
-                android:id="@+id/atmosphere_review_stars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/atmosphere_rating"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="20dp">
+                app:layout_constraintTop_toBottomOf="@id/setting_review_stars" />
 
-                <ImageView
-                    android:id="@+id/atmosphere_s1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/atmosphere_s2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/atmosphere_s3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/atmosphere_s4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/atmosphere_s5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-            </LinearLayout>
+            <RatingBar
+                android:id="@+id/atmosphere_review_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:numStars="5"
+                android:stepSize=".5"
+                android:theme="@style/reviewRatings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_rating_text" />
 
             <TextView
                 android:id="@+id/reliability_rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/reliability_rating"
-                app:layout_constraintTop_toBottomOf="@id/atmosphere_review_stars"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"/>
-
-            <LinearLayout
-                android:id="@+id/reliability_review_stars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/reliability_rating_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/reliability_rating"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="20dp">
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_review_stars" />
 
-                <ImageView
-                    android:id="@+id/reliability_s1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/reliability_s2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/reliability_s3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/reliability_s4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/reliability_s5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-            </LinearLayout>
+            <RatingBar
+                android:id="@+id/reliability_review_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:numStars="5"
+                android:stepSize=".5"
+                android:theme="@style/reviewRatings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reliability_rating_text" />
 
             <TextView
                 android:id="@+id/communication_rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/communication_rating"
-                app:layout_constraintTop_toBottomOf="@id/reliability_review_stars"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"/>
-
-            <LinearLayout
-                android:id="@+id/communication_review_stars"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/communication_rating_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/communication_rating"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="20dp">
+                app:layout_constraintTop_toBottomOf="@id/reliability_review_stars" />
 
-                <ImageView
-                    android:id="@+id/communication_s1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/communication_s2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24"/>
-                <ImageView
-                    android:id="@+id/communication_s3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/communication_s4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-                <ImageView
-                    android:id="@+id/communication_s5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_baseline_star_outline_24" />
-            </LinearLayout>
+            <RatingBar
+                android:id="@+id/communication_review_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:numStars="5"
+                android:stepSize=".5"
+                android:theme="@style/reviewRatings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/communication_rating_text" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_button"
@@ -268,8 +161,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/pill_button"
-                android:text="@string/submit"
                 android:onClick="@{() -> viewModel.onSubmitClick()}"
+                android:text="@string/submit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

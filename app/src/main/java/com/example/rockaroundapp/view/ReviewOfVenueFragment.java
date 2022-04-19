@@ -51,6 +51,10 @@ public class ReviewOfVenueFragment extends Fragment {
 
     private void observe() {
         mViewModel.get_venueReview().observe(getViewLifecycleOwner(), venueReview -> {
+            venueReview.setReliabilityRating(binding.reliabilityReviewStars.getRating());
+            venueReview.setAtmosphereRating(binding.atmosphereReviewStars.getRating());
+            venueReview.setSettingRating(binding.settingReviewStars.getRating());
+            venueReview.setCommunicationRating(binding.communicationReviewStars.getRating());
             if (binding.reviewTitle.getText().toString().isEmpty()) {
                 binding.reviewTitle.setError("Please provide a title");
             }
@@ -73,31 +77,7 @@ public class ReviewOfVenueFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        binding.communicationS1.setOnClickListener(this::setRatings);
-        binding.communicationS2.setOnClickListener(this::setRatings);
-        binding.communicationS3.setOnClickListener(this::setRatings);
-        binding.communicationS4.setOnClickListener(this::setRatings);
-        binding.communicationS5.setOnClickListener(this::setRatings);
 
-        binding.atmosphereS1.setOnClickListener(this::setRatings);
-        binding.atmosphereS2.setOnClickListener(this::setRatings);
-        binding.atmosphereS3.setOnClickListener(this::setRatings);
-        binding.atmosphereS4.setOnClickListener(this::setRatings);
-        binding.atmosphereS5.setOnClickListener(this::setRatings);
-
-        binding.settingS1.setOnClickListener(this::setRatings);
-        binding.settingS2.setOnClickListener(this::setRatings);
-        binding.settingS3.setOnClickListener(this::setRatings);
-        binding.settingS4.setOnClickListener(this::setRatings);
-        binding.settingS5.setOnClickListener(this::setRatings);
-
-        binding.reliabilityS1.setOnClickListener(this::setRatings);
-        binding.reliabilityS2.setOnClickListener(this::setRatings);
-        binding.reliabilityS3.setOnClickListener(this::setRatings);
-        binding.reliabilityS4.setOnClickListener(this::setRatings);
-        binding.reliabilityS5.setOnClickListener(this::setRatings);
-
-        //binding.saveButton.setOnClickListener(this::saveReview);
 
         navController = Navigation.findNavController(view);
 
@@ -117,7 +97,7 @@ public class ReviewOfVenueFragment extends Fragment {
         SETTING
     }
 
-    private void setRatings(View view) {
+    /*private void setRatings(View view) {
         if (view.getId() == R.id.communication_s1) {
             setStar1(binding.communicationS1, binding.communicationS2, binding.communicationS3, binding.communicationS4, binding.communicationS5, type.COMMUNICATION);
         } else if (view.getId() == R.id.communication_s2) {
@@ -159,7 +139,7 @@ public class ReviewOfVenueFragment extends Fragment {
         } else {
             setStar5(binding.atmosphereS1, binding.atmosphereS2, binding.atmosphereS3, binding.atmosphereS4, binding.atmosphereS5, type.ATMOSPHERE);
         }
-    }
+    }*/
 
     private void setRating(type ratingType, int rating) {
         switch (ratingType) {

@@ -1,9 +1,12 @@
 package com.example.rockaroundapp.adapters;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +25,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
     private LayoutInflater layoutInflater;
     private final ArtistListener artistListener;
 
+    private Drawable starFilled;
+    private Drawable starOutline;
+    private Drawable halfStar;
+
     public ArtistAdapter(ArtistListener artistListener) {
         this.artistListHolder = new ArrayList<>();
         this.artistListener = artistListener;
@@ -33,6 +40,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
+        starFilled = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_rate_50);
+        starOutline = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_outline_24);
+        halfStar = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_baseline_star_half_24);
         ArtistCardBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.artist_card, parent, false);
         return new ArtistViewHolder(binding);
     }
@@ -72,45 +82,45 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         }
 
         private void mapRating(double rating) {
-            int starFilled = R.drawable.ic_baseline_star_rate_50;
+            /*int starFilled = R.drawable.ic_baseline_star_rate_50;
             int halfStar = R.drawable.ic_baseline_star_half_24;
-            int starOutline = R.drawable.ic_baseline_star_outline_24;
+            int starOutline = R.drawable.ic_baseline_star_outline_24;*/
             if (rating == 0.0) {
-                binding.star1.setImageResource(starOutline);
-                binding.star2.setImageResource(starOutline);
-                binding.star3.setImageResource(starOutline);
-                binding.star4.setImageResource(starOutline);
-                binding.star5.setImageResource(starOutline);
+                binding.star1.setImageDrawable(starOutline);
+                binding.star2.setImageDrawable(starOutline);
+                binding.star3.setImageDrawable(starOutline);
+                binding.star4.setImageDrawable(starOutline);
+                binding.star5.setImageDrawable(starOutline);
             } else {
                 if (rating <= 0.50) {
-                    binding.star1.setImageResource(halfStar);
+                    binding.star1.setImageDrawable(halfStar);
                 }
                 if (rating > 0.50) {
-                    binding.star1.setImageResource(starFilled);
+                    binding.star1.setImageDrawable(starFilled);
                 }
                 if (rating > 1.00 && rating <= 1.50) {
-                    binding.star2.setImageResource(halfStar);
+                    binding.star2.setImageDrawable(halfStar);
                 }
                 if (rating > 1.50) {
-                    binding.star2.setImageResource(starFilled);
+                    binding.star2.setImageDrawable(starFilled);
                 }
                 if (rating > 2.00 && rating <= 2.50) {
-                    binding.star3.setImageResource(halfStar);
+                    binding.star3.setImageDrawable(halfStar);
                 }
                 if (rating > 2.50) {
-                    binding.star3.setImageResource(starFilled);
+                    binding.star3.setImageDrawable(starFilled);
                 }
                 if (rating > 3.00 && rating <= 3.50) {
-                    binding.star4.setImageResource(halfStar);
+                    binding.star4.setImageDrawable(halfStar);
                 }
                 if (rating > 3.50) {
-                    binding.star4.setImageResource(starFilled);
+                    binding.star4.setImageDrawable(starFilled);
                 }
                 if (rating > 4.00 && rating <= 4.50) {
-                    binding.star5.setImageResource(halfStar);
+                    binding.star5.setImageDrawable(halfStar);
                 }
                 if (rating > 4.50) {
-                    binding.star5.setImageResource(starFilled);
+                    binding.star5.setImageDrawable(starFilled);
                 }
             }
         }

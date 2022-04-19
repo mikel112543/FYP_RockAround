@@ -67,10 +67,10 @@ public class ArtistReviewsRepository {
                         artist.get().setTotalStagePresenceRating(artist.get().getTotalStagePresenceRating() + review.getStagePresenceRating());
 
                         //Avg Ratings
-                        artist.get().setAvgCommunicationRating((double) artist.get().getTotalCommunicationRating() / reviewCount.get());
-                        artist.get().setAvgReliabilityRating((double) artist.get().getTotalReliabilityRating() / reviewCount.get());
-                        artist.get().setAvgVocalsRating((double) artist.get().getTotalVocalsRating() / reviewCount.get());
-                        artist.get().setAvgStagePresenceRating((double) artist.get().getTotalStagePresenceRating() / reviewCount.get());
+                        artist.get().setAvgCommunicationRating(artist.get().getTotalCommunicationRating() / reviewCount.get());
+                        artist.get().setAvgReliabilityRating(artist.get().getTotalReliabilityRating() / reviewCount.get());
+                        artist.get().setAvgVocalsRating(artist.get().getTotalVocalsRating() / reviewCount.get());
+                        artist.get().setAvgStagePresenceRating(artist.get().getTotalStagePresenceRating() / reviewCount.get());
 
                         //Overall Avg Rating
                         artist.get().setAvgOverallRating((artist.get().getAvgCommunicationRating() / 4) + (artist.get().getAvgVocalsRating() / 4) +

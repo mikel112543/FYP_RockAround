@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString("currentUserType", currentUserType);
                 navController.navigate(R.id.account, bundle);
             }else{
-                navController.navigate(R.id.mapsFragment);
                 Bundle bundle = new Bundle();
                 bundle.putString("currentUserType", currentUserType);
+                navController.navigate(R.id.mapsFragment, bundle);
             }
             return true;
         });

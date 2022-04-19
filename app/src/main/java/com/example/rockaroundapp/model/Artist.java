@@ -23,10 +23,10 @@ public class Artist extends User {
     private double avgReliabilityRating;
     private double avgVocalsRating;
     private double avgStagePresenceRating;
-    private int totalCommunicationRating;
-    private int totalReliabilityRating;
-    private int totalVocalsRating;
-    private int totalStagePresenceRating;
+    private double totalCommunicationRating;
+    private double totalReliabilityRating;
+    private double totalVocalsRating;
+    private double totalStagePresenceRating;
     private double avgOverallRating;
     private List<String> instruments;
     private List<String> artistImages;
@@ -103,35 +103,35 @@ public class Artist extends User {
         this.avgStagePresenceRating = avgStagePresenceRating;
     }
 
-    public int getTotalCommunicationRating() {
+    public double getTotalCommunicationRating() {
         return totalCommunicationRating;
     }
 
-    public void setTotalCommunicationRating(int totalCommunicationRating) {
+    public void setTotalCommunicationRating(double totalCommunicationRating) {
         this.totalCommunicationRating = totalCommunicationRating;
     }
 
-    public int getTotalReliabilityRating() {
+    public double getTotalReliabilityRating() {
         return totalReliabilityRating;
     }
 
-    public void setTotalReliabilityRating(int totalReliabilityRating) {
+    public void setTotalReliabilityRating(double totalReliabilityRating) {
         this.totalReliabilityRating = totalReliabilityRating;
     }
 
-    public int getTotalVocalsRating() {
+    public double getTotalVocalsRating() {
         return totalVocalsRating;
     }
 
-    public void setTotalVocalsRating(int totalVocalsRating) {
+    public void setTotalVocalsRating(double totalVocalsRating) {
         this.totalVocalsRating = totalVocalsRating;
     }
 
-    public int getTotalStagePresenceRating() {
+    public double getTotalStagePresenceRating() {
         return totalStagePresenceRating;
     }
 
-    public void setTotalStagePresenceRating(int totalStagePresenceRating) {
+    public void setTotalStagePresenceRating(double totalStagePresenceRating) {
         this.totalStagePresenceRating = totalStagePresenceRating;
     }
 

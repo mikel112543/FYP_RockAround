@@ -84,14 +84,30 @@ public class ArtistRepository {
     }
 
     public void sortList(int orderPosition) {
-        if (orderPosition == 0) { //Descending
-            Collections.sort(artistList, Comparator.comparing(Artist::getStageName).reversed());
-        } else if (orderPosition == 1) { //Ascending
-            Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
-        } else if (orderPosition == 2) { //Rating (High - low)
-            Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
-        } else { //Rating (Low - high)
-            Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating));
+        switch (orderPosition) {
+            case 1:
+                //Ascending
+                Collections.sort(artistList, Comparator.comparing(Artist::getStageName));
+                break;
+            case 2:
+                //Rating (High-Low)
+                Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating).reversed());
+                break;
+            case 3:
+                //Rating (Low-High)
+                Collections.sort(artistList, Comparator.comparing(Artist::getAvgOverallRating));
+                break;
+            case 4:
+                //Price (High-Low)
+                Collections.sort(artistList, Comparator.comparing(Artist::getPrice).reversed());
+                break;
+            case 5:
+                Collections.sort(artistList, Comparator.comparing(Artist::getPrice));
+                break;
+            default:
+                // case 0; Descending
+                Collections.sort(artistList, Comparator.comparing(Artist::getStageName).reversed());
+                break;
         }
         artistListMutable.postValue(artistList);
     }

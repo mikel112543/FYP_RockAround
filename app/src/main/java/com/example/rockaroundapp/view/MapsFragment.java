@@ -93,14 +93,15 @@ public class MapsFragment extends Fragment {
 
     private boolean checkPermissions() {
         locationPermissionResults.launch(permissions);
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.e(TAG, "AT LEAST ONE PERMISSION NOT GRANTED");
-        } else {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationManager lm = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             deviceLat = location.getLatitude();
             deviceLong = location.getLongitude();
             return true;
+        } else {
+            Log.e(TAG, "AT LEAST ONE PERMISSION NOT GRANTED");
         }
         return false;
     }
@@ -122,7 +123,9 @@ public class MapsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(MapViewModel.class);
-        getUserType();
+        assert getArguments() != null;
+        userType = getArguments().getString("currentUserType");
+        getLists();
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_maps, container, false);
         return binding.getRoot();
     }

@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class VenueReview extends Review {
 
-    private int settingRating;
-    private int reliabilityRating;
-    private int atmosphereRating;
-    private int communicationRating;
+    private float settingRating;
+    private float reliabilityRating;
+    private float atmosphereRating;
+    private float communicationRating;
 
     public VenueReview() {
     }
@@ -18,35 +18,35 @@ public class VenueReview extends Review {
         return (double) (communicationRating+settingRating+reliabilityRating+atmosphereRating) / 4;
     }
 
-    public int getSettingRating() {
+    public float getSettingRating() {
         return settingRating;
     }
 
-    public void setSettingRating(int settingRating) {
+    public void setSettingRating(float settingRating) {
         this.settingRating = settingRating;
     }
 
-    public int getReliabilityRating() {
+    public float getReliabilityRating() {
         return reliabilityRating;
     }
 
-    public void setReliabilityRating(int reliabilityRating) {
+    public void setReliabilityRating(float reliabilityRating) {
         this.reliabilityRating = reliabilityRating;
     }
 
-    public int getAtmosphereRating() {
+    public float getAtmosphereRating() {
         return atmosphereRating;
     }
 
-    public void setAtmosphereRating(int atmosphereRating) {
+    public void setAtmosphereRating(float atmosphereRating) {
         this.atmosphereRating = atmosphereRating;
     }
 
-    public int getCommunicationRating() {
+    public float getCommunicationRating() {
         return communicationRating;
     }
 
-    public void setCommunicationRating(int communicationRating) {
+    public void setCommunicationRating(float communicationRating) {
         this.communicationRating = communicationRating;
     }
 }

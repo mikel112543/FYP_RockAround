@@ -2,10 +2,10 @@ package com.example.rockaroundapp.model;
 
 public class ArtistReview extends Review {
 
-    private int stagePresenceRating;
-    private int vocalsRating;
-    private int reliabilityRating;
-    private int communicationRating;
+    private float stagePresenceRating;
+    private float vocalsRating;
+    private float reliabilityRating;
+    private float communicationRating;
 
     public ArtistReview() {
     }
@@ -14,35 +14,35 @@ public class ArtistReview extends Review {
         return (double) (communicationRating+vocalsRating+reliabilityRating+stagePresenceRating) / 4;
     }
 
-    public int getStagePresenceRating() {
+    public float getStagePresenceRating() {
         return stagePresenceRating;
     }
 
-    public void setStagePresenceRating(int stagePresenceRating) {
+    public void setStagePresenceRating(float stagePresenceRating) {
         this.stagePresenceRating = stagePresenceRating;
     }
 
-    public int getVocalsRating() {
+    public float getVocalsRating() {
         return vocalsRating;
     }
 
-    public void setVocalsRating(int vocalsRating) {
+    public void setVocalsRating(float vocalsRating) {
         this.vocalsRating = vocalsRating;
     }
 
-    public int getReliabilityRating() {
+    public float getReliabilityRating() {
         return reliabilityRating;
     }
 
-    public void setReliabilityRating(int reliabilityRating) {
+    public void setReliabilityRating(float reliabilityRating) {
         this.reliabilityRating = reliabilityRating;
     }
 
-    public int getCommunicationRating() {
+    public float getCommunicationRating() {
         return communicationRating;
     }
 
-    public void setCommunicationRating(int communicationRating) {
+    public void setCommunicationRating(float communicationRating) {
         this.communicationRating = communicationRating;
     }
 }
