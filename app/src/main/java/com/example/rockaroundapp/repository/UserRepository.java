@@ -17,7 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class UserRepository {
@@ -28,6 +30,7 @@ public class UserRepository {
     private final MutableLiveData<String> loginFailureMsg;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String failedRegistration;
+    private final MutableLiveData<List<Double>> _coordinates;
     private final String currentId = FirebaseAuth.getInstance().getUid();
     ;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -41,6 +44,7 @@ public class UserRepository {
         registerSuccess = new MutableLiveData<>(false);
         loginSuccess = new MutableLiveData<>();
         userType = new MutableLiveData<>();
+        _coordinates = new MutableLiveData<>();
 
         if (auth.getCurrentUser() != null) {
             firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
@@ -170,17 +174,24 @@ public class UserRepository {
         auth.signOut();
     }
 
-    public void saveLocation(double devLat, double devLong, String userType) {
+    public MutableLiveData<List<Double>> saveLocation(double devLat, double devLong, String userType) {
         String LATITUDE = "latitude";
         String LONGITUDE = "longitude";
+        List<Double> coordinates = new ArrayList<>();
         if (userType.equalsIgnoreCase("solo")) {
             assert currentId != null;
             db.collection("solo").document(currentId).update(LATITUDE, devLat);
             db.collection("solo").document(currentId).update(LONGITUDE, devLong);
+            coordinates.add(devLat);
+            coordinates.add(devLong);
+            _coordinates.postValue(coordinates);
         } else if (userType.equalsIgnoreCase("group")) {
             assert currentId != null;
             db.collection("group").document(currentId).update(LATITUDE, devLat);
             db.collection("group").document(currentId).update(LONGITUDE, devLong);
+            coordinates.add(devLat);
+            coordinates.add(devLong);
+            _coordinates.postValue(coordinates);
         } else {
             assert currentId != null;
             db.collection("venue").document(currentId).get().addOnCompleteListener(task -> {
@@ -190,9 +201,16 @@ public class UserRepository {
                     if (venue.getLatitude() == 0 && venue.getLongitude() == 0) {
                         db.collection("venue").document(currentId).update(LATITUDE, devLat);
                         db.collection("venue").document(currentId).update(LONGITUDE, devLong);
+                        coordinates.add(devLat);
+                        coordinates.add(devLong);
+                    } else {
+                        coordinates.add(venue.getLatitude());
+                        coordinates.add(venue.getLongitude());
                     }
+                    _coordinates.postValue(coordinates);
                 }
             });
         }
+        return _coordinates;
     }
 }

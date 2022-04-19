@@ -34,47 +34,48 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class MapsFragment extends Fragment {
 
-    private String currentUid = FirebaseAuth.getInstance().getUid();
-
     private final String[] permissions = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION};
 
-    private MapViewModel viewModel;
     private double deviceLat;
     private double deviceLong;
     private FragmentMapsBinding binding;
     private Marker locationMarker;
+    private String userType;
     private boolean mapReady;
     private List<Artist> artistList;
     private List<Venue> venueList;
-    private String userType;
+    private MapViewModel viewModel;
     private GoogleMap gMap;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
+
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             gMap = googleMap;
             mapReady = true;
             if (checkPermissions()) {
-                LatLng currentLocation = new LatLng(deviceLat, deviceLong);
-                locationMarker = googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
-                if(userType != null) {
-                    viewModel.saveCoordinates(deviceLat, deviceLong, userType);
+                getLists();
+                if (userType != null) {
+                    viewModel.saveCoordinates(deviceLat, deviceLong, userType).observe(getViewLifecycleOwner(), location -> {
+                        deviceLat = location.get(0);
+                        deviceLong = location.get(1);
+                        LatLng currentLocation = new LatLng(deviceLat, deviceLong);
+                        locationMarker = googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                    });
                 }
             } else {
                 LatLng ireland = new LatLng(53.14, 7.69);
                 locationMarker = googleMap.addMarker(new MarkerOptions().position(ireland).title("Marker to Ireland"));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(ireland));
             }
-            updateMap();
         }
     };
 
@@ -88,20 +89,16 @@ public class MapsFragment extends Fragment {
                 }
             });
 
-    public MapsFragment() {
-    }
-
     private boolean checkPermissions() {
         locationPermissionResults.launch(permissions);
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "AT LEAST ONE PERMISSION NOT GRANTED");
+        } else {
             LocationManager lm = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             deviceLat = location.getLatitude();
             deviceLong = location.getLongitude();
             return true;
-        } else {
-            Log.e(TAG, "AT LEAST ONE PERMISSION NOT GRANTED");
         }
         return false;
     }
@@ -115,40 +112,6 @@ public class MapsFragment extends Fragment {
                 mapFragment.getMapAsync(callback);
             }
         }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MapViewModel.class);
-        assert getArguments() != null;
-        userType = getArguments().getString("currentUserType");
-        getLists();
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_maps, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.locationButton.setOnClickListener(this::onLocationClick);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
-        }
-    }
-
-    private void getUserType() {
-        viewModel.getUserType(currentUid).observe(getViewLifecycleOwner(), userType -> {
-            this.userType = userType;
-            if(checkPermissions()) {
-                viewModel.saveCoordinates(deviceLat, deviceLong, userType);
-            }
-            getLists();
-        });
     }
 
     private void getLists() {
@@ -187,6 +150,31 @@ public class MapsFragment extends Fragment {
                     }
                 }
             }
+        }
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(MapViewModel.class);
+        assert getArguments() != null;
+        userType = getArguments().getString("currentUserType");
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_maps, container, false);
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.locationButton.setOnClickListener(this::onLocationClick);
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(callback);
         }
     }
 }

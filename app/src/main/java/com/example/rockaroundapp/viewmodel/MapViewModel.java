@@ -1,5 +1,7 @@
 package com.example.rockaroundapp.viewmodel;
 
+import android.location.Location;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -23,8 +25,8 @@ public class MapViewModel extends ViewModel {
         artistRepository = new ArtistRepository();
     }
 
-    public void saveCoordinates(double devLat, double devLong, String userType) {
-        userRepository.saveLocation(devLat, devLong, userType);
+    public MutableLiveData<List<Double>> saveCoordinates(double devLat, double devLong, String userType) {
+        return userRepository.saveLocation(devLat, devLong, userType);
     }
 
     public MutableLiveData<String> getUserType(String userId) {
