@@ -1,6 +1,5 @@
 package com.example.rockaroundapp.view;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +20,6 @@ import com.example.rockaroundapp.databinding.FragmentArtistProfileBinding;
 import com.example.rockaroundapp.model.Artist;
 import com.example.rockaroundapp.viewmodel.ArtistProfileViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.mysql.cj.util.StringUtils;
 
 public class ArtistProfileFragment extends Fragment {
@@ -151,46 +148,37 @@ public class ArtistProfileFragment extends Fragment {
             star3.setImageResource(starOutline);
             star4.setImageResource(starOutline);
             star5.setImageResource(starOutline);
-        } else if (rating <= 0.50) {
-            star1.setImageResource(halfStar);
-        } else if (rating <= 1.00) {
-            star1.setImageResource(starFilled);
-        } else if (rating <= 1.50) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(halfStar);
-        } else if (rating <= 2.00) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-        } else if (rating <= 2.50) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(halfStar);
-        } else if (rating <= 3.00) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(starFilled);
-        } else if (rating <= 3.50) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(starFilled);
-            star4.setImageResource(halfStar);
-        } else if (rating <= 4.00) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(starFilled);
-            star4.setImageResource(starFilled);
-        } else if (rating <= 4.50) {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(starFilled);
-            star4.setImageResource(starFilled);
-            star5.setImageResource(halfStar);
         } else {
-            star1.setImageResource(starFilled);
-            star2.setImageResource(starFilled);
-            star3.setImageResource(starFilled);
-            star4.setImageResource(starFilled);
-            star5.setImageResource(starFilled);
+            if (rating <= 0.50) {
+                star1.setImageResource(halfStar);
+            }
+            if (rating > 0.50) {
+                star1.setImageResource(starFilled);
+            }
+            if (rating > 1.00 && rating <= 1.50) {
+                star2.setImageResource(halfStar);
+            }
+            if (rating > 1.50) {
+                star2.setImageResource(starFilled);
+            }
+            if (rating > 2.00 && rating <= 2.50) {
+                star3.setImageResource(halfStar);
+            }
+            if (rating > 2.50) {
+                star3.setImageResource(starFilled);
+            }
+            if (rating > 3.00 && rating <= 3.50) {
+                star4.setImageResource(halfStar);
+            }
+            if (rating > 3.50) {
+                star4.setImageResource(starFilled);
+            }
+            if (rating > 4.00 && rating <= 4.50) {
+                star5.setImageResource(halfStar);
+            }
+            if (rating > 4.50) {
+                star5.setImageResource(starFilled);
+            }
         }
     }
 }
